@@ -135,7 +135,7 @@ namespace LHJ.DBViewer
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!DBHelper.State.Equals(ConnectionState.Open))
+            if (!DBHelper.State.Equals(ConnectionState.Open) && !e.CloseReason.Equals(CloseReason.UserClosing))
             {
                 e.Cancel = true;
             }

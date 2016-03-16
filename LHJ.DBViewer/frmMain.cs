@@ -46,8 +46,6 @@ namespace LHJ.DBViewer
         private void ShowLoginForm()
         {
             frmLogin loginFrm = new frmLogin();
-            loginFrm.Owner = this;
-
             loginFrm.ShowDialog();
 
             if (DBHelper.State.Equals(ConnectionState.Open))
