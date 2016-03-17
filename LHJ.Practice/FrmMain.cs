@@ -85,6 +85,11 @@ namespace LHJ.Practice
                 FrmImageViewer scnImageViewer = new FrmImageViewer();
                 this.ShowFormORClose(scnImageViewer);
             }
+            else if (btn.Equals(this.barBtnScrollingText))
+            {
+                FrmScrollingText scnScrollingText = new FrmScrollingText();
+                this.ShowFormORClose(scnScrollingText);
+            }
         }
     }
 }

@@ -58,6 +58,9 @@
   <ItemGroup>
     <Compile Include="Definition\ConstValue.cs" />
     <Compile Include="Definition\DefEnum.cs" />
+    <Compile Include="clsScrollingText.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ExtensionMethod\ExtensionMethod.cs" />
     <Compile Include="ucImageViewer.cs">
       <SubType>Component</SubType>
