@@ -10,9 +10,9 @@ using LHJ.DBService;
 
 namespace LHJ.DBViewer
 {
-    public partial class UserControl1 : UserControl
+    public partial class ucObejct : UserControl
     {
-        public UserControl1()
+        public ucObejct()
         {
             InitializeComponent();
 
