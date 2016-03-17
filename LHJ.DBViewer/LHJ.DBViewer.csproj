@@ -78,6 +78,7 @@
       <HintPath>..\Compile\LHJ.DBService.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Oracle.DataAccess, Version=2.112.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=x86" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -89,6 +90,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="clsRichDDLBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ExtensionMethod.cs" />
     <Compile Include="DALDataAccess.cs" />
     <Compile Include="frmLogin.cs">
@@ -123,6 +127,12 @@
     <Compile Include="ucObejct.Designer.cs">
       <DependentUpon>ucObejct.cs</DependentUpon>
     </Compile>
+    <Compile Include="ucQuery.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucQuery.Designer.cs">
+      <DependentUpon>ucQuery.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -147,6 +157,9 @@
     </Compile>
     <EmbeddedResource Include="ucObejct.resx">
       <DependentUpon>ucObejct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucQuery.resx">
+      <DependentUpon>ucQuery.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

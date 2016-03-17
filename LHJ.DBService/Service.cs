@@ -165,10 +165,15 @@ namespace LHJ.DBService
 
         public DataSet ExecuteDataSet(string aQuery)
         {
-            return this.ExecuteDataSet(aQuery, null);
+            return this.ExecuteDataSet(aQuery, 0, 0, null, null);
         }
 
         public DataSet ExecuteDataSet(string aQuery, List<DBCmdParameter> aParam)
+        {
+            return this.ExecuteDataSet(aQuery, 0, 0, null, aParam);
+        }
+
+        public DataSet ExecuteDataSet(string aQuery, int aStartIndex, int aMaxIndex, string aSrcTable, List<DBCmdParameter> aParam)
         {
             if (this.mTransaction == null)
             {
@@ -195,7 +200,15 @@ namespace LHJ.DBService
             try
             {
                 da.SelectCommand = cmd;
-                da.Fill(ds);
+
+                if (aStartIndex.Equals(0) && aMaxIndex.Equals(0))
+                {
+                    da.Fill(ds);
+                }
+                else
+                {
+                    da.Fill(ds, aStartIndex, aMaxIndex, aSrcTable);
+                }
 
                 return ds;
             }

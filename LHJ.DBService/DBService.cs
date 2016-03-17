@@ -102,6 +102,11 @@ namespace LHJ.DBService
             return mService.ExecuteDataSet(Query, param);
         }
 
+        public static DataSet ExecuteDataSet(string Query, int aStartIndex, int aMaxIndex, string aSrcTable, List<DBCmdParameter> param)
+        {
+            return mService.ExecuteDataSet(Query, aStartIndex, aMaxIndex, aSrcTable, param);
+        }
+
         public static DataTable ExecuteDataTable(string Query)
         {
             return mService.ExecuteDataTable(Query);

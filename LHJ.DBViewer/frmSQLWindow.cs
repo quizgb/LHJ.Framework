@@ -14,6 +14,10 @@ namespace LHJ.DBViewer
         public frmSQLWindow()
         {
             InitializeComponent();
+
+            ucQuery query = new ucQuery();
+            query.Dock = DockStyle.Fill;
+            this.tabPage1.Controls.Add(query);
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
