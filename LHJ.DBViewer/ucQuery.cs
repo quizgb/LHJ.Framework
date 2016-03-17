@@ -165,12 +165,9 @@ namespace LHJ.DBViewer
 
         private void dgvQueryResult_Scroll(object sender, ScrollEventArgs e)
         {
-            if (e.NewValue.Equals(89))
+            if ((e.NewValue + this.dgvQueryResult.DisplayedRowCount(false)).Equals(100))
             {
-                if (this.dgvQueryResult.CurrentRow.Index.Equals(100))
-                {
-                        
-                }
+                ExecuteQuery();
             }
         }
     }
