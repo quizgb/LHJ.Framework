@@ -15,10 +15,5 @@ namespace LHJ.Common.Control
         {
             InitializeComponent();
         }
-
-        public void Close()
-        { 
-            
-        }
     }
 }

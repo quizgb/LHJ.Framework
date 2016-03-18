@@ -65,33 +65,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClsGetSlnCodeLine.cs" />
-    <Compile Include="Control\Block.xaml.cs">
+    <Compile Include="Common\Comm.cs" />
+    <Compile Include="Control\LoadingControl\Block.xaml.cs">
       <DependentUpon>Block.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Control\FrmSplash.cs">
+    <Compile Include="Control\LoadingControl\FrmSplash.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Control\FrmSplash.Designer.cs">
+    <Compile Include="Control\LoadingControl\FrmSplash.Designer.cs">
       <DependentUpon>FrmSplash.cs</DependentUpon>
     </Compile>
-    <Compile Include="Control\LoadingAnimation.xaml.cs">
+    <Compile Include="Control\LoadingControl\LoadingAnimation.xaml.cs">
       <DependentUpon>LoadingAnimation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\Com\Wait.cs" />
     <Compile Include="Definition\ConstValue.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Control\Block.xaml">
+    <Page Include="Control\LoadingControl\Block.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Control\LoadingAnimation.xaml">
+    <Page Include="Control\LoadingControl\LoadingAnimation.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Control\FrmSplash.resx">
+    <EmbeddedResource Include="Control\LoadingControl\FrmSplash.resx">
       <DependentUpon>FrmSplash.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>

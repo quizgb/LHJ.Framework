@@ -19,9 +19,6 @@ namespace LHJ.Practice
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
-
-            LHJ.Common.Control.FrmSplash aa = new Common.Control.FrmSplash();
-            aa.Show();
         }
 
         /// <summary>
@@ -74,11 +71,15 @@ namespace LHJ.Practice
             {
                 FrmDataGridView scnDataGridView = new FrmDataGridView();
                 this.ShowFormORClose(scnDataGridView);
+
+                LHJ.Common.Common.Comm.Wait.Show();
             }
             else if (btn.Equals(this.barBtnGetSlnCodeLine))
             {
                 FrmGetSlnCodeLine scnGetSlnCodeLine = new FrmGetSlnCodeLine();
                 this.ShowFormORClose(scnGetSlnCodeLine);
+
+                LHJ.Common.Common.Comm.Wait.Close();
             }
             else if (btn.Equals(this.barBtnImageViewer))
             {
