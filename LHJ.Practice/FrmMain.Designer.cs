@@ -36,6 +36,7 @@
             this.barBtnGetSlnCodeLine = new System.Windows.Forms.RibbonButton();
             this.barBtnImageViewer = new System.Windows.Forms.RibbonButton();
             this.barBtnScrollingText = new System.Windows.Forms.RibbonButton();
+            this.barBtnTextToSpeech = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // ribbon1
@@ -74,6 +75,7 @@
             this.ribbonPanel1.Items.Add(this.barBtnGetSlnCodeLine);
             this.ribbonPanel1.Items.Add(this.barBtnImageViewer);
             this.ribbonPanel1.Items.Add(this.barBtnScrollingText);
+            this.ribbonPanel1.Items.Add(this.barBtnTextToSpeech);
             this.ribbonPanel1.Text = "프로그램 리스트";
             // 
             // barBtnShowDataGridView
@@ -108,6 +110,13 @@
             this.barBtnScrollingText.Text = "ScrollingText";
             this.barBtnScrollingText.Click += new System.EventHandler(this.barBtnShowDataGridView_Click);
             // 
+            // barBtnTextToSpeech
+            // 
+            this.barBtnTextToSpeech.Image = ((System.Drawing.Image)(resources.GetObject("barBtnTextToSpeech.Image")));
+            this.barBtnTextToSpeech.SmallImage = ((System.Drawing.Image)(resources.GetObject("barBtnTextToSpeech.SmallImage")));
+            this.barBtnTextToSpeech.Text = "TextToSpeech";
+            this.barBtnTextToSpeech.Click += new System.EventHandler(this.barBtnShowDataGridView_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -131,5 +140,6 @@
         private System.Windows.Forms.RibbonButton barBtnGetSlnCodeLine;
         private System.Windows.Forms.RibbonButton barBtnImageViewer;
         private System.Windows.Forms.RibbonButton barBtnScrollingText;
+        private System.Windows.Forms.RibbonButton barBtnTextToSpeech;
     }
 }

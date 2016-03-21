@@ -91,6 +91,11 @@ namespace LHJ.Practice
                 FrmScrollingText scnScrollingText = new FrmScrollingText();
                 this.ShowFormORClose(scnScrollingText);
             }
+            else if (btn.Equals(this.barBtnTextToSpeech))
+            {
+                FrmTextToSpeech scnTextToSpeech = new FrmTextToSpeech();
+                this.ShowFormORClose(scnTextToSpeech);
+            }
         }
     }
 }
