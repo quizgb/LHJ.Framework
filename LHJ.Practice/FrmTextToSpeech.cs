@@ -22,6 +22,11 @@ namespace LHJ.Practice
             m_Ts.SetOutputToDefaultAudioDevice();
         }
 
+        /// <summary>
+        /// 숫자를 한글 발음으로 바꾼다.
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
         private string transToHan(long num)
         {
             string[] han = new string[] { "", "일", "이", "삼", "사", "오", "육", "칠", "팔", "구" };
@@ -118,6 +123,15 @@ namespace LHJ.Practice
         private void button3_Click(object sender, EventArgs e)
         {
             m_Ts.SpeakAsyncCancelAll();
+        }
+
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control && e.KeyCode.Equals(Keys.A))
+            {
+                this.textBox1.Focus();
+                this.textBox1.SelectAll();
+            }
         }
     }
 }
