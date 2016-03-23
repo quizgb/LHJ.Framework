@@ -20,24 +20,6 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
         #endregion
 
         #region Properties
-        public string DataSource
-        {
-            get { return m_DataSource; }
-            set { m_DataSource = value; }
-        }
-
-        public string UserID
-        {
-            get { return m_UserID; }
-            set { m_UserID = value; }
-        }
-
-        public string Password
-        {
-            get { return m_Password; }
-            set { m_Password = value; }
-        }
-
         public string ConnectionString
         {
             get { return m_OraCn.ConnectionString; }
@@ -75,6 +57,21 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
 
         #region Public Methods
 
+        public string GetDataSource()
+        {
+            return this.m_DataSource;
+        }
+
+        public string GetUserID()
+        {
+            return this.m_UserID;
+        }
+
+        public string GetPassWord()
+        {
+            return this.m_Password;
+        }
+
         public Boolean Open()
         {
             return Open(m_DataSource, m_UserID, m_Password);
@@ -82,9 +79,9 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
 
         public Boolean Open(string DataSource, string UserID, string Password)
         {
-            m_DataSource = DataSource;
-            m_UserID = UserID;
-            m_Password = Password;
+            this.m_DataSource = DataSource;
+            this.m_UserID = UserID;
+            this.m_Password = Password;
 
             if (m_UserID == string.Empty)
                 return false;
