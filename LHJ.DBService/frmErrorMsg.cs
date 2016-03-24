@@ -57,11 +57,11 @@ namespace LHJ.DBService
             }
             else
             {
-                if (aParam.GetType().Equals(typeof(List<DBCmdParameter>)))
+                if (aParam.GetType().Equals(typeof(List<ParamInfo>)))
                 {
-                    List<DBCmdParameter> param = aParam as List<DBCmdParameter>;
+                    List<ParamInfo> param = aParam as List<ParamInfo>;
 
-                    foreach (DBCmdParameter p in param)
+                    foreach (ParamInfo p in param)
                     {
                         str.AppendLine(string.Format("{0} : {1}", p.ParameterName, p.Value));
                     }

@@ -71,7 +71,7 @@ namespace LHJ.DBViewer
             {
                 return;
             }
-            if (!DBHelper.State.Equals(ConnectionState.Open))
+            if (!Common.Comm.DBWorker.GetConnState().Equals(ConnectionState.Open))
             {
                 MessageBox.Show("You are not connected", "No Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -133,7 +133,7 @@ namespace LHJ.DBViewer
                     {
                         this.Cursor = Cursors.WaitCursor;
 
-                        ds = DBHelper.ExecuteDataSet(strQuery, 0, 100, "Table1", null);
+                        ds = Common.Comm.DBWorker.ExecuteDataSet(strQuery, 0, 100, "Table1", null);
                         dgvQueryResult.DataSource = ds.Tables[0];
             
                         this.Cursor = Cursors.Default;
@@ -150,7 +150,7 @@ namespace LHJ.DBViewer
                     {
                         // executing the command
                         this.Cursor = Cursors.WaitCursor;
-                        int n = DBHelper.ExecuteNonQuery(strQuery);
+                        int n = Common.Comm.DBWorker.ExecuteNonQuery(strQuery);
                         this.Cursor = Cursors.Default;
                     }
                 }

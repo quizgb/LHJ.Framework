@@ -1,13 +1,29 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Windows.Forms;
+using System.Linq;
+using System.Text;
+using LHJ.Controls;
 
-namespace LHJ.Controls
+namespace LHJ.Common.Definition
 {
     public static class ExtensionMethod
     {
+        #region ParamList에 쿼리에 바인드 할 변수명과 값을 담는다.
+        /// <summary>
+        /// ParamList에 쿼리에 바인드 할 변수명과 값을 담는다.
+        /// </summary>
+        /// <param name="aParamList"></param>
+        /// <param name="aName"></param>
+        /// <param name="aValue"></param>
+        /// <returns></returns>
+        public static List<DBService.ParamInfo> AddParameter(this List<DBService.ParamInfo> aParamList, string aName, Object aValue)
+        {
+            aParamList.Add(new DBService.ParamInfo(aName, aValue));
+
+            return aParamList;
+        }
+        #endregion ParamList에 쿼리에 바인드 할 변수명과 값을 담는다.
+
         #region DataGridView의 해당 셀에 연결된 값을 가져온다.
         public static Object GetRowCellValue(this ucDataGridView aDGV, int aRowIndex, int aColIndex)
         {

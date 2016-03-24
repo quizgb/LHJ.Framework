@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -14,6 +15,8 @@ namespace LHJ.DBService
 
         string GetPassWord();
 
+        ConnectionState GetConnState();
+
         Boolean Open(string DataSource, string UserID, string Password);
 
         void Close();
@@ -24,9 +27,13 @@ namespace LHJ.DBService
 
         bool RollbackTrans();
 
-        DataTable ExecuteQuery(string Query);
+        DataSet ExecuteDataSet(string Query, int aStartIndex, int aMaxIndex, string aSrcTable, List<ParamInfo> param);
 
-        DataTable ExecuteQuery(string Query, List<ParamInfo> param);
+        DataTable ExecuteDataTable(string Query);
+
+        DataTable ExecuteDataTable(string Query, List<ParamInfo> param);
+
+        DataTable ExecuteDataTable(string Query, Hashtable ht);
 
         int ExecuteNonQuery(string Query);
 

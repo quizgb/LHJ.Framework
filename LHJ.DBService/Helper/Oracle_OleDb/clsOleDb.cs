@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OleDb;
@@ -22,14 +23,6 @@ namespace LHJ.DBService.Helper.Oracle_OleDb
         public string ConnectionString
         {
             get { return m_OledbCn.ConnectionString; }
-        }
-
-        /// <summary>
-        /// Database의 연결 상태를 보여준다.
-        /// </summary>
-        public ConnectionState State
-        {
-            get { return m_OledbCn.State; }
         }
 
         /// <summary>
@@ -69,6 +62,11 @@ namespace LHJ.DBService.Helper.Oracle_OleDb
         public string GetPassWord()
         {
             return this.m_Password;
+        }
+
+        public ConnectionState GetConnState()
+        {
+            return this.m_OledbCn.State;
         }
 
         public Boolean Open()
@@ -235,12 +233,134 @@ namespace LHJ.DBService.Helper.Oracle_OleDb
             return aCmd;
         }
 
-        public DataTable ExecuteQuery(string Query)
+        private OleDbCommand SetCmdParamter(OleDbCommand aCmd, Hashtable aParamList)
         {
-            return ExecuteQuery(Query, null);
+            List<string> xParamList = new List<string>();
+            Dictionary<string, object> ParamInfos = new Dictionary<string, object>();
+            List<string> names = new List<string>();
+            string tQuery = aCmd.CommandText;
+            int idx = 0;
+            List<int> idxLIst = new List<int>();
+
+            foreach (DictionaryEntry entry in aParamList)
+            {
+                xParamList.Add(entry.Key.ToString());
+                ParamInfos.Add(entry.Key.ToString(), entry.Value);
+            }
+
+            // ?로 대체시 Key 역순으로 해야 replace문제가 안생긴다.
+            xParamList.Sort();
+            xParamList.Reverse();
+
+            foreach (string str in xParamList)
+            {
+                idx = 0;
+
+                tQuery = tQuery.Replace(":" + str, "?");
+
+                do
+                {
+                    idx = aCmd.CommandText.IndexOf(":" + str, idx);
+
+                    if (idx > 0)
+                    {
+                        if (!idxLIst.Contains(idx))
+                        {
+                            idxLIst.Add(idx);
+                            names.Add(idx.ToString("000000") + ":" + str);
+                        }
+                    }
+                } while (idx++ > 0);
+
+                //aCmd.CommandText = aCmd.CommandText.Replace(":" + str, "?");
+                //aCmd.CommandText = tQuery;
+            }
+
+            names.Sort();
+            aCmd.CommandText = tQuery;
+
+            foreach (string s in names)
+            {
+                string[] x = s.Split(':');
+                aCmd.Parameters.AddWithValue(x[1] + "_" + x[0], ParamInfos[x[1]]);
+            }
+
+            //foreach (ParamInfo p in aParamList)
+            //{
+            //    aCmd.Parameters.AddWithValue("@" + p.ParameterName, p.Value);
+            //}
+
+            return aCmd;
         }
 
-        public DataTable ExecuteQuery(string Query, List<ParamInfo> param)
+        public DataSet ExecuteDataSet(string Query, int aStartIndex, int aMaxIndex, string aSrcTable, List<ParamInfo> param)
+        {
+            if (m_trans == null)
+                Connect();
+
+            OleDbDataAdapter da = new OleDbDataAdapter();
+            DataSet ds = new DataSet();
+            OleDbCommand cmd = new OleDbCommand(Query, m_OledbCn);
+
+            if (m_trans != null)
+                cmd.Transaction = m_trans;
+
+            if (param != null)
+            {
+                cmd = this.SetCmdParamter(cmd, param);
+            }
+
+            try
+            {
+                //cmd.ExecuteNonQuery();
+                da.SelectCommand = cmd;
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex, Query, param);
+                return null;
+            }
+        }
+
+        public DataTable ExecuteDataTable(string Query)
+        {
+            return ExecuteDataTable(Query, new List<ParamInfo>());
+        }
+
+        public DataTable ExecuteDataTable(string Query, List<ParamInfo> param)
+        {
+            if (m_trans == null)
+                Connect();
+
+            OleDbDataAdapter da = new OleDbDataAdapter();
+            DataSet ds = new DataSet();
+            OleDbCommand cmd = new OleDbCommand(Query, m_OledbCn);
+
+            if (m_trans != null)
+                cmd.Transaction = m_trans;
+
+            if (param != null)
+            {
+                cmd = this.SetCmdParamter(cmd, param);
+            }
+
+            try
+            {
+                //cmd.ExecuteNonQuery();
+                da.SelectCommand = cmd;
+                da.Fill(ds);
+                return ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex, Query, param);
+                return null;
+            }
+        }
+
+        public DataTable ExecuteDataTable(string Query, Hashtable param)
         {
             if (m_trans == null)
                 Connect();
@@ -317,10 +437,20 @@ namespace LHJ.DBService.Helper.Oracle_OleDb
 
         private void ErrorMessage(Exception ex, string Query)
         {
-            ErrorMessage(ex, Query, null);
+            ErrorMessage(ex, Query, new List<ParamInfo>());
         }
 
         private void ErrorMessage(Exception ex, string Query, List<ParamInfo> param)
+        {
+            frmErrorMsg frm = new frmErrorMsg();
+            frm.ex = ex;
+            frm.Query = Query;
+            //frm.Param = param;
+
+            frm.ShowDialog();
+        }
+
+        private void ErrorMessage(Exception ex, string Query, Hashtable param)
         {
             frmErrorMsg frm = new frmErrorMsg();
             frm.ex = ex;

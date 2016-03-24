@@ -5,6 +5,7 @@ using System.Drawing;
 using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
+using LHJ.Common.Definition;
 using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
 

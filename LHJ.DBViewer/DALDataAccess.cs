@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using LHJ.DBService;
+using LHJ.Common.Definition;
 
 namespace LHJ.DBViewer
 {
@@ -19,7 +20,7 @@ namespace LHJ.DBViewer
                               FROM V$VERSION
                              WHERE ROWNUM = 1   ";
 
-            dt = DBHelper.ExecuteDataTable(strCommand);
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand);
 
             return dt;
         }
@@ -33,7 +34,7 @@ namespace LHJ.DBViewer
                               FROM DBA_USERS
                              ORDER BY USERNAME  ";
 
-            dt = DBHelper.ExecuteDataTable(strCommand);
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand);
 
             return dt;
         }
@@ -53,7 +54,7 @@ namespace LHJ.DBViewer
             ht["USERID"] = aUserID;
             ht["OBJECT_TYPE"] = aObjectType;
 
-            dt = DBHelper.ExecuteDataTable(strCommand, ht);
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand, ht);
 
             return dt;
         }

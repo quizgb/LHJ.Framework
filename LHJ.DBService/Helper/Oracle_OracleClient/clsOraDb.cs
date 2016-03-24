@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.OracleClient;
@@ -23,14 +24,6 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
         public string ConnectionString
         {
             get { return m_OraCn.ConnectionString; }
-        }
-
-        /// <summary>
-        /// Database의 연결 상태를 보여준다.
-        /// </summary>
-        public ConnectionState State
-        {
-            get { return m_OraCn.State; }
         }
 
         /// <summary>
@@ -70,6 +63,11 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
         public string GetPassWord()
         {
             return this.m_Password;
+        }
+
+        public ConnectionState GetConnState()
+        {
+            return this.m_OraCn.State;
         }
 
         public Boolean Open()
@@ -176,12 +174,45 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
 
         #region ExecuteQuery
 
-        public DataTable ExecuteQuery(string Query)
+        public DataSet ExecuteDataSet(string Query, int aStartIndex, int aMaxIndex, string aSrcTable, List<ParamInfo> param)
         {
-            return ExecuteQuery(Query, null);
+            if (m_trans == null)
+                Connect();
+
+            OracleDataAdapter da = new OracleDataAdapter();
+            DataSet ds = new DataSet();
+            OracleCommand cmd = new OracleCommand(Query, m_OraCn);
+
+            if (m_trans != null)
+                cmd.Transaction = m_trans;
+
+            if (param != null)
+            {
+                foreach (ParamInfo p in param)
+                {
+                    cmd.Parameters.AddWithValue(p.ParameterName, p.Value);
+                }
+            }
+
+            try
+            {
+                da.SelectCommand = cmd;
+                da.Fill(ds);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex, Query, param);
+                return null;
+            }
         }
 
-        public DataTable ExecuteQuery(string Query, List<ParamInfo> param)
+        public DataTable ExecuteDataTable(string Query)
+        {
+            return ExecuteDataTable(Query, new List<ParamInfo>());
+        }
+
+        public DataTable ExecuteDataTable(string Query, List<ParamInfo> param)
         {
             if (m_trans == null)
                 Connect();
@@ -214,6 +245,43 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
             }
         }
 
+        public DataTable ExecuteDataTable(string aQuery, Hashtable aParam)
+        {
+            if (this.m_trans == null)
+            {
+                this.Connect();
+            }
+
+            OracleDataAdapter da = new OracleDataAdapter();
+            DataSet ds = new DataSet();
+            OracleCommand cmd = new OracleCommand(aQuery, this.m_OraCn);
+
+            if (m_trans != null)
+            {
+                cmd.Transaction = this.m_trans;
+            }
+
+            if (aParam != null)
+            {
+                foreach (string paramName in aParam.Keys)
+                {
+                    cmd.Parameters.AddWithValue(paramName, aParam[paramName]);
+                }
+            }
+
+            try
+            {
+                da.SelectCommand = cmd;
+                da.Fill(ds);
+
+                return ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex, aQuery, aParam);
+                return null;
+            }
+        }
 
         public OracleDataReader ExecuteReader(string Query)
         {
@@ -359,10 +427,20 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
 
         private void ErrorMessage(Exception ex, string Query)
         {
-            ErrorMessage(ex, Query, null);
+            ErrorMessage(ex, Query, new List<ParamInfo>());
         }
 
         private void ErrorMessage(Exception ex, string Query, List<ParamInfo> param)
+        {
+            frmErrorMsg frm = new frmErrorMsg();
+            frm.ex = ex;
+            frm.Query = Query;
+            frm.Param = param;
+
+            frm.ShowDialog();
+        }
+
+        private void ErrorMessage(Exception ex, string Query, Hashtable param)
         {
             frmErrorMsg frm = new frmErrorMsg();
             frm.ex = ex;

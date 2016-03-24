@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using LHJ.Common.Definition;
 
 namespace LHJ.Controls
 {
@@ -11,12 +12,12 @@ namespace LHJ.Controls
     {
         #region 1.Variable
         private string mProgressBarText = "";
-        private DefEnum.ProgressBarTextType mTextType = DefEnum.ProgressBarTextType.None;
+        private ConstValue.ProgressBarTextType mTextType = ConstValue.ProgressBarTextType.None;
         #endregion 1.Variable
 
 
         #region 2.Property
-        public DefEnum.ProgressBarTextType TextType
+        public ConstValue.ProgressBarTextType TextType
         {
             get { return this.mTextType; }
             set { this.mTextType = value; }
@@ -77,15 +78,15 @@ namespace LHJ.Controls
         #region 6.Method
         private string currentText()
         {
-            if (mTextType == DefEnum.ProgressBarTextType.None)
+            if (mTextType == ConstValue.ProgressBarTextType.None)
             {
                 return string.Empty;
             }
-            else if (mTextType == DefEnum.ProgressBarTextType.Word)
+            else if (mTextType == ConstValue.ProgressBarTextType.Word)
             {
                 return this.mProgressBarText;
             }
-            else if (mTextType == DefEnum.ProgressBarTextType.Percentage)
+            else if (mTextType == ConstValue.ProgressBarTextType.Percentage)
             {
                 int percent = (int)(((double)(Value - Minimum) / (double)(Maximum - Minimum)) * 100);
                 return percent.ToString() + "%";

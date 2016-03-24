@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -11,32 +12,11 @@ namespace LHJ.DBService
         private string m_DataSource = string.Empty;
         private string m_UserID = string.Empty;
         private string m_Password = string.Empty;
-
-        private Common.Definition.ConstValue.Def_DatabaseType m_DBType = Common.Definition.ConstValue.Def_DatabaseType.Oracle_OracleClient;
         private IDBHelper m_DBHelper = null;
 
-        public DBWorker() : this(Common.Definition.ConstValue.Def_DatabaseType.Oracle_OracleClient)
+        public DBWorker()
         {
-
-        }
-
-        public DBWorker(Common.Definition.ConstValue.Def_DatabaseType DbType)
-        {
-            m_DBType = DbType;
-
-            switch (m_DBType)
-            {
-                case Common.Definition.ConstValue.Def_DatabaseType.Oracle_OracleClient:
-                    m_DBHelper = new LHJ.DBService.Helper.Oracle_OleDb.clsOleDb();
-                    break;
-
-                case Common.Definition.ConstValue.Def_DatabaseType.Oracle_OleDb:
-                    m_DBHelper = new LHJ.DBService.Helper.Oracle_OracleClient.clsOraDb();
-                    break;
-
-                default:
-                    break;
-            }
+            m_DBHelper = new LHJ.DBService.Helper.Oracle_OracleClient.clsOraDb();
         }
 
         public string GetDataSource()
@@ -54,13 +34,39 @@ namespace LHJ.DBService
             return m_DBHelper.GetPassWord();
         }
 
+        public ConnectionState GetConnState()
+        {
+            return m_DBHelper.GetConnState();
+        }
+
         public Boolean Open(string aDataSource, string aUserID, string aPassWord)
         {
             this.m_DataSource = aDataSource;
             this.m_UserID = aUserID;
             this.m_Password = aPassWord;
+            bool state = false;
 
-            return m_DBHelper.Open(aDataSource, aUserID, aPassWord);
+            state = m_DBHelper.Open(aDataSource, aUserID, aPassWord);
+
+            DataTable dtCharSet = this.ExecuteDataTable(@"SELECT VALUE FROM NLS_DATABASE_PARAMETERS WHERE PARAMETER = 'NLS_CHARACTERSET'");
+
+            if (dtCharSet.Rows.Count > 0)
+            {
+                if (dtCharSet.Rows[0][0].ToString().Equals("US7ASCII"))
+                {
+                    m_DBHelper.Close();
+                    m_DBHelper = new LHJ.DBService.Helper.Oracle_OleDb.clsOleDb();
+                    state = m_DBHelper.Open(aDataSource, aUserID, aPassWord);
+                }
+                else
+                {
+                }
+            }
+            else
+            {
+            }
+
+            return state;
         }
 
         public void Close()
@@ -83,14 +89,24 @@ namespace LHJ.DBService
             return m_DBHelper.RollbackTrans();
         }
 
-        public DataTable ExecuteQuery(string Query)
+        public DataSet ExecuteDataSet(string Query, int aStartIndex, int aMaxIndex, string aSrcTable, List<ParamInfo> param)
         {
-            return m_DBHelper.ExecuteQuery(Query);
+            return m_DBHelper.ExecuteDataSet(Query, aStartIndex, aMaxIndex, aSrcTable, param);
         }
 
-        public DataTable ExecuteQuery(string Query, List<ParamInfo> param)
+        public DataTable ExecuteDataTable(string Query)
         {
-            return m_DBHelper.ExecuteQuery(Query, param);
+            return m_DBHelper.ExecuteDataTable(Query);
+        }
+
+        public DataTable ExecuteDataTable(string Query, List<ParamInfo> param)
+        {
+            return m_DBHelper.ExecuteDataTable(Query, param);
+        }
+
+        public DataTable ExecuteDataTable(string Query, Hashtable ht)
+        {
+            return m_DBHelper.ExecuteDataTable(Query, ht);
         }
 
         public int ExecuteNonQuery(string Query)

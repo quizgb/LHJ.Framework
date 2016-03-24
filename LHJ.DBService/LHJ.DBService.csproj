@@ -68,9 +68,7 @@
     <Compile Include="Helper\ParamInfo.cs" />
     <Compile Include="Helper\Oracle_OleDb\clsOleDb.cs" />
     <Compile Include="Helper\IDBHelper.cs" />
-    <Compile Include="DBService.cs" />
     <Compile Include="DBWorker.cs" />
-    <Compile Include="Service.cs" />
     <Compile Include="frmErrorMsg.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -36,7 +36,7 @@ namespace LHJ.DBViewer
             this.cboObjectList.Items.Add("Tables");
             this.cboObjectList.Items.Add("Views");
 
-            this.cboUserList.SelectedValue = DBHelper.UserID.ToUpper();
+            this.cboUserList.SelectedValue = Common.Comm.DBWorker.GetUserID().ToUpper();
             this.cboObjectList.SelectedIndex = 0;
         }
 

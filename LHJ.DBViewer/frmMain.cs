@@ -48,7 +48,7 @@ namespace LHJ.DBViewer
             frmLogin loginFrm = new frmLogin();
             loginFrm.ShowDialog();
 
-            if (DBHelper.State.Equals(ConnectionState.Open))
+            if (Common.Comm.DBWorker.GetConnState().Equals(ConnectionState.Open))
             {
                 this.SetOracleVersionLabel();
                 frmSQLWindow window = new frmSQLWindow();

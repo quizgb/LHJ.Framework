@@ -72,14 +72,14 @@ namespace LHJ.Practice
                 FrmDataGridView scnDataGridView = new FrmDataGridView();
                 this.ShowFormORClose(scnDataGridView);
 
-                LHJ.Common.Common.Comm.Wait.Show();
+                LHJ.Common.Comm.Wait.Show();
             }
             else if (btn.Equals(this.barBtnGetSlnCodeLine))
             {
                 FrmGetSlnCodeLine scnGetSlnCodeLine = new FrmGetSlnCodeLine();
                 this.ShowFormORClose(scnGetSlnCodeLine);
 
-                LHJ.Common.Common.Comm.Wait.Close();
+                LHJ.Common.Comm.Wait.Close();
             }
             else if (btn.Equals(this.barBtnImageViewer))
             {

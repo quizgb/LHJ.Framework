@@ -49,6 +49,14 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="LHJ.Controls, Version=1.0.5927.23803, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Compile\LHJ.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="LHJ.DBService, Version=1.0.5926.33097, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Compile\LHJ.DBService.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -79,7 +87,8 @@
       <DependentUpon>LoadingAnimation.xaml</DependentUpon>
     </Compile>
     <Compile Include="Common\Com\Wait.cs" />
-    <Compile Include="Definition\ConstValue.cs" />
+    <Compile Include="Definition\ConstValue\ConstValue.cs" />
+    <Compile Include="Definition\ExtensionMethod\ExtensionMethod.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

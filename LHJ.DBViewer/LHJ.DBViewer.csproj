@@ -93,7 +93,6 @@
     <Compile Include="clsRichDDLBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="ExtensionMethod.cs" />
     <Compile Include="DALDataAccess.cs" />
     <Compile Include="frmLogin.cs">
       <SubType>Form</SubType>

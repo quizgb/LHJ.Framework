@@ -82,12 +82,12 @@ namespace LHJ.DBViewer
             this.Cursor = Cursors.WaitCursor;
             this.btnLogin.Enabled = false;
 
-            DBHelper.Connect(this.txtUsername.Text.Trim(), this.txtPassword.Text.Trim(), this.txtDatabase.Text.Trim());
+            Common.Comm.DBWorker.Open(this.txtDatabase.Text.Trim(), this.txtUsername.Text.Trim(), this.txtPassword.Text.Trim());
 
             this.btnLogin.Enabled = true;
             this.Cursor = Cursors.Default;
 
-            if (DBHelper.State.Equals(ConnectionState.Open))
+            if (Common.Comm.DBWorker.GetConnState().Equals(ConnectionState.Open))
             {
                 if (this.cbxSavePassword.Checked)
                 {
@@ -135,7 +135,7 @@ namespace LHJ.DBViewer
 
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!DBHelper.State.Equals(ConnectionState.Open) && !e.CloseReason.Equals(CloseReason.UserClosing))
+            if (!Common.Comm.DBWorker.GetConnState().Equals(ConnectionState.Open) && !e.CloseReason.Equals(CloseReason.UserClosing))
             {
                 e.Cancel = true;
             }
