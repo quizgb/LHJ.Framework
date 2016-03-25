@@ -39,6 +39,27 @@ namespace LHJ.DBViewer
             return dt;
         }
 
+        public static DataTable GetTableColumns(string aUserID, string aTableName)
+        {
+            DataTable dt = new DataTable();
+            string strCommand = string.Empty;
+            Hashtable ht = new Hashtable();
+
+            strCommand = @" SELECT COLUMN_ID, COLUMN_NAME, DATA_TYPE||'('||DATA_LENGTH||')' AS DATA_TYPE, 
+                                   DECODE(NULLABLE, 'N', 'NOT NULL') AS NULLABLE, DATA_DEFAULT AS DEFAULT_VALUE
+                              FROM ALL_TAB_COLUMNS 
+                             WHERE OWNER = :USERID 
+                               AND TABLE_NAME = :TABLE_NAME
+                          ORDER BY COLUMN_ID    ";
+
+            ht["USERID"] = aUserID;
+            ht["TABLE_NAME"] = aTableName;
+
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand, ht);
+
+            return dt;
+        }
+
         public static DataTable GetObjectList(string aUserID, string aObjectType)
         {
             DataTable dt = new DataTable();
