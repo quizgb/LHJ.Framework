@@ -197,7 +197,7 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
             try
             {
                 da.SelectCommand = cmd;
-                da.Fill(ds);
+                da.Fill(ds,aStartIndex, aMaxIndex, aSrcTable);
                 return ds;
             }
             catch (Exception ex)
@@ -279,6 +279,39 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
             catch (Exception ex)
             {
                 ErrorMessage(ex, aQuery, aParam);
+                return null;
+            }
+        }
+
+        public DataTable ExecuteDataTable(string Query, int aStartIndex, int aMaxIndex, string aSrcTable, List<ParamInfo> param)
+        {
+            if (m_trans == null)
+                Connect();
+
+            OracleDataAdapter da = new OracleDataAdapter();
+            DataSet ds = new DataSet();
+            OracleCommand cmd = new OracleCommand(Query, m_OraCn);
+
+            if (m_trans != null)
+                cmd.Transaction = m_trans;
+
+            if (param != null)
+            {
+                foreach (ParamInfo p in param)
+                {
+                    cmd.Parameters.AddWithValue(p.ParameterName, p.Value);
+                }
+            }
+
+            try
+            {
+                da.SelectCommand = cmd;
+                da.Fill(ds, aStartIndex, aMaxIndex, aSrcTable);
+                return ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex, Query, param);
                 return null;
             }
         }

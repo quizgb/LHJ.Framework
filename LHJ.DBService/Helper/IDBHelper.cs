@@ -35,6 +35,8 @@ namespace LHJ.DBService
 
         DataTable ExecuteDataTable(string Query, Hashtable ht);
 
+        DataTable ExecuteDataTable(string Query, int aStartIndex, int aMaxIndex, string aSrcTable, List<ParamInfo> param);
+
         int ExecuteNonQuery(string Query);
 
         int ExecuteNonQuery(string Query, List<ParamInfo> param);

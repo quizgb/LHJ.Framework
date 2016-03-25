@@ -314,7 +314,7 @@ namespace LHJ.DBService.Helper.Oracle_OleDb
             {
                 //cmd.ExecuteNonQuery();
                 da.SelectCommand = cmd;
-                da.Fill(ds);
+                da.Fill(ds, aStartIndex, aMaxIndex, aSrcTable);
                 return ds;
             }
             catch (Exception ex)
@@ -382,6 +382,37 @@ namespace LHJ.DBService.Helper.Oracle_OleDb
                 //cmd.ExecuteNonQuery();
                 da.SelectCommand = cmd;
                 da.Fill(ds);
+                return ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex, Query, param);
+                return null;
+            }
+        }
+
+        public DataTable ExecuteDataTable(string Query, int aStartIndex, int aMaxIndex, string aSrcTable, List<ParamInfo> param)
+        {
+            if (m_trans == null)
+                Connect();
+
+            OleDbDataAdapter da = new OleDbDataAdapter();
+            DataSet ds = new DataSet();
+            OleDbCommand cmd = new OleDbCommand(Query, m_OledbCn);
+
+            if (m_trans != null)
+                cmd.Transaction = m_trans;
+
+            if (param != null)
+            {
+                cmd = this.SetCmdParamter(cmd, param);
+            }
+
+            try
+            {
+                //cmd.ExecuteNonQuery();
+                da.SelectCommand = cmd;
+                da.Fill(ds, aStartIndex, aMaxIndex, aSrcTable);
                 return ds.Tables[0];
             }
             catch (Exception ex)

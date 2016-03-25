@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using LHJ.DBService;
 using Oracle.DataAccess.Client;
+using System.Diagnostics;
 
 namespace LHJ.DBViewer
 {
@@ -18,10 +19,19 @@ namespace LHJ.DBViewer
         const int BASE_HEIGHT = LINE_HEIGHT * BASE_LINES;
         const int SCROLL_HEIGHT = 34;
         const int SCROLL_WIDTH = 70;
+        const int QUERY_ROW_CNT = 150;
+
+        private string m_Query = string.Empty;
+        private DataTable m_DTDataSource = null; 
 
         public ucQuery()
         {
             InitializeComponent();
+        }
+
+        public void SetFocusDDLBox()
+        {
+            this.txtSqlArea.Focus();
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -34,7 +44,7 @@ namespace LHJ.DBViewer
                     break;
 
                 case Keys.F7:
-                    ExecuteQuery();
+                    ExecuteQuery(false, 0);
                     break;
 
                 case Keys.F9:
@@ -57,73 +67,74 @@ namespace LHJ.DBViewer
             return base.ProcessCmdKey(ref msg, keyData);
         }
 
-        public void ExecuteQuery()
+        public void ExecuteQuery(bool aScrolled, int aLastScrollIndex)
         {
             // local variables
             bool isSelect;
             String trimmedSQL;
-            DataSet ds = new DataSet();
             List<String> lSQLStrings = new List<String>();
             int currSQLStringInd = 1;
-            String strQuery = null;
 
             if (txtSqlArea.ReadOnly) // do nothing if in "Read only" mode
             {
                 return;
             }
+
             if (!Common.Comm.DBWorker.GetConnState().Equals(ConnectionState.Open))
             {
                 MessageBox.Show("You are not connected", "No Connection", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // clear the grids data source
-            dgvQueryResult.DataSource = null;
+            Stopwatch sw1 = new Stopwatch();
+            sw1.Start();
 
-            if (ds != null)
+            if (!aScrolled)
             {
-                ds.Clear();
-            }
+                this.m_Query = string.Empty;
+                this.dgvQueryResult.DataSource = null;
+                this.m_DTDataSource = new DataTable();
 
-            // Check if user selected text to run
-            if (txtSqlArea.SelectedText == "")
-            {
-                //strQuery = txtSqlArea.Text.TrimEnd(';');
-
-                //2015.08.27 이호준 수정
-                string[] query = txtSqlArea.Text.Split(';');
-                int totLength = 0;
-
-                for (int cnt = 0; cnt < query.Length; cnt++)
+                // Check if user selected text to run
+                if (string.IsNullOrEmpty(txtSqlArea.SelectedText))
                 {
-                    totLength += query[cnt].Length + 1;
+                    //strQuery = txtSqlArea.Text.TrimEnd(';');
 
-                    if (txtSqlArea.SelectionStart > totLength)
+                    //2015.08.27 이호준 수정
+                    string[] query = txtSqlArea.Text.Split(';');
+                    int totLength = 0;
+
+                    for (int cnt = 0; cnt < query.Length; cnt++)
                     {
-                        continue;
+                        totLength += query[cnt].Length + 1;
+
+                        if (txtSqlArea.SelectionStart > totLength)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            this.m_Query = query[cnt];
+                            break;
+                        }
                     }
-                    else
-                    {
-                        strQuery = query[cnt];
-                        break;
-                    }
+                    //2015.08.27 이호준 수정
                 }
-                //2015.08.27 이호준 수정
-            }
-            else
-            {
-                strQuery = txtSqlArea.SelectedText.TrimEnd(';');
+                else
+                {
+                    this.m_Query = txtSqlArea.SelectedText.TrimEnd(';');
+                }
             }
 
-            if (strQuery != "")
+            if (!string.IsNullOrEmpty(this.m_Query))
             {
                 // checking type of SQL command
-                trimmedSQL = strQuery.Trim().ToUpper();
+                trimmedSQL = this.m_Query.Trim().ToUpper();
                 isSelect = trimmedSQL.StartsWith("SELECT");
 
                 // Inserting the new text to the SQL's list (after reomving all occurances of that SQL
-                lSQLStrings.RemoveAll(delegate (String s) { return s.Equals(strQuery); });
-                lSQLStrings.Add(strQuery);
+                lSQLStrings.RemoveAll(delegate (String s) { return s.Equals(this.m_Query); });
+                lSQLStrings.Add(this.m_Query);
                 currSQLStringInd = lSQLStrings.Count;
 
                 try
@@ -133,24 +144,36 @@ namespace LHJ.DBViewer
                     {
                         this.Cursor = Cursors.WaitCursor;
 
-                        ds = Common.Comm.DBWorker.ExecuteDataSet(strQuery, 0, 100, "Table1", null);
-                        dgvQueryResult.DataSource = ds.Tables[0];
-            
+                        if (!aScrolled)
+                        {
+                            this.m_DTDataSource = Common.Comm.DBWorker.ExecuteDataTable(this.m_Query, this.m_DTDataSource.Rows.Count, QUERY_ROW_CNT, "Table1", null);
+                            dgvQueryResult.DataSource = this.m_DTDataSource;
+                            this.tsslRowCount.Text = string.Format("{0} of {1}", "1", dgvQueryResult.Rows.Count.ToString());
+                        }
+                        else
+                        {
+                            DataTable dt = Common.Comm.DBWorker.ExecuteDataTable(this.m_Query, this.m_DTDataSource.Rows.Count, QUERY_ROW_CNT, "Table1", null);
+                            this.m_DTDataSource.Merge(dt);
+                        }
+
+                        sw1.Stop();
+                        this.tsslQueryResultDelay.Text = sw1.Elapsed.TotalSeconds.ToString();
+
                         this.Cursor = Cursors.Default;
 
-                        // Set the sizes of the text area and grid view
-                        txtSqlArea.Height = Math.Max((txtSqlArea.Lines.Length + 1) * LINE_HEIGHT, BASE_HEIGHT);
-                        txtSqlArea.Width = this.Width - SCROLL_WIDTH;
-                        dgvQueryResult.Width = this.Width - SCROLL_WIDTH;
-                        dgvQueryResult.Height = this.Height - txtSqlArea.Height - SCROLL_HEIGHT;
-                        dgvQueryResult.Location = new Point(0, txtSqlArea.Height);
-                        dgvQueryResult.Visible = true;
+                        if (aScrolled)
+                        {
+                            dgvQueryResult.FirstDisplayedScrollingRowIndex = aLastScrollIndex;
+                            dgvQueryResult.Refresh();
+                            dgvQueryResult.CurrentCell = dgvQueryResult.Rows[aLastScrollIndex].Cells[0];
+                            dgvQueryResult.Rows[aLastScrollIndex].Selected = true;
+                        }
                     }
                     else // if not SELECT statement, execute the DML/DDL Command
                     {
                         // executing the command
                         this.Cursor = Cursors.WaitCursor;
-                        int n = Common.Comm.DBWorker.ExecuteNonQuery(strQuery);
+                        int n = Common.Comm.DBWorker.ExecuteNonQuery(this.m_Query);
                         this.Cursor = Cursors.Default;
                     }
                 }
@@ -165,10 +188,18 @@ namespace LHJ.DBViewer
 
         private void dgvQueryResult_Scroll(object sender, ScrollEventArgs e)
         {
-            if ((e.NewValue + this.dgvQueryResult.DisplayedRowCount(false)).Equals(100))
+            if (e.ScrollOrientation == ScrollOrientation.VerticalScroll)
             {
-                ExecuteQuery();
+                if ((e.NewValue + this.dgvQueryResult.DisplayedRowCount(false)) >= this.m_DTDataSource.Rows.Count)
+                {
+                    ExecuteQuery(true, e.NewValue);
+                }
             }
+        }
+
+        private void dgvQueryResult_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            this.tsslRowCount.Text = string.Format("{0} of {1}", e.RowIndex, dgvQueryResult.Rows.Count);
         }
     }
 }

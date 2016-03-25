@@ -112,6 +112,11 @@ namespace LHJ.DBService
             return m_DBHelper.ExecuteDataTable(Query, ht);
         }
 
+        public DataTable ExecuteDataTable(string Query, int aStartIndex, int aMaxIndex, string aSrcTable, List<ParamInfo> param)
+        {
+            return m_DBHelper.ExecuteDataTable(Query, aStartIndex, aMaxIndex, aSrcTable, param);
+        }
+
         public int ExecuteNonQuery(string Query)
         {
             return m_DBHelper.ExecuteNonQuery(Query, null);

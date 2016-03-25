@@ -11,18 +11,24 @@ namespace LHJ.DBViewer
 {
     public partial class frmSQLWindow : Form
     {
+        private ucQuery m_Query = new ucQuery();
+
         public frmSQLWindow()
         {
             InitializeComponent();
 
-            ucQuery query = new ucQuery();
-            query.Dock = DockStyle.Fill;
-            this.tabPage1.Controls.Add(query);
+            m_Query.Dock = DockStyle.Fill;
+            this.tabPage1.Controls.Add(m_Query);
         }
 
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
             this.tabControl1.Refresh();
+        }
+
+        private void frmSQLWindow_Shown(object sender, EventArgs e)
+        {
+            this.m_Query.SetFocusDDLBox();
         }
     }
 }
