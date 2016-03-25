@@ -56,7 +56,7 @@
             this.lbxObject.ItemHeight = 12;
             this.lbxObject.Location = new System.Drawing.Point(0, 0);
             this.lbxObject.Name = "lbxObject";
-            this.lbxObject.Size = new System.Drawing.Size(186, 425);
+            this.lbxObject.Size = new System.Drawing.Size(186, 323);
             this.lbxObject.TabIndex = 2;
             this.lbxObject.SelectedIndexChanged += new System.EventHandler(this.lbxObject_SelectedIndexChanged);
             // 
@@ -92,7 +92,7 @@
             this.dgvColumnInfo.ReadOnly = true;
             this.dgvColumnInfo.RowTemplate.Height = 23;
             this.dgvColumnInfo.ShowRowHeaderValue = true;
-            this.dgvColumnInfo.Size = new System.Drawing.Size(186, 25);
+            this.dgvColumnInfo.Size = new System.Drawing.Size(186, 127);
             this.dgvColumnInfo.TabIndex = 5;
             // 
             // splitContainer1
@@ -112,7 +112,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvColumnInfo);
             this.splitContainer1.Size = new System.Drawing.Size(186, 454);
-            this.splitContainer1.SplitterDistance = 425;
+            this.splitContainer1.SplitterDistance = 323;
             this.splitContainer1.TabIndex = 6;
             // 
             // ucObejct
