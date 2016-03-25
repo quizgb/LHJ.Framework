@@ -34,6 +34,8 @@ namespace LHJ.DBViewer
             {
                 this.lbxObject.Items.Add(dr["OBJECT_NAME"].ToString());
             }
+
+            this.SetColumnInfo();
         }
 
         private void ucObjectList1_SelectedObjChanged(object sender, Common.Definition.EventHandler.SelectedObjChangedEventArgs e)
@@ -45,6 +47,19 @@ namespace LHJ.DBViewer
             {
                 this.lbxObject.Items.Add(dr["OBJECT_NAME"].ToString());
             }
+
+            this.SetColumnInfo();
+        }
+
+        private void lbxObject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            this.SetColumnInfo();
+        }
+
+        private void SetColumnInfo()
+        {
+            DataTable dt = DALDataAccess.GetTableColumns(Common.Comm.DBWorker.GetUserID().ToUpper(), this.lbxObject.Text);
+            this.dgvColumnInfo.DataSource = dt;
         }
     }
 }

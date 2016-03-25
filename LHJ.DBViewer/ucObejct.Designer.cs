@@ -32,6 +32,8 @@
             this.lbxObject = new System.Windows.Forms.ListBox();
             this.ucUserList1 = new LHJ.DBViewer.ucUserList();
             this.ucObjectList1 = new LHJ.DBViewer.ucObjectList();
+            this.dgvColumnInfo = new LHJ.Controls.ucDataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvColumnInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // splitter1
@@ -52,8 +54,9 @@
             this.lbxObject.ItemHeight = 12;
             this.lbxObject.Location = new System.Drawing.Point(3, 65);
             this.lbxObject.Name = "lbxObject";
-            this.lbxObject.Size = new System.Drawing.Size(186, 448);
+            this.lbxObject.Size = new System.Drawing.Size(186, 424);
             this.lbxObject.TabIndex = 2;
+            this.lbxObject.SelectedIndexChanged += new System.EventHandler(this.lbxObject_SelectedIndexChanged);
             // 
             // ucUserList1
             // 
@@ -75,14 +78,30 @@
             this.ucObjectList1.TabIndex = 4;
             this.ucObjectList1.SelectedObjChanged += new LHJ.Common.Definition.EventHandler.SelectedObjChangedEventHandler(this.ucObjectList1_SelectedObjChanged);
             // 
+            // dgvColumnInfo
+            // 
+            this.dgvColumnInfo.AllowUserToAddRows = false;
+            this.dgvColumnInfo.AllowUserToDeleteRows = false;
+            this.dgvColumnInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvColumnInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvColumnInfo.Location = new System.Drawing.Point(54, 287);
+            this.dgvColumnInfo.Name = "dgvColumnInfo";
+            this.dgvColumnInfo.ReadOnly = true;
+            this.dgvColumnInfo.RowTemplate.Height = 23;
+            this.dgvColumnInfo.ShowRowHeaderValue = true;
+            this.dgvColumnInfo.Size = new System.Drawing.Size(103, 144);
+            this.dgvColumnInfo.TabIndex = 5;
+            // 
             // ucObejct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.dgvColumnInfo);
             this.Controls.Add(this.ucObjectList1);
             this.Controls.Add(this.ucUserList1);
             this.Controls.Add(this.lbxObject);
             this.Name = "ucObejct";
             this.Size = new System.Drawing.Size(192, 522);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvColumnInfo)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -93,5 +112,6 @@
         private System.Windows.Forms.ListBox lbxObject;
         private ucUserList ucUserList1;
         private ucObjectList ucObjectList1;
+        private Controls.ucDataGridView dgvColumnInfo;
     }
 }
