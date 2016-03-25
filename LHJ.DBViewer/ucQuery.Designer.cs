@@ -30,6 +30,7 @@
         {
             this.dgvQueryResult = new LHJ.Controls.ucDataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtSqlArea = new LHJ.DBViewer.clsRichDDLBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslRowCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslQueryResultDelay = new System.Windows.Forms.ToolStripStatusLabel();
@@ -52,7 +53,7 @@
             this.dgvQueryResult.ReadOnly = true;
             this.dgvQueryResult.RowTemplate.Height = 23;
             this.dgvQueryResult.ShowRowHeaderValue = true;
-            this.dgvQueryResult.Size = new System.Drawing.Size(818, 184);
+            this.dgvQueryResult.Size = new System.Drawing.Size(818, 180);
             this.dgvQueryResult.TabIndex = 1;
             this.dgvQueryResult.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQueryResult_RowEnter);
             this.dgvQueryResult.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgvQueryResult_Scroll);
@@ -64,6 +65,10 @@
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.txtSqlArea);
+            // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvQueryResult);
@@ -72,16 +77,28 @@
             this.splitContainer1.SplitterDistance = 319;
             this.splitContainer1.TabIndex = 2;
             // 
+            // txtSqlArea
+            // 
+            this.txtSqlArea.AcceptsTab = true;
+            this.txtSqlArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSqlArea.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSqlArea.ForeColor = System.Drawing.Color.Black;
+            this.txtSqlArea.Location = new System.Drawing.Point(0, 0);
+            this.txtSqlArea.Name = "txtSqlArea";
+            this.txtSqlArea.Size = new System.Drawing.Size(818, 319);
+            this.txtSqlArea.TabIndex = 0;
+            this.txtSqlArea.Text = "";
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslRowCount,
             this.tsslQueryResultDelay});
             this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.statusStrip1.Location = new System.Drawing.Point(0, 184);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 180);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusStrip1.Size = new System.Drawing.Size(818, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(818, 28);
             this.statusStrip1.TabIndex = 2;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -91,8 +108,9 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.tsslRowCount.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
+            this.tsslRowCount.Font = new System.Drawing.Font("맑은 고딕", 10F);
             this.tsslRowCount.Name = "tsslRowCount";
-            this.tsslRowCount.Size = new System.Drawing.Size(75, 19);
+            this.tsslRowCount.Size = new System.Drawing.Size(86, 23);
             this.tsslRowCount.Text = "(RowCount)";
             // 
             // tsslQueryResultDelay
@@ -101,8 +119,9 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.tsslQueryResultDelay.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
+            this.tsslQueryResultDelay.Font = new System.Drawing.Font("맑은 고딕", 10F);
             this.tsslQueryResultDelay.Name = "tsslQueryResultDelay";
-            this.tsslQueryResultDelay.Size = new System.Drawing.Size(113, 19);
+            this.tsslQueryResultDelay.Size = new System.Drawing.Size(134, 23);
             this.tsslQueryResultDelay.Text = "(QueryResultDelay)";
             // 
             // ucQuery
@@ -131,5 +150,6 @@
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel tsslRowCount;
         private System.Windows.Forms.ToolStripStatusLabel tsslQueryResultDelay;
+        private clsRichDDLBox clsRichDDLBox1;
     }
 }

@@ -544,10 +544,10 @@
             this.toolStripStatusLabel1,
             this.tsslOracleVersion});
             this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.statusStrip1.Location = new System.Drawing.Point(0, 962);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 960);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
-            this.statusStrip1.Size = new System.Drawing.Size(1264, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1264, 26);
             this.statusStrip1.TabIndex = 18;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -558,7 +558,7 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.toolStripStatusLabel1.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(91, 19);
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(91, 21);
             this.toolStripStatusLabel1.Text = "                    ";
             // 
             // tsslOracleVersion
@@ -567,8 +567,9 @@
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Right) 
             | System.Windows.Forms.ToolStripStatusLabelBorderSides.Bottom)));
             this.tsslOracleVersion.BorderStyle = System.Windows.Forms.Border3DStyle.SunkenOuter;
+            this.tsslOracleVersion.Font = new System.Drawing.Font("맑은 고딕", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.tsslOracleVersion.Name = "tsslOracleVersion";
-            this.tsslOracleVersion.Size = new System.Drawing.Size(93, 19);
+            this.tsslOracleVersion.Size = new System.Drawing.Size(103, 21);
             this.tsslOracleVersion.Text = "(OracleVersion)";
             // 
             // frmMain

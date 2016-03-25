@@ -20,11 +20,11 @@ namespace LHJ.DBViewer
     {
         // Setting default Colors & Fonts for the the different types of strings
         private Color clrDefault = Color.Black;
-        private Font fntDefault = new Font("Courier New", 10, FontStyle.Regular);
+        private Font fntDefault = new Font("Courier New", 12, FontStyle.Regular);
         private Color clrKeyword = Color.Blue;
-        private Font fntKeyword = new Font("Courier New", 10, FontStyle.Bold);
+        private Font fntKeyword = new Font("Courier New", 12, FontStyle.Bold);
         private Color clrComment = Color.Green;
-        private Font fntComment = new Font("Courier New", 10, FontStyle.Italic);
+        private Font fntComment = new Font("Courier New", 12, FontStyle.Italic);
         private Color clrBackError = Color.Yellow;
 
 
