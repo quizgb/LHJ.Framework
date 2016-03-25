@@ -132,6 +132,18 @@
     <Compile Include="ucQuery.Designer.cs">
       <DependentUpon>ucQuery.cs</DependentUpon>
     </Compile>
+    <Compile Include="ucUserList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucUserList.Designer.cs">
+      <DependentUpon>ucUserList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ucObjectList.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucObjectList.Designer.cs">
+      <DependentUpon>ucObjectList.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -157,8 +169,14 @@
     <EmbeddedResource Include="ucObejct.resx">
       <DependentUpon>ucObejct.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ucObjectList.resx">
+      <DependentUpon>ucObjectList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucQuery.resx">
       <DependentUpon>ucQuery.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucUserList.resx">
+      <DependentUpon>ucUserList.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">

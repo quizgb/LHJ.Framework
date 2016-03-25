@@ -48,22 +48,25 @@ namespace LHJ.DBService
 
             state = m_DBHelper.Open(aDataSource, aUserID, aPassWord);
 
-            DataTable dtCharSet = this.ExecuteDataTable(@"SELECT VALUE FROM NLS_DATABASE_PARAMETERS WHERE PARAMETER = 'NLS_CHARACTERSET'");
-
-            if (dtCharSet.Rows.Count > 0)
+            if (state)
             {
-                if (dtCharSet.Rows[0][0].ToString().Equals("US7ASCII"))
+                DataTable dtCharSet = this.ExecuteDataTable(@"SELECT VALUE FROM NLS_DATABASE_PARAMETERS WHERE PARAMETER = 'NLS_CHARACTERSET'");
+
+                if (dtCharSet.Rows.Count > 0)
                 {
-                    m_DBHelper.Close();
-                    m_DBHelper = new LHJ.DBService.Helper.Oracle_OleDb.clsOleDb();
-                    state = m_DBHelper.Open(aDataSource, aUserID, aPassWord);
+                    if (dtCharSet.Rows[0][0].ToString().Equals("US7ASCII"))
+                    {
+                        m_DBHelper.Close();
+                        m_DBHelper = new LHJ.DBService.Helper.Oracle_OleDb.clsOleDb();
+                        state = m_DBHelper.Open(aDataSource, aUserID, aPassWord);
+                    }
+                    else
+                    {
+                    }
                 }
                 else
                 {
                 }
-            }
-            else
-            {
             }
 
             return state;

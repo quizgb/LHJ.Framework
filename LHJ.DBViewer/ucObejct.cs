@@ -21,51 +21,29 @@ namespace LHJ.DBViewer
                 return;
             }
 
-            this.InitCombo();
+            Common.Definition.EventHandler.SelectedUserChangedEventArgs e = new Common.Definition.EventHandler.SelectedUserChangedEventArgs(this.ucUserList1.User);
+            this.ucUserList1_SelectedUserChanged(this.ucUserList1, e);
         }
 
-        private void InitCombo()
-        {
-            DataTable dtUserList = DALDataAccess.GetUserList();
-
-            if (dtUserList.Rows.Count > 0)
-            {
-                this.cboUserList.DataSource = dtUserList;
-            }
-
-            this.cboObjectList.Items.Add("Tables");
-            this.cboObjectList.Items.Add("Views");
-
-            this.cboUserList.SelectedValue = Common.Comm.DBWorker.GetUserID().ToUpper();
-            this.cboObjectList.SelectedIndex = 0;
-        }
-
-        private void cboUserList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            this.cboObjectList_SelectedIndexChanged(this.cboObjectList, e);
-        }
-
-        private void cboObjectList_SelectedIndexChanged(object sender, EventArgs e)
+        private void ucUserList1_SelectedUserChanged(object sender, Common.Definition.EventHandler.SelectedUserChangedEventArgs e)
         {
             this.lbxObject.Items.Clear();
+            DataTable dt = this.ucObjectList1.GetObjectList(e.User);
 
-            if (this.cboObjectList.Text.Equals("Tables"))
+            foreach (DataRow dr in dt.Rows)
             {
-                DataTable dt = DALDataAccess.GetObjectList(this.cboUserList.Text, "TABLE");
-
-                foreach (DataRow dr in dt.Rows)
-                {
-                    this.lbxObject.Items.Add(dr["OBJECT_NAME"].ToString());
-                }
+                this.lbxObject.Items.Add(dr["OBJECT_NAME"].ToString());
             }
-            else if (this.cboObjectList.Text.Equals("Views"))
-            {
-                DataTable dt = DALDataAccess.GetObjectList(this.cboUserList.Text, "VIEW");
+        }
 
-                foreach (DataRow dr in dt.Rows)
-                {
-                    this.lbxObject.Items.Add(dr["OBJECT_NAME"].ToString());
-                }
+        private void ucObjectList1_SelectedObjChanged(object sender, Common.Definition.EventHandler.SelectedObjChangedEventArgs e)
+        {
+            this.lbxObject.Items.Clear();
+            DataTable dt = this.ucObjectList1.GetObjectList(this.ucUserList1.User);
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                this.lbxObject.Items.Add(dr["OBJECT_NAME"].ToString());
             }
         }
     }

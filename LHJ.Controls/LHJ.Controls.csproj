@@ -52,6 +52,7 @@
     <Reference Include="LHJ.Common, Version=1.0.5927.25142, Culture=neutral, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Compile\LHJ.Common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />

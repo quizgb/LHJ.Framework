@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.cboUserList = new System.Windows.Forms.ComboBox();
-            this.cboObjectList = new System.Windows.Forms.ComboBox();
             this.lbxObject = new System.Windows.Forms.ListBox();
+            this.ucUserList1 = new LHJ.DBViewer.ucUserList();
+            this.ucObjectList1 = new LHJ.DBViewer.ucObjectList();
             this.SuspendLayout();
             // 
             // splitter1
@@ -43,36 +43,6 @@
             this.splitter1.TabIndex = 7;
             this.splitter1.TabStop = false;
             // 
-            // cboUserList
-            // 
-            this.cboUserList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboUserList.DisplayMember = "USERNAME";
-            this.cboUserList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboUserList.FormattingEnabled = true;
-            this.cboUserList.Location = new System.Drawing.Point(3, 3);
-            this.cboUserList.Name = "cboUserList";
-            this.cboUserList.Size = new System.Drawing.Size(186, 20);
-            this.cboUserList.TabIndex = 0;
-            this.cboUserList.ValueMember = "USERNAME";
-            this.cboUserList.SelectedIndexChanged += new System.EventHandler(this.cboUserList_SelectedIndexChanged);
-            // 
-            // cboObjectList
-            // 
-            this.cboObjectList.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboObjectList.DisplayMember = "USERNAME";
-            this.cboObjectList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboObjectList.FormattingEnabled = true;
-            this.cboObjectList.Location = new System.Drawing.Point(3, 29);
-            this.cboObjectList.Name = "cboObjectList";
-            this.cboObjectList.Size = new System.Drawing.Size(186, 20);
-            this.cboObjectList.TabIndex = 1;
-            this.cboObjectList.ValueMember = "USERNAME";
-            this.cboObjectList.SelectedIndexChanged += new System.EventHandler(this.cboObjectList_SelectedIndexChanged);
-            // 
             // lbxObject
             // 
             this.lbxObject.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -80,19 +50,39 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lbxObject.FormattingEnabled = true;
             this.lbxObject.ItemHeight = 12;
-            this.lbxObject.Location = new System.Drawing.Point(3, 55);
+            this.lbxObject.Location = new System.Drawing.Point(3, 65);
             this.lbxObject.Name = "lbxObject";
-            this.lbxObject.Size = new System.Drawing.Size(186, 208);
+            this.lbxObject.Size = new System.Drawing.Size(186, 448);
             this.lbxObject.TabIndex = 2;
             // 
-            // UserControl1
+            // ucUserList1
+            // 
+            this.ucUserList1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucUserList1.Location = new System.Drawing.Point(3, 3);
+            this.ucUserList1.Name = "ucUserList1";
+            this.ucUserList1.Size = new System.Drawing.Size(186, 25);
+            this.ucUserList1.TabIndex = 3;
+            this.ucUserList1.SelectedUserChanged += new LHJ.Common.Definition.EventHandler.SelectedUserChangedEventHandler(this.ucUserList1_SelectedUserChanged);
+            // 
+            // ucObjectList1
+            // 
+            this.ucObjectList1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucObjectList1.Location = new System.Drawing.Point(3, 34);
+            this.ucObjectList1.Name = "ucObjectList1";
+            this.ucObjectList1.Size = new System.Drawing.Size(186, 25);
+            this.ucObjectList1.TabIndex = 4;
+            this.ucObjectList1.SelectedObjChanged += new LHJ.Common.Definition.EventHandler.SelectedObjChangedEventHandler(this.ucObjectList1_SelectedObjChanged);
+            // 
+            // ucObejct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.ucObjectList1);
+            this.Controls.Add(this.ucUserList1);
             this.Controls.Add(this.lbxObject);
-            this.Controls.Add(this.cboObjectList);
-            this.Controls.Add(this.cboUserList);
-            this.Name = "UserControl1";
-            this.Size = new System.Drawing.Size(192, 277);
+            this.Name = "ucObejct";
+            this.Size = new System.Drawing.Size(192, 522);
             this.ResumeLayout(false);
 
         }
@@ -100,8 +90,8 @@
         #endregion
 
         private System.Windows.Forms.Splitter splitter1;
-        private System.Windows.Forms.ComboBox cboUserList;
-        private System.Windows.Forms.ComboBox cboObjectList;
         private System.Windows.Forms.ListBox lbxObject;
+        private ucUserList ucUserList1;
+        private ucObjectList ucObjectList1;
     }
 }

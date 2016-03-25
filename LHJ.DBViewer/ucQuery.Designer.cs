@@ -52,13 +52,17 @@
             // 
             // dgvQueryResult
             // 
+            this.dgvQueryResult.AllowUserToAddRows = false;
+            this.dgvQueryResult.AllowUserToDeleteRows = false;
+            this.dgvQueryResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvQueryResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvQueryResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvQueryResult.Location = new System.Drawing.Point(0, 0);
             this.dgvQueryResult.Name = "dgvQueryResult";
+            this.dgvQueryResult.ReadOnly = true;
             this.dgvQueryResult.RowTemplate.Height = 23;
             this.dgvQueryResult.ShowRowHeaderValue = true;
-            this.dgvQueryResult.Size = new System.Drawing.Size(818, 208);
+            this.dgvQueryResult.Size = new System.Drawing.Size(818, 186);
             this.dgvQueryResult.TabIndex = 1;
             this.dgvQueryResult.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgvQueryResult_Scroll);
             // 
@@ -77,7 +81,6 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.dgvQueryResult);
             this.splitContainer1.Panel2.Controls.Add(this.statusStrip1);
-
             this.splitContainer1.Size = new System.Drawing.Size(818, 531);
             this.splitContainer1.SplitterDistance = 319;
             this.splitContainer1.TabIndex = 2;
