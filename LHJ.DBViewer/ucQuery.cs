@@ -279,7 +279,7 @@ namespace LHJ.DBViewer
         {
             if (e.ScrollOrientation == ScrollOrientation.VerticalScroll)
             {
-                if ((e.NewValue + this.dgvQueryResult.DisplayedRowCount(false)) >= this.m_DTDataSource.Rows.Count)
+                if (((e.NewValue + this.dgvQueryResult.DisplayedRowCount(false)) >= this.m_DTDataSource.Rows.Count) && (this.m_DTDataSource.Rows.Count >= QUERY_ROW_CNT))
                 {
                     ExecuteQuery(true, e.NewValue, false);
                 }
