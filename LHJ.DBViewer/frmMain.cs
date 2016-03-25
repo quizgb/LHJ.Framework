@@ -13,6 +13,7 @@ namespace LHJ.DBViewer
     public partial class frmMain : Form
     {
         private static string mBtn;
+        private ToolStripButton mTsBtnSqlWindow = new ToolStripButton();
 
         public frmMain()
         {
@@ -20,17 +21,10 @@ namespace LHJ.DBViewer
 
             this.toolStrip2.Renderer = new MyRenderer();
 
-            ToolStripButton tsBtn = new ToolStripButton();
-            tsBtn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
-            tsBtn.Text = "SQL Window";
+            mTsBtnSqlWindow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
+            mTsBtnSqlWindow.Text = "SQL Window";
 
-            this.toolStrip2.Items.Add(tsBtn);
-
-            tsBtn = new ToolStripButton();
-            tsBtn.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
-            tsBtn.Text = "Schema Browser";
-
-            this.toolStrip2.Items.Add(tsBtn);
+            this.toolStrip2.Items.Add(mTsBtnSqlWindow);
         }
 
         private void SetOracleVersionLabel()
@@ -51,8 +45,10 @@ namespace LHJ.DBViewer
             if (Common.Comm.DBWorker.GetConnState().Equals(ConnectionState.Open))
             {
                 this.SetOracleVersionLabel();
+
                 frmSQLWindow window = new frmSQLWindow();
                 this.ShowFormORClose(window);
+                this.mTsBtnSqlWindow.Checked = true;
             }
         }
 
@@ -128,23 +124,23 @@ namespace LHJ.DBViewer
 
         private void tsBtn_Click(object sender, MouseEventArgs e)
         {
-            ToolStripButton aaa = sender as ToolStripButton;
-            aaa.Checked = true;
+            ToolStripButton tsBtn = sender as ToolStripButton;
+            tsBtn.Checked = true;
 
-            foreach (ToolStripButton abtn in aaa.GetCurrentParent().Items)
+            foreach (ToolStripButton abtn in tsBtn.GetCurrentParent().Items)
             {
-                if (!abtn.Equals(aaa))
+                if (!abtn.Equals(tsBtn))
                 {
                     abtn.Checked = false;
                 }
             }
 
-            if (aaa.Text.Equals("SQL Window"))
+            if (tsBtn.Equals(this.mTsBtnSqlWindow))
             {
                 frmSQLWindow window = new frmSQLWindow();
                 this.ShowFormORClose(window);
             }
-            else if (aaa.Text.Equals("Schema Browser"))
+            else if (tsBtn.Text.Equals("Schema Browser"))
             {
                 frmSchemaBrowser browser = new frmSchemaBrowser();
                 this.ShowFormORClose(browser);
