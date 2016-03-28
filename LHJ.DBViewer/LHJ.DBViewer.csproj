@@ -112,6 +112,12 @@
     <Compile Include="frmSchemaBrowser.Designer.cs">
       <DependentUpon>frmSchemaBrowser.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmSessionView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSessionView.Designer.cs">
+      <DependentUpon>frmSessionView.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmSQLWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -152,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmSchemaBrowser.resx">
       <DependentUpon>frmSchemaBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSessionView.resx">
+      <DependentUpon>frmSessionView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmSQLWindow.resx">
       <DependentUpon>frmSQLWindow.cs</DependentUpon>
