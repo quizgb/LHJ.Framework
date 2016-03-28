@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LHJ.DBService;
+using LHJ.Common.Definition;
 
 namespace LHJ.DBViewer
 {
@@ -79,6 +80,11 @@ namespace LHJ.DBViewer
                 Common.Definition.EventHandler.ItemDoubleClickEventArgs e = new Common.Definition.EventHandler.ItemDoubleClickEventArgs(aItemName);
                 ItemDoubleClicked(this, e);
             }
+        }
+
+        private void dgvColumnInfo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.SetItemDoubleClicked(this.dgvColumnInfo.GetRowCellStrValue(e.RowIndex, e.ColumnIndex));
         }
     }
 }

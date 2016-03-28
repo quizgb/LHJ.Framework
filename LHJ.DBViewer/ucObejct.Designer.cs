@@ -95,6 +95,7 @@
             this.dgvColumnInfo.ShowRowHeaderValue = true;
             this.dgvColumnInfo.Size = new System.Drawing.Size(186, 127);
             this.dgvColumnInfo.TabIndex = 5;
+            this.dgvColumnInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvColumnInfo_CellDoubleClick);
             // 
             // splitContainer1
             // 
