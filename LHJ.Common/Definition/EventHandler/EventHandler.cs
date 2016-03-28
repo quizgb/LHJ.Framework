@@ -38,5 +38,21 @@ namespace LHJ.Common.Definition
         }
 
         #endregion ObjectList Changed Event
+
+        #region ItemDoubleClick Event
+
+        public delegate void ItemDoubleClickEventHandler(object sender, ItemDoubleClickEventArgs e);
+
+        public class ItemDoubleClickEventArgs : EventArgs
+        {
+            public string ItemName { get; set; }
+
+            public ItemDoubleClickEventArgs(string aItemName)
+            {
+                ItemName = aItemName;
+            }
+        }
+
+        #endregion ItemDoubleClick Event
     }
 }

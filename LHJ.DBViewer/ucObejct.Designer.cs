@@ -59,6 +59,7 @@
             this.lbxObject.Size = new System.Drawing.Size(186, 323);
             this.lbxObject.TabIndex = 2;
             this.lbxObject.SelectedIndexChanged += new System.EventHandler(this.lbxObject_SelectedIndexChanged);
+            this.lbxObject.DoubleClick += new System.EventHandler(this.lbxObject_DoubleClick);
             // 
             // ucUserList1
             // 

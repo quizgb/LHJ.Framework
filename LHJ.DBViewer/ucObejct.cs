@@ -12,6 +12,11 @@ namespace LHJ.DBViewer
 {
     public partial class ucObejct : UserControl
     {
+        [Browsable(true),
+         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+         Description("아이템이 더블클릭될 때 발생됩니다.")]
+        public event Common.Definition.EventHandler.ItemDoubleClickEventHandler ItemDoubleClicked;
+
         public ucObejct()
         {
             InitializeComponent();
@@ -60,6 +65,20 @@ namespace LHJ.DBViewer
         {
             DataTable dt = DALDataAccess.GetTableColumns(Common.Comm.DBWorker.GetUserID().ToUpper(), this.lbxObject.Text);
             this.dgvColumnInfo.DataSource = dt;
+        }
+
+        private void lbxObject_DoubleClick(object sender, EventArgs e)
+        {
+            this.SetItemDoubleClicked(this.lbxObject.Text);
+        }
+
+        private void SetItemDoubleClicked(string aItemName)
+        {
+            if (ItemDoubleClicked != null)
+            {
+                Common.Definition.EventHandler.ItemDoubleClickEventArgs e = new Common.Definition.EventHandler.ItemDoubleClickEventArgs(aItemName);
+                ItemDoubleClicked(this, e);
+            }
         }
     }
 }

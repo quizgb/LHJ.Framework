@@ -173,6 +173,7 @@
             this.userControl11.Name = "userControl11";
             this.userControl11.Size = new System.Drawing.Size(480, 986);
             this.userControl11.TabIndex = 0;
+            this.userControl11.ItemDoubleClicked += new LHJ.Common.Definition.EventHandler.ItemDoubleClickEventHandler(this.userControl11_ItemDoubleClicked);
             // 
             // frmSQLWindow
             // 

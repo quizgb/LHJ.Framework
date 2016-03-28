@@ -30,5 +30,10 @@ namespace LHJ.DBViewer
         {
             this.m_Query.SetFocusDDLBox();
         }
+
+        private void userControl11_ItemDoubleClicked(object sender, Common.Definition.EventHandler.ItemDoubleClickEventArgs e)
+        {
+            this.m_Query.AddObjectName(e.ItemName);
+        }
     }
 }

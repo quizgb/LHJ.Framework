@@ -34,6 +34,11 @@ namespace LHJ.DBViewer
             this.txtSqlArea.Focus();
         }
 
+        public void AddObjectName(string aObjectName)
+        {
+            this.txtSqlArea.Text += aObjectName;
+        }
+
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
