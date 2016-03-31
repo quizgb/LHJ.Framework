@@ -11,17 +11,35 @@ namespace LHJ.DBViewer
 {
     public static class DALDataAccess
     {
-        public static DataTable GetSessionSQL(string aSID)
+        public static DataTable GetSessionHashValue(string aSID)
         {
             DataTable dt = new DataTable();
             string strCommand = string.Empty;
             Hashtable ht = new Hashtable();
 
-            strCommand = @"  SELECT to_char(SQL_FULLTEXT) sql_text  
-                               FROM V$SQL  
-                              WHERE ADDRESS IN ( SELECT SQL_ADDRESS FROM V$SESSION WHERE SID = :SID ) ";
+            strCommand = @"  SELECT DECODE(sql_hash_value, 0, prev_hash_value, sql_hash_value) HASH
+                               FROM v$session
+                              WHERE SID = :SID  ";
 
             ht["SID"] = aSID;
+
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand, ht);
+
+            return dt;
+        }
+
+        public static DataTable GetSessionSql(string aHashValue)
+        {
+            DataTable dt = new DataTable();
+            string strCommand = string.Empty;
+            Hashtable ht = new Hashtable();
+
+            strCommand = @"  SELECT SQL_TEXT 
+                               FROM V$SQLTEXT_WITH_NEWLINES 
+                              WHERE HASH_VALUE = TO_NUMBER(:HASH_VALUE) 
+                              ORDER BY PIECE  ";
+
+            ht["HASH_VALUE"] = aHashValue;
 
             dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand, ht);
 
