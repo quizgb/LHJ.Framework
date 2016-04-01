@@ -385,10 +385,40 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
         #region ExecuteNonQuery
         public int ExecuteNonQuery(string Query)
         {
-            return ExecuteNonQuery(Query, null);
+            return ExecuteNonQuery(Query, new List<ParamInfo>());
         }
 
         public int ExecuteNonQuery(string Query, List<ParamInfo> param)
+        {
+            int affected = -1;
+            OracleCommand cmd = new OracleCommand(Query, m_OraCn);
+
+            if (m_trans != null)
+                cmd.Transaction = m_trans;
+
+            if (param != null)
+            {
+                foreach (ParamInfo p in param)
+                {
+                    cmd.Parameters.AddWithValue(p.ParameterName, p.Value);
+                }
+            }
+
+            try
+            {
+                affected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex, Query, param);
+                return -1;
+            }
+
+            return affected;
+
+        }
+
+        public int ExecuteNonQuery(string Query, Hashtable param)
         {
             int affected = -1;
             OracleCommand cmd = new OracleCommand(Query, m_OraCn);

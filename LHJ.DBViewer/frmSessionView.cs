@@ -17,13 +17,29 @@ namespace LHJ.DBViewer
             InitializeComponent();
 
             this.SearchSessionInfo();
+            this.SearchLockList();
+
             this.tbxSecond.Text = "30";
+        }
+
+        private void SearchLockList()
+        {
+            this.Cursor = Cursors.WaitCursor;
+
+            DataTable dt = DALDataAccess.GetLockList();
+            this.dgvLock.DataSource = dt;
+
+            this.Cursor = Cursors.Default;
         }
 
         private void SearchSessionInfo()
         {
+            this.Cursor = Cursors.WaitCursor;
+
             DataTable dt = DALDataAccess.GetSessionInfo();
-            this.dgvSession.DataSource = dt;  
+            this.dgvSession.DataSource = dt;
+
+            this.Cursor = Cursors.Default;
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -35,6 +51,11 @@ namespace LHJ.DBViewer
                 if (btn.Equals(this.btnRefresh))
                 {
                     this.SearchSessionInfo();
+                    this.SearchLockList();
+                }
+                else if (btn.Equals(this.btnLock))
+                {
+                    this.SearchLockList();
                 }
             }
         }
@@ -102,6 +123,19 @@ namespace LHJ.DBViewer
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.btnRefresh.PerformClick();
+            this.btnLock.PerformClick();
+        }
+
+        private void tsmiDeleteLock_Click(object sender, EventArgs e)
+        {
+            string msg = string.Format("{0},{1} Lock을 삭제하시겠습니까?", this.dgvLock.GetRowCellStrValue(this.dgvLock.CurrentRow.Index, "SID"), this.dgvLock.GetRowCellStrValue(this.dgvLock.CurrentRow.Index, "serial#"));
+
+            if (DialogResult.OK.Equals(MessageBox.Show(this, msg, ConstValue.MSGBOX_TITLE, MessageBoxButtons.YesNo, MessageBoxIcon.Information)))
+            {
+                DALDataAccess.DeleteLock(this.dgvLock.GetRowCellStrValue(this.dgvLock.CurrentRow.Index, "SID") + "," + this.dgvLock.GetRowCellStrValue(this.dgvLock.CurrentRow.Index, "serial#"));
+            }
+
+            this.SearchLockList();
         }
     }
 }

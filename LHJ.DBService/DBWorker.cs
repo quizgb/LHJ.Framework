@@ -119,12 +119,17 @@ namespace LHJ.DBService
 
         public int ExecuteNonQuery(string Query)
         {
-            return m_DBHelper.ExecuteNonQuery(Query, null);
+            return m_DBHelper.ExecuteNonQuery(Query);
         }
 
         public int ExecuteNonQuery(string Query, List<ParamInfo> param)
         {
             return m_DBHelper.ExecuteNonQuery(Query, param);
+        }
+
+        public int ExecuteNonQuery(string Query, Hashtable ht)
+        {
+            return m_DBHelper.ExecuteNonQuery(Query, ht);
         }
 
         ~DBWorker()

@@ -32,6 +32,8 @@ namespace LHJ.DBViewer
 
         private void InitCombo()
         {
+            this.Cursor = Cursors.WaitCursor;   
+
             DataTable dtUserList = DALDataAccess.GetUserList();
 
             if (dtUserList.Rows.Count > 0)
@@ -41,6 +43,8 @@ namespace LHJ.DBViewer
 
             this.cboUserList.SelectedValue = Common.Comm.DBWorker.GetUserID().ToUpper();
             this.User = this.cboUserList.Text;
+
+            this.Cursor = Cursors.Default;
         }
 
         private void SetSelectedUserChanged(string aUser)

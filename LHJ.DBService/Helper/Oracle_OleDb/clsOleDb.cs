@@ -422,15 +422,73 @@ namespace LHJ.DBService.Helper.Oracle_OleDb
             }
         }
 
+        public DataTable ExecuteDataTable(string Query, int aStartIndex, int aMaxIndex, string aSrcTable, Hashtable param)
+        {
+            if (m_trans == null)
+                Connect();
+
+            OleDbDataAdapter da = new OleDbDataAdapter();
+            DataSet ds = new DataSet();
+            OleDbCommand cmd = new OleDbCommand(Query, m_OledbCn);
+
+            if (m_trans != null)
+                cmd.Transaction = m_trans;
+
+            if (param != null)
+            {
+                cmd = this.SetCmdParamter(cmd, param);
+            }
+
+            try
+            {
+                //cmd.ExecuteNonQuery();
+                da.SelectCommand = cmd;
+                da.Fill(ds);
+                return ds.Tables[0];
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex, Query, param);
+                return null;
+            }
+        }
+
         #endregion
 
         #region ExecuteNonQuery
         public int ExecuteNonQuery(string Query)
         {
-            return ExecuteNonQuery(Query, null);
+            return ExecuteNonQuery(Query, new List<ParamInfo>());
         }
 
         public int ExecuteNonQuery(string Query, List<ParamInfo> param)
+        {
+            int affected = -1;
+            OleDbCommand cmd = new OleDbCommand(Query, m_OledbCn);
+
+            if (m_trans != null)
+                cmd.Transaction = m_trans;
+
+            if (param != null)
+            {
+                cmd = this.SetCmdParamter(cmd, param);
+            }
+
+            try
+            {
+                affected = cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex, Query, param);
+                return -1;
+            }
+
+            return affected;
+
+        }
+
+        public int ExecuteNonQuery(string Query, Hashtable param)
         {
             int affected = -1;
             OleDbCommand cmd = new OleDbCommand(Query, m_OledbCn);

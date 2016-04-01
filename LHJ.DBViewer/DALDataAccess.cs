@@ -11,6 +11,47 @@ namespace LHJ.DBViewer
 {
     public static class DALDataAccess
     {
+        public static int DeleteLock(string aSID_SERIAL)
+        {
+            string strCommand = string.Empty;
+            Hashtable ht = new Hashtable();
+
+            strCommand = @"  Alter System Kill Session :SID_SERIAL  immediate ";
+
+            ht["SID_SERIAL"] = aSID_SERIAL; 
+
+            return Common.Comm.DBWorker.ExecuteNonQuery(strCommand, ht);
+        }
+
+        public static DataTable GetLockList()
+        {
+            DataTable dt = new DataTable();
+            string strCommand = string.Empty;
+
+            strCommand = @"  SELECT /*+ rule */  DISTINCT c.SID, c.serial#, p.pid AS process, b.owner, b.object_name, 
+                                    DECODE (a.TYPE, 'TM', 'Table Lock', 'TX', 'Row Lock', NULL ) AS lock_level, 
+                                    c.status, 
+                                    TO_CHAR (c.logon_time, 'yyyy/mm/dd hh24:mi:ss') AS logon_time, 
+                                    TO_CHAR (t.start_date, 'yyyy/mm/dd hh24:mi:ss') AS start_time, 
+                                    a.id2 AS num, c.osuser, c.terminal, c.program 
+                              FROM gv$session c, 
+                                   dba_objects b, 
+                                   v$lock a, 
+                                   v$locked_object l, 
+                                   v$process p, 
+                                   v$transaction t 
+                             WHERE c.SID = a.SID 
+                               AND a.id2 > 1 
+                               AND b.object_id = l.object_id 
+                               AND p.addr = c.paddr 
+                               AND a.addr = t.addr 
+                             ORDER BY start_time, id2  ";
+
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand);
+
+            return dt;
+        }
+
         public static DataTable GetSessionHashValue(string aSID)
         {
             DataTable dt = new DataTable();

@@ -40,5 +40,7 @@ namespace LHJ.DBService
         int ExecuteNonQuery(string Query);
 
         int ExecuteNonQuery(string Query, List<ParamInfo> param);
+
+        int ExecuteNonQuery(string Query, Hashtable ht);
     }
 }
