@@ -14,13 +14,9 @@ namespace LHJ.DBViewer
         public static int DeleteLock(string aSID_SERIAL)
         {
             string strCommand = string.Empty;
-            Hashtable ht = new Hashtable();
+            strCommand = string.Format("Alter System Kill Session '{0}' immediate", aSID_SERIAL);
 
-            strCommand = @"  Alter System Kill Session :SID_SERIAL  immediate ";
-
-            ht["SID_SERIAL"] = aSID_SERIAL; 
-
-            return Common.Comm.DBWorker.ExecuteNonQuery(strCommand, ht);
+            return Common.Comm.DBWorker.ExecuteNonQuery(strCommand);
         }
 
         public static DataTable GetLockList()

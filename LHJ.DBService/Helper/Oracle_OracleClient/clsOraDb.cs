@@ -418,7 +418,7 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
 
         }
 
-        public int ExecuteNonQuery(string Query, Hashtable param)
+        public int ExecuteNonQuery(string Query, Hashtable aParam)
         {
             int affected = -1;
             OracleCommand cmd = new OracleCommand(Query, m_OraCn);
@@ -426,11 +426,11 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
             if (m_trans != null)
                 cmd.Transaction = m_trans;
 
-            if (param != null)
+            if (aParam != null)
             {
-                foreach (ParamInfo p in param)
+                foreach (string paramName in aParam.Keys)
                 {
-                    cmd.Parameters.AddWithValue(p.ParameterName, p.Value);
+                    cmd.Parameters.AddWithValue(paramName, aParam[paramName]);
                 }
             }
 
@@ -440,7 +440,7 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
             }
             catch (Exception ex)
             {
-                ErrorMessage(ex, Query, param);
+                ErrorMessage(ex, Query, aParam);
                 return -1;
             }
 

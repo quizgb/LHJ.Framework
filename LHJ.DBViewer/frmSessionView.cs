@@ -130,7 +130,7 @@ namespace LHJ.DBViewer
         {
             string msg = string.Format("{0},{1} Lock을 삭제하시겠습니까?", this.dgvLock.GetRowCellStrValue(this.dgvLock.CurrentRow.Index, "SID"), this.dgvLock.GetRowCellStrValue(this.dgvLock.CurrentRow.Index, "serial#"));
 
-            if (DialogResult.OK.Equals(MessageBox.Show(this, msg, ConstValue.MSGBOX_TITLE, MessageBoxButtons.YesNo, MessageBoxIcon.Information)))
+            if (DialogResult.Yes.Equals(MessageBox.Show(this, msg, ConstValue.MSGBOX_TITLE, MessageBoxButtons.YesNo, MessageBoxIcon.Information)))
             {
                 DALDataAccess.DeleteLock(this.dgvLock.GetRowCellStrValue(this.dgvLock.CurrentRow.Index, "SID") + "," + this.dgvLock.GetRowCellStrValue(this.dgvLock.CurrentRow.Index, "serial#"));
             }
