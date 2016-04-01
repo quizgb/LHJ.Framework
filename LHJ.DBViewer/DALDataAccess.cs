@@ -11,6 +11,38 @@ namespace LHJ.DBViewer
 {
     public static class DALDataAccess
     {
+        public static DataTable GetSessionSQL(string aSID)
+        {
+            DataTable dt = new DataTable();
+            string strCommand = string.Empty;
+            Hashtable ht = new Hashtable();
+
+            strCommand = @"  SELECT to_char(SQL_FULLTEXT) sql_text  
+                               FROM V$SQL  
+                              WHERE ADDRESS IN ( SELECT SQL_ADDRESS FROM V$SESSION WHERE SID = :SID ) ";
+
+            ht["SID"] = aSID;
+
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand, ht);
+
+            return dt;
+        }
+
+        public static DataTable GetSessionInfo()
+        {
+            DataTable dt = new DataTable();
+            string strCommand = string.Empty;
+
+            strCommand = @" SELECT sid, serial#, Audsid, UserName, Status, Server, OSuser, Machine, Terminal, Program,
+                                   Type, SQL_HASH_Value, Module, Action, Client_Info, LogOn_Time, Inst_ID
+                              FROM gv$session
+                          ORDER BY UserName, Program    ";
+
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand);
+
+            return dt;
+        }
+
         public static DataTable GetOracleVersion()
         {
             DataTable dt = new DataTable();

@@ -14,6 +14,7 @@ namespace LHJ.DBViewer
     {
         private static string mBtn;
         private ToolStripButton mTsBtnSqlWindow = new ToolStripButton();
+        private ToolStripButton mTsBtnSessionView = new ToolStripButton();
 
         public frmMain()
         {
@@ -24,7 +25,11 @@ namespace LHJ.DBViewer
             mTsBtnSqlWindow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
             mTsBtnSqlWindow.Text = "SQL Window";
 
+            mTsBtnSessionView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
+            mTsBtnSessionView.Text = "Session 조회";
+
             this.toolStrip2.Items.Add(mTsBtnSqlWindow);
+            this.toolStrip2.Items.Add(mTsBtnSessionView);
         }
 
         private void SetOracleVersionLabel()
@@ -144,6 +149,11 @@ namespace LHJ.DBViewer
             {
                 frmSchemaBrowser browser = new frmSchemaBrowser();
                 this.ShowFormORClose(browser);
+            }
+            else if (tsBtn.Equals(this.mTsBtnSessionView))
+            {
+                frmSessionView sessionView = new frmSessionView();
+                this.ShowFormORClose(sessionView);
             }
         }
     }
