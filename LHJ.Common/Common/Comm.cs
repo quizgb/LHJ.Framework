@@ -7,6 +7,8 @@ namespace LHJ.Common
 {
     public static class Comm
     {
+        private static Program m_Pgm = new Program();
+
         private static LHJ.DBService.DBWorker m_DBWorker = new LHJ.DBService.DBWorker();
         public static LHJ.DBService.DBWorker DBWorker
         {
