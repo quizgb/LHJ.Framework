@@ -19,7 +19,7 @@ namespace LHJ.DBViewer
             this.SearchSessionInfo();
             this.SearchLockList();
 
-            this.tbxSecond.Text = "30";
+            this.txtSecond.Text = "30";
         }
 
         private void SearchLockList()
@@ -57,6 +57,10 @@ namespace LHJ.DBViewer
                 {
                     this.SearchLockList();
                 }
+                else if (btn.Equals(this.btnCopy))
+                { 
+                    Clipboard.SetDataObject(this.txtSessionQuery.Text);
+                }
             }
         }
 
@@ -77,16 +81,16 @@ namespace LHJ.DBViewer
                         sql += dr["SQL_TEXT"].ToString();
                     }
 
-                    this.tbxSessionQuery.Text = sql;
+                    this.txtSessionQuery.Text = sql;
                 }
                 else
                 {
-                    this.tbxSessionQuery.Text = string.Empty;
+                    this.txtSessionQuery.Text = string.Empty;
                 }
             }
             else
             {
-                this.tbxSessionQuery.Text = string.Empty;
+                this.txtSessionQuery.Text = string.Empty;
             }
         }
 
@@ -94,8 +98,8 @@ namespace LHJ.DBViewer
         {
             if (e.Control && e.KeyCode.Equals(Keys.A))
             {
-                this.tbxSessionQuery.Focus();
-                this.tbxSessionQuery.SelectAll();
+                this.txtSessionQuery.Focus();
+                this.txtSessionQuery.SelectAll();
             }
         }
 
@@ -103,15 +107,15 @@ namespace LHJ.DBViewer
         {
             if (this.cbxAutoRefresh.Checked)
             {
-                if (string.IsNullOrEmpty(this.tbxSecond.Text))
+                if (string.IsNullOrEmpty(this.txtSecond.Text))
                 {
-                    this.tbxSecond.Focus();
+                    this.txtSecond.Focus();
                     MessageBox.Show(this, "자동갱신 전 초를 입력하셔야 합니다.", ConstValue.MSGBOX_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     this.cbxAutoRefresh.Checked = false;
                     return;
                 }
 
-                this.timer1.Interval = Convert.ToInt32(this.tbxSecond.Text) * 1000;
+                this.timer1.Interval = Convert.ToInt32(this.txtSecond.Text) * 1000;
                 this.timer1.Start();
             }
             else

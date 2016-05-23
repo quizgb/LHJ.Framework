@@ -23,7 +23,7 @@ namespace LHJ.Common.Common.Com
             hierarchy.Configured = true;
 
             log4net.Appender.RollingFileAppender rollingAppender = new log4net.Appender.RollingFileAppender();
-            rollingAppender.File = string.Format(@"{0}\LOG\{1}.log", Application.StartupPath, pLogFileName); // 전체 경로에 생성할 메인 로그 파일 이름  
+            rollingAppender.File = string.Format(@"{0}\LOG\{1}", Application.StartupPath, pLogFileName); // 전체 경로에 생성할 메인 로그 파일 이름  
             rollingAppender.AppendToFile = true;
             rollingAppender.RollingStyle = log4net.Appender.RollingFileAppender.RollingMode.Date;
             rollingAppender.LockingModel = new log4net.Appender.FileAppender.MinimalLock();
