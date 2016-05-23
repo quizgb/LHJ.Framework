@@ -218,6 +218,8 @@ namespace LHJ.DBViewer
 
             if (!string.IsNullOrEmpty(this.m_Query))
             {
+                Common.Comm.Logger.Info(System.Reflection.MethodBase.GetCurrentMethod(), string.Format("Execute Query!\r\nSQL : {0}", this.m_Query));
+
                 trimmedSQL = this.m_Query.Trim().ToUpper();
                 isSelect = trimmedSQL.StartsWith("SELECT");
 
