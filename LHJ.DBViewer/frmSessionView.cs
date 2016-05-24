@@ -26,8 +26,6 @@ namespace LHJ.DBViewer
         public frmSessionView()
         {
             InitializeComponent();
-
-            this.SetInitialize();
         }
         #endregion 3.Constructor
 
@@ -175,6 +173,11 @@ namespace LHJ.DBViewer
             }
 
             this.SearchLockList();
+        }
+
+        private void frmSessionView_Load(object sender, EventArgs e)
+        {
+            this.SetInitialize();
         }
         #endregion 7.Event
     }
