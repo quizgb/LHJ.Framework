@@ -55,7 +55,7 @@
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(1264, 986);
+            this.pnlMain.Size = new System.Drawing.Size(1264, 884);
             this.pnlMain.TabIndex = 0;
             // 
             // splitContainer1
@@ -72,7 +72,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.userControl11);
-            this.splitContainer1.Size = new System.Drawing.Size(1264, 986);
+            this.splitContainer1.Size = new System.Drawing.Size(1264, 884);
             this.splitContainer1.SplitterDistance = 780;
             this.splitContainer1.TabIndex = 1;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
@@ -84,7 +84,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 25);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(780, 961);
+            this.tabControl1.Size = new System.Drawing.Size(780, 859);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -92,7 +92,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(772, 935);
+            this.tabPage1.Size = new System.Drawing.Size(772, 833);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "SQL1";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -171,14 +171,14 @@
             this.userControl11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userControl11.Location = new System.Drawing.Point(0, 0);
             this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(480, 986);
+            this.userControl11.Size = new System.Drawing.Size(480, 884);
             this.userControl11.TabIndex = 0;
             this.userControl11.ItemDoubleClicked += new LHJ.Common.Definition.EventHandler.ItemDoubleClickEventHandler(this.userControl11_ItemDoubleClicked);
             // 
             // frmSQLWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1264, 986);
+            this.ClientSize = new System.Drawing.Size(1264, 884);
             this.Controls.Add(this.pnlMain);
             this.Name = "frmSQLWindow";
             this.Text = "SQL Window";

@@ -21,6 +21,8 @@ namespace LHJ.DBViewer
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
+            this.Icon = Properties.Resources._1464083802_key;
+
             Common.Comm.Logger.SetConfigLogger("DBViewer");
             Common.Comm.Logger.Info(System.Reflection.MethodBase.GetCurrentMethod(), "DBViewer Start!");
 

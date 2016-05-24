@@ -20,6 +20,10 @@ namespace LHJ.DBViewer
         {
             InitializeComponent();
 
+            this.SetTitleBuildDate();
+
+            this.Icon = Properties.Resources._1464082634_033;
+
             this.toolStrip2.Renderer = new MyRenderer();
 
             mTsBtnSqlWindow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
@@ -30,6 +34,14 @@ namespace LHJ.DBViewer
 
             this.toolStrip2.Items.Add(mTsBtnSqlWindow);
             this.toolStrip2.Items.Add(mTsBtnSessionView);
+        }
+
+        private void SetTitleBuildDate()
+        {
+            System.Version assemblyVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
+            DateTime buildDate = new DateTime(2000, 1, 1).AddDays(assemblyVersion.Build).AddSeconds(assemblyVersion.Revision * 2);
+
+            this.Text += " [Last Build : " + buildDate.ToString("yyyy-MM-dd") + "]";
         }
 
         private void SetOracleVersionLabel()
