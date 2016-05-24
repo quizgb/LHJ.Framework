@@ -532,9 +532,9 @@ namespace LHJ.DBService.Helper.Oracle_OleDb
         private void ErrorMessage(Exception ex, string Query, List<ParamInfo> param)
         {
             frmErrorMsg frm = new frmErrorMsg();
-            frm.ex = ex;
+            frm.Ex = ex;
             frm.Query = Query;
-            //frm.Param = param;
+            frm.Param = param;
 
             frm.ShowDialog();
         }
@@ -542,29 +542,11 @@ namespace LHJ.DBService.Helper.Oracle_OleDb
         private void ErrorMessage(Exception ex, string Query, Hashtable param)
         {
             frmErrorMsg frm = new frmErrorMsg();
-            frm.ex = ex;
+            frm.Ex = ex;
             frm.Query = Query;
-            //frm.Param = param;
+            frm.Param = param;
 
             frm.ShowDialog();
-        }
-
-        private string paramString(List<ParamInfo> param)
-        {
-            StringBuilder str = new StringBuilder("");
-
-            if (param == null)
-            {
-                return "";
-            }
-            else
-            {
-                foreach (ParamInfo p in param)
-                {
-                    str.AppendLine(string.Format("{0} : {1}", p.ParameterName, p.Value));
-                }
-                return str.ToString();
-            }
         }
         #endregion
     }

@@ -30,14 +30,16 @@
         {
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.lbxObject = new System.Windows.Forms.ListBox();
-            this.ucUserList1 = new LHJ.DBViewer.ucUserList();
-            this.ucObjectList1 = new LHJ.DBViewer.ucObjectList();
-            this.dgvColumnInfo = new LHJ.Controls.ucDataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvColumnInfo)).BeginInit();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.dgvColumnInfo = new LHJ.Controls.ucDataGridView();
+            this.ucObjectList1 = new LHJ.DBViewer.ucObjectList();
+            this.ucUserList1 = new LHJ.DBViewer.ucUserList();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvColumnInfo)).BeginInit();
             this.SuspendLayout();
             // 
             // splitter1
@@ -56,30 +58,51 @@
             this.lbxObject.ItemHeight = 12;
             this.lbxObject.Location = new System.Drawing.Point(0, 0);
             this.lbxObject.Name = "lbxObject";
-            this.lbxObject.Size = new System.Drawing.Size(186, 323);
+            this.lbxObject.Size = new System.Drawing.Size(186, 304);
             this.lbxObject.TabIndex = 2;
             this.lbxObject.SelectedIndexChanged += new System.EventHandler(this.lbxObject_SelectedIndexChanged);
             this.lbxObject.DoubleClick += new System.EventHandler(this.lbxObject_DoubleClick);
             // 
-            // ucUserList1
+            // splitContainer1
             // 
-            this.ucUserList1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucUserList1.Location = new System.Drawing.Point(3, 3);
-            this.ucUserList1.Name = "ucUserList1";
-            this.ucUserList1.Size = new System.Drawing.Size(186, 25);
-            this.ucUserList1.TabIndex = 3;
-            this.ucUserList1.SelectedUserChanged += new LHJ.Common.Definition.EventHandler.SelectedUserChangedEventHandler(this.ucUserList1_SelectedUserChanged);
+            this.splitContainer1.Location = new System.Drawing.Point(3, 90);
+            this.splitContainer1.Name = "splitContainer1";
+            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // ucObjectList1
+            // splitContainer1.Panel1
             // 
-            this.ucObjectList1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.splitContainer1.Panel1.Controls.Add(this.lbxObject);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.dgvColumnInfo);
+            this.splitContainer1.Size = new System.Drawing.Size(186, 429);
+            this.splitContainer1.SplitterDistance = 304;
+            this.splitContainer1.TabIndex = 6;
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucObjectList1.Location = new System.Drawing.Point(3, 34);
-            this.ucObjectList1.Name = "ucObjectList1";
-            this.ucObjectList1.Size = new System.Drawing.Size(186, 25);
-            this.ucObjectList1.TabIndex = 4;
-            this.ucObjectList1.SelectedObjChanged += new LHJ.Common.Definition.EventHandler.SelectedObjChangedEventHandler(this.ucObjectList1_SelectedObjChanged);
+            this.txtSearch.Location = new System.Drawing.Point(46, 57);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(139, 21);
+            this.txtSearch.TabIndex = 8;
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRefresh.Image = global::LHJ.DBViewer.Properties.Resources._1464092745_old_view_refresh;
+            this.btnRefresh.Location = new System.Drawing.Point(6, 57);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(34, 27);
+            this.btnRefresh.TabIndex = 7;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // dgvColumnInfo
             // 
@@ -93,43 +116,46 @@
             this.dgvColumnInfo.ReadOnly = true;
             this.dgvColumnInfo.RowTemplate.Height = 23;
             this.dgvColumnInfo.ShowRowHeaderValue = true;
-            this.dgvColumnInfo.Size = new System.Drawing.Size(186, 127);
+            this.dgvColumnInfo.Size = new System.Drawing.Size(186, 121);
             this.dgvColumnInfo.TabIndex = 5;
             this.dgvColumnInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvColumnInfo_CellDoubleClick);
             // 
-            // splitContainer1
+            // ucObjectList1
             // 
-            this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.ucObjectList1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(3, 65);
-            this.splitContainer1.Name = "splitContainer1";
-            this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.ucObjectList1.Location = new System.Drawing.Point(3, 26);
+            this.ucObjectList1.Name = "ucObjectList1";
+            this.ucObjectList1.Size = new System.Drawing.Size(186, 25);
+            this.ucObjectList1.TabIndex = 4;
+            this.ucObjectList1.SelectedObjChanged += new LHJ.Common.Definition.EventHandler.SelectedObjChangedEventHandler(this.ucObjectList1_SelectedObjChanged);
             // 
-            // splitContainer1.Panel1
+            // ucUserList1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.lbxObject);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.dgvColumnInfo);
-            this.splitContainer1.Size = new System.Drawing.Size(186, 454);
-            this.splitContainer1.SplitterDistance = 323;
-            this.splitContainer1.TabIndex = 6;
+            this.ucUserList1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.ucUserList1.Location = new System.Drawing.Point(3, 3);
+            this.ucUserList1.Name = "ucUserList1";
+            this.ucUserList1.Size = new System.Drawing.Size(186, 25);
+            this.ucUserList1.TabIndex = 3;
+            this.ucUserList1.SelectedUserChanged += new LHJ.Common.Definition.EventHandler.SelectedUserChangedEventHandler(this.ucUserList1_SelectedUserChanged);
             // 
             // ucObejct
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.Controls.Add(this.txtSearch);
+            this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.ucObjectList1);
             this.Controls.Add(this.ucUserList1);
             this.Name = "ucObejct";
             this.Size = new System.Drawing.Size(192, 522);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvColumnInfo)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvColumnInfo)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -141,5 +167,7 @@
         private ucObjectList ucObjectList1;
         private Controls.ucDataGridView dgvColumnInfo;
         private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

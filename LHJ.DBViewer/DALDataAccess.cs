@@ -166,5 +166,27 @@ namespace LHJ.DBViewer
 
             return dt;
         }
+
+        public static DataTable GetObjectListByObjectName(string aUserID, string aObjectType, string aObjectName)
+        {
+            DataTable dt = new DataTable();
+            string strCommand = string.Empty;
+            Hashtable ht = new Hashtable();
+
+            strCommand = @" SELECT OBJECT_NAME 
+                              FROM ALL_OBJECTS 
+                             WHERE OWNER = :USERID
+                               AND OBJECT_TYPE = :OBJECT_TYPE
+                               AND OBJECT_NAME LIKE '%' || :OBJECT_NAME || '%'
+                             ORDER BY 1     ";
+
+            ht["USERID"] = aUserID;
+            ht["OBJECT_TYPE"] = aObjectType;
+            ht["OBJECT_NAME"] = aObjectName;
+
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand, ht);
+
+            return dt;
+        }
     }
 }

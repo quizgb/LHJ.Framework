@@ -12,14 +12,16 @@ namespace LHJ.DBService
     public partial class frmErrorMsg : Form
     {
         #region 1.Variable
-        public Exception ex;
-        public string Query;
-        public Object Param;
+        private Exception m_Ex;
+        private string m_Query;
+        private Object m_Param;
         #endregion 1.Variable
 
 
         #region 2.Property
-
+        public Exception Ex { get; set; }
+        public string Query { get; set; }
+        public Object Param { get; set; }
         #endregion 2.Property
 
 
@@ -36,7 +38,7 @@ namespace LHJ.DBService
         #region 4.Override Method
         private void frmErrorMsg_Load(object sender, EventArgs e)
         {
-
+            this.showMessages();
         }
         #endregion 4.Override Method
 
@@ -47,7 +49,7 @@ namespace LHJ.DBService
         /// </summary>
         public void SetInitialize()
         {
-            this.showMessages();
+
         }
         #endregion 5.Set Initialize
 
@@ -58,45 +60,47 @@ namespace LHJ.DBService
             this.ShowException();
             this.ShowSQL();
             this.ShowParam();
+
+            this.txtSQL.SelectAll();
         }
 
         private void ShowException()
         {
-            this.lblError.Text = ex.Message;
+            this.lblError.Text = Ex.Message;
         }
 
         private void ShowSQL()
         {
-            this.txtSQL.Text = this.Query;
+            this.txtSQL.Text = Query.Replace("\n", "\r\n");
         }
 
         private void ShowParam()
         {
-            this.txtParam.Text = this.paramString(this.Param);
+            this.txtParam.Text = this.paramString();
         }
 
-        private string paramString(Object aParam)
+        private string paramString()
         {
             StringBuilder str = new StringBuilder("");
 
-            if (aParam == null)
+            if (Param == null)
             {
                 return "";
             }
             else
             {
-                if (aParam.GetType().Equals(typeof(List<ParamInfo>)))
+                if (Param.GetType().Equals(typeof(List<ParamInfo>)))
                 {
-                    List<ParamInfo> param = aParam as List<ParamInfo>;
+                    List<ParamInfo> param = Param as List<ParamInfo>;
 
                     foreach (ParamInfo p in param)
                     {
                         str.AppendLine(string.Format("{0} : {1}", p.ParameterName, p.Value));
                     }
                 }
-                else if (aParam.GetType().Equals(typeof(Hashtable)))
+                else if (Param.GetType().Equals(typeof(Hashtable)))
                 {
-                    Hashtable param = aParam as Hashtable;
+                    Hashtable param = Param as Hashtable;
 
                     foreach (string paramName in param)
                     {

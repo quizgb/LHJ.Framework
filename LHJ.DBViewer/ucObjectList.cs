@@ -79,6 +79,22 @@ namespace LHJ.DBViewer
             return dt;
         }
 
+        public DataTable GetObjectListByObjectName(string aUser, string aObjectName)
+        {
+            DataTable dt = new DataTable();
+
+            if (this.cboObjectList.Text.Equals("Tables"))
+            {
+                dt = DALDataAccess.GetObjectListByObjectName(aUser, "TABLE", aObjectName);
+            }
+            else if (this.cboObjectList.Text.Equals("Views"))
+            {
+                dt = DALDataAccess.GetObjectListByObjectName(aUser, "VIEW", aObjectName);
+            }
+
+            return dt;
+        }
+
         private void SetSelectedObjChanged(string aObject)
         {
             if (SelectedObjChanged != null)

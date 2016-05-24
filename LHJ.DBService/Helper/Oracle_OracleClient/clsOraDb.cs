@@ -495,7 +495,7 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
         private void ErrorMessage(Exception ex, string Query, List<ParamInfo> param)
         {
             frmErrorMsg frm = new frmErrorMsg();
-            frm.ex = ex;
+            frm.Ex = ex;
             frm.Query = Query;
             frm.Param = param;
 
@@ -505,7 +505,7 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
         private void ErrorMessage(Exception ex, string Query, Hashtable param)
         {
             frmErrorMsg frm = new frmErrorMsg();
-            frm.ex = ex;
+            frm.Ex = ex;
             frm.Query = Query;
             frm.Param = param;
 

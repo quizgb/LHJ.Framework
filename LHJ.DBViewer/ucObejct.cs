@@ -64,6 +64,27 @@ namespace LHJ.DBViewer
             DataTable dt = DALDataAccess.GetTableColumns(Common.Comm.DBWorker.GetUserID().ToUpper(), this.lbxObject.Text);
             this.dgvColumnInfo.DataSource = dt;
         }
+
+        private void Search()
+        {
+            if (string.IsNullOrEmpty(this.txtSearch.Text))
+            {
+                this.ucObjectList1_SelectedObjChanged(this.ucObjectList1, new Common.Definition.EventHandler.SelectedObjChangedEventArgs(string.Empty));
+            }
+            else
+            {
+                this.lbxObject.Items.Clear();
+                DataTable dt = this.ucObjectList1.GetObjectListByObjectName(this.ucUserList1.User, this.txtSearch.Text);
+
+                foreach (DataRow dr in dt.Rows)
+                {
+                    this.lbxObject.Items.Add(dr["OBJECT_NAME"].ToString());
+                }
+
+                this.SetColumnInfo();
+                this.txtSearch.Focus();
+            }
+        }
         #endregion 6.Method
 
 
@@ -79,6 +100,7 @@ namespace LHJ.DBViewer
             }
 
             this.SetColumnInfo();
+            this.txtSearch.Focus();
         }
 
         private void ucObjectList1_SelectedObjChanged(object sender, Common.Definition.EventHandler.SelectedObjChangedEventArgs e)
@@ -92,6 +114,7 @@ namespace LHJ.DBViewer
             }
 
             this.SetColumnInfo();
+            this.txtSearch.Focus();
         }
 
         private void lbxObject_SelectedIndexChanged(object sender, EventArgs e)
@@ -116,6 +139,19 @@ namespace LHJ.DBViewer
         private void dgvColumnInfo_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             this.SetItemDoubleClicked(this.dgvColumnInfo.GetRowCellStrValue(e.RowIndex, e.ColumnIndex));
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            this.Search();
+        }
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyData.Equals(Keys.Enter))
+            {
+                this.Search();
+            }
         }
         #endregion 7.Event
     }

@@ -111,7 +111,7 @@ namespace LHJ.DBViewer
 
                     foreach (DataRow dr in dtSql.Rows)
                     {
-                        sql += dr["SQL_TEXT"].ToString();
+                        sql += dr["SQL_TEXT"].ToString().Replace("\n", "\r\n");
                     }
 
                     this.txtSessionQuery.Text = sql;
@@ -125,6 +125,8 @@ namespace LHJ.DBViewer
             {
                 this.txtSessionQuery.Text = string.Empty;
             }
+
+            this.txtSessionQuery.SelectAll();
         }
 
         private void tbxSessionQuery_KeyDown(object sender, KeyEventArgs e)

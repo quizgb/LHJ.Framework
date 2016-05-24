@@ -47,7 +47,7 @@
             this.txtSQL.Name = "txtSQL";
             this.txtSQL.ReadOnly = true;
             this.txtSQL.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtSQL.Size = new System.Drawing.Size(524, 332);
+            this.txtSQL.Size = new System.Drawing.Size(409, 332);
             this.txtSQL.TabIndex = 0;
             this.txtSQL.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSQL_KeyDown);
             // 
@@ -62,7 +62,6 @@
             this.txtParam.ReadOnly = true;
             this.txtParam.Size = new System.Drawing.Size(109, 331);
             this.txtParam.TabIndex = 1;
-            this.txtParam.Visible = false;
             // 
             // lblError
             // 
@@ -86,6 +85,9 @@
             // 
             // btnClose
             // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.Location = new System.Drawing.Point(453, 12);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(70, 33);
