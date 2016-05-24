@@ -10,7 +10,6 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
 {
     public class clsOraDb : IDBHelper
     {
-
         #region Private Variables
         private string m_DataSource = string.Empty;
         private string m_UserID = string.Empty;

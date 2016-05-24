@@ -12,14 +12,39 @@ namespace LHJ.DBViewer
 {
     public partial class frmMain : Form
     {
+        #region 1.Variable
         private static string mBtn;
         private ToolStripButton mTsBtnSqlWindow = new ToolStripButton();
         private ToolStripButton mTsBtnSessionView = new ToolStripButton();
+        #endregion 1.Variable
 
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public frmMain()
         {
             InitializeComponent();
 
+            this.SetInitialize();
+        }
+        #endregion 3.Constructor
+
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
             this.SetTitleBuildDate();
 
             this.Icon = Properties.Resources._1464082634_033;
@@ -35,7 +60,10 @@ namespace LHJ.DBViewer
             this.toolStrip2.Items.Add(mTsBtnSqlWindow);
             this.toolStrip2.Items.Add(mTsBtnSessionView);
         }
+        #endregion 5.Set Initialize
 
+
+        #region 6.Method
         private void SetTitleBuildDate()
         {
             System.Version assemblyVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
@@ -67,36 +95,6 @@ namespace LHJ.DBViewer
                 this.ShowFormORClose(window);
                 this.mTsBtnSqlWindow.Checked = true;
             }
-        }
-
-        private class MyRenderer : ToolStripProfessionalRenderer
-        {
-            protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
-            {
-                ToolStripButton tsBtn = e.Item as ToolStripButton;
-
-                if (tsBtn != null && tsBtn.Checked)
-                {
-                    foreach (ToolStripButton btn in tsBtn.GetCurrentParent().Items)
-                    {
-                        if (!btn.Equals(tsBtn))
-                        {
-                            btn.Invalidate();
-                        }
-                    }
-
-                    e.Graphics.DrawRectangle(Pens.Black, 0, 0, e.Item.Size.Width - 1, e.Item.Size.Height - 1);
-                }
-                else
-                {
-                    base.OnRenderButtonBackground(e);
-                }
-            }
-        }
-
-        private void frmMain_Shown(object sender, EventArgs e)
-        {
-            this.ShowLoginForm();
         }
 
         private void ShowFormORClose(Form aActiveForm)
@@ -138,6 +136,14 @@ namespace LHJ.DBViewer
 
             return mdiChild;
         }
+        #endregion 6.Method
+
+
+        #region 7.Event
+        private void frmMain_Shown(object sender, EventArgs e)
+        {
+            this.ShowLoginForm();
+        }
 
         private void tsBtn_Click(object sender, MouseEventArgs e)
         {
@@ -166,6 +172,32 @@ namespace LHJ.DBViewer
             {
                 frmSessionView sessionView = new frmSessionView();
                 this.ShowFormORClose(sessionView);
+            }
+        }
+        #endregion 7.Event
+
+        private class MyRenderer : ToolStripProfessionalRenderer
+        {
+            protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
+            {
+                ToolStripButton tsBtn = e.Item as ToolStripButton;
+
+                if (tsBtn != null && tsBtn.Checked)
+                {
+                    foreach (ToolStripButton btn in tsBtn.GetCurrentParent().Items)
+                    {
+                        if (!btn.Equals(tsBtn))
+                        {
+                            btn.Invalidate();
+                        }
+                    }
+
+                    e.Graphics.DrawRectangle(Pens.Black, 0, 0, e.Item.Size.Width - 1, e.Item.Size.Height - 1);
+                }
+                else
+                {
+                    base.OnRenderButtonBackground(e);
+                }
             }
         }
     }

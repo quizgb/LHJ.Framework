@@ -12,16 +12,46 @@ namespace LHJ.DBViewer
 {
     public partial class frmSessionView : Form
     {
+        #region 1.Variable
+
+        #endregion 1.Variable
+
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public frmSessionView()
         {
             InitializeComponent();
 
+            this.SetInitialize();
+        }
+        #endregion 3.Constructor
+
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
             this.SearchSessionInfo();
             this.SearchLockList();
 
             this.txtSecond.Text = "30";
         }
+        #endregion 5.Set Initialize
 
+
+        #region 6.Method
         private void SearchLockList()
         {
             this.Cursor = Cursors.WaitCursor;
@@ -41,7 +71,10 @@ namespace LHJ.DBViewer
 
             this.Cursor = Cursors.Default;
         }
+        #endregion 6.Method
 
+
+        #region 7.Event
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             Button btn = sender as Button;
@@ -58,7 +91,7 @@ namespace LHJ.DBViewer
                     this.SearchLockList();
                 }
                 else if (btn.Equals(this.btnCopy))
-                { 
+                {
                     Clipboard.SetDataObject(this.txtSessionQuery.Text);
                 }
             }
@@ -141,5 +174,6 @@ namespace LHJ.DBViewer
 
             this.SearchLockList();
         }
+        #endregion 7.Event
     }
 }

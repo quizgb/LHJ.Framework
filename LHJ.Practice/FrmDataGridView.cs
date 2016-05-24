@@ -12,10 +12,37 @@ namespace LHJ.Practice
 {
     public partial class FrmDataGridView : Form
     {
+        #region 1.Variable
+
+        #endregion 1.Variable
+
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public FrmDataGridView()
         {
             InitializeComponent();
 
+            this.SetInitialize();
+        }
+        #endregion 3.Constructor
+
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
             DataSet ds = this.ucDataGridView1.OpenExcel(@"C:\Example.xls", true);
             //this.ucDataGridView1.DataSource = ds.Tables[0];
 
@@ -41,5 +68,16 @@ namespace LHJ.Practice
                 this.ucDataGridView1.Rows.Add(row);
             }
         }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
+
+        #endregion 6.Method
+
+
+        #region 7.Event
+
+        #endregion 7.Event
     }
 }

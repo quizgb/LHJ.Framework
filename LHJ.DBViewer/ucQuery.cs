@@ -14,6 +14,7 @@ namespace LHJ.DBViewer
 {
     public partial class ucQuery : UserControl
     {
+        #region 1.Variable
         const int LINE_HEIGHT = 20;
         const int BASE_LINES = 5;
         const int BASE_HEIGHT = LINE_HEIGHT * BASE_LINES;
@@ -23,22 +24,23 @@ namespace LHJ.DBViewer
 
         private string m_Query = string.Empty;
         private DataTable m_DTDataSource = null; 
+        #endregion 1.Variable
 
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public ucQuery()
         {
             InitializeComponent();
         }
+        #endregion 3.Constructor
 
-        public void SetFocusDDLBox()
-        {
-            this.txtSqlArea.Focus();
-        }
 
-        public void AddObjectName(string aObjectName)
-        {
-            this.txtSqlArea.Text += aObjectName;
-        }
-
+        #region 4.Override Method
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             switch (keyData)
@@ -74,6 +76,30 @@ namespace LHJ.DBViewer
             }
 
             return base.ProcessCmdKey(ref msg, keyData);
+        }
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
+        public void SetFocusDDLBox()
+        {
+            this.txtSqlArea.Focus();
+        }
+
+        public void AddObjectName(string aObjectName)
+        {
+            this.txtSqlArea.Text += aObjectName;
         }
 
         private void ExecuteExplainPlan()
@@ -281,7 +307,10 @@ namespace LHJ.DBViewer
 
             } // if SQL Area text is null
         }
+        #endregion 6.Method
 
+
+        #region 7.Event
         private void dgvQueryResult_Scroll(object sender, ScrollEventArgs e)
         {
             if (e.ScrollOrientation == ScrollOrientation.VerticalScroll)
@@ -297,5 +326,6 @@ namespace LHJ.DBViewer
         {
             this.tsslRowCount.Text = string.Format("{0} of {1}", (e.RowIndex + 1).ToString(), dgvQueryResult.Rows.Count.ToString());
         }
+        #endregion 7.Event
     }
 }

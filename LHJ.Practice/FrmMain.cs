@@ -11,16 +11,44 @@ namespace LHJ.Practice
 {
     public partial class FrmMain : RibbonForm
     {
+        #region 1.Variable
+
+        #endregion 1.Variable
+
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public FrmMain()
         {
             InitializeComponent();
         }
+        #endregion 3.Constructor
 
+
+        #region 4.Override Method
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
         }
+        #endregion 4.Override Method
 
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
         /// <summary>
         /// 메뉴에서 선택된 폼의 존재여부를 확인
         /// </summary>
@@ -62,7 +90,10 @@ namespace LHJ.Practice
                 }
             }
         }
+        #endregion 6.Method
 
+
+        #region 7.Event
         private void barBtnShowDataGridView_Click(object sender, EventArgs e)
         {
             RibbonButton btn = sender as RibbonButton;
@@ -97,5 +128,6 @@ namespace LHJ.Practice
                 this.ShowFormORClose(scnTextToSpeech);
             }
         }
+        #endregion 7.Event
     }
 }

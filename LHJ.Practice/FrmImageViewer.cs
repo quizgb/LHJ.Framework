@@ -12,12 +12,36 @@ namespace LHJ.Practice
 {
     public partial class FrmImageViewer : Form
     {
+        #region 1.Variable
+
+        #endregion 1.Variable
+
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public FrmImageViewer()
         {
             InitializeComponent();
-        }
 
-        private void Form1_Load(object sender, EventArgs e)
+            this.SetInitialize();
+        }
+        #endregion 3.Constructor
+
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
         {
             this.KeyPreview = false;
             ucImageViewer viewer = new ucImageViewer();
@@ -29,5 +53,19 @@ namespace LHJ.Practice
             this.KeyPreview = true;
             this.StartPosition = FormStartPosition.CenterScreen;
         }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
+
+        #endregion 6.Method
+
+
+        #region 7.Event
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+        #endregion 7.Event
     }
 }

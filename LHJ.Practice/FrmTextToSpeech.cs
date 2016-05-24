@@ -13,15 +13,43 @@ namespace LHJ.Practice
 {
     public partial class FrmTextToSpeech : Form
     {
+        #region 1.Variable
         private SpeechSynthesizer m_Ts = new SpeechSynthesizer();
+        #endregion 1.Variable
 
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public FrmTextToSpeech()
         {
             InitializeComponent();
 
-            m_Ts.SetOutputToDefaultAudioDevice();
+            this.SetInitialize();
         }
+        #endregion 3.Constructor
 
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+            this.m_Ts.SetOutputToDefaultAudioDevice();
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
         /// <summary>
         /// 숫자를 한글 발음으로 바꾼다.
         /// </summary>
@@ -82,26 +110,26 @@ namespace LHJ.Practice
                 // 2 SDK 설치 후 C:\Program Files\Microsoft SDKs\Speech\v11.0\Assembly\Microsoft.Speech.dll 를 참조
                 // System.Speech.dll을 참조하면 한국어를 인식 못함.
 
-
-
                 // 보이스를 선택하지 않아도 처리됨
                 //ts.SelectVoice("Microsoft Server Speech Text to Speech Voice (ko-KR, Heami)");
 
-
-                if (m_Ts.State == Microsoft.Speech.Synthesis.SynthesizerState.Ready)
+                if (this.m_Ts.State == Microsoft.Speech.Synthesis.SynthesizerState.Ready)
                 {
                     //m_Ts.SpeakProgress += new EventHandler<Microsoft.Speech.Synthesis.SpeakProgressEventArgs>(speakRBox_SpeakProgress);
                     //m_Ts.SpeakCompleted += new EventHandler<Microsoft.Speech.Synthesis.SpeakCompletedEventArgs>(speakRBox_SpeakCompleted);
-                    m_Ts.SpeakAsync(this.textBox1.Text);
+                    this.m_Ts.SpeakAsync(this.textBox1.Text);
                     return;
                 }
-                if (m_Ts.State == Microsoft.Speech.Synthesis.SynthesizerState.Paused)
+                if (this.m_Ts.State == Microsoft.Speech.Synthesis.SynthesizerState.Paused)
                 {
-                    m_Ts.Resume();
+                    this.m_Ts.Resume();
                 }
             }
         }
+        #endregion 6.Method
 
+
+        #region 7.Event
         private void button1_Click(object sender, EventArgs e)
         {
             this.Play();
@@ -111,18 +139,18 @@ namespace LHJ.Practice
         {
             if (m_Ts.State == Microsoft.Speech.Synthesis.SynthesizerState.Speaking)
             {
-                m_Ts.Pause();
+                this.m_Ts.Pause();
                 return;
             }
             else if (m_Ts.State == Microsoft.Speech.Synthesis.SynthesizerState.Paused)
             {
-                m_Ts.Resume();
+                this.m_Ts.Resume();
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            m_Ts.SpeakAsyncCancelAll();
+            this.m_Ts.SpeakAsyncCancelAll();
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
@@ -133,5 +161,6 @@ namespace LHJ.Practice
                 this.textBox1.SelectAll();
             }
         }
+        #endregion 7.Event
     }
 }

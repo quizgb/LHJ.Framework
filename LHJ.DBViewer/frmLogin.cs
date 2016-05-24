@@ -14,12 +14,36 @@ namespace LHJ.DBViewer
 {
     public partial class frmLogin : Form
     {
+        #region 1.Variable
+
+        #endregion 1.Variable
+
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public frmLogin()
         {
             InitializeComponent();
-        }
 
-        private void frmLogin_Load(object sender, EventArgs e)
+            this.SetInitialize();
+        }
+        #endregion 3.Constructor
+
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
         {
             this.Icon = Properties.Resources._1464083802_key;
 
@@ -37,21 +61,10 @@ namespace LHJ.DBViewer
             this.txtUsername.Text = Properties.Settings.Default.LastUsername;
             this.txtDatabase.Text = Properties.Settings.Default.LastDatabase;
         }
+        #endregion 5.Set Initialize
 
-        private void btnLogin_Click(object sender, EventArgs e)
-        {
-            Button btn = sender as Button;
 
-            if (btn.Equals(this.btnLogin))
-            {
-                this.DatabaseLogin();
-            }
-            else if (btn.Equals(this.btnClose))
-            {
-                this.Close();
-            }
-        }
-
+        #region 6.Method
         private bool CheckDataBeforeLogin()
         {
             if (string.IsNullOrEmpty(this.txtUsername.Text))
@@ -75,7 +88,7 @@ namespace LHJ.DBViewer
                 return false;
             }
 
-            return true;  
+            return true;
         }
 
         private void DatabaseLogin()
@@ -105,6 +118,28 @@ namespace LHJ.DBViewer
 
                 Properties.Settings.Default.Save();
 
+                this.Close();
+            }
+        }
+        #endregion 6.Method
+
+
+        #region 7.Event
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnLogin_Click(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+
+            if (btn.Equals(this.btnLogin))
+            {
+                this.DatabaseLogin();
+            }
+            else if (btn.Equals(this.btnClose))
+            {
                 this.Close();
             }
         }
@@ -159,5 +194,6 @@ namespace LHJ.DBViewer
                 Common.Comm.Logger.Error(System.Reflection.MethodBase.GetCurrentMethod(), ex.Message, ex);
             }
         }
+        #endregion 7.Event
     }
 }

@@ -13,11 +13,20 @@ namespace LHJ.DBViewer
 {
     public partial class ucObejct : UserControl
     {
+        #region 1.Variable
         [Browsable(true),
          DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
          Description("아이템이 더블클릭될 때 발생됩니다.")]
         public event Common.Definition.EventHandler.ItemDoubleClickEventHandler ItemDoubleClicked;
+        #endregion 1.Variable
 
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public ucObejct()
         {
             InitializeComponent();
@@ -27,10 +36,38 @@ namespace LHJ.DBViewer
                 return;
             }
 
+            this.SetInitialize();
+        }
+        #endregion 3.Constructor
+
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
             Common.Definition.EventHandler.SelectedUserChangedEventArgs e = new Common.Definition.EventHandler.SelectedUserChangedEventArgs(this.ucUserList1.User);
             this.ucUserList1_SelectedUserChanged(this.ucUserList1, e);
         }
+        #endregion 5.Set Initialize
 
+
+        #region 6.Method
+        private void SetColumnInfo()
+        {
+            DataTable dt = DALDataAccess.GetTableColumns(Common.Comm.DBWorker.GetUserID().ToUpper(), this.lbxObject.Text);
+            this.dgvColumnInfo.DataSource = dt;
+        }
+        #endregion 6.Method
+
+
+        #region 7.Event
         private void ucUserList1_SelectedUserChanged(object sender, Common.Definition.EventHandler.SelectedUserChangedEventArgs e)
         {
             this.lbxObject.Items.Clear();
@@ -62,12 +99,6 @@ namespace LHJ.DBViewer
             this.SetColumnInfo();
         }
 
-        private void SetColumnInfo()
-        {
-            DataTable dt = DALDataAccess.GetTableColumns(Common.Comm.DBWorker.GetUserID().ToUpper(), this.lbxObject.Text);
-            this.dgvColumnInfo.DataSource = dt;
-        }
-
         private void lbxObject_DoubleClick(object sender, EventArgs e)
         {
             this.SetItemDoubleClicked(this.lbxObject.Text);
@@ -86,5 +117,6 @@ namespace LHJ.DBViewer
         {
             this.SetItemDoubleClicked(this.dgvColumnInfo.GetRowCellStrValue(e.RowIndex, e.ColumnIndex));
         }
+        #endregion 7.Event
     }
 }

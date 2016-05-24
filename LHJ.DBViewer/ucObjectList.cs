@@ -11,11 +11,20 @@ namespace LHJ.DBViewer
 {
     public partial class ucObjectList : UserControl
     {
+        #region 1.Variable
         [Browsable(true),
          DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
          Description("오브젝트가 변경될 때 발생됩니다.")]
         public event Common.Definition.EventHandler.SelectedObjChangedEventHandler SelectedObjChanged;
+        #endregion 1.Variable
 
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public ucObjectList()
         {
             InitializeComponent();
@@ -25,9 +34,28 @@ namespace LHJ.DBViewer
                 return;
             }
 
+            this.SetInitialize();
+        }
+        #endregion 3.Constructor
+
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
             this.InitCombo();
         }
+        #endregion 5.Set Initialize
 
+
+        #region 6.Method
         private void InitCombo()
         {
             this.cboObjectList.Items.Add("Tables");
@@ -59,10 +87,14 @@ namespace LHJ.DBViewer
                 SelectedObjChanged(this, e);
             }
         }
+        #endregion 6.Method
 
+
+        #region 7.Event
         private void cboObjectList_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.SetSelectedObjChanged(this.cboObjectList.Text);
         }
+        #endregion 7.Event
     }
 }

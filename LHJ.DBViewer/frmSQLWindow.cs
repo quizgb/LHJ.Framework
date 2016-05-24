@@ -11,16 +11,49 @@ namespace LHJ.DBViewer
 {
     public partial class frmSQLWindow : Form
     {
+        #region 1.Variable
         private ucQuery m_Query = new ucQuery();
+        #endregion 1.Variable
 
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public frmSQLWindow()
         {
             InitializeComponent();
 
-            m_Query.Dock = DockStyle.Fill;
-            this.tabPage1.Controls.Add(m_Query);
+            this.SetInitialize();
         }
+        #endregion 3.Constructor
 
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+            this.m_Query.Dock = DockStyle.Fill;
+            this.tabPage1.Controls.Add(this.m_Query);
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
+
+        #endregion 6.Method
+
+
+        #region 7.Event
         private void splitContainer1_SplitterMoved(object sender, SplitterEventArgs e)
         {
             this.tabControl1.Refresh();
@@ -35,5 +68,6 @@ namespace LHJ.DBViewer
         {
             this.m_Query.AddObjectName(e.ItemName);
         }
+        #endregion 7.Event
     }
 }

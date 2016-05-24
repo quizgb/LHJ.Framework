@@ -9,16 +9,50 @@ namespace LHJ.DBService
 {
     public class DBWorker
     {
+        #region 1.Variable
         private string m_DataSource = string.Empty;
         private string m_UserID = string.Empty;
         private string m_Password = string.Empty;
         private IDBHelper m_DBHelper = null;
+        #endregion 1.Variable
 
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public DBWorker()
         {
             m_DBHelper = new LHJ.DBService.Helper.Oracle_OracleClient.clsOraDb();
         }
 
+        ~DBWorker()
+        {
+            //m_DBHelper.CloseSession();    // 하면 안됨. (Null Exception 발생함)
+            m_DBHelper = null;
+        }
+        #endregion 3.Constructor
+
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
         public string GetDataSource()
         {
             return m_DBHelper.GetDataSource();
@@ -131,11 +165,11 @@ namespace LHJ.DBService
         {
             return m_DBHelper.ExecuteNonQuery(Query, ht);
         }
+        #endregion 6.Method
 
-        ~DBWorker()
-        {
-            //m_DBHelper.CloseSession();    // 하면 안됨. (Null Exception 발생함)
-            m_DBHelper = null;
-        }
+
+        #region 7.Event
+
+        #endregion 7.Event
     }
 }

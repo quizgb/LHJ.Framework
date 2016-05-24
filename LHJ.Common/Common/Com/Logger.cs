@@ -8,12 +8,40 @@ namespace LHJ.Common.Common.Com
 {
     public class Logger
     {
+        #region 1.Variable
         private log4net.ILog m_Logger = null;
+        #endregion 1.Variable
 
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public Logger()
         {
         }
+        #endregion 3.Constructor
 
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
         public void SetConfigLogger(string pLogFileName)
         {
             m_Logger = log4net.LogManager.GetLogger(string.Format("{0}", pLogFileName));
@@ -36,7 +64,7 @@ namespace LHJ.Common.Common.Com
             rollingAppender.ActivateOptions();
 
             hierarchy.Root.Level = log4net.Core.Level.All;
-            #endregion  
+            #endregion
         }
 
         public void Fatal(System.Reflection.MethodBase pMethodBase, Object message)
@@ -73,5 +101,11 @@ namespace LHJ.Common.Common.Com
         {
             return string.Format("[CLASS NAME : {0}.cs]\r\n[METHOD NAME : {1}]\r\n", pMethodBase.ReflectedType.FullName, pMethodBase.Name);
         }
+        #endregion 6.Method
+
+
+        #region 7.Event
+
+        #endregion 7.Event
     }
 }

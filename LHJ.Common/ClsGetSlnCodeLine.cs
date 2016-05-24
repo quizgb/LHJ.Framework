@@ -9,6 +9,38 @@ namespace LHJ.Common
 {
     public class ClsGetSlnCodeLine
     {
+        #region 1.Variable
+
+        #endregion 1.Variable
+
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
+
+        #endregion 3.Constructor
+
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
         public static string[] GetCsproj(string slnDirect)
         {
             StreamReader sr = new StreamReader(slnDirect);
@@ -57,5 +89,11 @@ namespace LHJ.Common
 
             return codes.ToArray();
         }
+        #endregion 6.Method
+
+
+        #region 7.Event
+
+        #endregion 7.Event
     }
 }
