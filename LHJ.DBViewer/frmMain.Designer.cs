@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.MainMenu = new System.Windows.Forms.MenuStrip();
+            this.mnsMain = new System.Windows.Forms.MenuStrip();
             this.fileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sQLWindowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -77,38 +77,38 @@
             this.comileInvalidObjectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.computeStatisticsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem10 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
-            this.newToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.openToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.tsMain = new System.Windows.Forms.ToolStrip();
+            this.tsbtnSqlWindow = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnSchemaBrowser = new System.Windows.Forms.ToolStripButton();
             this.saveToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.printToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnSessionView = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.cutToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.copyToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.pasteToolStripButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.helpToolStripButton = new System.Windows.Forms.ToolStripButton();
-            this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+            this.tsSub = new System.Windows.Forms.ToolStrip();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslOracleVersion = new System.Windows.Forms.ToolStripStatusLabel();
-            this.MainMenu.SuspendLayout();
-            this.toolStrip1.SuspendLayout();
+            this.mnsMain.SuspendLayout();
+            this.tsMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // MainMenu
+            // mnsMain
             // 
-            this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenuItem,
             this.sessionToolStripMenuItem,
             this.toolsMenuItem});
-            this.MainMenu.Location = new System.Drawing.Point(0, 0);
-            this.MainMenu.Name = "MainMenu";
-            this.MainMenu.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.MainMenu.Size = new System.Drawing.Size(1264, 24);
-            this.MainMenu.TabIndex = 11;
-            this.MainMenu.Text = "menuStrip1";
+            this.mnsMain.Location = new System.Drawing.Point(0, 0);
+            this.mnsMain.Name = "mnsMain";
+            this.mnsMain.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
+            this.mnsMain.Size = new System.Drawing.Size(1264, 24);
+            this.mnsMain.TabIndex = 11;
+            this.mnsMain.Text = "menuStrip1";
             // 
             // fileMenuItem
             // 
@@ -429,42 +429,45 @@
             this.toolStripMenuItem10.Name = "toolStripMenuItem10";
             this.toolStripMenuItem10.Size = new System.Drawing.Size(199, 6);
             // 
-            // toolStrip1
+            // tsMain
             // 
-            this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newToolStripButton,
-            this.openToolStripButton,
+            this.tsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsbtnSqlWindow,
+            this.tsbtnSchemaBrowser,
             this.saveToolStripButton,
-            this.printToolStripButton,
+            this.tsbtnSessionView,
             this.toolStripSeparator,
             this.cutToolStripButton,
             this.copyToolStripButton,
             this.pasteToolStripButton,
             this.toolStripSeparator1,
             this.helpToolStripButton});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 24);
-            this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(1264, 25);
-            this.toolStrip1.TabIndex = 14;
-            this.toolStrip1.Text = "toolStrip1";
+            this.tsMain.Location = new System.Drawing.Point(0, 24);
+            this.tsMain.Name = "tsMain";
+            this.tsMain.Size = new System.Drawing.Size(1264, 25);
+            this.tsMain.TabIndex = 14;
+            this.tsMain.Text = "toolStrip1";
             // 
-            // newToolStripButton
+            // tsbtnSqlWindow
             // 
-            this.newToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.newToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("newToolStripButton.Image")));
-            this.newToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.newToolStripButton.Name = "newToolStripButton";
-            this.newToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.newToolStripButton.Text = "&New";
+            this.tsbtnSqlWindow.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnSqlWindow.Image = ((System.Drawing.Image)(resources.GetObject("tsbtnSqlWindow.Image")));
+            this.tsbtnSqlWindow.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnSqlWindow.Name = "tsbtnSqlWindow";
+            this.tsbtnSqlWindow.Size = new System.Drawing.Size(23, 22);
+            this.tsbtnSqlWindow.Text = "SQL Window";
+            this.tsbtnSqlWindow.ToolTipText = "SQL Window";
+            this.tsbtnSqlWindow.Click += new System.EventHandler(this.tsbtnSqlWindow_Click);
             // 
-            // openToolStripButton
+            // tsbtnSchemaBrowser
             // 
-            this.openToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.openToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("openToolStripButton.Image")));
-            this.openToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.openToolStripButton.Name = "openToolStripButton";
-            this.openToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.openToolStripButton.Text = "&Open";
+            this.tsbtnSchemaBrowser.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnSchemaBrowser.Image = ((System.Drawing.Image)(resources.GetObject("tsbtnSchemaBrowser.Image")));
+            this.tsbtnSchemaBrowser.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnSchemaBrowser.Name = "tsbtnSchemaBrowser";
+            this.tsbtnSchemaBrowser.Size = new System.Drawing.Size(23, 22);
+            this.tsbtnSchemaBrowser.Text = "Schema Browser";
+            this.tsbtnSchemaBrowser.Click += new System.EventHandler(this.tsbtnSqlWindow_Click);
             // 
             // saveToolStripButton
             // 
@@ -475,14 +478,16 @@
             this.saveToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.saveToolStripButton.Text = "&Save";
             // 
-            // printToolStripButton
+            // tsbtnSessionView
             // 
-            this.printToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.printToolStripButton.Image = ((System.Drawing.Image)(resources.GetObject("printToolStripButton.Image")));
-            this.printToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.printToolStripButton.Name = "printToolStripButton";
-            this.printToolStripButton.Size = new System.Drawing.Size(23, 22);
-            this.printToolStripButton.Text = "&Print";
+            this.tsbtnSessionView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnSessionView.Image = ((System.Drawing.Image)(resources.GetObject("tsbtnSessionView.Image")));
+            this.tsbtnSessionView.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnSessionView.Name = "tsbtnSessionView";
+            this.tsbtnSessionView.Size = new System.Drawing.Size(23, 22);
+            this.tsbtnSessionView.Text = "Session View";
+            this.tsbtnSessionView.ToolTipText = "Session View";
+            this.tsbtnSessionView.Click += new System.EventHandler(this.tsbtnSqlWindow_Click);
             // 
             // toolStripSeparator
             // 
@@ -530,13 +535,13 @@
             this.helpToolStripButton.Size = new System.Drawing.Size(23, 22);
             this.helpToolStripButton.Text = "He&lp";
             // 
-            // toolStrip2
+            // tsSub
             // 
-            this.toolStrip2.Location = new System.Drawing.Point(0, 49);
-            this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1264, 25);
-            this.toolStrip2.TabIndex = 16;
-            this.toolStrip2.Text = "toolStrip2";
+            this.tsSub.Location = new System.Drawing.Point(0, 49);
+            this.tsSub.Name = "tsSub";
+            this.tsSub.Size = new System.Drawing.Size(1264, 25);
+            this.tsSub.TabIndex = 16;
+            this.tsSub.Text = "toolStrip2";
             // 
             // statusStrip1
             // 
@@ -544,7 +549,7 @@
             this.toolStripStatusLabel1,
             this.tsslOracleVersion});
             this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
-            this.statusStrip1.Location = new System.Drawing.Point(0, 960);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 858);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.ManagerRenderMode;
             this.statusStrip1.Size = new System.Drawing.Size(1264, 26);
@@ -576,22 +581,22 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1264, 986);
+            this.ClientSize = new System.Drawing.Size(1264, 884);
             this.Controls.Add(this.statusStrip1);
-            this.Controls.Add(this.toolStrip2);
-            this.Controls.Add(this.toolStrip1);
-            this.Controls.Add(this.MainMenu);
+            this.Controls.Add(this.tsSub);
+            this.Controls.Add(this.tsMain);
+            this.Controls.Add(this.mnsMain);
             this.IsMdiContainer = true;
-            this.MainMenuStrip = this.MainMenu;
+            this.MainMenuStrip = this.mnsMain;
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "LHJ_DBViewer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Shown += new System.EventHandler(this.frmMain_Shown);
-            this.MainMenu.ResumeLayout(false);
-            this.MainMenu.PerformLayout();
-            this.toolStrip1.ResumeLayout(false);
-            this.toolStrip1.PerformLayout();
+            this.mnsMain.ResumeLayout(false);
+            this.mnsMain.PerformLayout();
+            this.tsMain.ResumeLayout(false);
+            this.tsMain.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -601,7 +606,7 @@
 
         #endregion
 
-        private System.Windows.Forms.MenuStrip MainMenu;
+        private System.Windows.Forms.MenuStrip mnsMain;
         private System.Windows.Forms.ToolStripMenuItem fileMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sQLWindowToolStripMenuItem;
@@ -649,18 +654,18 @@
         private System.Windows.Forms.ToolStripMenuItem comileInvalidObjectsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem computeStatisticsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem10;
-        private System.Windows.Forms.ToolStrip toolStrip1;
-        private System.Windows.Forms.ToolStripButton newToolStripButton;
-        private System.Windows.Forms.ToolStripButton openToolStripButton;
+        private System.Windows.Forms.ToolStrip tsMain;
+        private System.Windows.Forms.ToolStripButton tsbtnSqlWindow;
+        private System.Windows.Forms.ToolStripButton tsbtnSchemaBrowser;
         private System.Windows.Forms.ToolStripButton saveToolStripButton;
-        private System.Windows.Forms.ToolStripButton printToolStripButton;
+        private System.Windows.Forms.ToolStripButton tsbtnSessionView;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
         private System.Windows.Forms.ToolStripButton cutToolStripButton;
         private System.Windows.Forms.ToolStripButton copyToolStripButton;
         private System.Windows.Forms.ToolStripButton pasteToolStripButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton helpToolStripButton;
-        private System.Windows.Forms.ToolStrip toolStrip2;
+        private System.Windows.Forms.ToolStrip tsSub;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.ToolStripStatusLabel tsslOracleVersion;

@@ -15,6 +15,7 @@ namespace LHJ.DBViewer
         #region 1.Variable
         private static string mBtn;
         private ToolStripButton mTsBtnSqlWindow = new ToolStripButton();
+        private ToolStripButton mTsBtnSchemaBrowser = new ToolStripButton();
         private ToolStripButton mTsBtnSessionView = new ToolStripButton();
         #endregion 1.Variable
 
@@ -46,19 +47,17 @@ namespace LHJ.DBViewer
         public void SetInitialize()
         {
             this.SetTitleBuildDate();
-
             this.Icon = Properties.Resources._1464082634_033;
+            this.tsSub.Renderer = new MyRenderer();
 
-            this.toolStrip2.Renderer = new MyRenderer();
+            this.mTsBtnSqlWindow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
+            this.mTsBtnSqlWindow.Text = "SQL Window";
 
-            mTsBtnSqlWindow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
-            mTsBtnSqlWindow.Text = "SQL Window";
+            this.mTsBtnSchemaBrowser.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
+            this.mTsBtnSchemaBrowser.Text = "Schema Browser";
 
-            mTsBtnSessionView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
-            mTsBtnSessionView.Text = "Session 조회";
-
-            this.toolStrip2.Items.Add(mTsBtnSqlWindow);
-            this.toolStrip2.Items.Add(mTsBtnSessionView);
+            this.mTsBtnSessionView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
+            this.mTsBtnSessionView.Text = "Session 조회";
         }
         #endregion 5.Set Initialize
 
@@ -90,10 +89,7 @@ namespace LHJ.DBViewer
             if (Common.Comm.DBWorker.GetConnState().Equals(ConnectionState.Open))
             {
                 this.SetOracleVersionLabel();
-
-                frmSQLWindow window = new frmSQLWindow();
-                this.ShowFormORClose(window);
-                this.mTsBtnSqlWindow.Checked = true;
+                this.tsbtnSqlWindow.PerformClick();
             }
         }
 
@@ -163,7 +159,7 @@ namespace LHJ.DBViewer
                 frmSQLWindow window = new frmSQLWindow();
                 this.ShowFormORClose(window);
             }
-            else if (tsBtn.Text.Equals("Schema Browser"))
+            else if (tsBtn.Equals(this.mTsBtnSchemaBrowser))
             {
                 frmSchemaBrowser browser = new frmSchemaBrowser();
                 this.ShowFormORClose(browser);
@@ -198,6 +194,39 @@ namespace LHJ.DBViewer
                 {
                     base.OnRenderButtonBackground(e);
                 }
+            }
+        }
+
+        private void tsbtnSqlWindow_Click(object sender, EventArgs e)
+        {
+            ToolStripButton tsBtn = sender as ToolStripButton;
+
+            if (tsBtn.Equals(this.tsbtnSqlWindow))
+            {
+                if (!this.tsSub.Items.Contains(this.mTsBtnSqlWindow))
+                {
+                    this.tsSub.Items.Add(this.mTsBtnSqlWindow);
+                }
+
+                this.tsBtn_Click(this.mTsBtnSqlWindow, null);
+            }
+            else if (tsBtn.Equals(this.tsbtnSchemaBrowser))
+            {
+                if (!this.tsSub.Items.Contains(this.mTsBtnSchemaBrowser))
+                {
+                    this.tsSub.Items.Add(this.mTsBtnSchemaBrowser);
+                }
+
+                this.tsBtn_Click(this.mTsBtnSchemaBrowser, null);
+            }
+            else if (tsBtn.Equals(this.tsbtnSessionView))
+            {
+                if (!this.tsSub.Items.Contains(this.mTsBtnSessionView))
+                {
+                    this.tsSub.Items.Add(this.mTsBtnSessionView);
+                }
+
+                this.tsBtn_Click(this.mTsBtnSessionView, null);
             }
         }
     }
