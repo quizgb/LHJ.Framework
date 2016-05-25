@@ -296,13 +296,34 @@ namespace LHJ.DBViewer
                         // executing the command
                         this.Cursor = Cursors.WaitCursor;
 
-                        Common.Comm.DBWorker.BeginTrans();
+                        if (trimmedSQL.StartsWith("ROLLBACK"))
+                        {
+                            Common.Comm.DBWorker.RollbackTrans();
 
-                        this.tsslTransaction.Visible = true;
-                        this.tsslAffectedRowCount.Visible = true;
+                            this.tsslTransaction.Visible = true;
+                            this.tsslAffectedRowCount.Visible = false;
 
-                        int n = Common.Comm.DBWorker.ExecuteNonQuery(this.m_Query);
-                        this.tsslAffectedRowCount.Text = string.Format("{0} row(s) affected", n.ToString());
+                            this.tsslTransaction.Text = "Rollbacked";
+                        }
+                        else if (trimmedSQL.StartsWith("COMMIT"))
+                        {
+                            Common.Comm.DBWorker.CommitTrans();
+
+                            this.tsslTransaction.Visible = true;
+                            this.tsslAffectedRowCount.Visible = false;
+
+                            this.tsslTransaction.Text = "Committed";
+                        }
+                        else
+                        {
+                            Common.Comm.DBWorker.BeginTrans();
+
+                            this.tsslTransaction.Visible = true;
+                            this.tsslAffectedRowCount.Visible = true;
+
+                            int n = Common.Comm.DBWorker.ExecuteNonQuery(this.m_Query);
+                            this.tsslAffectedRowCount.Text = string.Format("{0} row(s) affected", n.ToString());
+                        }
 
                         this.Cursor = Cursors.Default;
                     }
