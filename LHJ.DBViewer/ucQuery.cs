@@ -59,11 +59,11 @@ namespace LHJ.DBViewer
                     break;
 
                 case Keys.F9:
-                    //ExecuteCommit();
+                    Common.Comm.DBWorker.CommitTrans();
                     break;
 
                 case Keys.F11:
-                    //ExecuteRollback();
+                    Common.Comm.DBWorker.RollbackTrans();
                     break;
 
                 case Keys.Control | Keys.P:
@@ -256,11 +256,14 @@ namespace LHJ.DBViewer
                     {
                         this.Cursor = Cursors.WaitCursor;
 
+                        this.tsslTransaction.Visible = false;
+                        this.tsslAffectedRowCount.Visible = false;
+
                         if (aAllQuery)
                         {
                             this.m_DTDataSource = Common.Comm.DBWorker.ExecuteDataTable(this.m_Query);
                             dgvQueryResult.DataSource = this.m_DTDataSource;
-                            this.tsslRowCount.Text = string.Format("{0} of {1}", "1", dgvQueryResult.Rows.Count.ToString());
+                            this.SetTsslRowCount();
                         }
                         else
                         {
@@ -268,7 +271,7 @@ namespace LHJ.DBViewer
                             {
                                 this.m_DTDataSource = Common.Comm.DBWorker.ExecuteDataTable(this.m_Query, this.m_DTDataSource.Rows.Count, QUERY_ROW_CNT, "Table1", null);
                                 dgvQueryResult.DataSource = this.m_DTDataSource;
-                                this.tsslRowCount.Text = string.Format("{0} of {1}", "1", dgvQueryResult.Rows.Count.ToString());
+                                this.SetTsslRowCount();
                             }
                             else
                             {
@@ -292,7 +295,15 @@ namespace LHJ.DBViewer
                     {
                         // executing the command
                         this.Cursor = Cursors.WaitCursor;
+
+                        Common.Comm.DBWorker.BeginTrans();
+
+                        this.tsslTransaction.Visible = true;
+                        this.tsslAffectedRowCount.Visible = true;
+
                         int n = Common.Comm.DBWorker.ExecuteNonQuery(this.m_Query);
+                        this.tsslAffectedRowCount.Text = string.Format("{0} row(s) affected", n.ToString());
+
                         this.Cursor = Cursors.Default;
                     }
                 }
@@ -306,6 +317,23 @@ namespace LHJ.DBViewer
                 }
 
             } // if SQL Area text is null
+        }
+
+        public void ExportExcelQueryResult()
+        {
+            this.dgvQueryResult.ExportToExcel("쿼리결과");
+        }
+
+        private void SetTsslRowCount(string aStartRowIndex = "1")
+        {
+            if (this.dgvQueryResult.RowCount > 0)
+            {
+                this.tsslRowCount.Text = string.Format("{0} of {1}", aStartRowIndex, this.dgvQueryResult.Rows.Count.ToString());
+            }
+            else
+            {
+                this.tsslRowCount.Text = "(RowCount)";
+            }
         }
         #endregion 6.Method
 
@@ -324,7 +352,7 @@ namespace LHJ.DBViewer
 
         private void dgvQueryResult_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            this.tsslRowCount.Text = string.Format("{0} of {1}", (e.RowIndex + 1).ToString(), dgvQueryResult.Rows.Count.ToString());
+            this.SetTsslRowCount((e.RowIndex + 1).ToString());
         }
         #endregion 7.Event
     }

@@ -12,7 +12,6 @@ namespace LHJ.DBViewer
     public partial class frmSQLWindow : Form
     {
         #region 1.Variable
-        private ucQuery m_Query = new ucQuery();
         #endregion 1.Variable
 
 
@@ -42,14 +41,25 @@ namespace LHJ.DBViewer
         /// </summary>
         public void SetInitialize()
         {
-            this.m_Query.Dock = DockStyle.Fill;
-            this.tabPage1.Controls.Add(this.m_Query);
+            this.tsbtnAddTab.PerformClick();
         }
         #endregion 5.Set Initialize
 
 
         #region 6.Method
-
+        private void SetCtrlEnabledByTabPageCnt()
+        {
+            if (this.tabControl1.TabPages.Count > 0)
+            {
+                this.tsbtnExecuteQuery.Enabled = true;
+                this.tsbtnExportExcel.Enabled = true;
+            }
+            else
+            {
+                this.tsbtnExecuteQuery.Enabled = false;
+                this.tsbtnExportExcel.Enabled = false;
+            }
+        }
         #endregion 6.Method
 
 
@@ -59,14 +69,53 @@ namespace LHJ.DBViewer
             this.tabControl1.Refresh();
         }
 
-        private void frmSQLWindow_Shown(object sender, EventArgs e)
-        {
-            this.m_Query.SetFocusDDLBox();
-        }
-
         private void userControl11_ItemDoubleClicked(object sender, Common.Definition.EventHandler.ItemDoubleClickEventArgs e)
         {
-            this.m_Query.AddObjectName(e.ItemName);
+            ucQuery query = this.tabControl1.SelectedTab.Tag as ucQuery;
+            query.AddObjectName(e.ItemName);
+        }
+
+        private void tsbtnExecuteQuery_Click(object sender, EventArgs e)
+        {
+            ToolStripButton tsbtn = sender as ToolStripButton;
+
+            if (tsbtn != null)
+            {
+                if (tsbtn.Equals(this.tsbtnExecuteQuery))
+                {
+                    ucQuery query = this.tabControl1.SelectedTab.Tag as ucQuery;
+                    query.ExecuteQuery(false, 0, false);
+                }
+                else if (tsbtn.Equals(this.tsbtnAddTab))
+                {
+                    this.tabControl1.TabPages.Add("SQL");
+                    this.tabControl1.SelectedIndex = this.tabControl1.TabCount - 1;
+
+                    ucQuery query = new ucQuery();
+                    query.Dock = DockStyle.Fill;
+                    this.tabControl1.SelectedTab.Controls.Add(query);
+                    this.tabControl1.SelectedTab.Tag = query;
+                    query.SetFocusDDLBox();
+
+                    this.SetCtrlEnabledByTabPageCnt();
+                }
+                else if (tsbtn.Equals(this.tsbtnRemoveTab))
+                {
+                    this.tabControl1.TabPages.Remove(this.tabControl1.SelectedTab);
+
+                    if (this.tabControl1.TabPages.Count > 0)
+                    {
+                        this.tabControl1.SelectedIndex = this.tabControl1.TabCount - 1;
+                    }
+
+                    this.SetCtrlEnabledByTabPageCnt();
+                }
+                else if (tsbtn.Equals(this.tsbtnExportExcel))
+                {
+                    ucQuery query = this.tabControl1.SelectedTab.Tag as ucQuery;
+                    query.ExportExcelQueryResult();
+                }
+            }
         }
         #endregion 7.Event
     }

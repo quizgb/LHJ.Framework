@@ -30,10 +30,12 @@
         {
             this.dgvQueryResult = new LHJ.Controls.ucDataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.txtSqlArea = new LHJ.DBViewer.clsRichDDLBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslRowCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslQueryResultDelay = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslAffectedRowCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslTransaction = new System.Windows.Forms.ToolStripStatusLabel();
+            this.txtSqlArea = new LHJ.DBViewer.clsRichDDLBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueryResult)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -77,23 +79,13 @@
             this.splitContainer1.SplitterDistance = 319;
             this.splitContainer1.TabIndex = 2;
             // 
-            // txtSqlArea
-            // 
-            this.txtSqlArea.AcceptsTab = true;
-            this.txtSqlArea.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSqlArea.Font = new System.Drawing.Font("맑은 고딕", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSqlArea.ForeColor = System.Drawing.Color.Black;
-            this.txtSqlArea.Location = new System.Drawing.Point(0, 0);
-            this.txtSqlArea.Name = "txtSqlArea";
-            this.txtSqlArea.Size = new System.Drawing.Size(818, 319);
-            this.txtSqlArea.TabIndex = 0;
-            this.txtSqlArea.Text = "";
-            // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsslRowCount,
-            this.tsslQueryResultDelay});
+            this.tsslQueryResultDelay,
+            this.tsslTransaction,
+            this.tsslAffectedRowCount});
             this.statusStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.HorizontalStackWithOverflow;
             this.statusStrip1.Location = new System.Drawing.Point(0, 180);
             this.statusStrip1.Name = "statusStrip1";
@@ -124,6 +116,32 @@
             this.tsslQueryResultDelay.Size = new System.Drawing.Size(134, 23);
             this.tsslQueryResultDelay.Text = "(QueryResultDelay)";
             // 
+            // tsslAffectedRowCount
+            // 
+            this.tsslAffectedRowCount.Name = "tsslAffectedRowCount";
+            this.tsslAffectedRowCount.Size = new System.Drawing.Size(101, 23);
+            this.tsslAffectedRowCount.Text = "1 Row(s) affected";
+            this.tsslAffectedRowCount.Visible = false;
+            // 
+            // tsslTransaction
+            // 
+            this.tsslTransaction.Name = "tsslTransaction";
+            this.tsslTransaction.Size = new System.Drawing.Size(97, 23);
+            this.tsslTransaction.Text = "On Transaction...";
+            this.tsslTransaction.Visible = false;
+            // 
+            // txtSqlArea
+            // 
+            this.txtSqlArea.AcceptsTab = true;
+            this.txtSqlArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSqlArea.Font = new System.Drawing.Font("Courier New", 12F);
+            this.txtSqlArea.ForeColor = System.Drawing.Color.Black;
+            this.txtSqlArea.Location = new System.Drawing.Point(0, 0);
+            this.txtSqlArea.Name = "txtSqlArea";
+            this.txtSqlArea.Size = new System.Drawing.Size(818, 319);
+            this.txtSqlArea.TabIndex = 0;
+            this.txtSqlArea.Text = "";
+            // 
             // ucQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -151,5 +169,7 @@
         private System.Windows.Forms.ToolStripStatusLabel tsslRowCount;
         private System.Windows.Forms.ToolStripStatusLabel tsslQueryResultDelay;
         private clsRichDDLBox clsRichDDLBox1;
+        private System.Windows.Forms.ToolStripStatusLabel tsslTransaction;
+        private System.Windows.Forms.ToolStripStatusLabel tsslAffectedRowCount;
     }
 }

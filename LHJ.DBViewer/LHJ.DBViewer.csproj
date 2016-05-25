@@ -246,6 +246,18 @@
   <ItemGroup>
     <None Include="Resources\1464171733_computer_settings.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1464172718_play-circle-outline.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1464172705_More.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1464172710_Less.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1464175446_excel.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

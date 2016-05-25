@@ -209,7 +209,7 @@ namespace LHJ.Controls
         /// <summary>
         /// 조회한 내용 엑셀파일 출력
         /// </summary>
-        public void ExportToExcel()
+        public void ExportToExcel(string aTitle)
         {
             try
             {
@@ -231,7 +231,7 @@ namespace LHJ.Controls
 
                 SaveFileDialog sfd = new SaveFileDialog();
 
-                sfd.FileName = DateTime.Today.ToString("yyyy-MM-dd") + "_LHJ";
+                sfd.FileName = aTitle + "_" + DateTime.Today.ToString("yyyy-MM-dd");
                 sfd.DefaultExt = "xls";
                 sfd.Filter = "Excel files (*.xls)|*.xls";
                 sfd.InitialDirectory = "C:\\";

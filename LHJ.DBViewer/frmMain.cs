@@ -76,7 +76,7 @@ namespace LHJ.DBViewer
 
             if (dt.Rows.Count > 0)
             {
-                this.tsslOracleVersion.Text = dt.Rows[0][0].ToString();
+                this.tsslOracleVersion.Text = string.Format("[{0}]", dt.Rows[0][0].ToString());
             }
         }
 
