@@ -127,4 +127,16 @@
   <data name="_1464092745_old_view_refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\1464092745_old-view-refresh.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="_1464171443_computer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1464171443_computer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1464171549_browser_window" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1464171549_browser_window.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1464171551_server" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1464171551_server.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_1464171733_computer_settings" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\1464171733_computer_settings.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
 </root>

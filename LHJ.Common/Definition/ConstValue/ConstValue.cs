@@ -20,6 +20,14 @@ namespace LHJ.Common.Definition
             None = 1, Percentage = 2, Word = 3
         }
 
+        public enum DBViewerFormType
+        { 
+            SqlWindow = 1, 
+            SchemaBrowser = 2, 
+            SessionViewer = 3,
+            TableSpaceViewer = 4
+        }
+
         public const int WM_PAINT = 15;
         public const string REGISTRY_EXCEL_KEY = @"Excel.Application";
 

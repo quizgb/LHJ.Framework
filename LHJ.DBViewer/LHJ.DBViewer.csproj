@@ -234,6 +234,18 @@
   <ItemGroup>
     <None Include="Resources\1464092745_old-view-refresh.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1464171443_computer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1464171551_server.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1464171549_browser_window.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1464171733_computer_settings.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -181,19 +181,6 @@ namespace LHJ.DBViewer
                 e.Cancel = true;
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                int temp = Convert.ToInt32(this.txtDatabase.Text);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                Common.Comm.Logger.Error(System.Reflection.MethodBase.GetCurrentMethod(), ex.Message, ex);
-            }
-        }
         #endregion 7.Event
     }
 }

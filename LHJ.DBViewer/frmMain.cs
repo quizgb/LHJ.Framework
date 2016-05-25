@@ -13,7 +13,6 @@ namespace LHJ.DBViewer
     public partial class frmMain : Form
     {
         #region 1.Variable
-        private static string mBtn;
         private ToolStripButton mTsBtnSqlWindow = new ToolStripButton();
         private ToolStripButton mTsBtnSchemaBrowser = new ToolStripButton();
         private ToolStripButton mTsBtnSessionView = new ToolStripButton();
@@ -46,7 +45,7 @@ namespace LHJ.DBViewer
         /// </summary>
         public void SetInitialize()
         {
-            this.SetTitleBuildDate();
+            this.SetLastBuildDate();
             this.Icon = Properties.Resources._1464082634_033;
             this.tsSub.Renderer = new MyRenderer();
 
@@ -63,12 +62,12 @@ namespace LHJ.DBViewer
 
 
         #region 6.Method
-        private void SetTitleBuildDate()
+        private void SetLastBuildDate()
         {
             System.Version assemblyVersion = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version;
             DateTime buildDate = new DateTime(2000, 1, 1).AddDays(assemblyVersion.Build).AddSeconds(assemblyVersion.Revision * 2);
 
-            this.Text += " [Last Build : " + buildDate.ToString("yyyy-MM-dd") + "]";
+            this.tsslLastBulidDate.Text = " [Last Build : " + buildDate.ToString("yyyy-MM-dd") + "]";
         }
 
         private void SetOracleVersionLabel()
@@ -86,6 +85,8 @@ namespace LHJ.DBViewer
             frmLogin loginFrm = new frmLogin();
             loginFrm.ShowDialog();
 
+            this.SetCtrlEnabledDBConnState();
+
             if (Common.Comm.DBWorker.GetConnState().Equals(ConnectionState.Open))
             {
                 this.SetOracleVersionLabel();
@@ -99,12 +100,45 @@ namespace LHJ.DBViewer
             {
                 if (this.vaildMdiChild(aActiveForm))
                 {
+                    aActiveForm.FormClosing += MdiChildFormClosing;
                     aActiveForm.MdiParent = this;
                     aActiveForm.Show();
                 }
                 else
                 {
                     aActiveForm.Close();
+                }
+            }
+        }
+
+        private void MdiChildFormClosing(object sender, FormClosingEventArgs e)
+        {
+            Form senderFrm = sender as Form;
+
+            if (senderFrm != null)
+            {
+                Common.Definition.ConstValue.DBViewerFormType frmType = (Common.Definition.ConstValue.DBViewerFormType)senderFrm.Tag;
+
+                if (frmType.Equals(Common.Definition.ConstValue.DBViewerFormType.SqlWindow))
+                {
+                    if (this.tsSub.Items.Contains(this.mTsBtnSqlWindow))
+                    {
+                        this.tsSub.Items.Remove(this.mTsBtnSqlWindow);
+                    }
+                }
+                else if (frmType.Equals(Common.Definition.ConstValue.DBViewerFormType.SchemaBrowser))
+                {
+                    if (this.tsSub.Items.Contains(this.mTsBtnSchemaBrowser))
+                    {
+                        this.tsSub.Items.Remove(this.mTsBtnSchemaBrowser);
+                    }
+                }
+                else if (frmType.Equals(Common.Definition.ConstValue.DBViewerFormType.SessionViewer))
+                {
+                    if (this.tsSub.Items.Contains(this.mTsBtnSessionView))
+                    {
+                        this.tsSub.Items.Remove(this.mTsBtnSessionView);
+                    }
                 }
             }
         }
@@ -132,6 +166,24 @@ namespace LHJ.DBViewer
 
             return mdiChild;
         }
+
+        private void SetCtrlEnabledDBConnState()
+        {
+            if (Common.Comm.DBWorker.GetConnState().Equals(ConnectionState.Open))
+            {
+                this.tsmiConnect.Enabled = false;
+                this.tsmiDisconnect.Enabled = true;
+                this.tsMain.Enabled = true;
+                this.tsSub.Enabled = true;
+            }
+            else
+            {
+                this.tsmiConnect.Enabled = true;
+                this.tsmiDisconnect.Enabled = false;
+                this.tsMain.Enabled = false;
+                this.tsSub.Enabled = false;
+            }
+        }
         #endregion 6.Method
 
 
@@ -157,43 +209,23 @@ namespace LHJ.DBViewer
             if (tsBtn.Equals(this.mTsBtnSqlWindow))
             {
                 frmSQLWindow window = new frmSQLWindow();
+                window.Tag = Common.Definition.ConstValue.DBViewerFormType.SqlWindow;
+
                 this.ShowFormORClose(window);
             }
             else if (tsBtn.Equals(this.mTsBtnSchemaBrowser))
             {
                 frmSchemaBrowser browser = new frmSchemaBrowser();
+                browser.Tag = Common.Definition.ConstValue.DBViewerFormType.SchemaBrowser;
+
                 this.ShowFormORClose(browser);
             }
             else if (tsBtn.Equals(this.mTsBtnSessionView))
             {
                 frmSessionView sessionView = new frmSessionView();
+                sessionView.Tag = Common.Definition.ConstValue.DBViewerFormType.SessionViewer;
+
                 this.ShowFormORClose(sessionView);
-            }
-        }
-        #endregion 7.Event
-
-        private class MyRenderer : ToolStripProfessionalRenderer
-        {
-            protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
-            {
-                ToolStripButton tsBtn = e.Item as ToolStripButton;
-
-                if (tsBtn != null && tsBtn.Checked)
-                {
-                    foreach (ToolStripButton btn in tsBtn.GetCurrentParent().Items)
-                    {
-                        if (!btn.Equals(tsBtn))
-                        {
-                            btn.Invalidate();
-                        }
-                    }
-
-                    e.Graphics.DrawRectangle(Pens.Black, 0, 0, e.Item.Size.Width - 1, e.Item.Size.Height - 1);
-                }
-                else
-                {
-                    base.OnRenderButtonBackground(e);
-                }
             }
         }
 
@@ -227,6 +259,64 @@ namespace LHJ.DBViewer
                 }
 
                 this.tsBtn_Click(this.mTsBtnSessionView, null);
+            }
+        }
+
+        private void tsmiConnect_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+
+            if (tsmi != null)
+            {
+                if (tsmi.Equals(this.tsmiConnect))
+                {
+                    this.ShowLoginForm();
+                }
+                else if (tsmi.Equals(this.tsmiDisconnect))
+                {
+                    Common.Comm.DBWorker.Close();
+
+                    for (int cnt = 0; cnt < this.MdiChildren.Length; cnt++)
+                    {
+                        this.MdiChildren[cnt].Close();
+                    }
+                }
+                else if (tsmi.Equals(this.tsmiExit))
+                {
+                    this.Close();
+                }
+            }
+        }
+
+        private void fileMenuItem_DropDownOpening(object sender, EventArgs e)
+        {
+            this.SetCtrlEnabledDBConnState();
+        }
+        #endregion 7.Event
+
+
+        private class MyRenderer : ToolStripProfessionalRenderer
+        {
+            protected override void OnRenderButtonBackground(ToolStripItemRenderEventArgs e)
+            {
+                ToolStripButton tsBtn = e.Item as ToolStripButton;
+
+                if (tsBtn != null && tsBtn.Checked)
+                {
+                    foreach (ToolStripButton btn in tsBtn.GetCurrentParent().Items)
+                    {
+                        if (!btn.Equals(tsBtn))
+                        {
+                            btn.Invalidate();
+                        }
+                    }
+
+                    e.Graphics.DrawRectangle(Pens.Black, 0, 0, e.Item.Size.Width - 1, e.Item.Size.Height - 1);
+                }
+                else
+                {
+                    base.OnRenderButtonBackground(e);
+                }
             }
         }
     }

@@ -37,7 +37,6 @@
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.txtUsername = new System.Windows.Forms.TextBox();
             this.cbxSavePassword = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtDatabase
@@ -125,23 +124,12 @@
             this.cbxSavePassword.UseVisualStyleBackColor = true;
             this.cbxSavePassword.CheckedChanged += new System.EventHandler(this.cbxSavePassword_CheckedChanged);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(257, 87);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // frmLogin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(354, 122);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.cbxSavePassword);
             this.Controls.Add(this.txtDatabase);
             this.Controls.Add(this.lblDatabase);
@@ -176,7 +164,6 @@
         private System.Windows.Forms.TextBox txtPassword;
         public System.Windows.Forms.TextBox txtUsername;
         private System.Windows.Forms.CheckBox cbxSavePassword;
-        private System.Windows.Forms.Button button1;
     }
 }
 
