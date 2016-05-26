@@ -309,6 +309,20 @@ namespace LHJ.Controls
                 MessageBox.Show(errorMessage, "알림", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+        public void AutoResizeColumn()
+        {
+            for (int i = 0; i < this.Columns.Count; i++)
+            {
+                if (i != 0 || i != 1)
+                {
+                    this.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+                    int intWidth = this.Columns[i].Width;
+                    this.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+                    this.Columns[i].Width = intWidth;
+                }
+            }
+        }
         #endregion 6.Method
 
 
@@ -350,8 +364,19 @@ namespace LHJ.Controls
             protected override void Paint(System.Drawing.Graphics g, System.Drawing.Rectangle clipBounds, System.Drawing.Rectangle cellBounds, int rowIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts)
             {
                 int progressVal = 0;
+
                 if (value != null)
-                    progressVal = (int)value;
+                {
+                    if (string.IsNullOrEmpty(value.ToString()))
+                    {
+                        progressVal = 0;
+                    }
+                    else
+                    {
+                        progressVal = Convert.ToInt32(value.ToString());
+                    }
+                }
+
                 float percentage = ((float)progressVal / 100.0f); // Need to convert to float before division; otherwise C# returns int which is 0 for anything but 100%.
                 Brush backColorBrush = new SolidBrush(cellStyle.BackColor);
                 Brush foreColorBrush = new SolidBrush(cellStyle.ForeColor);
@@ -363,7 +388,7 @@ namespace LHJ.Controls
                 {
                     // Draw the progress bar and the text
                     g.FillRectangle(new SolidBrush(Color.FromArgb(163, 189, 242)), cellBounds.X + 2, cellBounds.Y + 2, Convert.ToInt32((percentage * cellBounds.Width - 4)), cellBounds.Height - 4);
-                    g.DrawString(progressVal.ToString() + "%", cellStyle.Font, foreColorBrush, cellBounds.X + cellBounds.Size.Width / 2 - 12, cellBounds.Y + 2);
+                    g.DrawString(progressVal.ToString() + "%", cellStyle.Font, foreColorBrush, cellBounds.X + cellBounds.Size.Width / 2 - 12, cellBounds.Y + 5);
                 }
                 else
                 {
@@ -371,9 +396,9 @@ namespace LHJ.Controls
                     if (this.DataGridView.CurrentRow != null)
                     {
                         if (this.DataGridView.CurrentRow.Index == rowIndex)
-                            g.DrawString(progressVal.ToString() + "%", cellStyle.Font, new SolidBrush(cellStyle.SelectionForeColor), cellBounds.X + cellBounds.Size.Width / 2 - 12, cellBounds.Y + 2);
+                            g.DrawString(progressVal.ToString() + "%", cellStyle.Font, new SolidBrush(cellStyle.SelectionForeColor), cellBounds.X + cellBounds.Size.Width / 2 - 12, cellBounds.Y + 5);
                         else
-                            g.DrawString(progressVal.ToString() + "%", cellStyle.Font, foreColorBrush, cellBounds.X + cellBounds.Size.Width / 2 - 12, cellBounds.Y + 2);
+                            g.DrawString(progressVal.ToString() + "%", cellStyle.Font, foreColorBrush, cellBounds.X + cellBounds.Size.Width / 2 - 12, cellBounds.Y + 5);
                     }
                 }   //"cellBounds.X + cellBounds.Size.Width / 2 - 12"로 수정 원래 "cellBounds.X + 6"임
             }

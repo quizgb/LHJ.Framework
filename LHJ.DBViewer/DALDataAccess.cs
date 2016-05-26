@@ -19,6 +19,51 @@ namespace LHJ.DBViewer
             return Common.Comm.DBWorker.ExecuteNonQuery(strCommand);
         }
 
+        public static DataTable GetTableSpaceList()
+        {
+            DataTable dt = new DataTable();
+            string strCommand = string.Empty;
+
+            strCommand = @"  SELECT TABLESPACE_NAME
+                               FROM DBA_DATA_FILES
+
+                               UNION ALL
+
+                              SELECT TABLESPACE_NAME
+                                FROM DBA_TEMP_FILES
+                            ORDER BY TABLESPACE_NAME ";
+
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand);
+
+            return dt;
+        }
+
+        public static DataTable GetTableSpaceInfo(string aTableSpaceName)
+        {
+            DataTable dt = new DataTable();
+            string strCommand = string.Empty;
+            Hashtable ht = new Hashtable();
+
+            strCommand = @"  SELECT MAX(D.FILE_NAME) FILE_NAME,
+                                    MAX(D.FILE_ID) FILE_ID,
+                                    ROUND((MAX(D.BYTES) - nvl(SUM(F.BYTES), 0)) / MAX(D.BYTES) * 100, 0) USAGE,
+                                    ROUND(MAX(D.BYTES) / 1024 / 1024, 2)||'MB' TOTAL,
+                                    ROUND((MAX(D.BYTES) - nvl(SUM(F.BYTES), 0)) / 1024 / 1024, 2)||'MB' USED,
+                                    ROUND(NVL(SUM(F.BYTES), 0) / 1024 / 1024, 2)||'MB' FREE,
+                                    MAX(D.AUTOEXTENSIBLE) AUTOEXTENSIBLE,
+                                    MAX(D.STATUS) STATUS
+                               FROM DBA_FREE_SPACE F, DBA_DATA_FILES D
+                              WHERE F.TABLESPACE_NAME(+) = D.TABLESPACE_NAME
+                                AND F.FILE_ID(+) = D.FILE_ID
+                                AND D.TABLESPACE_NAME = :TABLESPACE_NAME  ";
+
+            ht["TABLESPACE_NAME"] = aTableSpaceName;
+
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand, ht);
+
+            return dt;
+        }
+
         public static DataTable GetLockList()
         {
             DataTable dt = new DataTable();

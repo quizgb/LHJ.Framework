@@ -376,5 +376,10 @@ namespace LHJ.DBViewer
             this.SetTsslRowCount((e.RowIndex + 1).ToString());
         }
         #endregion 7.Event
+
+        private void dgvQueryResult_DataSourceChanged(object sender, EventArgs e)
+        {
+            this.dgvQueryResult.AutoResizeColumn();
+        }
     }
 }

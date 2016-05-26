@@ -16,6 +16,7 @@ namespace LHJ.DBViewer
         private ToolStripButton mTsBtnSqlWindow = new ToolStripButton();
         private ToolStripButton mTsBtnSchemaBrowser = new ToolStripButton();
         private ToolStripButton mTsBtnSessionView = new ToolStripButton();
+        private ToolStripButton mTsBtnTableSpaceView = new ToolStripButton();
         #endregion 1.Variable
 
 
@@ -57,6 +58,9 @@ namespace LHJ.DBViewer
 
             this.mTsBtnSessionView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
             this.mTsBtnSessionView.Text = "Session 조회";
+
+            this.mTsBtnTableSpaceView.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
+            this.mTsBtnTableSpaceView.Text = "TableSpace 조회";
         }
         #endregion 5.Set Initialize
 
@@ -138,6 +142,13 @@ namespace LHJ.DBViewer
                     if (this.tsSub.Items.Contains(this.mTsBtnSessionView))
                     {
                         this.tsSub.Items.Remove(this.mTsBtnSessionView);
+                    }
+                }
+                else if (frmType.Equals(Common.Definition.ConstValue.DBViewerFormType.TableSpaceViewer))
+                {
+                    if (this.tsSub.Items.Contains(this.mTsBtnTableSpaceView))
+                    {
+                        this.tsSub.Items.Remove(this.mTsBtnTableSpaceView);
                     }
                 }
             }
@@ -227,6 +238,13 @@ namespace LHJ.DBViewer
 
                 this.ShowFormORClose(sessionView);
             }
+            else if (tsBtn.Equals(this.mTsBtnTableSpaceView))
+            {
+                frmTableSpaceView tableSpaceView = new frmTableSpaceView();
+                tableSpaceView.Tag = Common.Definition.ConstValue.DBViewerFormType.TableSpaceViewer;
+
+                this.ShowFormORClose(tableSpaceView);
+            }
         }
 
         private void tsbtnSqlWindow_Click(object sender, EventArgs e)
@@ -259,6 +277,15 @@ namespace LHJ.DBViewer
                 }
 
                 this.tsBtn_Click(this.mTsBtnSessionView, null);
+            }
+            else if (tsBtn.Equals(this.tsbtnTableSpaceViewer))
+            {
+                if (!this.tsSub.Items.Contains(this.mTsBtnTableSpaceView))
+                {
+                    this.tsSub.Items.Add(this.mTsBtnTableSpaceView);
+                }
+
+                this.tsBtn_Click(this.mTsBtnTableSpaceView, null);
             }
         }
 

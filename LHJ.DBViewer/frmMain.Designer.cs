@@ -243,6 +243,7 @@
             this.tsbtnTableSpaceViewer.Name = "tsbtnTableSpaceViewer";
             this.tsbtnTableSpaceViewer.Size = new System.Drawing.Size(23, 22);
             this.tsbtnTableSpaceViewer.Text = "TableSpace Viewer";
+            this.tsbtnTableSpaceViewer.Click += new System.EventHandler(this.tsbtnSqlWindow_Click);
             // 
             // toolStripSeparator1
             // 

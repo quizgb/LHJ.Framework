@@ -28,37 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvQueryResult = new LHJ.Controls.ucDataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslRowCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslQueryResultDelay = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tsslAffectedRowCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslTransaction = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslAffectedRowCount = new System.Windows.Forms.ToolStripStatusLabel();
+            this.dgvQueryResult = new LHJ.Controls.ucDataGridView();
             this.txtSqlArea = new LHJ.DBViewer.clsRichDDLBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvQueryResult)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvQueryResult)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dgvQueryResult
-            // 
-            this.dgvQueryResult.AllowUserToAddRows = false;
-            this.dgvQueryResult.AllowUserToDeleteRows = false;
-            this.dgvQueryResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvQueryResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvQueryResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvQueryResult.Location = new System.Drawing.Point(0, 0);
-            this.dgvQueryResult.Name = "dgvQueryResult";
-            this.dgvQueryResult.ReadOnly = true;
-            this.dgvQueryResult.RowTemplate.Height = 23;
-            this.dgvQueryResult.ShowRowHeaderValue = true;
-            this.dgvQueryResult.Size = new System.Drawing.Size(818, 180);
-            this.dgvQueryResult.TabIndex = 1;
-            this.dgvQueryResult.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQueryResult_RowEnter);
-            this.dgvQueryResult.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgvQueryResult_Scroll);
             // 
             // splitContainer1
             // 
@@ -116,6 +99,13 @@
             this.tsslQueryResultDelay.Size = new System.Drawing.Size(134, 23);
             this.tsslQueryResultDelay.Text = "(QueryResultDelay)";
             // 
+            // tsslTransaction
+            // 
+            this.tsslTransaction.Name = "tsslTransaction";
+            this.tsslTransaction.Size = new System.Drawing.Size(97, 23);
+            this.tsslTransaction.Text = "On Transaction...";
+            this.tsslTransaction.Visible = false;
+            // 
             // tsslAffectedRowCount
             // 
             this.tsslAffectedRowCount.Name = "tsslAffectedRowCount";
@@ -123,12 +113,23 @@
             this.tsslAffectedRowCount.Text = "1 Row(s) affected";
             this.tsslAffectedRowCount.Visible = false;
             // 
-            // tsslTransaction
+            // dgvQueryResult
             // 
-            this.tsslTransaction.Name = "tsslTransaction";
-            this.tsslTransaction.Size = new System.Drawing.Size(97, 23);
-            this.tsslTransaction.Text = "On Transaction...";
-            this.tsslTransaction.Visible = false;
+            this.dgvQueryResult.AllowUserToAddRows = false;
+            this.dgvQueryResult.AllowUserToDeleteRows = false;
+            this.dgvQueryResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvQueryResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvQueryResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvQueryResult.Location = new System.Drawing.Point(0, 0);
+            this.dgvQueryResult.Name = "dgvQueryResult";
+            this.dgvQueryResult.ReadOnly = true;
+            this.dgvQueryResult.RowTemplate.Height = 23;
+            this.dgvQueryResult.ShowRowHeaderValue = true;
+            this.dgvQueryResult.Size = new System.Drawing.Size(818, 180);
+            this.dgvQueryResult.TabIndex = 1;
+            this.dgvQueryResult.DataSourceChanged += new System.EventHandler(this.dgvQueryResult_DataSourceChanged);
+            this.dgvQueryResult.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQueryResult_RowEnter);
+            this.dgvQueryResult.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgvQueryResult_Scroll);
             // 
             // txtSqlArea
             // 
@@ -149,13 +150,13 @@
             this.Controls.Add(this.splitContainer1);
             this.Name = "ucQuery";
             this.Size = new System.Drawing.Size(818, 531);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvQueryResult)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             this.splitContainer1.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvQueryResult)).EndInit();
             this.ResumeLayout(false);
 
         }
