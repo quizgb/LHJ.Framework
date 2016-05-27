@@ -53,11 +53,15 @@ namespace LHJ.DBViewer
             {
                 this.tsbtnExecuteQuery.Enabled = true;
                 this.tsbtnExportExcel.Enabled = true;
+                this.tsbtnCommit.Enabled = true;
+                this.tsbtnRollback.Enabled = true;
             }
             else
             {
                 this.tsbtnExecuteQuery.Enabled = false;
                 this.tsbtnExportExcel.Enabled = false;
+                this.tsbtnCommit.Enabled = false;
+                this.tsbtnRollback.Enabled = false;
             }
         }
         #endregion 6.Method
@@ -108,6 +112,14 @@ namespace LHJ.DBViewer
                     }
 
                     this.SetCtrlEnabledByTabPageCnt();
+                }
+                else if (tsbtn.Equals(this.tsbtnCommit))
+                {
+                    Common.Comm.DBWorker.CommitTrans();
+                }
+                else if (tsbtn.Equals(this.tsbtnRollback))
+                {
+                    Common.Comm.DBWorker.RollbackTrans();
                 }
                 else if (tsbtn.Equals(this.tsbtnExportExcel))
                 {

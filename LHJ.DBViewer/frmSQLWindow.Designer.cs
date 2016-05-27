@@ -39,6 +39,9 @@
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.tsbtnExportExcel = new System.Windows.Forms.ToolStripButton();
             this.userControl11 = new LHJ.DBViewer.ucObejct();
+            this.tsbtnCommit = new System.Windows.Forms.ToolStripButton();
+            this.tsbtnRollback = new System.Windows.Forms.ToolStripButton();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.pnlMain.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -91,6 +94,9 @@
             this.tsbtnAddTab,
             this.tsbtnRemoveTab,
             this.toolStripSeparator2,
+            this.tsbtnCommit,
+            this.tsbtnRollback,
+            this.toolStripSeparator3,
             this.tsbtnExportExcel});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
@@ -157,6 +163,31 @@
             this.userControl11.TabIndex = 0;
             this.userControl11.ItemDoubleClicked += new LHJ.Common.Definition.EventHandler.ItemDoubleClickEventHandler(this.userControl11_ItemDoubleClicked);
             // 
+            // tsbtnCommit
+            // 
+            this.tsbtnCommit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnCommit.Image = global::LHJ.DBViewer.Properties.Resources._1464334475_check_circle_outline;
+            this.tsbtnCommit.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnCommit.Name = "tsbtnCommit";
+            this.tsbtnCommit.Size = new System.Drawing.Size(23, 22);
+            this.tsbtnCommit.Text = "Commit";
+            this.tsbtnCommit.Click += new System.EventHandler(this.tsbtnExecuteQuery_Click);
+            // 
+            // tsbtnRollback
+            // 
+            this.tsbtnRollback.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnRollback.Image = global::LHJ.DBViewer.Properties.Resources._1464334516_cancel;
+            this.tsbtnRollback.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnRollback.Name = "tsbtnRollback";
+            this.tsbtnRollback.Size = new System.Drawing.Size(23, 22);
+            this.tsbtnRollback.Text = "Rollback";
+            this.tsbtnRollback.Click += new System.EventHandler(this.tsbtnExecuteQuery_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
+            // 
             // frmSQLWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -189,6 +220,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripButton tsbtnExportExcel;
+        private System.Windows.Forms.ToolStripButton tsbtnCommit;
+        private System.Windows.Forms.ToolStripButton tsbtnRollback;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
 
     }
 }
