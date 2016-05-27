@@ -101,10 +101,9 @@ namespace LHJ.DBViewer
                 }
                 else if (tsbtn.Equals(this.tsbtnRemoveTab))
                 {
-                    this.tabControl1.TabPages.Remove(this.tabControl1.SelectedTab);
-
                     if (this.tabControl1.TabPages.Count > 0)
                     {
+                        this.tabControl1.TabPages.Remove(this.tabControl1.SelectedTab);
                         this.tabControl1.SelectedIndex = this.tabControl1.TabCount - 1;
                     }
 
