@@ -27,6 +27,8 @@ namespace LHJ.DBService
 
         bool RollbackTrans();
 
+        bool IsOnTrans();
+
         DataSet ExecuteDataSet(string Query, int aStartIndex, int aMaxIndex, string aSrcTable, List<ParamInfo> param);
 
         DataTable ExecuteDataTable(string Query);

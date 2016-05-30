@@ -126,6 +126,11 @@ namespace LHJ.DBService
             return m_DBHelper.RollbackTrans();
         }
 
+        public bool IsOnTrans()
+        {
+            return m_DBHelper.IsOnTrans();
+        }
+
         public DataSet ExecuteDataSet(string Query, int aStartIndex, int aMaxIndex, string aSrcTable, List<ParamInfo> param)
         {
             return m_DBHelper.ExecuteDataSet(Query, aStartIndex, aMaxIndex, aSrcTable, param);

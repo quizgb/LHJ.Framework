@@ -169,6 +169,24 @@ namespace LHJ.DBService.Helper.Oracle_OracleClient
                 return false;
             }
         }
+
+        public bool IsOnTrans()
+        {
+            try
+            {
+                if (m_trans == null)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                ErrorMessage(ex);
+                return false;
+            }
+        }
         #endregion
 
         #region ExecuteQuery
