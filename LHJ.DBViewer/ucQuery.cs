@@ -320,9 +320,7 @@ namespace LHJ.DBViewer
                             this.tsslAffectedRowCount.Visible = true;
 
                             int n = Common.Comm.DBWorker.ExecuteNonQuery(this.m_Query);
-
-                            this.tsslTransaction.Text = "On Transaction...";
-                            this.tsslAffectedRowCount.Text = string.Format("{0} row(s) affected", n.ToString());
+                            this.SetCtrlProp_Executed(n);
                         }
 
                         this.Cursor = Cursors.Default;
@@ -338,6 +336,12 @@ namespace LHJ.DBViewer
                 }
 
             } // if SQL Area text is null
+        }
+
+        public void SetCtrlProp_Executed(int aAffectedRowCnt)
+        {
+            this.tsslTransaction.Text = "On Transaction...";
+            this.tsslAffectedRowCount.Text = string.Format("{0} row(s) affected", aAffectedRowCnt.ToString());
         }
 
         public void SetCtrlProp_Committed()
