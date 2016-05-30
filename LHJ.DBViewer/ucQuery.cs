@@ -60,10 +60,12 @@ namespace LHJ.DBViewer
 
                 case Keys.F9:
                     Common.Comm.DBWorker.CommitTrans();
+                    this.SetCtrlProp_Committed();
                     break;
 
                 case Keys.F11:
                     Common.Comm.DBWorker.RollbackTrans();
+                    this.SetCtrlProp_Rollbacked();
                     break;
 
                 case Keys.Control | Keys.P:
@@ -256,7 +258,11 @@ namespace LHJ.DBViewer
                     {
                         this.Cursor = Cursors.WaitCursor;
 
-                        this.tsslTransaction.Visible = false;
+                        if (!Common.Comm.DBWorker.IsOnTrans())
+                        {
+                            this.tsslTransaction.Visible = false;
+                        }
+
                         this.tsslAffectedRowCount.Visible = false;
 
                         if (aAllQuery)
@@ -299,20 +305,12 @@ namespace LHJ.DBViewer
                         if (trimmedSQL.StartsWith("ROLLBACK"))
                         {
                             Common.Comm.DBWorker.RollbackTrans();
-
-                            this.tsslTransaction.Visible = true;
-                            this.tsslAffectedRowCount.Visible = false;
-
-                            this.tsslTransaction.Text = "Rollbacked";
+                            this.SetCtrlProp_Rollbacked();
                         }
                         else if (trimmedSQL.StartsWith("COMMIT"))
                         {
                             Common.Comm.DBWorker.CommitTrans();
-
-                            this.tsslTransaction.Visible = true;
-                            this.tsslAffectedRowCount.Visible = false;
-
-                            this.tsslTransaction.Text = "Committed";
+                            this.SetCtrlProp_Committed();
                         }
                         else
                         {
@@ -322,6 +320,8 @@ namespace LHJ.DBViewer
                             this.tsslAffectedRowCount.Visible = true;
 
                             int n = Common.Comm.DBWorker.ExecuteNonQuery(this.m_Query);
+
+                            this.tsslTransaction.Text = "On Transaction...";
                             this.tsslAffectedRowCount.Text = string.Format("{0} row(s) affected", n.ToString());
                         }
 
@@ -338,6 +338,22 @@ namespace LHJ.DBViewer
                 }
 
             } // if SQL Area text is null
+        }
+
+        public void SetCtrlProp_Committed()
+        {
+            this.tsslTransaction.Visible = true;
+            this.tsslAffectedRowCount.Visible = false;
+
+            this.tsslTransaction.Text = "Committed";
+        }
+
+        public void SetCtrlProp_Rollbacked()
+        {
+            this.tsslTransaction.Visible = true;
+            this.tsslAffectedRowCount.Visible = false;
+
+            this.tsslTransaction.Text = "Rollbacked";
         }
 
         public void ExportExcelQueryResult()

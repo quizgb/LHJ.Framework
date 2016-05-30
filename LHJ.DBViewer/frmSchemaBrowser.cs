@@ -44,13 +44,6 @@ namespace LHJ.DBViewer
         }
         #endregion 5.Set Initialize
 
-        private void frmSchemaBrowser_Activated(object sender, EventArgs e)
-        {
-            this.SuspendLayout();
-            this.Update();
-            this.ResumeLayout();
-        }
-
 
         #region 6.Method
 

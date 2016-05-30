@@ -89,12 +89,5 @@ namespace LHJ.DBViewer
             this.dgvTableSpace.AutoResizeColumn();
         }
         #endregion 7.Event
-
-        private void frmTableSpaceView_Activated(object sender, EventArgs e)
-        {
-            this.SuspendLayout();
-            this.Update();
-            this.ResumeLayout();
-        }
     }
 }

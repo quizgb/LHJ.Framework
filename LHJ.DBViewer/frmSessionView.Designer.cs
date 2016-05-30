@@ -273,7 +273,6 @@
             this.Name = "frmSessionView";
             this.Text = "Session 조회";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Activated += new System.EventHandler(this.frmSessionView_Activated);
             this.Load += new System.EventHandler(this.frmSessionView_Load);
             this.pnlMain.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);

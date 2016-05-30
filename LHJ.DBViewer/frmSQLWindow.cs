@@ -116,10 +116,16 @@ namespace LHJ.DBViewer
                 else if (tsbtn.Equals(this.tsbtnCommit))
                 {
                     Common.Comm.DBWorker.CommitTrans();
+
+                    ucQuery query = this.tabControl1.SelectedTab.Tag as ucQuery;
+                    query.SetCtrlProp_Committed();
                 }
                 else if (tsbtn.Equals(this.tsbtnRollback))
                 {
                     Common.Comm.DBWorker.RollbackTrans();
+
+                    ucQuery query = this.tabControl1.SelectedTab.Tag as ucQuery;
+                    query.SetCtrlProp_Rollbacked();
                 }
                 else if (tsbtn.Equals(this.tsbtnExportExcel))
                 {
@@ -129,12 +135,5 @@ namespace LHJ.DBViewer
             }
         }
         #endregion 7.Event
-
-        private void frmSQLWindow_Activated(object sender, EventArgs e)
-        {
-            this.SuspendLayout();
-            this.Update();
-            this.ResumeLayout();
-        }
     }
 }

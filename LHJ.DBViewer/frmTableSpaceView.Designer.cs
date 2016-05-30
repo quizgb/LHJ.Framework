@@ -192,7 +192,6 @@
             this.Name = "frmTableSpaceView";
             this.Text = "TableSpace Viewer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Activated += new System.EventHandler(this.frmTableSpaceView_Activated);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             this.pnlBody.ResumeLayout(false);
