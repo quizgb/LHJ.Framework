@@ -36,9 +36,9 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.sessionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.executeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.commitF9ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rollbackF10ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSQLWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSchemaBrowser = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiSessionView = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.sessionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem9 = new System.Windows.Forms.ToolStripSeparator();
@@ -57,6 +57,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslLastBulidDate = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslOracleVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsmiTableSpaceViewer = new System.Windows.Forms.ToolStripMenuItem();
             this.mnsMain.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -90,56 +91,63 @@
             // tsmiConnect
             // 
             this.tsmiConnect.Name = "tsmiConnect";
-            this.tsmiConnect.Size = new System.Drawing.Size(147, 22);
+            this.tsmiConnect.Size = new System.Drawing.Size(152, 22);
             this.tsmiConnect.Text = "Connect ...";
             this.tsmiConnect.Click += new System.EventHandler(this.tsmiConnect_Click);
             // 
             // tsmiDisconnect
             // 
             this.tsmiDisconnect.Name = "tsmiDisconnect";
-            this.tsmiDisconnect.Size = new System.Drawing.Size(147, 22);
+            this.tsmiDisconnect.Size = new System.Drawing.Size(152, 22);
             this.tsmiDisconnect.Text = "Disconnect ...";
             this.tsmiDisconnect.Click += new System.EventHandler(this.tsmiConnect_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(144, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // tsmiExit
             // 
             this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(147, 22);
+            this.tsmiExit.Size = new System.Drawing.Size(152, 22);
             this.tsmiExit.Text = "E&xit";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiConnect_Click);
             // 
             // sessionToolStripMenuItem
             // 
             this.sessionToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.executeToolStripMenuItem,
-            this.commitF9ToolStripMenuItem,
-            this.rollbackF10ToolStripMenuItem});
+            this.tsmiSQLWindow,
+            this.tsmiSchemaBrowser,
+            this.tsmiSessionView,
+            this.tsmiTableSpaceViewer});
             this.sessionToolStripMenuItem.Name = "sessionToolStripMenuItem";
             this.sessionToolStripMenuItem.Size = new System.Drawing.Size(59, 20);
             this.sessionToolStripMenuItem.Text = "보기(&V)";
             // 
-            // executeToolStripMenuItem
+            // tsmiSQLWindow
             // 
-            this.executeToolStripMenuItem.Name = "executeToolStripMenuItem";
-            this.executeToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.executeToolStripMenuItem.Text = "Execute     F8";
+            this.tsmiSQLWindow.Image = global::LHJ.DBViewer.Properties.Resources._1464171549_browser_window;
+            this.tsmiSQLWindow.Name = "tsmiSQLWindow";
+            this.tsmiSQLWindow.Size = new System.Drawing.Size(174, 22);
+            this.tsmiSQLWindow.Text = "SQL Window";
+            this.tsmiSQLWindow.Click += new System.EventHandler(this.tsmiSQLWindow_Click);
             // 
-            // commitF9ToolStripMenuItem
+            // tsmiSchemaBrowser
             // 
-            this.commitF9ToolStripMenuItem.Name = "commitF9ToolStripMenuItem";
-            this.commitF9ToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.commitF9ToolStripMenuItem.Text = "Commit      F9";
+            this.tsmiSchemaBrowser.Image = global::LHJ.DBViewer.Properties.Resources._1464171551_server;
+            this.tsmiSchemaBrowser.Name = "tsmiSchemaBrowser";
+            this.tsmiSchemaBrowser.Size = new System.Drawing.Size(174, 22);
+            this.tsmiSchemaBrowser.Text = "Schema Browser";
+            this.tsmiSchemaBrowser.Click += new System.EventHandler(this.tsmiSQLWindow_Click);
             // 
-            // rollbackF10ToolStripMenuItem
+            // tsmiSessionView
             // 
-            this.rollbackF10ToolStripMenuItem.Name = "rollbackF10ToolStripMenuItem";
-            this.rollbackF10ToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-            this.rollbackF10ToolStripMenuItem.Text = "Rollback    F11";
+            this.tsmiSessionView.Image = global::LHJ.DBViewer.Properties.Resources._1464171443_computer;
+            this.tsmiSessionView.Name = "tsmiSessionView";
+            this.tsmiSessionView.Size = new System.Drawing.Size(174, 22);
+            this.tsmiSessionView.Text = "Session View";
+            this.tsmiSessionView.Click += new System.EventHandler(this.tsmiSQLWindow_Click);
             // 
             // toolsMenuItem
             // 
@@ -301,6 +309,14 @@
             this.tsslOracleVersion.Size = new System.Drawing.Size(103, 21);
             this.tsslOracleVersion.Text = "(OracleVersion)";
             // 
+            // tsmiTableSpaceViewer
+            // 
+            this.tsmiTableSpaceViewer.Image = global::LHJ.DBViewer.Properties.Resources._1464171733_computer_settings;
+            this.tsmiTableSpaceViewer.Name = "tsmiTableSpaceViewer";
+            this.tsmiTableSpaceViewer.Size = new System.Drawing.Size(174, 22);
+            this.tsmiTableSpaceViewer.Text = "TableSpace Viewer";
+            this.tsmiTableSpaceViewer.Click += new System.EventHandler(this.tsmiSQLWindow_Click);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -337,9 +353,9 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
         private System.Windows.Forms.ToolStripMenuItem sessionToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem executeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem commitF9ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rollbackF10ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSQLWindow;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSchemaBrowser;
+        private System.Windows.Forms.ToolStripMenuItem tsmiSessionView;
         private System.Windows.Forms.ToolStripMenuItem toolsMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sessionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripMenuItem9;
@@ -358,6 +374,7 @@
         private System.Windows.Forms.ToolStripStatusLabel tsslOracleVersion;
         private System.Windows.Forms.ToolStripButton tsbtnTableSpaceViewer;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTableSpaceViewer;
 
     }
 }

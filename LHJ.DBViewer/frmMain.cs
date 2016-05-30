@@ -346,5 +346,50 @@ namespace LHJ.DBViewer
                 }
             }
         }
+
+        private void tsmiSQLWindow_Click(object sender, EventArgs e)
+        {
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+
+            if (tsmi != null)
+            {
+                if (tsmi.Equals(this.tsmiSQLWindow))
+                {
+                    if (!this.tsSub.Items.Contains(this.mTsBtnSqlWindow))
+                    {
+                        this.tsSub.Items.Add(this.mTsBtnSqlWindow);
+                    }
+
+                    this.tsBtn_Click(this.mTsBtnSqlWindow, null);
+                }
+                else if (tsmi.Equals(this.tsmiSchemaBrowser))
+                {
+                    if (!this.tsSub.Items.Contains(this.mTsBtnSchemaBrowser))
+                    {
+                        this.tsSub.Items.Add(this.mTsBtnSchemaBrowser);
+                    }
+
+                    this.tsBtn_Click(this.mTsBtnSchemaBrowser, null);
+                }
+                else if (tsmi.Equals(this.tsmiSessionView))
+                {
+                    if (!this.tsSub.Items.Contains(this.mTsBtnSessionView))
+                    {
+                        this.tsSub.Items.Add(this.mTsBtnSessionView);
+                    }
+
+                    this.tsBtn_Click(this.mTsBtnSessionView, null);
+                }
+                else if (tsmi.Equals(this.tsmiTableSpaceViewer))
+                {
+                    if (!this.tsSub.Items.Contains(this.mTsBtnTableSpaceView))
+                    {
+                        this.tsSub.Items.Add(this.mTsBtnTableSpaceView);
+                    }
+
+                    this.tsBtn_Click(this.mTsBtnTableSpaceView, null);
+                }
+            }
+        }
     }
 }

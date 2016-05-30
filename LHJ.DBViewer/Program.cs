@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace LHJ.DBViewer
@@ -16,9 +17,24 @@ namespace LHJ.DBViewer
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.ThrowException);
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmMain());
+            bool bNew;
+            Mutex mutex = new Mutex(true, "LHJ.DBViewer", out bNew);
+
+            if (bNew)
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
+                Application.Run(new frmMain());
+
+                // 뮤텍스 릴리즈                 
+                mutex.ReleaseMutex();
+            }
+            else
+            {
+                // 소유권이 부여되지 않음                 
+                MessageBox.Show("프로그램이 이미 실행중 입니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Application.Exit();
+            }
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)

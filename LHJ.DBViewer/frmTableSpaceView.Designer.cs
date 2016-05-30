@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.pnlHeader = new System.Windows.Forms.Panel();
-            this.lbxTableSpace = new System.Windows.Forms.ListBox();
             this.lblTableSpaceName = new System.Windows.Forms.Label();
+            this.lbxTableSpace = new System.Windows.Forms.ListBox();
             this.pnlBody = new System.Windows.Forms.Panel();
             this.dgvTableSpace = new LHJ.Controls.ucDataGridView();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -55,17 +55,6 @@
             this.pnlHeader.Size = new System.Drawing.Size(845, 46);
             this.pnlHeader.TabIndex = 0;
             // 
-            // lbxTableSpace
-            // 
-            this.lbxTableSpace.Dock = System.Windows.Forms.DockStyle.Left;
-            this.lbxTableSpace.FormattingEnabled = true;
-            this.lbxTableSpace.ItemHeight = 12;
-            this.lbxTableSpace.Location = new System.Drawing.Point(0, 46);
-            this.lbxTableSpace.Name = "lbxTableSpace";
-            this.lbxTableSpace.Size = new System.Drawing.Size(162, 537);
-            this.lbxTableSpace.TabIndex = 3;
-            this.lbxTableSpace.SelectedIndexChanged += new System.EventHandler(this.lbxTableSpace_SelectedIndexChanged);
-            // 
             // lblTableSpaceName
             // 
             this.lblTableSpaceName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -76,6 +65,17 @@
             this.lblTableSpaceName.Name = "lblTableSpaceName";
             this.lblTableSpaceName.Size = new System.Drawing.Size(0, 12);
             this.lblTableSpaceName.TabIndex = 0;
+            // 
+            // lbxTableSpace
+            // 
+            this.lbxTableSpace.Dock = System.Windows.Forms.DockStyle.Left;
+            this.lbxTableSpace.FormattingEnabled = true;
+            this.lbxTableSpace.ItemHeight = 12;
+            this.lbxTableSpace.Location = new System.Drawing.Point(0, 46);
+            this.lbxTableSpace.Name = "lbxTableSpace";
+            this.lbxTableSpace.Size = new System.Drawing.Size(162, 537);
+            this.lbxTableSpace.TabIndex = 3;
+            this.lbxTableSpace.SelectedIndexChanged += new System.EventHandler(this.lbxTableSpace_SelectedIndexChanged);
             // 
             // pnlBody
             // 
@@ -118,7 +118,7 @@
             this.Column1.HeaderText = "DataFile Name";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
-            this.Column1.Width = 113;
+            this.Column1.Width = 104;
             // 
             // Column2
             // 
@@ -127,7 +127,7 @@
             this.Column2.HeaderText = "File ID";
             this.Column2.Name = "Column2";
             this.Column2.ReadOnly = true;
-            this.Column2.Width = 65;
+            this.Column2.Width = 51;
             // 
             // Column3
             // 
@@ -192,6 +192,7 @@
             this.Name = "frmTableSpaceView";
             this.Text = "TableSpace Viewer";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Activated += new System.EventHandler(this.frmTableSpaceView_Activated);
             this.pnlHeader.ResumeLayout(false);
             this.pnlHeader.PerformLayout();
             this.pnlBody.ResumeLayout(false);

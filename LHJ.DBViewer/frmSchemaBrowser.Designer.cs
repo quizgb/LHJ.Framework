@@ -37,6 +37,7 @@
             this.Name = "frmSchemaBrowser";
             this.Text = "Schema Browser";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Activated += new System.EventHandler(this.frmSchemaBrowser_Activated);
             this.ResumeLayout(false);
 
         }

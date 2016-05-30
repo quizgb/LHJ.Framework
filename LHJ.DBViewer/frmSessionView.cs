@@ -180,5 +180,12 @@ namespace LHJ.DBViewer
             this.SetInitialize();
         }
         #endregion 7.Event
+
+        private void frmSessionView_Activated(object sender, EventArgs e)
+        {
+            this.SuspendLayout();
+            this.Update();
+            this.ResumeLayout();
+        }
     }
 }

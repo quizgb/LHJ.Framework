@@ -37,11 +37,11 @@
             this.tsbtnAddTab = new System.Windows.Forms.ToolStripButton();
             this.tsbtnRemoveTab = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.tsbtnExportExcel = new System.Windows.Forms.ToolStripButton();
-            this.userControl11 = new LHJ.DBViewer.ucObejct();
             this.tsbtnCommit = new System.Windows.Forms.ToolStripButton();
             this.tsbtnRollback = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.tsbtnExportExcel = new System.Windows.Forms.ToolStripButton();
+            this.userControl11 = new LHJ.DBViewer.ucObejct();
             this.pnlMain.SuspendLayout();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -144,25 +144,6 @@
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(6, 25);
             // 
-            // tsbtnExportExcel
-            // 
-            this.tsbtnExportExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.tsbtnExportExcel.Image = global::LHJ.DBViewer.Properties.Resources._1464175446_excel;
-            this.tsbtnExportExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbtnExportExcel.Name = "tsbtnExportExcel";
-            this.tsbtnExportExcel.Size = new System.Drawing.Size(23, 22);
-            this.tsbtnExportExcel.Text = "Export Excel";
-            this.tsbtnExportExcel.Click += new System.EventHandler(this.tsbtnExecuteQuery_Click);
-            // 
-            // userControl11
-            // 
-            this.userControl11.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.userControl11.Location = new System.Drawing.Point(0, 0);
-            this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(260, 884);
-            this.userControl11.TabIndex = 0;
-            this.userControl11.ItemDoubleClicked += new LHJ.Common.Definition.EventHandler.ItemDoubleClickEventHandler(this.userControl11_ItemDoubleClicked);
-            // 
             // tsbtnCommit
             // 
             this.tsbtnCommit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
@@ -188,6 +169,25 @@
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(6, 25);
             // 
+            // tsbtnExportExcel
+            // 
+            this.tsbtnExportExcel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.tsbtnExportExcel.Image = global::LHJ.DBViewer.Properties.Resources._1464175446_excel;
+            this.tsbtnExportExcel.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbtnExportExcel.Name = "tsbtnExportExcel";
+            this.tsbtnExportExcel.Size = new System.Drawing.Size(23, 22);
+            this.tsbtnExportExcel.Text = "Export Excel";
+            this.tsbtnExportExcel.Click += new System.EventHandler(this.tsbtnExecuteQuery_Click);
+            // 
+            // userControl11
+            // 
+            this.userControl11.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.userControl11.Location = new System.Drawing.Point(0, 0);
+            this.userControl11.Name = "userControl11";
+            this.userControl11.Size = new System.Drawing.Size(260, 884);
+            this.userControl11.TabIndex = 0;
+            this.userControl11.ItemDoubleClicked += new LHJ.Common.Definition.EventHandler.ItemDoubleClickEventHandler(this.userControl11_ItemDoubleClicked);
+            // 
             // frmSQLWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -196,6 +196,7 @@
             this.Name = "frmSQLWindow";
             this.Text = "SQL Window";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Activated += new System.EventHandler(this.frmSQLWindow_Activated);
             this.pnlMain.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();

@@ -129,5 +129,12 @@ namespace LHJ.DBViewer
             }
         }
         #endregion 7.Event
+
+        private void frmSQLWindow_Activated(object sender, EventArgs e)
+        {
+            this.SuspendLayout();
+            this.Update();
+            this.ResumeLayout();
+        }
     }
 }
