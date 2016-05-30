@@ -48,7 +48,7 @@ namespace LHJ.DBViewer
         {
             this.SetLastBuildDate();
             this.Icon = Properties.Resources._1464082634_033;
-            this.tsSub.Renderer = new MyRenderer();
+            //this.tsSub.Renderer = new MyRenderer();
 
             this.mTsBtnSqlWindow.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tsBtn_Click);
             this.mTsBtnSqlWindow.Text = "SQL Window";
