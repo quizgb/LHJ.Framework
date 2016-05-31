@@ -15,12 +15,6 @@ namespace LHJ.Common
             get { return Comm.m_DBWorker; }
         }
 
-        private static LHJ.Common.Com.Wait m_Wait = new LHJ.Common.Com.Wait();
-        public static LHJ.Common.Com.Wait Wait
-        {
-            get { return Comm.m_Wait; }
-        }
-
         private static LHJ.Common.Common.Com.Logger m_Logger = new LHJ.Common.Common.Com.Logger();
         public static LHJ.Common.Common.Com.Logger Logger
         {

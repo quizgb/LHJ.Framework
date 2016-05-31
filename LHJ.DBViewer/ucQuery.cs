@@ -258,6 +258,8 @@ namespace LHJ.DBViewer
                     {
                         this.Cursor = Cursors.WaitCursor;
 
+                        Common.Control.LoadingControl.SplashWnd.SplashShow();
+
                         if (!Common.Comm.DBWorker.IsOnTrans())
                         {
                             this.tsslTransaction.Visible = false;
@@ -288,6 +290,8 @@ namespace LHJ.DBViewer
 
                         sw1.Stop();
                         this.tsslQueryResultDelay.Text = string.Format("{0} Secs", Math.Round(sw1.Elapsed.TotalSeconds, 3).ToString());
+
+                        Common.Control.LoadingControl.SplashWnd.SplashClose();
 
                         if (aScrolled)
                         {
