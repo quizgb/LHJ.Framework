@@ -196,6 +196,7 @@
             this.Name = "frmSQLWindow";
             this.Text = "SQL Window";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmSQLWindow_FormClosing);
             this.pnlMain.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();

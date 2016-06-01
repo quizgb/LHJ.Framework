@@ -134,6 +134,30 @@ namespace LHJ.DBViewer
                 }
             }
         }
+
+        private void frmSQLWindow_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Common.Comm.DBWorker.IsOnTrans())
+            {
+                DialogResult result = MessageBox.Show(this, "Transaction이 진행중입니다.\r\n저장하시겠습니까?\r\nYes : Commit  No : Rollback",
+                                                      Common.Definition.ConstValue.MSGBOX_TITLE, MessageBoxButtons.YesNoCancel, MessageBoxIcon.Information);
+
+                if (result.Equals(DialogResult.Yes))
+                {
+                    Common.Comm.DBWorker.CommitTrans();
+                }
+                else if (result.Equals(DialogResult.No))
+                {
+                    Common.Comm.DBWorker.RollbackTrans();
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
+            }
+        }
         #endregion 7.Event
+
+
     }
 }
