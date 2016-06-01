@@ -150,7 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="log4net.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="ajax-loader.gif" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\recv_mail.wav" />
   </ItemGroup>

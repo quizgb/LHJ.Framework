@@ -18,7 +18,7 @@ namespace LHJ.Common.Control.LoadingControl
     public partial class SplashWnd : Form
     {
         #region 1.Variable
-        private Bitmap bit;
+        private Image mImg;
 
         /// <summary>
         /// 스플래쉬 닫을 때 true로 세팅하는 값
@@ -65,8 +65,11 @@ namespace LHJ.Common.Control.LoadingControl
         #region 4.Override Method
         protected override void OnLoad(EventArgs e)
         {
-            bit = new Bitmap(@"..\Compile\ajax-loader.gif");
-            ImageAnimator.Animate(bit, new EventHandler(this.OnFrameChanged));
+            //string[] names = this.GetType().Assembly.GetManifestResourceNames();
+            System.IO.Stream s = this.GetType().Assembly.GetManifestResourceStream("LHJ.Common.ajax-loader.gif");
+            this.mImg = Image.FromStream(s);
+            ImageAnimator.Animate(this.mImg, new EventHandler(this.OnFrameChanged));
+
             base.OnLoad(e);
         }
 
@@ -74,7 +77,8 @@ namespace LHJ.Common.Control.LoadingControl
         {
             ImageAnimator.UpdateFrames();
             Graphics g = pbxLogo.CreateGraphics();
-            g.DrawImage(this.bit, new Point(5, 5));
+            g.DrawImage(this.mImg, new Point(5, 5));
+
             base.OnPaint(e);
         }
 
