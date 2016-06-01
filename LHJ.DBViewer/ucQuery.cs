@@ -318,7 +318,10 @@ namespace LHJ.DBViewer
                         }
                         else
                         {
-                            Common.Comm.DBWorker.BeginTrans();
+                            if (!Common.Comm.DBWorker.IsOnTrans())
+                            {
+                                Common.Comm.DBWorker.BeginTrans();
+                            }
 
                             this.tsslTransaction.Visible = true;
                             this.tsslAffectedRowCount.Visible = true;
