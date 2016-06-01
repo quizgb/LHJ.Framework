@@ -45,6 +45,9 @@ namespace LHJ.Practice
         /// </summary>
         public void SetInitialize()
         {
+            Common.Comm.Logger.SetConfigLogger("Practice");
+            Common.Comm.Logger.Info(System.Reflection.MethodBase.GetCurrentMethod(), "Practice Start!");
+
             this.m_Timer = new Timer();
             this.m_Timer.Interval = 20000;
             this.m_Timer.Tick += this.timer_Tick;
@@ -103,7 +106,7 @@ namespace LHJ.Practice
             nw = new Common.Control.Toast.frmNotify("Toast 알림", "TEST");
             nw.TitleClicked += new System.EventHandler(titleClick);
             nw.TextClicked += new System.EventHandler(textClick);
-            nw.SetDimensions(200, 200);
+            nw.SetDimensions(150, 100);
             nw.WaitTime = 5000;
 
             nw.Notify();
