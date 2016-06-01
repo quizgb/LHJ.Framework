@@ -165,6 +165,11 @@ namespace LHJ.Practice
                 FrmTextToSpeech scnTextToSpeech = new FrmTextToSpeech();
                 this.ShowFormORClose(scnTextToSpeech);
             }
+            else if (btn.Equals(this.barBtnColorSpoid))
+            {
+                Common.Control.ColorSpoid.FrmColorSpoid scnFrmColorSpoid = new Common.Control.ColorSpoid.FrmColorSpoid();
+                this.ShowFormORClose(scnFrmColorSpoid);
+            }
         }
         #endregion 7.Event
     }

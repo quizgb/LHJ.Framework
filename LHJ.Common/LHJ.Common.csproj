@@ -85,6 +85,12 @@
     <Compile Include="ClsGetSlnCodeLine.cs" />
     <Compile Include="Common\Comm.cs" />
     <Compile Include="Common\Com\Logger.cs" />
+    <Compile Include="Control\ColorSpoid\FrmColorSpoid.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\ColorSpoid\FrmColorSpoid.Designer.cs">
+      <DependentUpon>FrmColorSpoid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Control\LoadingControl\Block.xaml.cs">
       <DependentUpon>Block.xaml</DependentUpon>
     </Compile>
