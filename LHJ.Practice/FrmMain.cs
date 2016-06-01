@@ -12,7 +12,7 @@ namespace LHJ.Practice
     public partial class FrmMain : RibbonForm
     {
         #region 1.Variable
-
+        private Timer m_Timer;
         #endregion 1.Variable
 
 
@@ -33,6 +33,8 @@ namespace LHJ.Practice
         protected override void OnLoad(EventArgs e)
         {
             base.OnLoad(e);
+
+            this.SetInitialize();
         }
         #endregion 4.Override Method
 
@@ -43,7 +45,10 @@ namespace LHJ.Practice
         /// </summary>
         public void SetInitialize()
         {
-
+            this.m_Timer = new Timer();
+            this.m_Timer.Interval = 20000;
+            this.m_Timer.Tick += this.timer_Tick;
+            this.m_Timer.Start();
         }
         #endregion 5.Set Initialize
 
@@ -90,10 +95,44 @@ namespace LHJ.Practice
                 }
             }
         }
+
+        private void ShowNotify()
+        {
+            Common.Control.Toast.frmNotify nw;
+
+            nw = new Common.Control.Toast.frmNotify("Toast 알림", "TEST");
+            nw.TitleClicked += new System.EventHandler(titleClick);
+            nw.TextClicked += new System.EventHandler(textClick);
+            nw.SetDimensions(200, 200);
+            nw.WaitTime = 5000;
+
+            nw.Notify();
+        }
         #endregion 6.Method
 
 
         #region 7.Event
+        private void titleClick(object sender, System.EventArgs e)
+        {
+            MessageBox.Show("Title text clicked");
+        }
+
+        private void textClick(object sender, System.EventArgs e)
+        {
+            MessageBox.Show("Text clicked");
+        }
+
+        private void timer_Tick(object sender, EventArgs e)
+        {
+            Timer timer = sender as Timer;
+            this.ShowNotify();
+
+            //if (timer.Interval < m_Delay)
+            //{
+            //    timer.Interval = m_Delay;
+            //}
+        }
+
         private void barBtnShowDataGridView_Click(object sender, EventArgs e)
         {
             RibbonButton btn = sender as RibbonButton;

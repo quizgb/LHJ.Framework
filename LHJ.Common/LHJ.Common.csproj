@@ -103,6 +103,12 @@
     <Compile Include="Control\LoadingControl\SplashWnd.Designer.cs">
       <DependentUpon>SplashWnd.cs</DependentUpon>
     </Compile>
+    <Compile Include="Control\Toast\frmNotify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Control\Toast\frmNotify.Designer.cs">
+      <DependentUpon>frmNotify.cs</DependentUpon>
+    </Compile>
     <Compile Include="Definition\ConstValue\ConstValue.cs" />
     <Compile Include="Definition\EventHandler\EventHandler.cs" />
     <Compile Include="Definition\ExtensionMethod\ExtensionMethod.cs" />
@@ -144,8 +150,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="log4net.dll" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <None Include="Resources\recv_mail.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
