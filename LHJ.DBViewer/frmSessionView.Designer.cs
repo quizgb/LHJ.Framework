@@ -94,18 +94,22 @@
             // 
             this.dgvSession.AllowUserToAddRows = false;
             this.dgvSession.AllowUserToDeleteRows = false;
-            this.dgvSession.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvSession.AllowUserToResizeRows = false;
+            this.dgvSession.BackgroundColor = System.Drawing.Color.White;
+            this.dgvSession.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvSession.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvSession.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSession.Location = new System.Drawing.Point(0, 0);
             this.dgvSession.MultiSelect = false;
             this.dgvSession.Name = "dgvSession";
             this.dgvSession.ReadOnly = true;
+            this.dgvSession.RowHeadersVisible = false;
             this.dgvSession.RowTemplate.Height = 23;
             this.dgvSession.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvSession.ShowRowHeaderValue = true;
+            this.dgvSession.ShowRowHeaderValue = false;
             this.dgvSession.Size = new System.Drawing.Size(1264, 374);
             this.dgvSession.TabIndex = 2;
+            this.dgvSession.DataSourceChanged += new System.EventHandler(this.dgvSession_DataSourceChanged);
             this.dgvSession.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSession_CellDoubleClick);
             // 
             // splitContainer2
@@ -131,17 +135,22 @@
             // 
             this.dgvLock.AllowUserToAddRows = false;
             this.dgvLock.AllowUserToDeleteRows = false;
-            this.dgvLock.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dgvLock.AllowUserToResizeRows = false;
+            this.dgvLock.BackgroundColor = System.Drawing.Color.White;
+            this.dgvLock.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvLock.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvLock.ContextMenuStrip = this.cmsDeleteLock;
             this.dgvLock.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvLock.Location = new System.Drawing.Point(0, 35);
+            this.dgvLock.MultiSelect = false;
             this.dgvLock.Name = "dgvLock";
             this.dgvLock.ReadOnly = true;
+            this.dgvLock.RowHeadersVisible = false;
             this.dgvLock.RowTemplate.Height = 23;
-            this.dgvLock.ShowRowHeaderValue = true;
+            this.dgvLock.ShowRowHeaderValue = false;
             this.dgvLock.Size = new System.Drawing.Size(667, 436);
             this.dgvLock.TabIndex = 3;
+            this.dgvLock.DataSourceChanged += new System.EventHandler(this.dgvLock_DataSourceChanged);
             // 
             // cmsDeleteLock
             // 

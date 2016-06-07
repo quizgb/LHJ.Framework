@@ -177,7 +177,7 @@ namespace LHJ.DBViewer
             string strCommand = string.Empty;
             Hashtable ht = new Hashtable();
 
-            strCommand = @" SELECT COLUMN_ID, COLUMN_NAME, DATA_TYPE||'('||DATA_LENGTH||')' AS DATA_TYPE, 
+            strCommand = @" SELECT COLUMN_NAME, DATA_TYPE||'('||DATA_LENGTH||')' AS DATA_TYPE, 
                                    DECODE(NULLABLE, 'N', 'NOT NULL') AS NULLABLE, DATA_DEFAULT AS DEFAULT_VALUE
                               FROM ALL_TAB_COLUMNS 
                              WHERE OWNER = :USERID 

@@ -73,7 +73,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.userControl11);
             this.splitContainer1.Size = new System.Drawing.Size(1264, 884);
-            this.splitContainer1.SplitterDistance = 1000;
+            this.splitContainer1.SplitterDistance = 1100;
             this.splitContainer1.TabIndex = 1;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
             // 
@@ -83,7 +83,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 25);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1000, 859);
+            this.tabControl1.Size = new System.Drawing.Size(1100, 859);
             this.tabControl1.TabIndex = 0;
             // 
             // toolStrip2
@@ -100,7 +100,7 @@
             this.tsbtnExportExcel});
             this.toolStrip2.Location = new System.Drawing.Point(0, 0);
             this.toolStrip2.Name = "toolStrip2";
-            this.toolStrip2.Size = new System.Drawing.Size(1000, 25);
+            this.toolStrip2.Size = new System.Drawing.Size(1100, 25);
             this.toolStrip2.TabIndex = 17;
             this.toolStrip2.Text = "toolStrip2";
             // 
@@ -184,7 +184,7 @@
             this.userControl11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userControl11.Location = new System.Drawing.Point(0, 0);
             this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(260, 884);
+            this.userControl11.Size = new System.Drawing.Size(160, 884);
             this.userControl11.TabIndex = 0;
             this.userControl11.ItemDoubleClicked += new LHJ.Common.Definition.EventHandler.ItemDoubleClickEventHandler(this.userControl11_ItemDoubleClicked);
             // 

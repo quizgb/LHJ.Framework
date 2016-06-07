@@ -90,6 +90,7 @@
             // 
             this.dgvTableSpace.AllowUserToAddRows = false;
             this.dgvTableSpace.AllowUserToDeleteRows = false;
+            this.dgvTableSpace.AllowUserToResizeRows = false;
             this.dgvTableSpace.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvTableSpace.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvTableSpace.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {

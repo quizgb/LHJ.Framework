@@ -31,9 +31,9 @@
             this.splitter1 = new System.Windows.Forms.Splitter();
             this.lbxObject = new System.Windows.Forms.ListBox();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.dgvColumnInfo = new LHJ.Controls.ucDataGridView();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnRefresh = new System.Windows.Forms.Button();
-            this.dgvColumnInfo = new LHJ.Controls.ucDataGridView();
             this.ucObjectList1 = new LHJ.DBViewer.ucObjectList();
             this.ucUserList1 = new LHJ.DBViewer.ucUserList();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -83,6 +83,26 @@
             this.splitContainer1.SplitterDistance = 304;
             this.splitContainer1.TabIndex = 6;
             // 
+            // dgvColumnInfo
+            // 
+            this.dgvColumnInfo.AllowUserToAddRows = false;
+            this.dgvColumnInfo.AllowUserToDeleteRows = false;
+            this.dgvColumnInfo.AllowUserToResizeRows = false;
+            this.dgvColumnInfo.BackgroundColor = System.Drawing.Color.White;
+            this.dgvColumnInfo.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvColumnInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvColumnInfo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvColumnInfo.Location = new System.Drawing.Point(0, 0);
+            this.dgvColumnInfo.Name = "dgvColumnInfo";
+            this.dgvColumnInfo.ReadOnly = true;
+            this.dgvColumnInfo.RowHeadersVisible = false;
+            this.dgvColumnInfo.RowTemplate.Height = 23;
+            this.dgvColumnInfo.ShowRowHeaderValue = false;
+            this.dgvColumnInfo.Size = new System.Drawing.Size(186, 121);
+            this.dgvColumnInfo.TabIndex = 5;
+            this.dgvColumnInfo.DataSourceChanged += new System.EventHandler(this.dgvColumnInfo_DataSourceChanged);
+            this.dgvColumnInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvColumnInfo_CellDoubleClick);
+            // 
             // txtSearch
             // 
             this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -103,22 +123,6 @@
             this.btnRefresh.TabIndex = 7;
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // dgvColumnInfo
-            // 
-            this.dgvColumnInfo.AllowUserToAddRows = false;
-            this.dgvColumnInfo.AllowUserToDeleteRows = false;
-            this.dgvColumnInfo.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
-            this.dgvColumnInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvColumnInfo.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvColumnInfo.Location = new System.Drawing.Point(0, 0);
-            this.dgvColumnInfo.Name = "dgvColumnInfo";
-            this.dgvColumnInfo.ReadOnly = true;
-            this.dgvColumnInfo.RowTemplate.Height = 23;
-            this.dgvColumnInfo.ShowRowHeaderValue = true;
-            this.dgvColumnInfo.Size = new System.Drawing.Size(186, 121);
-            this.dgvColumnInfo.TabIndex = 5;
-            this.dgvColumnInfo.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvColumnInfo_CellDoubleClick);
             // 
             // ucObjectList1
             // 
