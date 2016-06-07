@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.txtSqlArea = new LHJ.DBViewer.clsRichDDLBox();
+            this.dgvQueryResult = new LHJ.Controls.ucDataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslRowCount = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslQueryResultDelay = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslTransaction = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslAffectedRowCount = new System.Windows.Forms.ToolStripStatusLabel();
-            this.dgvQueryResult = new LHJ.Controls.ucDataGridView();
-            this.txtSqlArea = new LHJ.DBViewer.clsRichDDLBox();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvQueryResult)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -61,6 +61,37 @@
             this.splitContainer1.Size = new System.Drawing.Size(818, 531);
             this.splitContainer1.SplitterDistance = 319;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // txtSqlArea
+            // 
+            this.txtSqlArea.AcceptsTab = true;
+            this.txtSqlArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtSqlArea.Font = new System.Drawing.Font("Courier New", 12F);
+            this.txtSqlArea.ForeColor = System.Drawing.Color.Black;
+            this.txtSqlArea.Location = new System.Drawing.Point(0, 0);
+            this.txtSqlArea.Name = "txtSqlArea";
+            this.txtSqlArea.Size = new System.Drawing.Size(818, 319);
+            this.txtSqlArea.TabIndex = 0;
+            this.txtSqlArea.Text = "";
+            // 
+            // dgvQueryResult
+            // 
+            this.dgvQueryResult.AllowUserToAddRows = false;
+            this.dgvQueryResult.AllowUserToDeleteRows = false;
+            this.dgvQueryResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvQueryResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvQueryResult.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvQueryResult.Location = new System.Drawing.Point(0, 0);
+            this.dgvQueryResult.Name = "dgvQueryResult";
+            this.dgvQueryResult.ReadOnly = true;
+            this.dgvQueryResult.RowTemplate.Height = 23;
+            this.dgvQueryResult.ShowRowHeaderValue = true;
+            this.dgvQueryResult.Size = new System.Drawing.Size(818, 180);
+            this.dgvQueryResult.TabIndex = 1;
+            this.dgvQueryResult.DataSourceChanged += new System.EventHandler(this.dgvQueryResult_DataSourceChanged);
+            this.dgvQueryResult.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQueryResult_CellDoubleClick);
+            this.dgvQueryResult.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQueryResult_RowEnter);
+            this.dgvQueryResult.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgvQueryResult_Scroll);
             // 
             // statusStrip1
             // 
@@ -113,36 +144,6 @@
             this.tsslAffectedRowCount.Text = "1 Row(s) affected";
             this.tsslAffectedRowCount.Visible = false;
             // 
-            // dgvQueryResult
-            // 
-            this.dgvQueryResult.AllowUserToAddRows = false;
-            this.dgvQueryResult.AllowUserToDeleteRows = false;
-            this.dgvQueryResult.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvQueryResult.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvQueryResult.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvQueryResult.Location = new System.Drawing.Point(0, 0);
-            this.dgvQueryResult.Name = "dgvQueryResult";
-            this.dgvQueryResult.ReadOnly = true;
-            this.dgvQueryResult.RowTemplate.Height = 23;
-            this.dgvQueryResult.ShowRowHeaderValue = true;
-            this.dgvQueryResult.Size = new System.Drawing.Size(818, 180);
-            this.dgvQueryResult.TabIndex = 1;
-            this.dgvQueryResult.DataSourceChanged += new System.EventHandler(this.dgvQueryResult_DataSourceChanged);
-            this.dgvQueryResult.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvQueryResult_RowEnter);
-            this.dgvQueryResult.Scroll += new System.Windows.Forms.ScrollEventHandler(this.dgvQueryResult_Scroll);
-            // 
-            // txtSqlArea
-            // 
-            this.txtSqlArea.AcceptsTab = true;
-            this.txtSqlArea.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtSqlArea.Font = new System.Drawing.Font("Courier New", 12F);
-            this.txtSqlArea.ForeColor = System.Drawing.Color.Black;
-            this.txtSqlArea.Location = new System.Drawing.Point(0, 0);
-            this.txtSqlArea.Name = "txtSqlArea";
-            this.txtSqlArea.Size = new System.Drawing.Size(818, 319);
-            this.txtSqlArea.TabIndex = 0;
-            this.txtSqlArea.Text = "";
-            // 
             // ucQuery
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -154,9 +155,9 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             this.splitContainer1.Panel2.PerformLayout();
             this.splitContainer1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvQueryResult)).EndInit();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvQueryResult)).EndInit();
             this.ResumeLayout(false);
 
         }

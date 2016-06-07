@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using LHJ.DBService;
 using Oracle.DataAccess.Client;
 using System.Diagnostics;
+using LHJ.Common.Definition;
 
 namespace LHJ.DBViewer
 {
@@ -335,6 +336,7 @@ namespace LHJ.DBViewer
                 }
                 catch (Exception ex)
                 {
+                    Common.Control.LoadingControl.SplashWnd.SplashClose();
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 finally
@@ -407,6 +409,11 @@ namespace LHJ.DBViewer
         private void dgvQueryResult_DataSourceChanged(object sender, EventArgs e)
         {
             this.dgvQueryResult.AutoResizeColumn();
+        }
+
+        private void dgvQueryResult_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            this.txtSqlArea.Text += string.Format("'{0}'", this.dgvQueryResult.GetRowCellStrValue(e.RowIndex, e.ColumnIndex));
         }
     }
 }
