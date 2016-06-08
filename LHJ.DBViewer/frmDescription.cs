@@ -50,6 +50,8 @@ namespace LHJ.DBViewer
         #region 6.Method
         public void Search(Hashtable aHt)
         {
+            this.Cursor = Cursors.WaitCursor;
+
             this.tabControl1.TabPages.Clear();
 
             this.mHt = aHt;
@@ -98,6 +100,8 @@ namespace LHJ.DBViewer
             }
 
             this.tabControl1_SelectedIndexChanged(this.tabControl1, null);
+
+            this.Cursor = Cursors.Default;
         }
         #endregion 6.Method
 

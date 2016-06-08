@@ -37,8 +37,14 @@ namespace LHJ.DBViewer
         #region 4.Override Method
         protected override void OnLoad(EventArgs e)
         {
-            this.SetInitialize();
             base.OnLoad(e);
+
+            if (LicenseManager.UsageMode.Equals(LicenseUsageMode.Designtime))
+            {
+                return;
+            }
+
+            this.SetInitialize();
         }
         #endregion 4.Override Method
 
@@ -101,6 +107,8 @@ namespace LHJ.DBViewer
 
         private void GetObjectList(string aUser = "")
         {
+            this.Cursor = Cursors.WaitCursor;
+
             DataTable dt = new DataTable();
             ListBox lbx = this.tabControl1.SelectedTab.Controls[0] as ListBox;
             lbx.Items.Clear();
@@ -185,6 +193,8 @@ namespace LHJ.DBViewer
             {
                 lbx.Items.Add(dr["OBJECT_NAME"].ToString());
             }
+
+            this.Cursor = Cursors.Default;
         }
         #endregion 6.Method
 

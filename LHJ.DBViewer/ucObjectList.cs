@@ -40,10 +40,6 @@ namespace LHJ.DBViewer
 
 
         #region 4.Override Method
-        protected override void OnLoad(EventArgs e)
-        {
-            base.OnLoad(e);
-        }
         #endregion 4.Override Method
 
 
@@ -68,6 +64,8 @@ namespace LHJ.DBViewer
 
         public DataTable GetObjectList(string aUser)
         {
+            this.Cursor = Cursors.WaitCursor;
+
             DataTable dt = new DataTable();
 
             if (this.cboObjectList.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectList_DISPLAY.TABLE))
@@ -79,11 +77,15 @@ namespace LHJ.DBViewer
                 dt = DALDataAccess.GetObjectList(aUser, Common.Definition.ConstValue.DBViewer_ObjectList_VALUE.VIEW);
             }
 
+            this.Cursor = Cursors.Default;
+
             return dt;
         }
 
         public DataTable GetObjectListByObjectName(string aUser, string aObjectName)
         {
+            this.Cursor = Cursors.WaitCursor;
+
             DataTable dt = new DataTable();
 
             if (this.cboObjectList.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectList_DISPLAY.TABLE))
@@ -94,6 +96,8 @@ namespace LHJ.DBViewer
             {
                 dt = DALDataAccess.GetObjectListByObjectName(aUser, Common.Definition.ConstValue.DBViewer_ObjectList_VALUE.VIEW, aObjectName);
             }
+
+            this.Cursor = Cursors.Default;
 
             return dt;
         }

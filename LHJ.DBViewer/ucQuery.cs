@@ -371,7 +371,9 @@ namespace LHJ.DBViewer
 
         public void ExportExcelQueryResult()
         {
+            this.Cursor = Cursors.WaitCursor;
             this.dgvQueryResult.ExportToExcel("쿼리결과");
+            this.Cursor = Cursors.Default;
         }
 
         private void SetTsslRowCount(string aStartRowIndex = "1")

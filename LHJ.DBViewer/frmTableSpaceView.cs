@@ -78,10 +78,14 @@ namespace LHJ.DBViewer
         #region 7.Event
         private void lbxTableSpace_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.Cursor = Cursors.WaitCursor;
+
             this.lblTableSpaceName.Text = this.lbxTableSpace.Text;
 
             DataTable dtTableSpaceInfo = DALDataAccess.GetTableSpaceInfo(this.lbxTableSpace.Text);
             this.dgvTableSpace.DataSource = dtTableSpaceInfo;
+
+            this.Cursor = Cursors.Default;
         }
 
         private void dgvTableSpace_DataSourceChanged(object sender, EventArgs e)
