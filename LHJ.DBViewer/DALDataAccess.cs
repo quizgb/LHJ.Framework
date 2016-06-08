@@ -19,6 +19,45 @@ namespace LHJ.DBViewer
             return Common.Comm.DBWorker.ExecuteNonQuery(strCommand);
         }
 
+        public static DataTable GetIndexByTableName(string aUserID, string aTableName)
+        {
+            DataTable dt = new DataTable();
+            string strCommand = string.Empty;
+            Hashtable ht = new Hashtable();
+
+            strCommand = @" SELECT INDEX_NAME
+                              FROM ALL_INDEXES
+                             WHERE OWNER = :OWNER
+                               AND TABLE_NAME = :TABLE_NAME
+                          ORDER BY UNIQUENESS DESC, INDEX_NAME  ";
+
+            ht["OWNER"] = aUserID;
+            ht["TABLE_NAME"] = aTableName;
+
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand, ht);
+
+            return dt;
+        }
+
+        public static DataTable GetObjectScript(string aUserID, string aObjectName)
+        {
+            DataTable dt = new DataTable();
+            string strCommand = string.Empty;
+            Hashtable ht = new Hashtable();
+
+            strCommand = @" SELECT dbms_metadata.get_ddl(object_type, object_name, owner) SCRIPT
+                              FROM ALL_OBJECTS
+                             WHERE OWNER = :USERID
+                               AND OBJECT_NAME = :OBJECT_NAME   ";
+
+            ht["USERID"] = aUserID;
+            ht["OBJECT_NAME"] = aObjectName;
+
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand, ht);
+
+            return dt;
+        }
+
         public static DataTable GetTableSpaceList()
         {
             DataTable dt = new DataTable();

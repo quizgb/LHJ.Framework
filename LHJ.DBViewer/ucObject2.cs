@@ -30,19 +30,16 @@ namespace LHJ.DBViewer
         public ucObject2()
         {
             InitializeComponent();
-
-            if (LicenseManager.UsageMode.Equals(LicenseUsageMode.Designtime))
-            {
-                return;
-            }
-
-            this.SetInitialize();
         }
         #endregion 3.Constructor
 
 
         #region 4.Override Method
-
+        protected override void OnLoad(EventArgs e)
+        {
+            this.SetInitialize();
+            base.OnLoad(e);
+        }
         #endregion 4.Override Method
 
 
@@ -196,6 +193,13 @@ namespace LHJ.DBViewer
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             this.GetObjectList(string.Empty);
+
+            ListBox lbx = this.tabControl1.SelectedTab.Controls[0] as ListBox;
+
+            if (lbx.Items.Count > 0)
+            {
+                lbx.SelectedIndex = 0;
+            }
         }
 
         private void ucUserList1_SelectedUserChanged(object sender, Common.Definition.EventHandler.SelectedUserChangedEventArgs e)

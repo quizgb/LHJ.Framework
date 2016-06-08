@@ -40,7 +40,10 @@ namespace LHJ.DBViewer
 
 
         #region 4.Override Method
-
+        protected override void OnLoad(EventArgs e)
+        {
+            base.OnLoad(e);
+        }
         #endregion 4.Override Method
 
 
