@@ -28,6 +28,30 @@ namespace LHJ.Common.Definition
             TableSpaceViewer = 4
         }
 
+        public struct DBViewer_ObjectList_DISPLAY
+        {
+            public const string TABLE = "Tables";
+            public const string VIEW = "Views";
+            public const string FUNCTION = "Functions";
+            public const string PROCEDURE = "Procedures";
+            public const string TRIGGER = "Triggers";
+            public const string INDEX = "Indexes";
+            public const string SEQUENCE = "Sequences";
+            public const string PACKAGE = "Packages";
+        }
+
+        public struct DBViewer_ObjectList_VALUE
+        {
+            public const string TABLE = "TABLE";
+            public const string VIEW = "VIEW";
+            public const string FUNCTION = "FUNCTION";
+            public const string PROCEDURE = "PROCEDURE";
+            public const string TRIGGER = "TRIGGER";
+            public const string INDEX = "INDEX";
+            public const string SEQUENCE = "SEQUENCE";
+            public const string PACKAGE = "PACKAGE";
+        }
+
         public const int WM_PAINT = 15;
         public const string REGISTRY_EXCEL_KEY = @"Excel.Application";
 

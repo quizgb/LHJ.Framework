@@ -153,11 +153,11 @@ namespace LHJ.DBViewer
                 this.Search();
             }
         }
-        #endregion 7.Event
 
         private void dgvColumnInfo_DataSourceChanged(object sender, EventArgs e)
         {
             this.dgvColumnInfo.AutoResizeColumn();
         }
+        #endregion 7.Event
     }
 }

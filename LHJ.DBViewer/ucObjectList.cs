@@ -58,8 +58,8 @@ namespace LHJ.DBViewer
         #region 6.Method
         private void InitCombo()
         {
-            this.cboObjectList.Items.Add("Tables");
-            this.cboObjectList.Items.Add("Views");
+            this.cboObjectList.Items.Add(Common.Definition.ConstValue.DBViewer_ObjectList_DISPLAY.TABLE);
+            this.cboObjectList.Items.Add(Common.Definition.ConstValue.DBViewer_ObjectList_DISPLAY.VIEW);
             this.cboObjectList.SelectedIndex = 0;
         }
 
@@ -67,13 +67,13 @@ namespace LHJ.DBViewer
         {
             DataTable dt = new DataTable();
 
-            if (this.cboObjectList.Text.Equals("Tables"))
+            if (this.cboObjectList.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectList_DISPLAY.TABLE))
             {
-                dt = DALDataAccess.GetObjectList(aUser, "TABLE");
+                dt = DALDataAccess.GetObjectList(aUser, Common.Definition.ConstValue.DBViewer_ObjectList_VALUE.TABLE);
             }
-            else if (this.cboObjectList.Text.Equals("Views"))
+            else if (this.cboObjectList.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectList_DISPLAY.VIEW))
             {
-                dt = DALDataAccess.GetObjectList(aUser, "VIEW");
+                dt = DALDataAccess.GetObjectList(aUser, Common.Definition.ConstValue.DBViewer_ObjectList_VALUE.VIEW);
             }
 
             return dt;
@@ -83,13 +83,13 @@ namespace LHJ.DBViewer
         {
             DataTable dt = new DataTable();
 
-            if (this.cboObjectList.Text.Equals("Tables"))
+            if (this.cboObjectList.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectList_DISPLAY.TABLE))
             {
-                dt = DALDataAccess.GetObjectListByObjectName(aUser, "TABLE", aObjectName);
+                dt = DALDataAccess.GetObjectListByObjectName(aUser, Common.Definition.ConstValue.DBViewer_ObjectList_VALUE.TABLE, aObjectName);
             }
-            else if (this.cboObjectList.Text.Equals("Views"))
+            else if (this.cboObjectList.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectList_DISPLAY.VIEW))
             {
-                dt = DALDataAccess.GetObjectListByObjectName(aUser, "VIEW", aObjectName);
+                dt = DALDataAccess.GetObjectListByObjectName(aUser, Common.Definition.ConstValue.DBViewer_ObjectList_VALUE.VIEW, aObjectName);
             }
 
             return dt;

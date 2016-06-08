@@ -152,6 +152,12 @@
     <Compile Include="ucObejct.Designer.cs">
       <DependentUpon>ucObejct.cs</DependentUpon>
     </Compile>
+    <Compile Include="ucObject2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ucObject2.Designer.cs">
+      <DependentUpon>ucObject2.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucQuery.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -200,6 +206,9 @@
     </Compile>
     <EmbeddedResource Include="ucObejct.resx">
       <DependentUpon>ucObejct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ucObject2.resx">
+      <DependentUpon>ucObject2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ucObjectList.resx">
       <DependentUpon>ucObjectList.cs</DependentUpon>

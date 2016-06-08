@@ -179,7 +179,6 @@ namespace LHJ.DBViewer
         {
             this.SetInitialize();
         }
-        #endregion 7.Event
 
         private void dgvSession_DataSourceChanged(object sender, EventArgs e)
         {
@@ -190,5 +189,6 @@ namespace LHJ.DBViewer
         {
             this.dgvLock.AutoResizeColumn();
         }
+        #endregion 7.Event
     }
 }

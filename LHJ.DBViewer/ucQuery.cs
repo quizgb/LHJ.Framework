@@ -404,7 +404,6 @@ namespace LHJ.DBViewer
         {
             this.SetTsslRowCount((e.RowIndex + 1).ToString());
         }
-        #endregion 7.Event
 
         private void dgvQueryResult_DataSourceChanged(object sender, EventArgs e)
         {
@@ -415,5 +414,6 @@ namespace LHJ.DBViewer
         {
             this.txtSqlArea.Text += string.Format("'{0}'", this.dgvQueryResult.GetRowCellStrValue(e.RowIndex, e.ColumnIndex));
         }
+        #endregion 7.Event
     }
 }
