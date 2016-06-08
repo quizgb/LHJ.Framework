@@ -15,7 +15,7 @@ namespace LHJ.DBViewer
         [Browsable(true),
          DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
          Description("오브젝트가 변경될 때 발생됩니다.")]
-        public event Common.Definition.EventHandler.SelectedObjChangedEventHandler SelectedObjChanged;
+        public event Common.Definition.EventHandler.SelectedObjListChangedEventHandler SelectedObjListChanged;
         #endregion 1.Variable
 
 
@@ -97,10 +97,10 @@ namespace LHJ.DBViewer
 
         private void SetSelectedObjChanged(string aObject)
         {
-            if (SelectedObjChanged != null)
+            if (SelectedObjListChanged != null)
             {
-                Common.Definition.EventHandler.SelectedObjChangedEventArgs e = new Common.Definition.EventHandler.SelectedObjChangedEventArgs(aObject);
-                SelectedObjChanged(this, e);
+                Common.Definition.EventHandler.SelectedObjListChangedEventArgs e = new Common.Definition.EventHandler.SelectedObjListChangedEventArgs(aObject);
+                SelectedObjListChanged(this, e);
             }
         }
         #endregion 6.Method

@@ -69,7 +69,7 @@ namespace LHJ.DBViewer
         {
             if (string.IsNullOrEmpty(this.txtSearch.Text))
             {
-                this.ucObjectList1_SelectedObjChanged(this.ucObjectList1, new Common.Definition.EventHandler.SelectedObjChangedEventArgs(string.Empty));
+                this.ucObjectList1_SelectedObjListChanged(this.ucObjectList1, new Common.Definition.EventHandler.SelectedObjListChangedEventArgs(string.Empty));
             }
             else
             {
@@ -103,7 +103,7 @@ namespace LHJ.DBViewer
             this.txtSearch.Focus();
         }
 
-        private void ucObjectList1_SelectedObjChanged(object sender, Common.Definition.EventHandler.SelectedObjChangedEventArgs e)
+        private void ucObjectList1_SelectedObjListChanged(object sender, Common.Definition.EventHandler.SelectedObjListChangedEventArgs e)
         {
             this.lbxObject.Items.Clear();
             DataTable dt = this.ucObjectList1.GetObjectList(this.ucUserList1.User);

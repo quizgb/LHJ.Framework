@@ -25,6 +25,8 @@ namespace LHJ.DBViewer
         public frmSchemaBrowser()
         {
             InitializeComponent();
+
+            this.SetInitialize();
         }
         #endregion 3.Constructor
 
@@ -40,7 +42,14 @@ namespace LHJ.DBViewer
         /// </summary>
         public void SetInitialize()
         {
+            frmDescription descFrm = new frmDescription();
+            descFrm.Dock = DockStyle.Fill;
+            descFrm.TopLevel = false;
+            descFrm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
 
+            this.splitContainer1.Panel2.Controls.Add(descFrm);
+
+            descFrm.Show();
         }
         #endregion 5.Set Initialize
 
@@ -51,7 +60,11 @@ namespace LHJ.DBViewer
 
 
         #region 7.Event
-
+        private void ucObject21_SelectedObjChanged(object sender, Common.Definition.EventHandler.SelectedObjChangedEventArgs e)
+        {
+            frmDescription descFrm = this.splitContainer1.Panel2.Controls[0] as frmDescription;
+            descFrm.Search(e.Ht);
+        }
         #endregion 7.Event
     }
 }

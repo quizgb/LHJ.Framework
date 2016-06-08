@@ -198,7 +198,7 @@ namespace LHJ.DBViewer
             string strCommand = string.Empty;
             Hashtable ht = new Hashtable();
 
-            strCommand = @" SELECT OBJECT_NAME 
+            strCommand = @" SELECT * 
                               FROM ALL_OBJECTS 
                              WHERE OWNER = :USERID
                                AND OBJECT_TYPE = :OBJECT_TYPE
@@ -227,6 +227,26 @@ namespace LHJ.DBViewer
 
             ht["USERID"] = aUserID;
             ht["OBJECT_TYPE"] = aObjectType;
+            ht["OBJECT_NAME"] = aObjectName;
+
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand, ht);
+
+            return dt;
+        }
+
+        public static DataTable GetObjectListByObjectName(string aUserID, string aObjectName)
+        {
+            DataTable dt = new DataTable();
+            string strCommand = string.Empty;
+            Hashtable ht = new Hashtable();
+
+            strCommand = @" SELECT * 
+                              FROM ALL_OBJECTS 
+                             WHERE OWNER = :USERID
+                               AND OBJECT_NAME = :OBJECT_NAME
+                             ORDER BY 1     ";
+
+            ht["USERID"] = aUserID;
             ht["OBJECT_NAME"] = aObjectName;
 
             dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand, ht);

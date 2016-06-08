@@ -54,6 +54,7 @@
             this.ucObject21.Name = "ucObject21";
             this.ucObject21.Size = new System.Drawing.Size(202, 680);
             this.ucObject21.TabIndex = 0;
+            this.ucObject21.SelectedObjChanged += new LHJ.Common.Definition.EventHandler.SelectedObjChangedEventHandler(this.ucObject21_SelectedObjChanged);
             // 
             // frmSchemaBrowser
             // 

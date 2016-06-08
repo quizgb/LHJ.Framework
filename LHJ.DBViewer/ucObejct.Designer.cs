@@ -132,7 +132,7 @@
             this.ucObjectList1.Name = "ucObjectList1";
             this.ucObjectList1.Size = new System.Drawing.Size(186, 25);
             this.ucObjectList1.TabIndex = 4;
-            this.ucObjectList1.SelectedObjChanged += new LHJ.Common.Definition.EventHandler.SelectedObjChangedEventHandler(this.ucObjectList1_SelectedObjChanged);
+            this.ucObjectList1.SelectedObjListChanged += new LHJ.Common.Definition.EventHandler.SelectedObjListChangedEventHandler(this.ucObjectList1_SelectedObjListChanged);
             // 
             // ucUserList1
             // 

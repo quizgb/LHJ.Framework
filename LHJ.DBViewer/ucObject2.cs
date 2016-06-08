@@ -6,13 +6,18 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using LHJ.Common.Definition;
+using System.Collections;
 
 namespace LHJ.DBViewer
 {
     public partial class ucObject2 : UserControl
     {
         #region 1.Variable
-
+        [Browsable(true),
+         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+         Description("될 때 발생됩니다.")]
+        public event Common.Definition.EventHandler.SelectedObjChangedEventHandler SelectedObjChanged;
         #endregion 1.Variable
 
 
@@ -25,6 +30,11 @@ namespace LHJ.DBViewer
         public ucObject2()
         {
             InitializeComponent();
+
+            if (LicenseManager.UsageMode.Equals(LicenseUsageMode.Designtime))
+            {
+                return;
+            }
 
             this.SetInitialize();
         }
@@ -57,6 +67,7 @@ namespace LHJ.DBViewer
             {
                 lbx = new ListBox();
                 lbx.Dock = DockStyle.Fill;
+                lbx.SelectedIndexChanged += this.lbx_SelectedIndexChanged;
 
                 tp.Controls.Add(lbx);
             }
@@ -66,7 +77,31 @@ namespace LHJ.DBViewer
         #endregion 5.Set Initialize
 
 
-        #region 6.Method
+        #region 6.Metho
+        private void SetSelectedObjChanged(Hashtable aHt)
+        {
+            if (SelectedObjChanged != null)
+            {
+                Common.Definition.EventHandler.SelectedObjChangedEventArgs e = new Common.Definition.EventHandler.SelectedObjChangedEventArgs(aHt);
+                SelectedObjChanged(this, e);
+            }
+        }
+
+        private void lbx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ListBox lbx = sender as ListBox;
+
+            if (lbx != null)
+            { 
+                Hashtable ht = new Hashtable();
+
+                ht["USER"] = this.ucUserList1.User;
+                ht["OBJECT_NAME"] = lbx.Text;
+
+                this.SetSelectedObjChanged(ht);
+            }
+        }
+
         private void GetObjectList(string aUser = "")
         {
             DataTable dt = new DataTable();

@@ -52,6 +52,14 @@ namespace LHJ.Common.Definition
             public const string PACKAGE = "PACKAGE";
         }
 
+        public struct DBViewer_ObjectInfo_DISPLAY
+        {
+            public const string COLUMN = "Columns";
+            public const string DATA = "Data";
+            public const string INDEX = "Indexes";
+            public const string SCRIPT = "Script";
+        }
+
         public const int WM_PAINT = 15;
         public const string REGISTRY_EXCEL_KEY = @"Excel.Application";
 

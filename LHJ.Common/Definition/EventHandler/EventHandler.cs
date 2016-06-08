@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,15 +26,27 @@ namespace LHJ.Common.Definition
 
         #region ObjectList Changed Event
 
+        public delegate void SelectedObjListChangedEventHandler(object sender, SelectedObjListChangedEventArgs e);
+
+        public class SelectedObjListChangedEventArgs : EventArgs
+        {
+            public string Object { get; set; }
+
+            public SelectedObjListChangedEventArgs(string aObject)
+            {
+                Object = aObject;
+            }
+        }
+
         public delegate void SelectedObjChangedEventHandler(object sender, SelectedObjChangedEventArgs e);
 
         public class SelectedObjChangedEventArgs : EventArgs
         {
-            public string Object { get; set; }
+            public Hashtable Ht { get; set; }
 
-            public SelectedObjChangedEventArgs(string aObject)
+            public SelectedObjChangedEventArgs(Hashtable aHt)
             {
-                Object = aObject;
+                Ht = aHt;
             }
         }
 
