@@ -118,6 +118,12 @@
     <Compile Include="FrmImageViewer.Designer.cs">
       <DependentUpon>FrmImageViewer.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmJson.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmJson.Designer.cs">
+      <DependentUpon>FrmJson.cs</DependentUpon>
+    </Compile>
     <Compile Include="FrmMain.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -146,6 +152,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FrmImageViewer.resx">
       <DependentUpon>FrmImageViewer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmJson.resx">
+      <DependentUpon>FrmJson.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>

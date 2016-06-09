@@ -38,6 +38,7 @@
             this.barBtnScrollingText = new System.Windows.Forms.RibbonButton();
             this.barBtnTextToSpeech = new System.Windows.Forms.RibbonButton();
             this.barBtnColorSpoid = new System.Windows.Forms.RibbonButton();
+            this.barBtnJson = new System.Windows.Forms.RibbonButton();
             this.SuspendLayout();
             // 
             // ribbon1
@@ -78,6 +79,7 @@
             this.ribbonPanel1.Items.Add(this.barBtnScrollingText);
             this.ribbonPanel1.Items.Add(this.barBtnTextToSpeech);
             this.ribbonPanel1.Items.Add(this.barBtnColorSpoid);
+            this.ribbonPanel1.Items.Add(this.barBtnJson);
             this.ribbonPanel1.Text = "프로그램 리스트";
             // 
             // barBtnShowDataGridView
@@ -126,6 +128,13 @@
             this.barBtnColorSpoid.Text = "ColorSpoid";
             this.barBtnColorSpoid.Click += new System.EventHandler(this.barBtnShowDataGridView_Click);
             // 
+            // barBtnJson
+            // 
+            this.barBtnJson.Image = ((System.Drawing.Image)(resources.GetObject("barBtnJson.Image")));
+            this.barBtnJson.SmallImage = ((System.Drawing.Image)(resources.GetObject("barBtnJson.SmallImage")));
+            this.barBtnJson.Text = "Json";
+            this.barBtnJson.Click += new System.EventHandler(this.barBtnShowDataGridView_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -151,5 +160,6 @@
         private System.Windows.Forms.RibbonButton barBtnScrollingText;
         private System.Windows.Forms.RibbonButton barBtnTextToSpeech;
         private System.Windows.Forms.RibbonButton barBtnColorSpoid;
+        private System.Windows.Forms.RibbonButton barBtnJson;
     }
 }

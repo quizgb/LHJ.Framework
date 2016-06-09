@@ -168,7 +168,13 @@ namespace LHJ.Practice
             else if (btn.Equals(this.barBtnColorSpoid))
             {
                 Common.Control.ColorSpoid.FrmColorSpoid scnFrmColorSpoid = new Common.Control.ColorSpoid.FrmColorSpoid();
+                scnFrmColorSpoid.WindowState = FormWindowState.Maximized;
                 this.ShowFormORClose(scnFrmColorSpoid);
+            }
+            else if (btn.Equals(this.barBtnJson))
+            {
+                FrmJson scnTextToSpeech = new FrmJson();
+                this.ShowFormORClose(scnTextToSpeech);
             }
         }
         #endregion 7.Event
