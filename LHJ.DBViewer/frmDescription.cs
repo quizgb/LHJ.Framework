@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using LHJ.Common.Definition;
+using LHJ.Controls;
 
 namespace LHJ.DBViewer
 {
@@ -85,10 +86,31 @@ namespace LHJ.DBViewer
             {
                 this.tabControl1.TabPages.Add(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.SCRIPT);
             }
+            else if (dt.Rows[0]["OBJECT_TYPE"].ToString().Equals(Common.Definition.ConstValue.DBViewer_ObjectList_VALUE.INDEX))
+            {
+                this.tabControl1.TabPages.Add(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.SCRIPT);
+            }
+            else if (dt.Rows[0]["OBJECT_TYPE"].ToString().Equals(Common.Definition.ConstValue.DBViewer_ObjectList_VALUE.SEQUENCE))
+            {
+                this.tabControl1.TabPages.Add(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.SCRIPT);
+            }
 
             foreach (TabPage tp in this.tabControl1.TabPages)
             {
-                if (tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.SCRIPT))
+                if (tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.COLUMN) || tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.INDEX))
+                {
+                    ucDataGridView dgv = new ucDataGridView();
+                    dgv.Dock = DockStyle.Fill;
+                    dgv.AllowUserToAddRows = false;
+                    dgv.AllowUserToDeleteRows = false;
+                    dgv.AllowUserToResizeRows = false;
+                    dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                    dgv.ReadOnly = true;
+                    dgv.DataSourceChanged += dgv_DataSourceChanged;
+
+                    tp.Controls.Add(dgv);
+                }
+                else if (tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.SCRIPT))
                 {
                     TextBox tbx = new TextBox();
                     tbx.ReadOnly = true;
@@ -105,11 +127,37 @@ namespace LHJ.DBViewer
         }
         #endregion 6.Method
 
+
+        #region 7.Event
+        private void dgv_DataSourceChanged(object sender, EventArgs e)
+        {
+            ucDataGridView dgv = sender as ucDataGridView;
+
+            if (dgv != null)
+            {
+                dgv.AutoResizeColumn();
+            }
+        }
+
         private void tabControl1_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (this.tabControl1.TabPages.Count > 0)
             {
-                if (this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.SCRIPT))
+                if (this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.COLUMN))
+                {
+                    DataTable dt = DALDataAccess.GetTableColumns(this.mHt["USER"].ToString(), this.mHt["OBJECT_NAME"].ToString());
+                    ucDataGridView dgv = this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Controls[0] as ucDataGridView;
+
+                    dgv.DataSource = dt;
+                }
+                else if (this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.INDEX))
+                {
+                    DataTable dt = DALDataAccess.GetTableIndexInfo(this.mHt["USER"].ToString(), this.mHt["OBJECT_NAME"].ToString());
+                    ucDataGridView dgv = this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Controls[0] as ucDataGridView;
+
+                    dgv.DataSource = dt;
+                }
+                else if (this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.SCRIPT))
                 {
                     DataTable dtScript = DALDataAccess.GetObjectScript(this.mHt["USER"].ToString(), this.mHt["OBJECT_NAME"].ToString());
                     TextBox tbx = this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Controls[0] as TextBox;
@@ -134,10 +182,6 @@ namespace LHJ.DBViewer
                 }
             }
         }
-
-
-        #region 7.Event
-
         #endregion 7.Event
     }
 }

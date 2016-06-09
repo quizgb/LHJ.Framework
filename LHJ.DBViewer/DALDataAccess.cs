@@ -19,6 +19,39 @@ namespace LHJ.DBViewer
             return Common.Comm.DBWorker.ExecuteNonQuery(strCommand);
         }
 
+        public static DataTable GetTableIndexInfo(string aUserID, string aTableName)
+        {
+            DataTable dt = new DataTable();
+            string strCommand = string.Empty;
+            Hashtable ht = new Hashtable();
+
+            strCommand = @" SELECT a.index_name,
+                                   min(decode(a.uniqueness,'UNIQUE', 'UNIQUE')) uniqueness, 
+                                   min(decode(column_position,1,b.column_name)) col1,
+                                   min(decode(column_position,2,b.column_name)) col2,
+                                   min(decode(column_position,3,b.column_name)) col3,
+                                   min(decode(column_position,4,b.column_name)) col4,
+                                   min(decode(column_position,5,b.column_name)) col5,
+                                   min(decode(column_position,6,b.column_name)) col6,
+                                   min(decode(column_position,7,b.column_name)) col7,
+                                   min(decode(column_position,8,b.column_name)) col8,
+                                   min(decode(column_position,9,b.column_name)) col9
+                              FROM all_indexes a, all_ind_columns b
+                             where a.table_owner = :OWNER 
+                               and a.table_name = :TABLE_NAME
+                               and a.owner = b.index_owner
+                               and a.index_name = b.index_name
+                             group by a.index_name
+                             order by a.index_name  ";
+
+            ht["OWNER"] = aUserID;
+            ht["TABLE_NAME"] = aTableName;
+
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand, ht);
+
+            return dt;
+        }
+
         public static DataTable GetIndexByTableName(string aUserID, string aTableName)
         {
             DataTable dt = new DataTable();
@@ -216,12 +249,31 @@ namespace LHJ.DBViewer
             string strCommand = string.Empty;
             Hashtable ht = new Hashtable();
 
-            strCommand = @" SELECT COLUMN_NAME, DATA_TYPE||'('||DATA_LENGTH||')' AS DATA_TYPE, 
-                                   DECODE(NULLABLE, 'N', 'NOT NULL') AS NULLABLE, DATA_DEFAULT AS DEFAULT_VALUE
-                              FROM ALL_TAB_COLUMNS 
-                             WHERE OWNER = :USERID 
-                               AND TABLE_NAME = :TABLE_NAME
-                          ORDER BY COLUMN_ID    ";
+            strCommand = @"   SELECT A.COLUMN_NAME, A.COLUMN_ID AS ID,
+                                     (SELECT X.POSITION
+                                        FROM SYS.DBA_CONS_COLUMNS X
+                                       WHERE X.TABLE_NAME = :TABLE_NAME
+		                                 AND X.CONSTRAINT_NAME IN (SELECT CN.NAME
+                                                            			FROM SYS.CDEF$ C, SYS.CON$ CN, SYS.OBJ$ O, SYS.USER$ U
+                                                            		   WHERE  C.TYPE# = 2
+                                                            			 AND  C.CON# = CN.CON#
+                                                            			 AND  C.OBJ# = O.OBJ#
+                                                            			 AND  O.OWNER# = U.USER#
+                                                            			 AND  U.NAME = :USERID
+                                                            			 AND  O.NAME = :TABLE_NAME)
+                                         AND X.OWNER = :USERID
+                                         AND X.COLUMN_NAME = A.COLUMN_NAME) AS PK,
+                                     DECODE(NULLABLE, 'N', 'NOT NULL') AS NULLABLE,
+                                     A.DATA_TYPE||
+  		                             DECODE(A.DATA_PRECISION, NULL,
+  		                             DECODE(A.DATA_TYPE, 'NUMBER', '', 'DATE', '', '('||
+  		                             DECODE(A.DATA_TYPE, 'NUMBER', A.DATA_PRECISION||', '||A.DATA_SCALE, A.DATA_LENGTH)||')'), '('||
+  		                             DECODE(A.DATA_TYPE, 'NUMBER', A.DATA_PRECISION||', '||A.DATA_SCALE, A.DATA_LENGTH)||')') AS DATA_TYPE, 
+                                     A.DATA_DEFAULT AS DEFAULT_VALUE, A.NUM_DISTINCT
+                                FROM ALL_TAB_COLUMNS A
+                               WHERE A.OWNER = :USERID
+                                 AND A.TABLE_NAME = :TABLE_NAME
+                               ORDER BY A.COLUMN_ID ";
 
             ht["USERID"] = aUserID;
             ht["TABLE_NAME"] = aTableName;
