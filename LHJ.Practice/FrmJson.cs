@@ -8,18 +8,17 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Windows.Forms;
+using LHJ.Practice.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace LHJ.Practice
 {
     public partial class FrmJson : Form
     {
-        public class Issue
-        {
-            public string Subject { get; set; }
-            public string Done { get; set; }
-            public string Author { get; set; }
-        }
+        //JSON 작업순서
+        //1.JSON 문자열을 받아서 클립보드에 복사하고 비쥬얼스튜디오 -> 편집 -> 선택하여 붙여넣기 -> JSON을 클래스로 붙여넣기 선택.
+        //2.RootObject 클래스 명칭을 원하는대로 변경 후 JsonConvert.DeserializeObject<클래스명>을 통해 받아오면 끝.
 
         public FrmJson()
         {
@@ -31,8 +30,9 @@ namespace LHJ.Practice
             this.listView1.Items.Clear();
 
             string result = null;
-            string url = "http://www.redmine.org/issues.json";
-            Console.WriteLine("url : " + url);
+            //string url = "http://www.redmine.org/issues.json";
+            //string url = @"http://maps.googleapis.com/maps/api/geocode/json?latlng=37.566535,126.977969&language=ko";
+            string url = string.Format(@"http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key={0}&targetDt={1}", "07b59c3c13cc181e4279e43161a6762b", "20150101");
 
             try
             {
@@ -56,31 +56,11 @@ namespace LHJ.Practice
         {
             listView1.BeginUpdate();
 
-            List<Issue> issues = new List<Issue>();
-            JObject obj = JObject.Parse(json);
-            JArray array = JArray.Parse(obj["issues"].ToString());
-
-            foreach (JObject itemObj in array)
-            {
-                Issue issue = new Issue();
-                issue.Subject = itemObj["subject"].ToString();
-                issue.Done = itemObj["done_ratio"].ToString();
-                issue.Author = itemObj["author"]["name"].ToString();
-                issues.Add(issue);
-            }
-
-            foreach(Issue isu in issues)
-            {
-                ListViewItem lvi = new ListViewItem(isu.Subject);
-                lvi.SubItems.Add(isu.Done);
-                lvi.SubItems.Add(isu.Author);
-
-                listView1.Items.Add(lvi);
-            }
-
-            this.listView1.Columns.Add("Subject",  200/*가로사이즈*/, HorizontalAlignment.Left);
-            this.listView1.Columns.Add("Done", 200/*가로사이즈*/, HorizontalAlignment.Left);
-            this.listView1.Columns.Add("Author", 200/*가로사이즈*/, HorizontalAlignment.Left);
+            Movie mv = JsonConvert.DeserializeObject<Movie>(json); 
+            //GoogleMaps gm = JsonConvert.DeserializeObject<GoogleMaps>(json); 
+            //this.listView1.Columns.Add("Subject", 200/*가로사이즈*/, HorizontalAlignment.Left);
+            //this.listView1.Columns.Add("Done", 200/*가로사이즈*/, HorizontalAlignment.Left);
+            //this.listView1.Columns.Add("Author", 200/*가로사이즈*/, HorizontalAlignment.Left);
 
             listView1.EndUpdate();
         }
