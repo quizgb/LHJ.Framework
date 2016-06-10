@@ -86,6 +86,11 @@
       <HintPath>..\..\..\..\..\..\Program Files\Microsoft SDKs\Speech\v11.0\Assembly\Microsoft.Speech.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Windows.Forms.Ribbon35">
@@ -190,6 +195,7 @@
     <None Include="Resources\00001161_608555_001.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Newtonsoft.Json.dll" />
     <Content Include="Resources\add.png" />
     <Content Include="Resources\delete.png" />
     <Content Include="Resources\login view_32x32.png" />
