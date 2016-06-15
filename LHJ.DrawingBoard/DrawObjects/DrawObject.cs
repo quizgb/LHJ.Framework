@@ -12,32 +12,22 @@ namespace LHJ.DrawingBoard.DrawObjects
     [Serializable]
     public abstract class DrawObject
     {
-        #region 전역변수
-
+        #region 1.Variable
         //DrawObject 의 선택 여부를 저장
-        private bool selected;
+        private bool mSelected;
 
         //DrawObject 의 테두리 색깔을 지정한다.
-        private Color color;
+        private Color mColor;
 
         //DrawObject 의 배경 색깔을 지정한다.
-        private Color backColor;
+        private Color mBackColor;
 
         //DrawObject 의 Pen 두께를 지정한다.
-        private int penWidth;
+        private int mPenWidth;
+        #endregion 1.Variable
 
-        #endregion
 
-        #region 생성자
-
-        public DrawObject()
-        {
-        }
-
-        #endregion
-
-        #region Properties
-
+        #region 2.Property
         /// <summary>
         /// DrawObject 의 선택여부
         /// </summary>
@@ -45,11 +35,11 @@ namespace LHJ.DrawingBoard.DrawObjects
         {
             get
             {
-                return selected;
+                return this.mSelected;
             }
             set
             {
-                selected = value;
+                this.mSelected = value;
             }
         }
 
@@ -60,11 +50,11 @@ namespace LHJ.DrawingBoard.DrawObjects
         {
             get
             {
-                return color;
+                return this.mColor;
             }
             set
             {
-                color = value;
+                this.mColor = value;
             }
         }
 
@@ -75,12 +65,12 @@ namespace LHJ.DrawingBoard.DrawObjects
         {
             get
             {
-                return backColor;
+                return this.mBackColor;
             }
 
             set
             {
-                backColor = value;
+                this.mBackColor = value;
             }
         }
 
@@ -91,11 +81,11 @@ namespace LHJ.DrawingBoard.DrawObjects
         {
             get
             {
-                return penWidth;
+                return this.mPenWidth;
             }
             set
             {
-                penWidth = value;
+                this.mPenWidth = value;
             }
         }
 
@@ -109,11 +99,33 @@ namespace LHJ.DrawingBoard.DrawObjects
                 return 0;
             }
         }
+        #endregion 2.Property
 
-        #endregion
 
-        #region 가상 함수
+        #region 3.Constructor
+        public DrawObject()
+        {
+        }
+        #endregion 3.Constructor
 
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
         /// <summary>
         /// DrawObject 복사 함수
         /// </summary>
@@ -130,7 +142,7 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// <summary>
         /// 핸들 넘버의 위치를 반환한다.
         /// </summary>
-        public virtual Point GetHandle(int handleNumber)
+        public virtual Point GetHandle(int aHandleNumber)
         {
             return new Point(0, 0);
         }
@@ -138,9 +150,9 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// <summary>
         /// 핸들의 Rectangle 을 반환한다.
         /// </summary>
-        public virtual Rectangle GetHandleRectangle(int handleNumber)
+        public virtual Rectangle GetHandleRectangle(int aHandleNumber)
         {
-            Point point = GetHandle(handleNumber);
+            Point point = this.GetHandle(aHandleNumber);
 
             return new Rectangle(point.X - 3, point.Y - 3, 7, 7);
         }
@@ -168,7 +180,7 @@ namespace LHJ.DrawingBoard.DrawObjects
         ///   0 - hit anywhere
         /// > 1 - handle number
         /// </summary>
-        public virtual int HitTest(Point point)
+        public virtual int HitTest(Point aPoint)
         {
             return -1;
         }
@@ -177,7 +189,7 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// <summary>
         /// 마우스의 위치가 DrawObject 내에 있는지 알려준다.
         /// </summary>
-        protected virtual bool PointInObject(Point point)
+        protected virtual bool PointInObject(Point aPoint)
         {
             return false;
         }
@@ -186,7 +198,7 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// <summary>
         /// Pointer 의 HandleNumber 에 따라서 마우스 커서를 반환한다.
         /// </summary>
-        public virtual Cursor GetHandleCursor(int handleNumber)
+        public virtual Cursor GetHandleCursor(int aHandleNumber)
         {
             return Cursors.Default;
         }
@@ -194,7 +206,7 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// <summary>
         /// DrawObject가 rectangle 에 포함되는지 알려준다.
         /// </summary>
-        public virtual bool IntersectsWith(Rectangle rectangle)
+        public virtual bool IntersectsWith(Rectangle aRectangle)
         {
             return false;
         }
@@ -202,18 +214,16 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// <summary>
         /// DrawObject 의 위치를 이동한다.
         /// </summary>
-        public virtual void Move(int deltaX, int deltaY)
+        public virtual void Move(int aDeltaX, int aDeltaY)
         {
         }
 
         /// <summary>
         /// DrawObject 의 사이즈를 변경한다.
         /// </summary>
-        public virtual void MoveHandleTo(Point point, int handleNumber)
+        public virtual void MoveHandleTo(Point aPoint, int aHandleNumber)
         {
         }
-
-
 
         /// <summary>
         /// DrawObject 를 새로 그리거나, 사이즈를 변경이 끝났을 때 호출된다.
@@ -222,27 +232,22 @@ namespace LHJ.DrawingBoard.DrawObjects
         {
         }
 
-        #endregion
-
-        #region 내부 함수
-
         /// <summary>
         /// DrawObject 초기화
         /// </summary>
         protected void Initialize()
         {
             //DrawObject 를 선택으로 설정
-            this.selected = true;
-
+            this.mSelected = true;
 
             //마지막으로 사용된 테두리 색을 입력한다.
-            color = Controller.MainController.Instance.LastUsedColor;
+            this.mColor = Controller.MainController.Instance.LastUsedColor;
 
             //마지막으로 사용된 배경색을 입력한다.
-            backColor = Controller.MainController.Instance.LastUesdBackgoroundColor;
+            this.mBackColor = Controller.MainController.Instance.LastUesdBackgoroundColor;
 
             //마지막으로 사용된 Pen 두께를 입력한다.
-            penWidth = Controller.MainController.Instance.LastUsedPenWidth;
+            this.mPenWidth = Controller.MainController.Instance.LastUsedPenWidth;
         }
 
         /// <summary>
@@ -250,12 +255,16 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// </summary>
         protected void FillDrawObjectFields(DrawObject drawObject)
         {
-            drawObject.selected = this.selected;
-            drawObject.color = this.color;
-            drawObject.backColor = this.backColor;
-            drawObject.penWidth = this.penWidth;
+            drawObject.Selected = this.mSelected;
+            drawObject.Color = this.mColor;
+            drawObject.BackColor = this.mBackColor;
+            drawObject.PenWidth = this.mPenWidth;
         }
+        #endregion 6.Method
 
-        #endregion
+
+        #region 7.Event
+
+        #endregion 7.Event
     }
 }

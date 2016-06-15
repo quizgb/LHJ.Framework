@@ -13,30 +13,28 @@ namespace LHJ.DrawingBoard.Command
     /// </summary>
     public class Command
     {
-        #region 전역변수
-
+        #region 1.Variable
         /// <summary>
         /// 실행취소(Undo) 스택
         /// List<DrawObject> 를 스택으로 쌓는다.
         /// </summary>
-        private Stack<List<DrawObjects.DrawObject>> undoStack = new Stack<List<DrawObjects.DrawObject>>();
+        private Stack<List<DrawObjects.DrawObject>> mUndoStack = new Stack<List<DrawObjects.DrawObject>>();
 
         /// <summary>
         /// 다시실행(Redo) 스택
         /// List<DrawObject> 를 스택으로 쌓는다.
         /// </summary>
-        private Stack<List<DrawObjects.DrawObject>> redoStack = new Stack<List<DrawObjects.DrawObject>>();
+        private Stack<List<DrawObjects.DrawObject>> mRedoStack = new Stack<List<DrawObjects.DrawObject>>();
+        #endregion 1.Variable
 
-        #endregion
 
-        #region 속성
-
+        #region 2.Property
         /// <summary>
         /// 실행취소(Undo) 가능 여부 
         /// </summary>
         public bool CanUndo
         {
-            get { return undoStack.Count > 0; }
+            get { return this.mUndoStack.Count > 0; }
         }
 
         /// <summary>
@@ -44,20 +42,40 @@ namespace LHJ.DrawingBoard.Command
         /// </summary>
         public bool CanRedo
         {
-            get { return redoStack.Count > 0; }
+            get { return this.mRedoStack.Count > 0; }
         }
+        #endregion 2.Property
 
-        #endregion
 
-        #region 내부 함수
+        #region 3.Constructor
 
+        #endregion 3.Constructor
+
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
         /// <summary>
         /// Command 추가 => 실행취소(Undo) 스택에 List<DrawObjects.DrawObject>를 추가한다.
         /// </summary>
         public void AddCommand(List<DrawObjects.DrawObject> data)
         {
             //실행취소(Undo) 스택에 추가
-            undoStack.Push(DataClone(data));
+            this.mUndoStack.Push(DataClone(data));
 
             //Command 가 추가 되었음을 옵저버에게 알린다.
             MainController.Instance.Notify(ObserverAction.Command);
@@ -68,9 +86,9 @@ namespace LHJ.DrawingBoard.Command
         /// </summary>
         public void Clear()
         {
-            undoStack.Clear();
-            redoStack.Clear();
-        }
+            this.mUndoStack.Clear();
+            this.mRedoStack.Clear();
+        }   
 
 
         /// <summary>
@@ -83,10 +101,10 @@ namespace LHJ.DrawingBoard.Command
             if (CanUndo)
             {
                 //다시실행(Redo) 스택에 현재 GrapList 를 넣어준다.
-                redoStack.Push(DataClone(MainController.Instance.GraphicModel.GrapList));
+                this.mRedoStack.Push(DataClone(MainController.Instance.GraphicModel.GrapList));
 
                 //실행취소(Undo) 스택에서 가장 최근에 들어온 값을 복사하여 현재 GrapList에 입력한다.
-                MainController.Instance.GraphicModel.GrapList = DataClone(undoStack.Pop());
+                MainController.Instance.GraphicModel.GrapList = this.DataClone(this.mUndoStack.Pop());
 
                 return true;
             }
@@ -104,10 +122,10 @@ namespace LHJ.DrawingBoard.Command
             if (CanRedo)
             {
                 //실행취소(Undo) 스택에 현재 GrapList 를 넣어준다.
-                undoStack.Push(DataClone(MainController.Instance.GraphicModel.GrapList));
+                this.mUndoStack.Push(DataClone(MainController.Instance.GraphicModel.GrapList));
 
                 //현재 GrapList 에 다시실행(Redo) 스택에서 가장 최근에 들어온 값을 복사하여 넣어준다.
-                MainController.Instance.GraphicModel.GrapList = DataClone(redoStack.Pop());
+                MainController.Instance.GraphicModel.GrapList = DataClone(this.mRedoStack.Pop());
 
                 return true;
             }
@@ -118,18 +136,22 @@ namespace LHJ.DrawingBoard.Command
         /// <summary>
         /// List<DrawObjects.DrawObject> 을 복사하여 반환한다.
         /// </summary>
-        private List<DrawObjects.DrawObject> DataClone(List<DrawObjects.DrawObject> data)
+        private List<DrawObjects.DrawObject> DataClone(List<DrawObjects.DrawObject> aDrawObjects)
         {
             List<DrawObject> clone = new List<DrawObject>();
 
-            foreach (DrawObject item in data)
+            foreach (DrawObject item in aDrawObjects)
             {
                 clone.Add(item.Clone());
             }
 
             return clone;
         }
+        #endregion 6.Method
 
-        #endregion
+
+        #region 7.Event
+
+        #endregion 7.Event
     }
 }

@@ -11,8 +11,17 @@ namespace LHJ.DrawingBoard.DrawObjects
     [Serializable]
     class EllipseObject : RectangleObject
     {
-        #region 생성자
+        #region 1.Variable
 
+        #endregion 1.Variable
+
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public EllipseObject()
             : this(0, 0, 1, 1)
         {
@@ -24,11 +33,26 @@ namespace LHJ.DrawingBoard.DrawObjects
             Rectangle = new Rectangle(x, y, width, height);
             Initialize();
         }
+        #endregion 3.Constructor
 
-        #endregion
 
-        #region 내부 함수
+        #region 4.Override Method
 
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
         /// <summary>
         /// 이 객체를 복사한다.
         /// </summary>
@@ -56,9 +80,12 @@ namespace LHJ.DrawingBoard.DrawObjects
                     g.FillEllipse(brush, Rectangle);
                 }
             }
-
         }
+        #endregion 6.Method
 
-        #endregion
+
+        #region 7.Event
+
+        #endregion 7.Event
     }
 }

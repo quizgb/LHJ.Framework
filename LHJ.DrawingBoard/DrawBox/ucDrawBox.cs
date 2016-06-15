@@ -16,66 +16,70 @@ namespace LHJ.DrawingBoard.DrawBox
     /// </summary>
     public partial class ucDrawBox : UserControl, IObserver
     {
-        #region 전역 변수
-
+        #region 1.Variable
         /// <summary>
         /// 속성 설정 폼
         /// </summary>
-        private PropertiesVIew properies;
+        private PropertiesVIew mProperies;
 
         /// <summary>
         /// 선택된 객체의 사이즈를 변경할 때 사용된다.
         /// </summary>
-        private DrawObject resizedObject;
+        private DrawObject mResizedObject;
 
         /// <summary>
         /// 사이즈가 변결 될 객체의 핸들 번호를 가져온다.
         /// </summary>
-        private int resizedObjectHandle;
+        private int mResizedObjectHandle;
 
         /// <summary>
         /// 마우스의 시작 위치
         /// </summary>
-        private Point startPoint = new Point(0, 0);
+        private Point mStartPoint = new Point(0, 0);
 
         /// <summary>
         /// 마우스의 마지막 위치
         /// </summary>
-        private Point lastPoint = new Point(0, 0);
+        private Point mLastPoint = new Point(0, 0);
 
         /// <summary>
         /// 이전의 lastPoint 를 저장한다.
         /// </summary>
-        private Point oldPoint;
+        private Point mOldPoint;
 
         /// <summary>
         /// DrawObject를 그릴수 있는 DrawBox 사이즈를 수정 할 수 있는지 여부를 저장하는 변수
         /// </summary>
-        private bool allowResize = false;
+        private bool mAllowResize = false;
 
         /// <summary>
         /// Pencil 을 그릴 때 마지막으로 그려진 Location.X 를 저장한다.
         /// </summary>
-        private int lastX;
+        private int mLastX;
 
         /// <summary>
         /// Pencil 을 그릴 때 마지막으로 그려진 Location.Y 를 저장한다.
         /// </summary>
-        private int lastY;
+        private int mLastY;
 
         /// <summary>
         /// Pencil 도구로 그릴 때 사용되는 PencilObject 변수
         /// </summary>
-        private PencilObejct newPencil;
+        private PencilObejct mNewPencil;
 
         /// <summary>
         /// Pencil 도구로 그릴 때 연결 점 사이의 최소 거리를 지정하는 상수
         /// </summary>
-        private const int MinDistance = 15 * 15;
+        private const int mMinDistance = 15 * 15;
+        #endregion 1.Variable
 
-        #endregion
 
-        #region 생성자
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
 
         /// <summary>
         /// 생성자
@@ -84,6 +88,22 @@ namespace LHJ.DrawingBoard.DrawBox
         {
             InitializeComponent();
 
+            this.SetInitialize();
+        }
+        #endregion 3.Constructor
+
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
             #region Paint 이벤트와 관련해서 유용한 style 을 적용한다.
 
             this.SetStyle(ControlStyles.AllPaintingInWmPaint, true);
@@ -101,7 +121,6 @@ namespace LHJ.DrawingBoard.DrawBox
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.DrawBox_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.DrawBox_MouseUp);
 
-
             this.pictureBox_ReSize.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_ReSize_MouseDown);
             this.pictureBox_ReSize.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_ReSize_MouseMove);
             this.pictureBox_ReSize.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_ReSize_MouseUp);
@@ -116,11 +135,10 @@ namespace LHJ.DrawingBoard.DrawBox
             //옵저버에 이 클래스를 구독자로 등록한다.
             MainController.Instance.Subscribe(this);
         }
+        #endregion 5.Set Initialize
 
-        #endregion
 
-        #region 옵저버 패턴
-
+        #region 6.Method
         /// <summary>
         /// 수신된 ObserverAction 에 따라서 처리 한다.
         /// </summary>
@@ -147,43 +165,6 @@ namespace LHJ.DrawingBoard.DrawBox
             }
         }
 
-        #endregion
-
-        #region DrawBox 크기 조절 이벤트
-
-        /// <summary>
-        /// DrawBox 오른쪽 하단의 화살표를 마우스를 클릭했을 때 이벤트
-        /// 클릭하면 DrawBox 의 사이즈를 조절 할 수 있도록 허락한다.
-        /// </summary>
-        private void pictureBox_ReSize_MouseDown(object sender, MouseEventArgs e)
-        {
-            allowResize = true;
-        }
-
-        /// <summary>
-        /// 마우스의 위치에 따라서 DrawBox 의 사이즈를 조절한다.
-        /// </summary>
-        private void pictureBox_ReSize_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (allowResize)
-            {
-                this.Height = pictureBox_ReSize.Top + e.Y;
-                this.Width = pictureBox_ReSize.Left + e.X;
-            }
-        }
-
-        /// <summary>
-        /// 마우스를 클릭을 해제하면 DrawBox 의 사이즈 조절이 끝난다.
-        /// </summary>
-        private void pictureBox_ReSize_MouseUp(object sender, MouseEventArgs e)
-        {
-            allowResize = false;
-        }
-
-        #endregion
-
-        #region 내부함수
-
         /// <summary>
         /// DrawBox 에 그려진 모든 DrawObject의 선택을 해제한다.
         /// </summary>
@@ -198,28 +179,90 @@ namespace LHJ.DrawingBoard.DrawBox
         /// <summary>
         /// 그리기 도구에 선택된 DrawObject 의 종류에 따라 새로운 DrawObject 객체를 생성해서 반환한다.
         /// </summary>
-        /// <param name="type">그리기 도구에서 선택된 도구의 종류</param>
-        /// <param name="location">DrawObject가 그려질 위치</param>
+        /// <param name="aType">그리기 도구에서 선택된 도구의 종류</param>
+        /// <param name="aLocation">DrawObject가 그려질 위치</param>
         /// <returns></returns>
-        private DrawObject AddNewDrawObject(DrawObjectType type, Point location)
+        private DrawObject AddNewDrawObject(DrawObjectType aType, Point aLocation)
         {
-            switch (type)
+            switch (aType)
             {
-                case DrawObjectType.Rectangle: return new RectangleObject(location.X, location.Y, 1, 1);
-                case DrawObjectType.Ellipse: return new EllipseObject(location.X, location.Y, 1, 1);
-                case DrawObjectType.Line: return new LineObject(location.X, location.Y, location.X + 1, location.Y + 1);
-                case DrawObjectType.Pencil: lastX = location.X;
-                    lastY = location.Y;
-                    return newPencil = new PencilObejct(location.X, location.Y, location.X + 1, location.Y + 1);
+                case DrawObjectType.Rectangle: return new RectangleObject(aLocation.X, aLocation.Y, 1, 1);
+                case DrawObjectType.Ellipse: return new EllipseObject(aLocation.X, aLocation.Y, 1, 1);
+                case DrawObjectType.Line: return new LineObject(aLocation.X, aLocation.Y, aLocation.X + 1, aLocation.Y + 1);
+                case DrawObjectType.Pencil: 
+                    this.mLastX = aLocation.X;
+                    this.mLastY = aLocation.Y;
+                    return this.mNewPencil = new PencilObejct(aLocation.X, aLocation.Y, aLocation.X + 1, aLocation.Y + 1);
             }
 
-
-            return new RectangleObject(location.X, location.Y, 1, 1);
+            return new RectangleObject(aLocation.X, aLocation.Y, 1, 1);
         }
 
-        #endregion
+        /// <summary>
+        /// 버튼의 상태를 설정한다.
+        /// </summary>
+        private void SetToolStripMenu()
+        {
+            if (MainController.Instance.Command.CanUndo)
+            {
+                this.UndoToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                this.UndoToolStripMenuItem.Enabled = false;
+            }
 
-        #region 그리기 관련 이벤트
+            if (MainController.Instance.Command.CanRedo)
+            {
+                this.RedoToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                this.RedoToolStripMenuItem.Enabled = false;
+            }
+
+            //선택된 DrawObject 가 하나 일 때만 설정이 가능하다.
+            if (MainController.Instance.GraphicModel.SelectedCount == 1)
+            {
+                this.PropertiesToolStripMenuItem.Enabled = true;
+            }
+            else
+            {
+                this.PropertiesToolStripMenuItem.Enabled = false;
+            }
+        }
+        #endregion 6.Method
+
+
+        #region 7.Event
+        /// <summary>
+        /// DrawBox 오른쪽 하단의 화살표를 마우스를 클릭했을 때 이벤트
+        /// 클릭하면 DrawBox 의 사이즈를 조절 할 수 있도록 허락한다.
+        /// </summary>
+        private void pictureBox_ReSize_MouseDown(object sender, MouseEventArgs e)
+        {
+            this.mAllowResize = true;
+        }
+
+        /// <summary>
+        /// 마우스의 위치에 따라서 DrawBox 의 사이즈를 조절한다.
+        /// </summary>
+        private void pictureBox_ReSize_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (this.mAllowResize)
+            {
+                this.Height = this.pictureBox_ReSize.Top + e.Y;
+                this.Width = this.pictureBox_ReSize.Left + e.X;
+            }
+        }
+
+        /// <summary>
+        /// 마우스를 클릭을 해제하면 DrawBox 의 사이즈 조절이 끝난다.
+        /// </summary>
+        private void pictureBox_ReSize_MouseUp(object sender, MouseEventArgs e)
+        {
+            this.mAllowResize = false;
+        }
 
         /// <summary>
         /// 마우스 다운 이벤트, 새롭게 객체를 그리거나, 그려진 객체를 선택한다.
@@ -243,11 +286,11 @@ namespace LHJ.DrawingBoard.DrawBox
                         MainController.Instance.SelectMode = SelectMode.Size;
 
                         //사이즈 변경을 할 수 있도록 준비한다.
-                        resizedObject = ob;
-                        resizedObjectHandle = handleNumber;
+                        this.mResizedObject = ob;
+                        this.mResizedObjectHandle = handleNumber;
 
                         //DrawBox 그려진 모든 DrawObject 의 선택을 해제한다.
-                        UnSelectAll();
+                        this.UnSelectAll();
 
                         //현재 클릭된 DrawObejct 를 선택한다.
                         ob.Selected = true;
@@ -255,7 +298,6 @@ namespace LHJ.DrawingBoard.DrawBox
                         break;
                     }
                 }
-
 
                 if (MainController.Instance.SelectMode == SelectMode.None)
                 {
@@ -266,7 +308,7 @@ namespace LHJ.DrawingBoard.DrawBox
                             //Ctrl 키가 눌러지지 않은 상태에서 DrawObject 를 선택하면 모든 DrawObjec의 선택을 해제하고 현재 DrawObject 를 선택한다.
                             if ((Control.ModifierKeys & Keys.Control) == 0 && !o.Selected)
                             {
-                                UnSelectAll();
+                                this.UnSelectAll();
                                 o.Selected = true;
                             }
                             else if ((Control.ModifierKeys & Keys.Control) != 0 && o.Selected)
@@ -291,20 +333,19 @@ namespace LHJ.DrawingBoard.DrawBox
                     }
                 }
 
-
                 //DrawBox 의 상태가 아무것도 지정되지 않고 키보드를 누른 상태가 아니라면 DrawBox 에 선택된 모든 객체를 해제한다.
                 if (MainController.Instance.SelectMode == SelectMode.None)
                 {
                     if ((Control.ModifierKeys & Keys.Control) == 0)
-                        UnSelectAll();
+                        this.UnSelectAll();
 
                     //DrawBox 의 상태를 영역으로 선택하기로 변경한다.
                     MainController.Instance.SelectMode = SelectMode.NetSelection;
                 }
 
                 //현재의 마우스 위치를 저장한다.
-                lastPoint = e.Location;
-                startPoint = e.Location;
+                this.mLastPoint = e.Location;
+                this.mStartPoint = e.Location;
 
                 //마우스를 캡쳐한다.
                 this.Capture = true;
@@ -312,7 +353,7 @@ namespace LHJ.DrawingBoard.DrawBox
                 //DrawBox의 상태가 영역으로 선택하기 일떄, 영역 그리기를 시작한다.
                 if (MainController.Instance.SelectMode == SelectMode.NetSelection)
                 {
-                    ControlPaint.DrawReversibleFrame(this.RectangleToScreen(RectangleObject.GetNormalizedRectangle(startPoint, lastPoint)), Color.Black, FrameStyle.Dashed);
+                    ControlPaint.DrawReversibleFrame(this.RectangleToScreen(RectangleObject.GetNormalizedRectangle(this.mStartPoint, this.mLastPoint)), Color.Black, FrameStyle.Dashed);
                 }
             }
 
@@ -320,30 +361,27 @@ namespace LHJ.DrawingBoard.DrawBox
             else if (e.Button == MouseButtons.Left && !(MainController.Instance.DrawObjectType == DrawObjectType.Select))
             {
                 //모든 DrawObject 선택 해제
-                UnSelectAll();
+                this.UnSelectAll();
 
                 //현재 상태를 실행취소(Undo) & 다시실행(Redo) Command 에 등록한다.
                 MainController.Instance.Command.AddCommand(MainController.Instance.GraphicModel.GrapList);
 
                 //새로운 DrawObject 를 GrapList 에 등록한다.
-                MainController.Instance.GraphicModel.GrapList.Insert(0, AddNewDrawObject(MainController.Instance.DrawObjectType, e.Location));
-
+                MainController.Instance.GraphicModel.GrapList.Insert(0, this.AddNewDrawObject(MainController.Instance.DrawObjectType, e.Location));
 
                 //마우스를 캡쳐한다.
                 this.Capture = true;
-
             }
 
            //마우스 우클릭시 팝업 메뉴를 보여준다.
             else if (e.Button == System.Windows.Forms.MouseButtons.Right)
             {
-                SetToolStripMenu();
+                this.SetToolStripMenu();
 
-                contextMenuStrip1.Show(MousePosition);
+                this.contextMenuStrip1.Show(MousePosition);
 
                 return;
             }
-
         }
 
         /// <summary>
@@ -351,29 +389,29 @@ namespace LHJ.DrawingBoard.DrawBox
         /// </summary>
         private void DrawBox_MouseMove(object sender, MouseEventArgs e)
         {
-            oldPoint = lastPoint;
+            this.mOldPoint = this.mLastPoint;
 
             //마우스 왼쪽 클릭이고, DrawObjectType 이 선택하기가 아닐 때
             if (e.Button == MouseButtons.Left && MainController.Instance.DrawObjectType != DrawObjectType.Select)
             {
                 //Pencil 그리기 일때
-                if (MainController.Instance.DrawObjectType == DrawObjectType.Pencil && newPencil != null)
+                if (MainController.Instance.DrawObjectType == DrawObjectType.Pencil && this.mNewPencil != null)
                 {
                     Point point = new Point(e.X, e.Y);
-                    int distance = (e.X - lastX) * (e.X - lastX) + (e.Y - lastY) * (e.Y - lastY);
+                    int distance = (e.X - this.mLastX) * (e.X - this.mLastX) + (e.Y - this.mLastY) * (e.Y - this.mLastY);
 
                     //연결점 사이의 거리가 최소 거리보다 적을 때
-                    if (distance < MinDistance)
+                    if (distance < mMinDistance)
                     {
                         //Pencil의 라인을 연장해서 그린다
-                        newPencil.MoveHandleTo(point, newPencil.HandleCount);
+                        this.mNewPencil.MoveHandleTo(point, this.mNewPencil.HandleCount);
                     }
                     else //연결점 사이의 거리가 최소 거리보다 멀 때
                     {
                         //새로운 연결점 추가
-                        newPencil.AddPoint(e.Location);
-                        lastX = e.X;
-                        lastY = e.Y;
+                        this.mNewPencil.AddPoint(e.Location);
+                        this.mLastX = e.X;
+                        this.mLastY = e.Y;
                     }
                 }
                 else
@@ -391,19 +429,19 @@ namespace LHJ.DrawingBoard.DrawBox
             else if (e.Button == MouseButtons.Left && MainController.Instance.DrawObjectType == DrawObjectType.Select)
             {
                 //마우스의 현재 위치에서 마지막 위치를 뺀 값을 저장한다.
-                int distanceX = e.X - lastPoint.X;
-                int distanceY = e.Y - lastPoint.Y;
+                int distanceX = e.X - mLastPoint.X;
+                int distanceY = e.Y - mLastPoint.Y;
 
                 //마우스의 현재 위치를 마지막 값으로 저장한다.
-                lastPoint = e.Location;
+                this.mLastPoint = e.Location;
 
                 //DrawBox 의 현재 상태가 사이즈 변경 모드일때
                 if (MainController.Instance.SelectMode == SelectMode.Size)
                 {
-                    if (resizedObject != null)
+                    if (this.mResizedObject != null)
                     {
                         //DrawObject 의 사이즈를 변경한다.
-                        resizedObject.MoveHandleTo(e.Location, resizedObjectHandle);
+                        this.mResizedObject.MoveHandleTo(e.Location, this.mResizedObjectHandle);
 
                         //DrawBox의 Paint 이벤트를 호출한다.
                         this.Invalidate(false);
@@ -437,8 +475,8 @@ namespace LHJ.DrawingBoard.DrawBox
                 if (MainController.Instance.SelectMode == SelectMode.NetSelection)
                 {
                     //마우스로 이동된 만큼 영역을 그려준다.
-                    ControlPaint.DrawReversibleFrame(this.RectangleToScreen(RectangleObject.GetNormalizedRectangle(startPoint, oldPoint)), Color.Black, FrameStyle.Dashed);
-                    ControlPaint.DrawReversibleFrame(this.RectangleToScreen(RectangleObject.GetNormalizedRectangle(startPoint, e.Location)), Color.Black, FrameStyle.Dashed);
+                    ControlPaint.DrawReversibleFrame(this.RectangleToScreen(RectangleObject.GetNormalizedRectangle(this.mStartPoint, this.mOldPoint)), Color.Black, FrameStyle.Dashed);
+                    ControlPaint.DrawReversibleFrame(this.RectangleToScreen(RectangleObject.GetNormalizedRectangle(this.mStartPoint, e.Location)), Color.Black, FrameStyle.Dashed);
 
                     return;
                 }
@@ -454,8 +492,6 @@ namespace LHJ.DrawingBoard.DrawBox
                     return;
                 }
             }
-
-
         }
 
         /// <summary>
@@ -474,7 +510,7 @@ namespace LHJ.DrawingBoard.DrawBox
                 MainController.Instance.GraphicModel.GrapList[0].Normalize();
 
                 //Pencil 변수를 null 로 초기화 한다.
-                newPencil = null;
+                this.mNewPencil = null;
 
                 MainController.Instance.Notify(ObserverAction.Select);
             }
@@ -483,13 +519,13 @@ namespace LHJ.DrawingBoard.DrawBox
                 ////DrawBox 의 상태가 영역으로 선택하기 일 때
                 if (MainController.Instance.SelectMode == SelectMode.NetSelection)
                 {
-                    ControlPaint.DrawReversibleFrame(this.RectangleToScreen(RectangleObject.GetNormalizedRectangle(startPoint, lastPoint)), Color.Black, FrameStyle.Dashed);
+                    ControlPaint.DrawReversibleFrame(this.RectangleToScreen(RectangleObject.GetNormalizedRectangle(this.mStartPoint, this.mLastPoint)), Color.Black, FrameStyle.Dashed);
 
                     //모든 DrawObject 의 선택을 해제한다.
-                    UnSelectAll();
+                    this.UnSelectAll();
 
                     //마우스의 처음과 마지막 위치 만큼의 Rectangle 을 생성한다.
-                    Rectangle rec = RectangleObject.GetNormalizedRectangle(startPoint, lastPoint);
+                    Rectangle rec = RectangleObject.GetNormalizedRectangle(this.mStartPoint, this.mLastPoint);
 
                     //rec 의 영역에 DrawObject 가 포함된다면 선택된걸로 설정한다.
                     foreach (DrawObject o in MainController.Instance.GraphicModel.GrapList)
@@ -503,10 +539,10 @@ namespace LHJ.DrawingBoard.DrawBox
                 }
 
                 //DrawObjec 의 사이즈 변경 변수가 Null 이 아니라면 변경된 된 크기만큼 최종적으로 설정해준다.
-                if (resizedObject != null)
+                if (this.mResizedObject != null)
                 {
-                    resizedObject.Normalize();
-                    resizedObject = null;
+                    this.mResizedObject.Normalize();
+                    this.mResizedObject = null;
                 }
 
                 //DrawBox 의 Paint 이벤트를 호출한다.
@@ -542,48 +578,6 @@ namespace LHJ.DrawingBoard.DrawBox
                 }
             }
         }
-
-        #endregion
-
-        #region 메뉴 버튼 설정
-
-        /// <summary>
-        /// 버튼의 상태를 설정한다.
-        /// </summary>
-        private void SetToolStripMenu()
-        {
-            if (MainController.Instance.Command.CanUndo)
-            {
-                UndoToolStripMenuItem.Enabled = true;
-            }
-            else
-            {
-                UndoToolStripMenuItem.Enabled = false;
-            }
-
-            if (MainController.Instance.Command.CanRedo)
-            {
-                RedoToolStripMenuItem.Enabled = true;
-            }
-            else
-            {
-                RedoToolStripMenuItem.Enabled = false;
-            }
-
-            //선택된 DrawObject 가 하나 일 때만 설정이 가능하다.
-            if (MainController.Instance.GraphicModel.SelectedCount == 1)
-            {
-                PropertiesToolStripMenuItem.Enabled = true;
-            }
-            else
-            {
-                PropertiesToolStripMenuItem.Enabled = false;
-            }
-        }
-
-        #endregion
-
-        #region 팝업 메뉴
 
         /// <summary>
         /// 전체 선택하기
@@ -659,18 +653,18 @@ namespace LHJ.DrawingBoard.DrawBox
             {
                 if (obj.Selected)
                 {
-                    properies = new PropertiesVIew(obj.Color, obj.BackColor);
+                    this.mProperies = new PropertiesVIew(obj.Color, obj.BackColor);
 
-                    if (properies.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
+                    if (this.mProperies.ShowDialog(this) == System.Windows.Forms.DialogResult.OK)
                     {
-                        obj.Color = properies.Color;
-                        obj.BackColor = properies.BackGroundColor;
-                        obj.PenWidth = properies.PenWidth;
+                        obj.Color = this.mProperies.Color;
+                        obj.BackColor = this.mProperies.BackGroundColor;
+                        obj.PenWidth = this.mProperies.PenWidth;
 
                         MainController.Instance.Notify(ObserverAction.Invalidate);
                     }
 
-                    properies.Dispose();
+                    this.mProperies.Dispose();
 
                     break;
                 }
@@ -714,7 +708,6 @@ namespace LHJ.DrawingBoard.DrawBox
                 }
             }
         }
-
-        #endregion
+        #endregion 7.Event
     }
 }

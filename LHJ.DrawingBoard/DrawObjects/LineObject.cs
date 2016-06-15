@@ -13,32 +13,101 @@ namespace LHJ.DrawingBoard.DrawObjects
     [Serializable]
     class LineObject : DrawObject
     {
-        #region 전역 변수
-
+        #region 1.Variable
         /// <summary>
         /// 라인 시작 위치
         /// </summary>
-        private Point startPoint;
+        private Point mStartPoint;
 
         /// <summary>
         /// 라인 끝 위치
         /// </summary>
-        private Point endPoint;
+        private Point mEndPoint;
 
         /// <summary>
         /// 연결된 라인 관련 변수
         /// </summary>
         [NonSerialized]
-        private GraphicsPath areaPath = null;
+        private GraphicsPath mAreaPath = null;
         [NonSerialized]
-        private Pen areaPen = null;
+        private Pen mAreaPen = null;
         [NonSerialized]
-        private Region areaRegion = null;
+        private Region mAreaRegion = null;
+        #endregion 1.Variable
 
-        #endregion
 
-        #region 생성자
+        #region 2.Property
+        /// <summary>
+        /// 이 객체가 가지는 핸들의 개수를 반환한다.
+        /// </summary>
+        public override int HandleCount
+        {
+            get
+            {
+                return 2;
+            }
+        }
 
+        /// <summary>
+        ///  GraphicsPath 
+        /// </summary>    
+        protected GraphicsPath AreaPath
+        {
+            get
+            {
+                return this.mAreaPath;
+            }
+            set
+            {
+                this.mAreaPath = value;
+            }
+        }
+
+        /// <summary>
+        /// Pen 
+        /// </summary>
+        protected Pen AreaPen
+        {
+            get
+            {
+                return this.mAreaPen;
+            }
+            set
+            {
+                this.mAreaPen = value;
+            }
+        }
+
+        /// <summary>
+        /// Region
+        /// </summary>
+        protected Region AreaRegion
+        {
+            get
+            {
+                return this.mAreaRegion;
+            }
+            set
+            {
+                this.mAreaRegion = value;
+            }
+        }
+
+        public Point StartPoint
+        {
+            get { return this.mStartPoint; }
+            set { this.mStartPoint = value; }
+        }
+
+        public Point EndPoint
+        {
+            get { return this.mEndPoint; }
+            set { this.mEndPoint = value; }
+        }
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public LineObject()
             : this(0, 0, 1, 0)
         {
@@ -47,26 +116,41 @@ namespace LHJ.DrawingBoard.DrawObjects
         public LineObject(int x1, int y1, int x2, int y2)
             : base()
         {
-            startPoint.X = x1;
-            startPoint.Y = y1;
-            endPoint.X = x2;
-            endPoint.Y = y2;
+            this.mStartPoint.X = x1;
+            this.mStartPoint.Y = y1;
+            this.mEndPoint.X = x2;
+            this.mEndPoint.Y = y2;
 
             Initialize();
         }
+        #endregion 3.Constructor
 
-        #endregion
 
-        #region 내부 함수
+        #region 4.Override Method
 
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
         /// <summary>
         /// 이 객체를 복사한다.
         /// </summary>
         public override DrawObject Clone()
         {
             LineObject lineObject = new LineObject();
-            lineObject.startPoint = this.startPoint;
-            lineObject.endPoint = this.endPoint;
+            lineObject.StartPoint = this.mStartPoint;
+            lineObject.EndPoint = this.mEndPoint;
 
             FillDrawObjectFields(lineObject);
             return lineObject;
@@ -82,7 +166,7 @@ namespace LHJ.DrawingBoard.DrawObjects
 
             using (Pen pen = new Pen(Color, PenWidth))
             {
-                g.DrawLine(pen, startPoint.X, startPoint.Y, endPoint.X, endPoint.Y);
+                g.DrawLine(pen, this.mStartPoint.X, this.mStartPoint.Y, this.mEndPoint.X, this.mEndPoint.Y);
             }
         }
 
@@ -94,9 +178,9 @@ namespace LHJ.DrawingBoard.DrawObjects
         public override Point GetHandle(int handleNumber)
         {
             if (handleNumber == 1)
-                return startPoint;
+                return this.mStartPoint;
             else
-                return endPoint;
+                return this.mEndPoint;
         }
 
         /// <summary>
@@ -163,9 +247,9 @@ namespace LHJ.DrawingBoard.DrawObjects
         public override void MoveHandleTo(Point point, int handleNumber)
         {
             if (handleNumber == 1)
-                startPoint = point;
+                this.mStartPoint = point;
             else
-                endPoint = point;
+                this.mEndPoint = point;
 
             Invalidate();
         }
@@ -175,17 +259,14 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// </summary>
         public override void Move(int deltaX, int deltaY)
         {
-            startPoint.X += deltaX;
-            startPoint.Y += deltaY;
-
-            endPoint.X += deltaX;
-            endPoint.Y += deltaY;
+            this.mStartPoint.X += deltaX;
+            this.mStartPoint.Y += deltaY;
+            
+            this.mEndPoint.X += deltaX;
+            this.mEndPoint.Y += deltaY;
 
             Invalidate();
         }
-
-
-
 
         /// <summary>
         /// 객체를 갱신한다.
@@ -219,77 +300,18 @@ namespace LHJ.DrawingBoard.DrawObjects
             if (AreaPath != null)
                 return;
 
-
             AreaPath = new GraphicsPath();
             AreaPen = new Pen(Color.Black, 7);
-            AreaPath.AddLine(startPoint.X, startPoint.Y, endPoint.X, endPoint.Y);
+            AreaPath.AddLine(this.mStartPoint.X, this.mStartPoint.Y, this.mEndPoint.X, this.mEndPoint.Y);
             AreaPath.Widen(AreaPen);
-
 
             AreaRegion = new Region(AreaPath);
         }
+        #endregion 6.Method
 
-        #endregion
 
-        #region 속성
+        #region 7.Event
 
-        /// <summary>
-        /// 이 객체가 가지는 핸들의 개수를 반환한다.
-        /// </summary>
-        public override int HandleCount
-        {
-            get
-            {
-                return 2;
-            }
-        }
-
-        /// <summary>
-        ///  GraphicsPath 
-        /// </summary>    
-
-        protected GraphicsPath AreaPath
-        {
-            get
-            {
-                return areaPath;
-            }
-            set
-            {
-                areaPath = value;
-            }
-        }
-
-        /// <summary>
-        /// Pen 
-        /// </summary>
-        protected Pen AreaPen
-        {
-            get
-            {
-                return areaPen;
-            }
-            set
-            {
-                areaPen = value;
-            }
-        }
-
-        /// <summary>
-        /// Region
-        /// </summary>
-        protected Region AreaRegion
-        {
-            get
-            {
-                return areaRegion;
-            }
-            set
-            {
-                areaRegion = value;
-            }
-        }
-
-        #endregion
+        #endregion 7.Event
     }
 }
