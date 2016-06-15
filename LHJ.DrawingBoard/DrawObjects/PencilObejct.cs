@@ -13,21 +13,39 @@ namespace LHJ.DrawingBoard.DrawObjects
     [Serializable]
     class PencilObejct : LineObject
     {
-        #region 전역 변수
-
+        #region 1.Variable
         /// <summary>
         /// 위치를 저장하는 컬렉션
         /// </summary>
-        private List<Point> pointList;
+        private List<Point> mPointList;
+        #endregion 1.Variable
 
-        #endregion
 
-        #region 생성자
+        #region 2.Property
+        /// <summary>
+        /// 핸들의 수를 반환한다.
+        /// </summary>
+        public override int HandleCount
+        {
+            get
+            {
+                return this.mPointList.Count;
+            }
+        }
 
+        public List<Point> PointList
+        {
+            get { return this.mPointList; }
+            set { this.mPointList = value; }
+        }
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public PencilObejct()
             : base()
         {
-            pointList = new List<Point>();
+            this.mPointList = new List<Point>();
 
             Initialize();
         }
@@ -35,17 +53,32 @@ namespace LHJ.DrawingBoard.DrawObjects
         public PencilObejct(int x1, int y1, int x2, int y2)
             : base()
         {
-            pointList = new List<Point>();
-            pointList.Add(new Point(x1, y1));
-            pointList.Add(new Point(x2, y2));
+           this.mPointList = new List<Point>();
+           this.mPointList.Add(new Point(x1, y1));
+           this.mPointList.Add(new Point(x2, y2));
 
             Initialize();
         }
+        #endregion 3.Constructor
 
-        #endregion
 
-        #region 내부함수
+        #region 4.Override Method
 
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
         /// <summary>
         /// 이 객체를 복사한다.
         /// </summary>
@@ -53,9 +86,9 @@ namespace LHJ.DrawingBoard.DrawObjects
         {
             PencilObejct pencilObejct = new PencilObejct();
 
-            foreach (Point p in this.pointList)
+            foreach (Point p in this.mPointList)
             {
-                pencilObejct.pointList.Add(p);
+                pencilObejct.PointList.Add(p);
             }
 
             FillDrawObjectFields(pencilObejct);
@@ -74,7 +107,7 @@ namespace LHJ.DrawingBoard.DrawObjects
 
             using (Pen pen = new Pen(Color, PenWidth))
             {
-                IEnumerator<Point> enumerator = pointList.GetEnumerator();
+                IEnumerator<Point> enumerator = this.mPointList.GetEnumerator();
 
                 if (enumerator.MoveNext())
                 {
@@ -99,37 +132,37 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// <summary>
         /// 위치를 pointList 에 추가한다.
         /// </summary>
-        public void AddPoint(Point point)
+        public void AddPoint(Point aPoint)
         {
-            pointList.Add(point);
+            this.mPointList.Add(aPoint);
         }
 
         /// <summary>
         /// 핸들 넘버의 위치를 반환한다.
         /// </summary> 
-        public override Point GetHandle(int handleNumber)
+        public override Point GetHandle(int aHandleNumber)
         {
-            if (handleNumber < 1)
-                handleNumber = 1;
+            if (aHandleNumber < 1)
+                aHandleNumber = 1;
 
-            if (handleNumber > pointList.Count)
-                handleNumber = pointList.Count;
+            if (aHandleNumber > this.mPointList.Count)
+                aHandleNumber = this.mPointList.Count;
 
-            return ((Point)pointList[handleNumber - 1]);
+            return ((Point)this.mPointList[aHandleNumber - 1]);
         }
 
         /// <summary>
         /// DrawObject 의 사이즈를 변경한다.
         /// </summary>
-        public override void MoveHandleTo(Point point, int handleNumber)
+        public override void MoveHandleTo(Point aPoint, int aHandleNumber)
         {
-            if (handleNumber < 1)
-                handleNumber = 1;
+            if (aHandleNumber < 1)
+                aHandleNumber = 1;
 
-            if (handleNumber > pointList.Count)
-                handleNumber = pointList.Count;
+            if (aHandleNumber > this.mPointList.Count)
+                aHandleNumber = this.mPointList.Count;
 
-            pointList[handleNumber - 1] = point;
+            mPointList[aHandleNumber - 1] = aPoint;
 
             Invalidate();
         }
@@ -137,21 +170,19 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// <summary>
         /// DrawObject 의 위치를 이동한다.
         /// </summary>
-        public override void Move(int deltaX, int deltaY)
+        public override void Move(int aDeltaX, int aDeltaY)
         {
-            int n = pointList.Count;
+            int n = this.mPointList.Count;
             Point point;
 
             for (int i = 0; i < n; i++)
             {
-                point = new Point(((Point)pointList[i]).X + deltaX, ((Point)pointList[i]).Y + deltaY);
-
-                pointList[i] = point;
+                point = new Point(((Point)this.mPointList[i]).X + aDeltaX, ((Point)this.mPointList[i]).Y + aDeltaY);
+                this.mPointList[i] = point;
             }
 
             Invalidate();
         }
-
 
         /// <summary>
         /// HistTest 를 위한 그래픽 객체를 만들어준다.
@@ -166,7 +197,7 @@ namespace LHJ.DrawingBoard.DrawObjects
             int x1 = 0, y1 = 0;     // 이전 위치
             int x2, y2;             // 현재 위치
 
-            IEnumerator<Point> enumerator = pointList.GetEnumerator();
+            IEnumerator<Point> enumerator = this.mPointList.GetEnumerator();
 
             if (enumerator.MoveNext())
             {
@@ -189,22 +220,11 @@ namespace LHJ.DrawingBoard.DrawObjects
 
             AreaRegion = new Region(AreaPath);
         }
+        #endregion 6.Method
 
-        #endregion
 
-        #region 속성
+        #region 7.Event
 
-        /// <summary>
-        /// 핸들의 수를 반환한다.
-        /// </summary>
-        public override int HandleCount
-        {
-            get
-            {
-                return pointList.Count;
-            }
-        }
-
-        #endregion
+        #endregion 7.Event
     }
 }

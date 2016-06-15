@@ -12,27 +12,25 @@ namespace LHJ.DrawingBoard.Model
     [Serializable]
     public class Graphic
     {
-        #region 전역변수
-
+        #region 1.Variable
         /// <summary>
         /// DrawObject 형 List
         /// </summary>
-        private List<DrawObject> grapList = new List<DrawObject>();
+        private List<DrawObject> mGrapList = new List<DrawObject>();
+        #endregion 1.Variable
 
-        #endregion
 
-        #region 속성
-
+        #region 2.Property
         public List<DrawObject> GrapList
         {
             get
             {
-                return grapList;
+                return this.mGrapList;
             }
 
             set
             {
-                grapList = value;
+                this.mGrapList = value;
             }
         }
 
@@ -45,7 +43,7 @@ namespace LHJ.DrawingBoard.Model
             {
                 int i = 0;
 
-                foreach (DrawObject obj in grapList)
+                foreach (DrawObject obj in this.mGrapList)
                 {
                     if (obj.Selected)
                     {
@@ -56,7 +54,37 @@ namespace LHJ.DrawingBoard.Model
                 return i;
             }
         }
+        #endregion 2.Property
 
-        #endregion
+
+        #region 3.Constructor
+
+        #endregion 3.Constructor
+
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
+
+        #endregion 6.Method
+
+
+        #region 7.Event
+
+        #endregion 7.Event
     }
 }

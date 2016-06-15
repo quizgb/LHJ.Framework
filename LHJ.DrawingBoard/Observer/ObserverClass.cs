@@ -13,20 +13,46 @@ namespace LHJ.DrawingBoard.Observer
     /// </summary>
     public class ObserverClass
     {
-        #region 생성자
+        #region 1.Variable
 
-        public ObserverClass(string name)
+        #endregion 1.Variable
+
+
+        #region 2.Property
+        public ObserverName Name { get; set; }
+        public ObserverAction Action { get; set; }
+        #endregion 2.Property
+
+
+        #region 3.Constructor
+        public ObserverClass(string aName)
         {
-            Name = GetName(name);
+            Name = GetName(aName);
         }
+        #endregion 3.Constructor
 
-        #endregion
 
-        #region 내부 함수
-        //ObserverName 을 반환한다.
-        private ObserverName GetName(string name)
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
         {
-            switch (name)
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
+        //ObserverName 을 반환한다.
+        private ObserverName GetName(string aName)
+        {
+            switch (aName)
             {
                 case "MainView": return ObserverName.MainView;
                 case "ToolBar": return ObserverName.ToolBar;
@@ -36,15 +62,11 @@ namespace LHJ.DrawingBoard.Observer
             //일치하는 name 이 없다면 ObserverName.MainView 을 반환한다.
             return ObserverName.MainView;
         }
+        #endregion 6.Method
 
-        #endregion
 
-        #region Properties
+        #region 7.Event
 
-        public ObserverName Name { get; set; }
-        public ObserverAction Action { get; set; }
-
-        #endregion
-
+        #endregion 7.Event
     }
 }

@@ -14,42 +14,81 @@ namespace LHJ.DrawingBoard.DrawObjects
     [Serializable]
     class RectangleObject : DrawObject
     {
-        #region 전역 변수
+        #region 1.Variable
+        private Rectangle mRectangle;
+        #endregion 1.Variable
 
-        private Rectangle rectangle;
 
-        #endregion
+        #region 2.Property
+        /// <summary>
+        /// 핸들의 숫자를 반환한다.
+        /// </summary>
+        public override int HandleCount
+        {
+            get
+            {
+                return 8;
+            }
+        }
 
-        #region 생성자
+        protected Rectangle Rectangle
+        {
+            get
+            {
+                return this.mRectangle;
+            }
+            set
+            {
+                this.mRectangle = value;
+            }
+        }
+        #endregion 2.Property
 
+
+        #region 3.Constructor
         public RectangleObject()
             : this(0, 0, 1, 1)
         {
 
         }
 
-
         public RectangleObject(int x, int y, int width, int height)
             : base()
         {
-            rectangle.X = x;
-            rectangle.Y = y;
-            rectangle.Width = width;
-            rectangle.Height = height;
+            this.mRectangle.X = x;
+            this.mRectangle.Y = y;
+            this.mRectangle.Width = width;
+            this.mRectangle.Height = height;
+
             Initialize();
         }
+        #endregion 3.Constructor
 
-        #endregion
 
-        #region 내부함수
+        #region 4.Override Method
 
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
         /// <summary>
         /// 이 객체를 복사한다.
         /// </summary>
         public override DrawObject Clone()
         {
             RectangleObject rectangleObject = new RectangleObject();
-            rectangleObject.rectangle = this.rectangle;
+            rectangleObject.Rectangle = this.mRectangle;
 
             FillDrawObjectFields(rectangleObject);
             return rectangleObject;
@@ -64,11 +103,11 @@ namespace LHJ.DrawingBoard.DrawObjects
             using (Pen pen = new Pen(Color, PenWidth))
             {
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
-                g.DrawRectangle(pen, RectangleObject.GetNormalizedRectangle(Rectangle));
+                g.DrawRectangle(pen, RectangleObject.GetNormalizedRectangle(this.mRectangle));
 
                 using (SolidBrush brush = new SolidBrush(BackColor))
                 {
-                    g.FillRectangle(brush, Rectangle);
+                    g.FillRectangle(brush, this.mRectangle);
                 }
             }
         }
@@ -76,56 +115,56 @@ namespace LHJ.DrawingBoard.DrawObjects
         //Retangle 의 크기와 위치를 설정한다.
         protected void SetRectangle(int x, int y, int width, int height)
         {
-            rectangle.X = x;
-            rectangle.Y = y;
-            rectangle.Width = width;
-            rectangle.Height = height;
+            this.mRectangle.X = x;
+            this.mRectangle.Y = y;
+            this.mRectangle.Width = width;
+            this.mRectangle.Height = height;
         }
 
         /// <summary>
         /// 핸들 넘버의 위치를 반환한다.
         /// </summary>
-        public override Point GetHandle(int handleNumber)
+        public override Point GetHandle(int aHandleNumber)
         {
             int x, y, xCenter, yCenter;
 
-            xCenter = rectangle.X + rectangle.Width / 2;
-            yCenter = rectangle.Y + rectangle.Height / 2;
-            x = rectangle.X;
-            y = rectangle.Y;
+            xCenter = this.mRectangle.X + this.mRectangle.Width / 2;
+            yCenter = this.mRectangle.Y + this.mRectangle.Height / 2;
+            x = this.mRectangle.X;
+            y = this.mRectangle.Y;
 
-            switch (handleNumber)
+            switch (aHandleNumber)
             {
                 case 1:
-                    x = rectangle.X;
-                    y = rectangle.Y;
+                    x = this.mRectangle.X;
+                    y = this.mRectangle.Y;
                     break;
                 case 2:
                     x = xCenter;
-                    y = rectangle.Y;
+                    y = this.mRectangle.Y;
                     break;
                 case 3:
-                    x = rectangle.Right;
-                    y = rectangle.Y;
+                    x = this.mRectangle.Right;
+                    y = this.mRectangle.Y;
                     break;
                 case 4:
-                    x = rectangle.Right;
+                    x = this.mRectangle.Right;
                     y = yCenter;
                     break;
                 case 5:
-                    x = rectangle.Right;
-                    y = rectangle.Bottom;
+                    x = this.mRectangle.Right;
+                    y = this.mRectangle.Bottom;
                     break;
                 case 6:
                     x = xCenter;
-                    y = rectangle.Bottom;
+                    y = this.mRectangle.Bottom;
                     break;
                 case 7:
-                    x = rectangle.X;
-                    y = rectangle.Bottom;
+                    x = this.mRectangle.X;
+                    y = this.mRectangle.Bottom;
                     break;
                 case 8:
-                    x = rectangle.X;
+                    x = this.mRectangle.X;
                     y = yCenter;
                     break;
             }
@@ -140,18 +179,18 @@ namespace LHJ.DrawingBoard.DrawObjects
         ///   0 - hit anywhere
         /// > 1 - handle number
         /// </summary>
-        public override int HitTest(Point point)
+        public override int HitTest(Point aPoint)
         {
             if (Selected)
             {
                 for (int i = 1; i <= HandleCount; i++)
                 {
-                    if (GetHandleRectangle(i).Contains(point))
+                    if (GetHandleRectangle(i).Contains(aPoint))
                         return i;
                 }
             }
 
-            if (PointInObject(point))
+            if (PointInObject(aPoint))
                 return 0;
 
             return -1;
@@ -160,18 +199,17 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// <summary>
         /// 마우스의 위치가 DrawObject 내에 있는지 알려준다.
         /// </summary>
-        protected override bool PointInObject(Point point)
+        protected override bool PointInObject(Point aPoint)
         {
-            return rectangle.Contains(point);
+            return this.mRectangle.Contains(aPoint);
         }
-
 
         /// <summary>
         /// Pointer 의 HandleNumber 에 따라서 마우스 커서를 반환한다.
         /// </summary>
-        public override Cursor GetHandleCursor(int handleNumber)
+        public override Cursor GetHandleCursor(int aHandleNumber)
         {
-            switch (handleNumber)
+            switch (aHandleNumber)
             {
                 case 1:
                     return Cursors.SizeNWSE;
@@ -197,63 +235,63 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// <summary>
         /// DrawObject 의 사이즈를 변경한다.
         /// </summary>
-        public override void MoveHandleTo(Point point, int handleNumber)
+        public override void MoveHandleTo(Point aPoint, int aHandleNumber)
         {
-            int left = Rectangle.Left;
-            int top = Rectangle.Top;
-            int right = Rectangle.Right;
-            int bottom = Rectangle.Bottom;
+            int left = this.mRectangle.Left;
+            int top = this.mRectangle.Top;
+            int right = this.mRectangle.Right;
+            int bottom = this.mRectangle.Bottom;
 
-            switch (handleNumber)
+            switch (aHandleNumber)
             {
                 case 1:
-                    left = point.X;
-                    top = point.Y;
+                    left = aPoint.X;
+                    top = aPoint.Y;
                     break;
                 case 2:
-                    top = point.Y;
+                    top = aPoint.Y;
                     break;
                 case 3:
-                    right = point.X;
-                    top = point.Y;
+                    right = aPoint.X;
+                    top = aPoint.Y;
                     break;
                 case 4:
-                    right = point.X;
+                    right = aPoint.X;
                     break;
                 case 5:
-                    right = point.X;
-                    bottom = point.Y;
+                    right = aPoint.X;
+                    bottom = aPoint.Y;
                     break;
                 case 6:
-                    bottom = point.Y;
+                    bottom = aPoint.Y;
                     break;
                 case 7:
-                    left = point.X;
-                    bottom = point.Y;
+                    left = aPoint.X;
+                    bottom = aPoint.Y;
                     break;
                 case 8:
-                    left = point.X;
+                    left = aPoint.X;
                     break;
             }
 
-            SetRectangle(left, top, right - left, bottom - top);
+            this.SetRectangle(left, top, right - left, bottom - top);
         }
 
         /// <summary>
         /// DrawObject가 rectangle 에 포함되는지 알려준다.
         /// </summary>
-        public override bool IntersectsWith(Rectangle rectangle)
+        public override bool IntersectsWith(Rectangle aRectangle)
         {
-            return Rectangle.IntersectsWith(rectangle);
+            return this.mRectangle.IntersectsWith(aRectangle);
         }
 
         /// <summary>
         /// DrawObject 의 위치를 이동한다.
         /// </summary>
-        public override void Move(int deltaX, int deltaY)
+        public override void Move(int aDeltaX, int aDeltaY)
         {
-            rectangle.X += deltaX;
-            rectangle.Y += deltaY;
+            this.mRectangle.X += aDeltaX;
+            this.mRectangle.Y += aDeltaY;
         }
 
         /// <summary>
@@ -261,7 +299,7 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// </summary>
         public override void Normalize()
         {
-            rectangle = RectangleObject.GetNormalizedRectangle(rectangle);
+            this.mRectangle = RectangleObject.GetNormalizedRectangle(this.mRectangle);
         }
 
 
@@ -290,47 +328,23 @@ namespace LHJ.DrawingBoard.DrawObjects
         /// <summary>
         /// Retagle을 그려준다
         /// </summary>
-        public static Rectangle GetNormalizedRectangle(Point p1, Point p2)
+        public static Rectangle GetNormalizedRectangle(Point aP1, Point aP2)
         {
-            return GetNormalizedRectangle(p1.X, p1.Y, p2.X, p2.Y);
+            return GetNormalizedRectangle(aP1.X, aP1.Y, aP2.X, aP2.Y);
         }
 
         /// <summary>
         /// Retagle을 그려준다
         /// </summary>
-        public static Rectangle GetNormalizedRectangle(Rectangle r)
+        public static Rectangle GetNormalizedRectangle(Rectangle aRect)
         {
-            return GetNormalizedRectangle(r.X, r.Y, r.X + r.Width, r.Y + r.Height);
+            return GetNormalizedRectangle(aRect.X, aRect.Y, aRect.X + aRect.Width, aRect.Y + aRect.Height);
         }
+        #endregion 6.Method
 
-        #endregion
 
-        #region 속성
+        #region 7.Event
 
-        /// <summary>
-        /// 핸들의 숫자를 반환한다.
-        /// </summary>
-        public override int HandleCount
-        {
-            get
-            {
-                return 8;
-            }
-        }
-
-        protected Rectangle Rectangle
-        {
-            get
-            {
-                return rectangle;
-            }
-            set
-            {
-                rectangle = value;
-            }
-        }
-
-        #endregion
-
+        #endregion 7.Event
     }
 }

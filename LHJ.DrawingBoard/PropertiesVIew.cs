@@ -12,17 +12,15 @@ namespace LHJ.DrawingBoard
 {
     public partial class PropertiesVIew : Form
     {
-        #region 전역변수
-
+        #region 1.Variable
         /// <summary>
         /// Pen의 두께의 최대치를 설정하는 상수
         /// </summary>
-        private const int maxWidth = 10;
+        private const int mMaxWidth = 10;
+        #endregion 1.Variable
 
-        #endregion
 
-        #region 속성
-
+        #region 2.Property
         /// <summary>
         /// Pen 의 두께
         /// </summary>
@@ -49,11 +47,10 @@ namespace LHJ.DrawingBoard
             get;
             set;
         }
+        #endregion 2.Property
 
-        #endregion
 
-        #region 생성자
-
+        #region 3.Constructor
         public PropertiesVIew()
         {
         }
@@ -63,30 +60,59 @@ namespace LHJ.DrawingBoard
         {
             InitializeComponent();
 
-            InitControls();
+            this.SetInitialize(color, backgroundColor, penWidth);
+        }
+        #endregion 3.Constructor
 
-            label_Color.BackColor = color;
-            label_BackgroundColor.BackColor = backgroundColor;
-            combobox_PenWidth.Text = penWidth.ToString();
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize(Color aColor, Color aBackgroundColor, int aPenWidth)
+        {
+            this.InitControls();
+
+            this.label_Color.BackColor = aColor;
+            this.label_BackgroundColor.BackColor = aBackgroundColor;
+            this.combobox_PenWidth.Text = aPenWidth.ToString();
 
             this.button_Save.Click += new System.EventHandler(this.button_Save_Click);
             this.button_SelectColor.Click += new System.EventHandler(this.button_SelectColor_Click);
             this.button_SelectBackgroudColor.Click += new System.EventHandler(this.button_Cancel_Click);
         }
+        #endregion 5.Set Initialize
 
-        #endregion
 
-        #region 이벤트
+        #region 6.Method
+        /// <summary>
+        /// 콤보박스 초기화
+        /// </summary>
+        private void InitControls()
+        {
+            for (int i = 1; i <= mMaxWidth; i++)
+            {
+                this.combobox_PenWidth.Items.Add(i.ToString(CultureInfo.InvariantCulture));
+            }
+        }
+        #endregion 6.Method
 
+
+        #region 7.Event
         /// <summary>
         /// 저장하기
         /// </summary>
         private void button_Save_Click(object sender, EventArgs e)
         {
             //프로그램의 속성에 속성들을 저장한다.
-            Controller.MainController.Instance.LastUsedColor = Color = label_Color.BackColor;
-            Controller.MainController.Instance.LastUesdBackgoroundColor = BackGroundColor = label_BackgroundColor.BackColor;
-            Controller.MainController.Instance.LastUsedPenWidth = PenWidth = int.Parse(combobox_PenWidth.Text);
+            Controller.MainController.Instance.LastUsedColor = Color = this.label_Color.BackColor;
+            Controller.MainController.Instance.LastUesdBackgoroundColor = BackGroundColor = this.label_BackgroundColor.BackColor;
+            Controller.MainController.Instance.LastUsedPenWidth = PenWidth = int.Parse(this.combobox_PenWidth.Text);
 
             this.DialogResult = DialogResult.OK;
         }
@@ -96,11 +122,11 @@ namespace LHJ.DrawingBoard
         /// </summary>
         private void button_SelectColor_Click(object sender, EventArgs e)
         {
-            colorDialog1.Color = label_Color.BackColor;
+            this.colorDialog1.Color = this.label_Color.BackColor;
 
-            if (colorDialog1.ShowDialog(this) == DialogResult.OK)
+            if (this.colorDialog1.ShowDialog(this) == DialogResult.OK)
             {
-                label_Color.BackColor = colorDialog1.Color;
+                this.label_Color.BackColor = this.colorDialog1.Color;
             }
         }
 
@@ -109,25 +135,13 @@ namespace LHJ.DrawingBoard
         /// </summary>
         private void button_Cancel_Click(object sender, EventArgs e)
         {
-            colorDialog1.Color = label_BackgroundColor.BackColor;
+            this.colorDialog1.Color = this.label_BackgroundColor.BackColor;
 
-            if (colorDialog1.ShowDialog(this) == DialogResult.OK)
+            if (this.colorDialog1.ShowDialog(this) == DialogResult.OK)
             {
-                label_BackgroundColor.BackColor = colorDialog1.Color;
+                this.label_BackgroundColor.BackColor = this.colorDialog1.Color;
             }
         }
-
-        /// <summary>
-        /// 콤보박스 초기화
-        /// </summary>
-        private void InitControls()
-        {
-            for (int i = 1; i <= maxWidth; i++)
-            {
-                combobox_PenWidth.Items.Add(i.ToString(CultureInfo.InvariantCulture));
-            }
-        }
-
-        #endregion
+        #endregion 7.Event
     }
 }
