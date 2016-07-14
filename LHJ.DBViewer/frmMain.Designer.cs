@@ -52,6 +52,13 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslLastBulidDate = new System.Windows.Forms.ToolStripStatusLabel();
             this.tsslOracleVersion = new System.Windows.Forms.ToolStripStatusLabel();
+            this.창ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiCascadeWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTileVerticalWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiTileHorizontalWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiAllWindowClose = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiArrangeIconsWindow = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.mnsMain.SuspendLayout();
             this.tsMain.SuspendLayout();
             this.statusStrip1.SuspendLayout();
@@ -62,7 +69,8 @@
             this.mnsMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenuItem,
             this.sessionToolStripMenuItem,
-            this.toolsMenuItem});
+            this.toolsMenuItem,
+            this.창ToolStripMenuItem});
             this.mnsMain.Location = new System.Drawing.Point(0, 0);
             this.mnsMain.Name = "mnsMain";
             this.mnsMain.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
@@ -85,26 +93,26 @@
             // tsmiConnect
             // 
             this.tsmiConnect.Name = "tsmiConnect";
-            this.tsmiConnect.Size = new System.Drawing.Size(147, 22);
+            this.tsmiConnect.Size = new System.Drawing.Size(152, 22);
             this.tsmiConnect.Text = "Connect ...";
             this.tsmiConnect.Click += new System.EventHandler(this.tsmiConnect_Click);
             // 
             // tsmiDisconnect
             // 
             this.tsmiDisconnect.Name = "tsmiDisconnect";
-            this.tsmiDisconnect.Size = new System.Drawing.Size(147, 22);
+            this.tsmiDisconnect.Size = new System.Drawing.Size(152, 22);
             this.tsmiDisconnect.Text = "Disconnect ...";
             this.tsmiDisconnect.Click += new System.EventHandler(this.tsmiConnect_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(144, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(149, 6);
             // 
             // tsmiExit
             // 
             this.tsmiExit.Name = "tsmiExit";
-            this.tsmiExit.Size = new System.Drawing.Size(147, 22);
+            this.tsmiExit.Size = new System.Drawing.Size(152, 22);
             this.tsmiExit.Text = "E&xit";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiConnect_Click);
             // 
@@ -270,6 +278,59 @@
             this.tsslOracleVersion.Size = new System.Drawing.Size(103, 21);
             this.tsslOracleVersion.Text = "(OracleVersion)";
             // 
+            // 창ToolStripMenuItem
+            // 
+            this.창ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsmiCascadeWindow,
+            this.tsmiTileVerticalWindow,
+            this.tsmiTileHorizontalWindow,
+            this.tsmiArrangeIconsWindow,
+            this.tsmiAllWindowClose,
+            this.toolStripSeparator2});
+            this.창ToolStripMenuItem.Name = "창ToolStripMenuItem";
+            this.창ToolStripMenuItem.Size = new System.Drawing.Size(50, 20);
+            this.창ToolStripMenuItem.Text = "창(&W)";
+            // 
+            // tsmiCascadeWindow
+            // 
+            this.tsmiCascadeWindow.Name = "tsmiCascadeWindow";
+            this.tsmiCascadeWindow.Size = new System.Drawing.Size(178, 22);
+            this.tsmiCascadeWindow.Text = "계단식 배열";
+            this.tsmiCascadeWindow.Click += new System.EventHandler(this.tsmiCascadeWindow_Click);
+            // 
+            // tsmiTileVerticalWindow
+            // 
+            this.tsmiTileVerticalWindow.Name = "tsmiTileVerticalWindow";
+            this.tsmiTileVerticalWindow.Size = new System.Drawing.Size(178, 22);
+            this.tsmiTileVerticalWindow.Text = "세로 바둑판식 배열";
+            this.tsmiTileVerticalWindow.Click += new System.EventHandler(this.tsmiCascadeWindow_Click);
+            // 
+            // tsmiTileHorizontalWindow
+            // 
+            this.tsmiTileHorizontalWindow.Name = "tsmiTileHorizontalWindow";
+            this.tsmiTileHorizontalWindow.Size = new System.Drawing.Size(178, 22);
+            this.tsmiTileHorizontalWindow.Text = "가로 바둑판식 배열";
+            this.tsmiTileHorizontalWindow.Click += new System.EventHandler(this.tsmiCascadeWindow_Click);
+            // 
+            // tsmiAllWindowClose
+            // 
+            this.tsmiAllWindowClose.Name = "tsmiAllWindowClose";
+            this.tsmiAllWindowClose.Size = new System.Drawing.Size(178, 22);
+            this.tsmiAllWindowClose.Text = "모두 닫기";
+            this.tsmiAllWindowClose.Click += new System.EventHandler(this.tsmiCascadeWindow_Click);
+            // 
+            // tsmiArrangeIconsWindow
+            // 
+            this.tsmiArrangeIconsWindow.Name = "tsmiArrangeIconsWindow";
+            this.tsmiArrangeIconsWindow.Size = new System.Drawing.Size(178, 22);
+            this.tsmiArrangeIconsWindow.Text = "아이콘 정렬";
+            this.tsmiArrangeIconsWindow.Click += new System.EventHandler(this.tsmiCascadeWindow_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(175, 6);
+            // 
             // frmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -322,6 +383,13 @@
         private System.Windows.Forms.ToolStripButton tsbtnTableSpaceViewer;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem tsmiTableSpaceViewer;
+        private System.Windows.Forms.ToolStripMenuItem 창ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem tsmiCascadeWindow;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTileVerticalWindow;
+        private System.Windows.Forms.ToolStripMenuItem tsmiTileHorizontalWindow;
+        private System.Windows.Forms.ToolStripMenuItem tsmiAllWindowClose;
+        private System.Windows.Forms.ToolStripMenuItem tsmiArrangeIconsWindow;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
 
     }
 }
