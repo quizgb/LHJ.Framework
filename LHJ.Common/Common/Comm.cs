@@ -12,7 +12,7 @@ namespace LHJ.Common
         private static LHJ.DBService.DBWorker m_DBWorker = new LHJ.DBService.DBWorker();
         public static LHJ.DBService.DBWorker DBWorker
         {
-            get { return Comm.m_DBWorker; }
+            get { return m_DBWorker; }
         }
 
         private static LHJ.Common.Common.Com.Logger m_Logger = new LHJ.Common.Common.Com.Logger();
