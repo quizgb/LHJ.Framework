@@ -54,6 +54,11 @@
       <HintPath>..\Compile\LHJ.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="LHJ.DBService, Version=1.0.6043.27211, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Compile\LHJ.DBService.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />

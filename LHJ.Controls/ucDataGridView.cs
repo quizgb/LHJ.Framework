@@ -6,6 +6,7 @@ using System.IO;
 using System.Reflection;
 using System.Windows.Forms;
 using LHJ.Common.Definition;
+using LHJ.DBService;
 using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -21,6 +22,8 @@ namespace LHJ.Controls
     {
         #region 1.Variable
         private bool mShowRowHeaderValue = true;
+        private bool mPaging = false;
+        private int mPagingRowCount = 150;
         #endregion 1.Variable
 
 
@@ -33,6 +36,28 @@ namespace LHJ.Controls
         {
             get { return this.mShowRowHeaderValue; }
             set { this.mShowRowHeaderValue = value; }
+        }
+
+        public bool Paging
+        {
+            get { return this.mPaging; }
+            set { this.mPaging = value; }
+        }
+
+        public int PagingRowCount
+        {
+            get 
+            {
+                if (this.mPaging)
+                {
+                    return this.mPagingRowCount;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            set { this.mPagingRowCount = value; }
         }
 
         #endregion 2.Property
@@ -82,6 +107,15 @@ namespace LHJ.Controls
 
 
         #region 6.Method
+        public void SetDataSource(string aQuery)
+        {
+            this.DataSource = Common.Comm.DBWorker.ExecuteDataTable(aQuery);
+        }
+
+        public void SetDataSource(string aQuery, int aStartIndex, int aMaxIndex, string aSrcTable)
+        {
+            this.DataSource = Common.Comm.DBWorker.ExecuteDataTable(aQuery, aStartIndex, aMaxIndex, aSrcTable, null);
+        }
         /// <summary>
         ///    Excel 파일의 형태를 반환한다.
         ///    -2 : Error  
