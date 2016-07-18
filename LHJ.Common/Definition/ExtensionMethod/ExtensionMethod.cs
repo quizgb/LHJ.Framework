@@ -9,13 +9,6 @@ namespace LHJ.Common.Definition
     public static class ExtensionMethod
     {
         #region ParamList에 쿼리에 바인드 할 변수명과 값을 담는다.
-        /// <summary>
-        /// ParamList에 쿼리에 바인드 할 변수명과 값을 담는다.
-        /// </summary>
-        /// <param name="aParamList"></param>
-        /// <param name="aName"></param>
-        /// <param name="aValue"></param>
-        /// <returns></returns>
         public static List<DBService.ParamInfo> AddParameter(this List<DBService.ParamInfo> aParamList, string aName, Object aValue)
         {
             aParamList.Add(new DBService.ParamInfo(aName, aValue));
@@ -52,7 +45,7 @@ namespace LHJ.Common.Definition
                 return aDGV.Rows[aRowIndex].Cells[aColIndex].Value.ToString();
             }
 
-            return null;
+            return string.Empty;
         }
 
         public static string GetRowCellStrValue(this ucDataGridView aDGV, int aRowIndex, string aColName)
@@ -62,7 +55,7 @@ namespace LHJ.Common.Definition
                 return aDGV.Rows[aRowIndex].Cells[aColName].Value.ToString();
             }
 
-            return null;
+            return string.Empty;
         }
         #endregion DataGridView의 해당 셀에 연결된 값을 가져온다.
 

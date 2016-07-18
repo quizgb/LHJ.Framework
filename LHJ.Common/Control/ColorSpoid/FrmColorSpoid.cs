@@ -14,42 +14,72 @@ namespace LHJ.Common.Control.ColorSpoid
 {
     public partial class FrmColorSpoid : Form
     {
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panel1;
-        Thread th;
+        #region 1.Variable
+        private System.Windows.Forms.Label mLabel;
+        private System.Windows.Forms.Panel mPanel;
+        private Thread mThread;
         delegate void SetTextCallback(string text);
         delegate void SetColorCallback(Color color);
+        #endregion 1.Variable
 
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public FrmColorSpoid()
         {
             InitializeComponent();
-            design();
+            
+            this.Design();
         }
-        private void design()
+        #endregion 3.Constructor
+
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
+        private void Design()
+        {
+            this.mLabel = new System.Windows.Forms.Label();
+            this.mPanel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 9);
-            this.label1.Size = new System.Drawing.Size(38, 12);
-            this.label1.TabIndex = 0;
+            this.mLabel.AutoSize = true;
+            this.mLabel.Location = new System.Drawing.Point(12, 9);
+            this.mLabel.Size = new System.Drawing.Size(38, 12);
+            this.mLabel.TabIndex = 0;
             // 
             // panel1
             // 
-            this.panel1.Location = new System.Drawing.Point(111, 9);
-            this.panel1.Size = new System.Drawing.Size(47, 45);
-            this.panel1.TabIndex = 1;
+            this.mPanel.Location = new System.Drawing.Point(111, 9);
+            this.mPanel.Size = new System.Drawing.Size(47, 45);
+            this.mPanel.TabIndex = 1;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.mPanel);
+            this.Controls.Add(this.mLabel);
             this.Text = "Spoid";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -59,87 +89,101 @@ namespace LHJ.Common.Control.ColorSpoid
             this.MinimumSize = sz;
             this.PerformLayout();
         }
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            th = new Thread(new ThreadStart(test_label));
-            th.Start();
-        }
-        private Color ScreenColor(int x, int y)
+
+        private Color ScreenColor(int aX, int aY)
         {
             Size sz = new Size(1, 1);
             Bitmap bmp = new Bitmap(1, 1);
             Graphics g = Graphics.FromImage(bmp);
-            g.CopyFromScreen(x, y, 0, 0, sz);
+            g.CopyFromScreen(aX, aY, 0, 0, sz);
+
             return bmp.GetPixel(0, 0);
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        public void DisplayColorInfo()
         {
-            th.Abort();
-        }
-        public void test_label()
-        {
-            String buf = "";
-            Color colorbuf;
+            String buff = "";
+            Color colorBuff;
+
             while (true)
             {
-                buf = "X 좌표 : " + System.Windows.Forms.Control.MousePosition.X.ToString() + "\r\n";
-                buf += "Y 좌표 : " + System.Windows.Forms.Control.MousePosition.Y.ToString() + "\r\n";
+                buff = "X 좌표 : " + System.Windows.Forms.Control.MousePosition.X.ToString() + "\r\n";
+                buff += "Y 좌표 : " + System.Windows.Forms.Control.MousePosition.Y.ToString() + "\r\n";
 
-                colorbuf = ScreenColor(System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y);
+                colorBuff = ScreenColor(System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y);
 
-                buf += "R : " + colorbuf.R.ToString() + "\r\n";
-                buf += "G : " + colorbuf.G.ToString() + "\r\n";
-                buf += "B : " + colorbuf.B.ToString() + "\r\n";
-                buf += "Code : " + ToHexString(colorbuf.R).Substring(0, 2) + ToHexString(colorbuf.G).Substring(0, 2) + ToHexString(colorbuf.B).Substring(0, 2);
+                buff += "R : " + colorBuff.R.ToString() + "\r\n";
+                buff += "G : " + colorBuff.G.ToString() + "\r\n";
+                buff += "B : " + colorBuff.B.ToString() + "\r\n";
+                buff += "Code : " + ToHexString(colorBuff.R).Substring(0, 2) + ToHexString(colorBuff.G).Substring(0, 2) + ToHexString(colorBuff.B).Substring(0, 2);
 
-                SetText(buf);
-                SetColor(colorbuf);
+                this.SetText(buff);
+                this.SetColor(colorBuff);
             }
-
         }
-        public string ToHexString(int nor)
+
+        public string ToHexString(int aNor)
         {
-            byte[] bytes = BitConverter.GetBytes(nor);
+            byte[] bytes = BitConverter.GetBytes(aNor);
             string hexString = "";
+
             for (int i = 0; i < bytes.Length; i++)
             {
                 hexString += bytes[i].ToString("X2");
             }
+
             return hexString;
         }
-        private void SetColor(Color color)
+
+        private void SetColor(Color aColor)
         {
-            if (this.panel1.InvokeRequired)
+            if (this.mPanel.InvokeRequired)
             {
-                SetColorCallback d = new SetColorCallback(SetColor);
+                SetColorCallback d = new SetColorCallback(this.SetColor);
+
                 try
                 {
-                    this.Invoke(d, new object[] { color });
+                    this.Invoke(d, new object[] { aColor });
                 }
                 catch { }
             }
             else
             {
-                this.panel1.BackColor = color;
-            }
-        }
-        private void SetText(string text)
-        {
-            if (this.label1.InvokeRequired)
-            {
-                SetTextCallback d = new SetTextCallback(SetText);
-                try
-                {
-                    this.Invoke(d, new object[] { text });
-                }
-                catch { }
-            }
-            else
-            {
-                this.label1.Text = text;
+                this.mPanel.BackColor = aColor;
             }
         }
 
+        private void SetText(string aText)
+        {
+            if (this.mLabel.InvokeRequired)
+            {
+                SetTextCallback d = new SetTextCallback(this.SetText);
+
+                try
+                {
+                    this.Invoke(d, new object[] { aText });
+                }
+                catch { }
+            }
+            else
+            {
+                this.mLabel.Text = aText;
+            }
+        }
+        #endregion 6.Method
+
+
+        #region 7.Event
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            this.mThread = new Thread(new ThreadStart(this.DisplayColorInfo));
+            this.mThread.Start();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.mThread.Abort();
+        }
+        #endregion 7.Event
     }
 }
