@@ -243,6 +243,19 @@ namespace LHJ.DBViewer
             return dt;
         }
 
+        public static DataTable GetTableData(string aUserID, string aTableName)
+        {
+            DataTable dt = new DataTable();
+            string strCommand = string.Empty;
+
+            strCommand = string.Format(@"   SELECT *
+                                              FROM {0}.{1} ", aUserID, aTableName);
+
+            dt = Common.Comm.DBWorker.ExecuteDataTable(strCommand);
+
+            return dt;
+        }
+
         public static DataTable GetTableColumns(string aUserID, string aTableName)
         {
             DataTable dt = new DataTable();

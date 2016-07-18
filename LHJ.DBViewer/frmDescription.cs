@@ -97,7 +97,8 @@ namespace LHJ.DBViewer
 
             foreach (TabPage tp in this.tabControl1.TabPages)
             {
-                if (tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.COLUMN) || tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.INDEX))
+                if (tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.COLUMN) || tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.INDEX) ||
+                    tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.DATA))
                 {
                     ucDataGridView dgv = new ucDataGridView();
                     dgv.Dock = DockStyle.Fill;
@@ -107,6 +108,11 @@ namespace LHJ.DBViewer
                     dgv.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
                     dgv.ReadOnly = true;
                     dgv.DataSourceChanged += dgv_DataSourceChanged;
+
+                    if (tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.DATA))
+                    { 
+                        
+                    }
 
                     tp.Controls.Add(dgv);
                 }
@@ -146,6 +152,13 @@ namespace LHJ.DBViewer
                 if (this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.COLUMN))
                 {
                     DataTable dt = DALDataAccess.GetTableColumns(this.mHt["USER"].ToString(), this.mHt["OBJECT_NAME"].ToString());
+                    ucDataGridView dgv = this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Controls[0] as ucDataGridView;
+
+                    dgv.DataSource = dt;
+                }
+                else if (this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.DATA))
+                {
+                    DataTable dt = DALDataAccess.GetTableData(this.mHt["USER"].ToString(), this.mHt["OBJECT_NAME"].ToString());
                     ucDataGridView dgv = this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Controls[0] as ucDataGridView;
 
                     dgv.DataSource = dt;
