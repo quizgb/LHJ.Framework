@@ -210,6 +210,10 @@ namespace LHJ.DBViewer
             {
                 lbx.SelectedIndex = 0;
             }
+            else
+            {
+                this.lbx_SelectedIndexChanged(lbx, null);
+            }
         }
 
         private void ucUserList1_SelectedUserChanged(object sender, Common.Definition.EventHandler.SelectedUserChangedEventArgs e)

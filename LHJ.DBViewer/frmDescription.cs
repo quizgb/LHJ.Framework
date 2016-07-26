@@ -49,6 +49,13 @@ namespace LHJ.DBViewer
 
 
         #region 6.Method
+        private void Clear()
+        {
+            this.lblInfo.Text = string.Empty;
+            this.tabControl1.Tag = null;
+            this.tabControl1.TabPages.Clear();
+        }
+
         public void Search(Hashtable aHt)
         {
             this.Cursor = Cursors.WaitCursor;
@@ -57,6 +64,13 @@ namespace LHJ.DBViewer
 
             this.mHt = aHt;
             DataTable dt = DALDataAccess.GetObjectListByObjectName(this.mHt["USER"].ToString(), this.mHt["OBJECT_NAME"].ToString());
+
+            if (dt.Rows.Count < 1)
+            {
+                this.Cursor = Cursors.Default;
+                this.Clear();
+                return;
+            }
 
             this.lblInfo.Text = string.Format("[{0}] Created:{1}   Last DDL:{2}", this.mHt["OBJECT_NAME"].ToString(), dt.Rows[0]["CREATED"].ToString(), dt.Rows[0]["LAST_DDL_TIME"].ToString());
             this.tabControl1.Tag = dt.Rows[0]["OBJECT_TYPE"].ToString();
@@ -91,6 +105,10 @@ namespace LHJ.DBViewer
                 this.tabControl1.TabPages.Add(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.SCRIPT);
             }
             else if (dt.Rows[0]["OBJECT_TYPE"].ToString().Equals(Common.Definition.ConstValue.DBViewer_ObjectList_VALUE.SEQUENCE))
+            {
+                this.tabControl1.TabPages.Add(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.SCRIPT);
+            }
+            else if (dt.Rows[0]["OBJECT_TYPE"].ToString().Equals(Common.Definition.ConstValue.DBViewer_ObjectList_VALUE.PACKAGE))
             {
                 this.tabControl1.TabPages.Add(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.SCRIPT);
             }
