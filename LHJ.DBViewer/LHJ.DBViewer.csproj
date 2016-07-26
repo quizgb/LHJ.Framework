@@ -152,6 +152,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ucDgvQuery.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ucObejct.cs">
       <SubType>UserControl</SubType>
     </Compile>

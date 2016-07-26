@@ -47,8 +47,7 @@ namespace LHJ.DBViewer
             switch (keyData)
             {
                 case Keys.Control | Keys.S:
-                    //Form1 frmMain = (Form1)this.MdiParent;
-                    //frmMain.SaveFileDialog();
+                    this.ExportExcelQueryResult();
                     break;
 
                 case Keys.Control | Keys.Down:

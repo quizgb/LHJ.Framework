@@ -97,8 +97,7 @@ namespace LHJ.DBViewer
 
             foreach (TabPage tp in this.tabControl1.TabPages)
             {
-                if (tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.COLUMN) || tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.INDEX) ||
-                    tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.DATA))
+                if (tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.COLUMN) || tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.INDEX))
                 {
                     ucDataGridView dgv = new ucDataGridView();
                     dgv.Dock = DockStyle.Fill;
@@ -109,12 +108,19 @@ namespace LHJ.DBViewer
                     dgv.ReadOnly = true;
                     dgv.DataSourceChanged += dgv_DataSourceChanged;
 
-                    if (tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.DATA))
-                    { 
-                        
-                    }
-
                     tp.Controls.Add(dgv);
+                }
+                else if (tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.DATA))
+                {
+                    ucDgvQuery dgvQuery = new ucDgvQuery();
+                    dgvQuery.Dock = DockStyle.Fill;
+                    dgvQuery.AllowUserToAddRows = false;
+                    dgvQuery.AllowUserToDeleteRows = false;
+                    dgvQuery.AllowUserToResizeRows = false;
+                    dgvQuery.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+                    dgvQuery.ReadOnly = true;
+
+                    tp.Controls.Add(dgvQuery);
                 }
                 else if (tp.Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.SCRIPT))
                 {
@@ -158,10 +164,10 @@ namespace LHJ.DBViewer
                 }
                 else if (this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.DATA))
                 {
-                    DataTable dt = DALDataAccess.GetTableData(this.mHt["USER"].ToString(), this.mHt["OBJECT_NAME"].ToString());
-                    ucDataGridView dgv = this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Controls[0] as ucDataGridView;
-
-                    dgv.DataSource = dt;
+                    string query = string.Format(@" SELECT * FROM {0}.{1} ", this.mHt["USER"].ToString(), this.mHt["OBJECT_NAME"].ToString());
+                    ucDgvQuery dgvQuery = this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Controls[0] as ucDgvQuery;
+                    dgvQuery.Query = query;
+                    dgvQuery.ExecuteQuery(false, 0, false);
                 }
                 else if (this.tabControl1.TabPages[this.tabControl1.SelectedIndex].Text.Equals(Common.Definition.ConstValue.DBViewer_ObjectInfo_DISPLAY.INDEX))
                 {

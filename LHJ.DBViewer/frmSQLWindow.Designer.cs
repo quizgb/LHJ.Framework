@@ -55,7 +55,7 @@
             this.pnlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pnlMain.Location = new System.Drawing.Point(0, 0);
             this.pnlMain.Name = "pnlMain";
-            this.pnlMain.Size = new System.Drawing.Size(1264, 884);
+            this.pnlMain.Size = new System.Drawing.Size(1264, 876);
             this.pnlMain.TabIndex = 0;
             // 
             // splitContainer1
@@ -72,7 +72,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.userControl11);
-            this.splitContainer1.Size = new System.Drawing.Size(1264, 884);
+            this.splitContainer1.Size = new System.Drawing.Size(1264, 876);
             this.splitContainer1.SplitterDistance = 1100;
             this.splitContainer1.TabIndex = 1;
             this.splitContainer1.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer1_SplitterMoved);
@@ -83,7 +83,7 @@
             this.tabControl1.Location = new System.Drawing.Point(0, 25);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1100, 859);
+            this.tabControl1.Size = new System.Drawing.Size(1100, 851);
             this.tabControl1.TabIndex = 0;
             // 
             // toolStrip2
@@ -184,14 +184,14 @@
             this.userControl11.Dock = System.Windows.Forms.DockStyle.Fill;
             this.userControl11.Location = new System.Drawing.Point(0, 0);
             this.userControl11.Name = "userControl11";
-            this.userControl11.Size = new System.Drawing.Size(160, 884);
+            this.userControl11.Size = new System.Drawing.Size(160, 876);
             this.userControl11.TabIndex = 0;
             this.userControl11.ItemDoubleClicked += new LHJ.Common.Definition.EventHandler.ItemDoubleClickEventHandler(this.userControl11_ItemDoubleClicked);
             // 
             // frmSQLWindow
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1264, 884);
+            this.ClientSize = new System.Drawing.Size(1264, 876);
             this.Controls.Add(this.pnlMain);
             this.Name = "frmSQLWindow";
             this.Text = "SQL Window";
