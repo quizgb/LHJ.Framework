@@ -17,7 +17,6 @@ namespace LHJ.YoutubeDownloader
     public partial class frmYoutubeDownload : Form
     {
         #region 1.Variable
-        List<YoutubeModel> m_DownloadList = new List<YoutubeModel>();
         #endregion 1.Variable
 
 
@@ -210,10 +209,6 @@ namespace LHJ.YoutubeDownloader
             downInfoBox.SetDownloadInfo(aModel, aLink);
             this.flpDownloadList.Controls.Add(downInfoBox);
 
-            //Add item to download to the beginning of the list
-            //If you use Add it adds to the end of the list
-            this.m_DownloadList.Insert(0, aModel);
-
             //Reset the textbox where the link was typed in
             this.tbxYoutubeUrl.Text = string.Empty;
         }
@@ -267,6 +262,30 @@ namespace LHJ.YoutubeDownloader
 
             return true;
         }
+
+        private void DeleteCheckDownloadList()
+        {
+            List<ucDownloadInfoBox> delList = new List<ucDownloadInfoBox>();
+            Control.ControlCollection ctrlColl = this.flpDownloadList.Controls;
+
+            foreach (Control ctrl in ctrlColl)
+            {
+                if (ctrl.GetType().Equals(typeof(ucDownloadInfoBox)))
+                {
+                    ucDownloadInfoBox downInfoBox = ctrl as ucDownloadInfoBox;
+
+                    if (downInfoBox.GetCheckState())
+                    {
+                        delList.Add(downInfoBox);
+                    }
+                }
+            }
+
+            foreach (ucDownloadInfoBox downInfoBox in delList)
+            {
+                this.flpDownloadList.Controls.Remove(downInfoBox);
+            }
+        }
         #endregion 6.Method
 
 
@@ -290,7 +309,7 @@ namespace LHJ.YoutubeDownloader
                 {
                     this.SetFavoriteLocalDownPath();
                 }
-                else if (btn.Equals(this.btnDownloadPath))
+                else if (btn.Equals(this.btnSetDownloadPath))
                 { 
                     
                 }
@@ -300,10 +319,17 @@ namespace LHJ.YoutubeDownloader
                     {
                         return;
                     }
+
+                    this.DeleteCheckDownloadList();
                 }
                 else if (btn.Equals(this.btnDownload))
-                { 
-                    
+                {
+                    if (!this.CheckExistDownloadList())
+                    {
+                        return;
+                    }
+
+
                 }
             }
         }
@@ -333,6 +359,21 @@ namespace LHJ.YoutubeDownloader
                     }
                 }
             }
+        }
+
+        private void bgwDownload_DoWork(object sender, DoWorkEventArgs e)
+        {
+
+        }
+
+        private void bgwDownload_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+
+        }
+
+        private void bgwDownload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+
         }
         #endregion 7.Event
     }

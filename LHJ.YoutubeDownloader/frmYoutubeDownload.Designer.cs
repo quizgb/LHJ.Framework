@@ -35,7 +35,7 @@
             this.cboDownloadType = new System.Windows.Forms.ComboBox();
             this.tbxYoutubeUrl = new System.Windows.Forms.TextBox();
             this.lblYoutubeUrl = new System.Windows.Forms.Label();
-            this.btnDownloadPath = new System.Windows.Forms.Button();
+            this.btnSetDownloadPath = new System.Windows.Forms.Button();
             this.tbxDownloadPath = new System.Windows.Forms.TextBox();
             this.lblDownloadPath = new System.Windows.Forms.Label();
             this.ucpgbDownload = new LHJ.Controls.ucProgressBar();
@@ -44,6 +44,7 @@
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnDelDownloadList = new System.Windows.Forms.Button();
             this.cbxCheckAllDownloadList = new System.Windows.Forms.CheckBox();
+            this.bgwDownload = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
             this.pnlDownloadList.SuspendLayout();
             this.pnlDownloadListMenu.SuspendLayout();
@@ -77,7 +78,7 @@
             this.panel1.Controls.Add(this.tbxYoutubeUrl);
             this.panel1.Controls.Add(this.lblYoutubeUrl);
             this.panel1.Controls.Add(this.btnAddDownloadList);
-            this.panel1.Controls.Add(this.btnDownloadPath);
+            this.panel1.Controls.Add(this.btnSetDownloadPath);
             this.panel1.Controls.Add(this.tbxDownloadPath);
             this.panel1.Controls.Add(this.lblDownloadPath);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -123,15 +124,15 @@
             this.lblYoutubeUrl.TabIndex = 5;
             this.lblYoutubeUrl.Text = "Youtube URL";
             // 
-            // btnDownloadPath
+            // btnSetDownloadPath
             // 
-            this.btnDownloadPath.Image = global::LHJ.YoutubeDownloader.Properties.Resources._1472131309_system_search;
-            this.btnDownloadPath.Location = new System.Drawing.Point(680, 3);
-            this.btnDownloadPath.Name = "btnDownloadPath";
-            this.btnDownloadPath.Size = new System.Drawing.Size(31, 23);
-            this.btnDownloadPath.TabIndex = 4;
-            this.btnDownloadPath.UseVisualStyleBackColor = true;
-            this.btnDownloadPath.Click += new System.EventHandler(this.btnAddDownloadList_Click);
+            this.btnSetDownloadPath.Image = global::LHJ.YoutubeDownloader.Properties.Resources._1472131309_system_search;
+            this.btnSetDownloadPath.Location = new System.Drawing.Point(680, 3);
+            this.btnSetDownloadPath.Name = "btnSetDownloadPath";
+            this.btnSetDownloadPath.Size = new System.Drawing.Size(31, 23);
+            this.btnSetDownloadPath.TabIndex = 4;
+            this.btnSetDownloadPath.UseVisualStyleBackColor = true;
+            this.btnSetDownloadPath.Click += new System.EventHandler(this.btnAddDownloadList_Click);
             // 
             // tbxDownloadPath
             // 
@@ -211,6 +212,14 @@
             this.cbxCheckAllDownloadList.UseVisualStyleBackColor = true;
             this.cbxCheckAllDownloadList.CheckedChanged += new System.EventHandler(this.cbxCheckAllDownloadList_CheckedChanged);
             // 
+            // bgwDownload
+            // 
+            this.bgwDownload.WorkerReportsProgress = true;
+            this.bgwDownload.WorkerSupportsCancellation = true;
+            this.bgwDownload.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwDownload_DoWork);
+            this.bgwDownload.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwDownload_ProgressChanged);
+            this.bgwDownload.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwDownload_RunWorkerCompleted);
+            // 
             // frmYoutubeDownload
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -238,7 +247,7 @@
         private System.Windows.Forms.FlowLayoutPanel flpDownloadList;
         private System.Windows.Forms.Button btnAddDownloadList;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnDownloadPath;
+        private System.Windows.Forms.Button btnSetDownloadPath;
         private System.Windows.Forms.TextBox tbxDownloadPath;
         private System.Windows.Forms.Label lblDownloadPath;
         private System.Windows.Forms.TextBox tbxYoutubeUrl;
@@ -251,6 +260,7 @@
         private System.Windows.Forms.CheckBox cbxCheckAllDownloadList;
         private System.Windows.Forms.Button btnDownload;
         private System.Windows.Forms.Button btnDelDownloadList;
+        private System.ComponentModel.BackgroundWorker bgwDownload;
     }
 }
 

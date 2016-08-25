@@ -13,7 +13,7 @@ namespace LHJ.YoutubeDownloader
     public partial class ucDownloadInfoBox : UserControl
     {
         #region 1.Variable
-
+        private YoutubeModel mYoutubeModel;
         #endregion 1.Variable
 
 
@@ -49,6 +49,7 @@ namespace LHJ.YoutubeDownloader
         #region 6.Method
         public void SetDownloadInfo(YoutubeModel aYoutubeModel, string aLink)
         {
+            this.mYoutubeModel = aYoutubeModel;
             this.lblTitle.Text = aYoutubeModel.Video.Title;
             string youtubeCode = aLink.Substring(aLink.Length - 11, 11);
 
