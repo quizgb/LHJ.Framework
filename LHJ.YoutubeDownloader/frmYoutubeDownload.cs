@@ -7,11 +7,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
+using LHJ.Common.Definition;
+
 using YoutubeExtractor;
 
 namespace LHJ.YoutubeDownloader
 {
-    public partial class Form1 : Form
+    public partial class frmYoutubeDownload : Form
     {
         #region 1.Variable
         List<YoutubeModel> m_DownloadList = new List<YoutubeModel>();
@@ -24,7 +27,7 @@ namespace LHJ.YoutubeDownloader
 
 
         #region 3.Constructor
-        public Form1()
+        public frmYoutubeDownload()
         {
             InitializeComponent();
 
@@ -63,14 +66,14 @@ namespace LHJ.YoutubeDownloader
 
             DataRow dr = dtType.NewRow();
 
-            dr["CODE"] = LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType.Video;
+            dr["CODE"] = (int)LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType.Video;
             dr["CODE_NAME"] = LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType_DISPLAY.VIDEO;
 
             dtType.Rows.Add(dr);
 
             dr = dtType.NewRow();
 
-            dr["CODE"] = LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType.MP3;
+            dr["CODE"] = (int)LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType.MP3;
             dr["CODE_NAME"] = LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType_DISPLAY.MP3;
 
             dtType.Rows.Add(dr);
@@ -103,9 +106,42 @@ namespace LHJ.YoutubeDownloader
             }
         }
 
+        private LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType GetDownloadType()
+        {
+            LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType downType = 0;
+
+            if (this.cboDownloadType.InvokeRequired)
+            {
+                this.cboDownloadType.Invoke(new MethodInvoker(delegate()
+                {
+                    if (Convert.ToInt32(this.cboDownloadType.SelectedValue).Equals(Convert.ToInt32(LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType.Video)))
+                    {
+                        downType = LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType.Video;
+                    }
+                    else
+                    {
+                        downType = LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType.MP3;
+                    }
+                }));
+            }
+            else
+            {
+                if (Convert.ToInt32(this.cboDownloadType.SelectedValue).Equals(Convert.ToInt32(LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType.Video)))
+                {
+                    downType = LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType.Video;
+                }
+                else
+                {
+                    downType = LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType.MP3;
+                }
+            }
+
+            return downType;
+        }
+
         private void CreateVideoOrAudioObject()
         {
-            if (this.cboDownloadType.SelectedValue.Equals(LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType.Video))
+            if (this.GetDownloadType().Equals(LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType.Video))
             {
                 //Create new videoDownloader object
                 YoutubeVideoModel videoDownloader = new YoutubeVideoModel();
@@ -162,11 +198,10 @@ namespace LHJ.YoutubeDownloader
         private void button1_Click(object sender, EventArgs e)
         {
             BackgroundWorker bg = new BackgroundWorker();
+            var isGoodLink = this.ValidateLink();
 
             bg.DoWork += (s, args) =>
             {
-                var isGoodLink = ValidateLink();
-
                 if (isGoodLink.Item1 == true)
                 {
                     CreateVideoOrAudioObject();

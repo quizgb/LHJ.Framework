@@ -1,6 +1,6 @@
 ﻿namespace LHJ.YoutubeDownloader
 {
-    partial class Form1
+    partial class frmYoutubeDownload
     {
         /// <summary>
         /// 필수 디자이너 변수입니다.
@@ -78,11 +78,12 @@
             // 
             // cboDownloadType
             // 
-            this.cboDownloadType.FormattingEnabled = true;
+            this.cboDownloadType.DisplayMember = "CODE_NAME";
             this.cboDownloadType.Location = new System.Drawing.Point(710, 6);
             this.cboDownloadType.Name = "cboDownloadType";
             this.cboDownloadType.Size = new System.Drawing.Size(51, 20);
             this.cboDownloadType.TabIndex = 7;
+            this.cboDownloadType.ValueMember = "CODE";
             // 
             // tbxYoutubeUrl
             // 
