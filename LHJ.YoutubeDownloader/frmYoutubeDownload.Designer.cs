@@ -31,6 +31,7 @@
             this.flpDownloadList = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAddDownloadList = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnFavoriteLocalDownPath = new System.Windows.Forms.Button();
             this.cboDownloadType = new System.Windows.Forms.ComboBox();
             this.tbxYoutubeUrl = new System.Windows.Forms.TextBox();
             this.lblYoutubeUrl = new System.Windows.Forms.Label();
@@ -38,24 +39,28 @@
             this.tbxDownloadPath = new System.Windows.Forms.TextBox();
             this.lblDownloadPath = new System.Windows.Forms.Label();
             this.ucProgressBar1 = new LHJ.Controls.ucProgressBar();
+            this.pnlDownloadList = new System.Windows.Forms.Panel();
+            this.pnlDownloadListMenu = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
+            this.pnlDownloadList.SuspendLayout();
             this.SuspendLayout();
             // 
             // flpDownloadList
             // 
             this.flpDownloadList.AutoScroll = true;
             this.flpDownloadList.BackColor = System.Drawing.Color.White;
-            this.flpDownloadList.Location = new System.Drawing.Point(12, 97);
+            this.flpDownloadList.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flpDownloadList.Location = new System.Drawing.Point(0, 30);
             this.flpDownloadList.Name = "flpDownloadList";
-            this.flpDownloadList.Size = new System.Drawing.Size(781, 458);
+            this.flpDownloadList.Size = new System.Drawing.Size(761, 421);
             this.flpDownloadList.TabIndex = 0;
             this.flpDownloadList.MouseEnter += new System.EventHandler(this.flpDownloadList_MouseEnter);
             // 
             // btnAddDownloadList
             // 
-            this.btnAddDownloadList.Location = new System.Drawing.Point(767, 5);
+            this.btnAddDownloadList.Location = new System.Drawing.Point(718, 32);
             this.btnAddDownloadList.Name = "btnAddDownloadList";
-            this.btnAddDownloadList.Size = new System.Drawing.Size(75, 23);
+            this.btnAddDownloadList.Size = new System.Drawing.Size(57, 23);
             this.btnAddDownloadList.TabIndex = 1;
             this.btnAddDownloadList.Text = "추가";
             this.btnAddDownloadList.UseVisualStyleBackColor = true;
@@ -63,6 +68,7 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnFavoriteLocalDownPath);
             this.panel1.Controls.Add(this.cboDownloadType);
             this.panel1.Controls.Add(this.tbxYoutubeUrl);
             this.panel1.Controls.Add(this.lblYoutubeUrl);
@@ -73,15 +79,24 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(991, 62);
+            this.panel1.Size = new System.Drawing.Size(788, 62);
             this.panel1.TabIndex = 2;
+            // 
+            // btnFavoriteLocalDownPath
+            // 
+            this.btnFavoriteLocalDownPath.Image = global::LHJ.YoutubeDownloader.Properties.Resources._1472131444_star;
+            this.btnFavoriteLocalDownPath.Location = new System.Drawing.Point(648, 3);
+            this.btnFavoriteLocalDownPath.Name = "btnFavoriteLocalDownPath";
+            this.btnFavoriteLocalDownPath.Size = new System.Drawing.Size(31, 23);
+            this.btnFavoriteLocalDownPath.TabIndex = 8;
+            this.btnFavoriteLocalDownPath.UseVisualStyleBackColor = true;
             // 
             // cboDownloadType
             // 
             this.cboDownloadType.DisplayMember = "CODE_NAME";
-            this.cboDownloadType.Location = new System.Drawing.Point(710, 6);
+            this.cboDownloadType.Location = new System.Drawing.Point(652, 33);
             this.cboDownloadType.Name = "cboDownloadType";
-            this.cboDownloadType.Size = new System.Drawing.Size(51, 20);
+            this.cboDownloadType.Size = new System.Drawing.Size(60, 20);
             this.cboDownloadType.TabIndex = 7;
             this.cboDownloadType.ValueMember = "CODE";
             // 
@@ -103,9 +118,10 @@
             // 
             // btnDownloadPath
             // 
-            this.btnDownloadPath.Location = new System.Drawing.Point(652, 4);
+            this.btnDownloadPath.Image = global::LHJ.YoutubeDownloader.Properties.Resources._1472131309_system_search;
+            this.btnDownloadPath.Location = new System.Drawing.Point(680, 3);
             this.btnDownloadPath.Name = "btnDownloadPath";
-            this.btnDownloadPath.Size = new System.Drawing.Size(42, 23);
+            this.btnDownloadPath.Size = new System.Drawing.Size(31, 23);
             this.btnDownloadPath.TabIndex = 4;
             this.btnDownloadPath.UseVisualStyleBackColor = true;
             // 
@@ -130,22 +146,42 @@
             this.ucProgressBar1.Location = new System.Drawing.Point(12, 68);
             this.ucProgressBar1.Name = "ucProgressBar1";
             this.ucProgressBar1.ProgressBarText = "";
-            this.ucProgressBar1.Size = new System.Drawing.Size(781, 23);
+            this.ucProgressBar1.Size = new System.Drawing.Size(763, 23);
             this.ucProgressBar1.TabIndex = 3;
             this.ucProgressBar1.TextType = LHJ.Common.Definition.ConstValue.ProgressBarTextType.None;
             // 
-            // Form1
+            // pnlDownloadList
+            // 
+            this.pnlDownloadList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDownloadList.Controls.Add(this.flpDownloadList);
+            this.pnlDownloadList.Controls.Add(this.pnlDownloadListMenu);
+            this.pnlDownloadList.Location = new System.Drawing.Point(12, 97);
+            this.pnlDownloadList.Name = "pnlDownloadList";
+            this.pnlDownloadList.Size = new System.Drawing.Size(763, 453);
+            this.pnlDownloadList.TabIndex = 4;
+            // 
+            // pnlDownloadListMenu
+            // 
+            this.pnlDownloadListMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDownloadListMenu.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlDownloadListMenu.Location = new System.Drawing.Point(0, 0);
+            this.pnlDownloadListMenu.Name = "pnlDownloadListMenu";
+            this.pnlDownloadListMenu.Size = new System.Drawing.Size(761, 30);
+            this.pnlDownloadListMenu.TabIndex = 5;
+            // 
+            // frmYoutubeDownload
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(991, 562);
+            this.ClientSize = new System.Drawing.Size(788, 562);
+            this.Controls.Add(this.pnlDownloadList);
             this.Controls.Add(this.ucProgressBar1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.flpDownloadList);
-            this.Name = "Form1";
+            this.Name = "frmYoutubeDownload";
             this.Text = "Youtube Downloader";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.pnlDownloadList.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -162,6 +198,9 @@
         private System.Windows.Forms.Label lblYoutubeUrl;
         private Controls.ucProgressBar ucProgressBar1;
         private System.Windows.Forms.ComboBox cboDownloadType;
+        private System.Windows.Forms.Panel pnlDownloadList;
+        private System.Windows.Forms.Panel pnlDownloadListMenu;
+        private System.Windows.Forms.Button btnFavoriteLocalDownPath;
     }
 }
 

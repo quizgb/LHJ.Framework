@@ -139,8 +139,10 @@ namespace LHJ.YoutubeDownloader
             return downType;
         }
 
-        private void CreateVideoOrAudioObject()
+        private void CreateVideoOrAudioObject(string aLink)
         {
+            this.Cursor = Cursors.WaitCursor;   
+
             if (this.GetDownloadType().Equals(LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType.Video))
             {
                 //Create new videoDownloader object
@@ -156,7 +158,7 @@ namespace LHJ.YoutubeDownloader
                 //Stores VideoInfo object in model
                 videoDownloader.Video = FileDownloader.GetVideoInfo(videoDownloader);
 
-                UpdateDownloadList(videoDownloader);
+                UpdateDownloadList(videoDownloader, aLink);
             }
             //Create audio object
             else
@@ -174,14 +176,17 @@ namespace LHJ.YoutubeDownloader
                 //Stores VideoInfo object in model
                 audioDownloader.Video = FileDownloader.GetVideoInfoAudioOnly(audioDownloader);
 
-                UpdateDownloadList(audioDownloader);
+                UpdateDownloadList(audioDownloader, aLink);
             }
+
+            this.Cursor = Cursors.Default;
         }
 
-        private void UpdateDownloadList(YoutubeModel model)
+        private void UpdateDownloadList(YoutubeModel model, string aLink)
         {
-            UserControl1 ctrl = new UserControl1();
+            ucDownloadInfo ctrl = new ucDownloadInfo();
             ctrl.Width = this.flpDownloadList.Width - 20;
+            ctrl.SetDownloadInfo(model, aLink);
             this.flpDownloadList.Controls.Add(ctrl);
 
             //Add item to download to the beginning of the list
@@ -200,15 +205,10 @@ namespace LHJ.YoutubeDownloader
             BackgroundWorker bg = new BackgroundWorker();
             var isGoodLink = this.ValidateLink();
 
-            bg.DoWork += (s, args) =>
+            if (isGoodLink.Item1 == true)
             {
-                if (isGoodLink.Item1 == true)
-                {
-                    CreateVideoOrAudioObject();
-                }
-            };
-
-            bg.RunWorkerAsync();
+                this.CreateVideoOrAudioObject(isGoodLink.Item2);
+            }
         }
 
         private void flpDownloadList_MouseEnter(object sender, EventArgs e)

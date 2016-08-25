@@ -22,5 +22,17 @@ namespace LHJ.YoutubeDownloader.Properties {
                 return defaultInstance;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string LocalDownPath {
+            get {
+                return ((string)(this["LocalDownPath"]));
+            }
+            set {
+                this["LocalDownPath"] = value;
+            }
+        }
     }
 }

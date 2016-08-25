@@ -1,6 +1,6 @@
 ﻿namespace LHJ.YoutubeDownloader
 {
-    partial class UserControl1
+    partial class ucDownloadInfo
     {
         /// <summary> 
         /// 필수 디자이너 변수입니다.
@@ -29,46 +29,48 @@
         private void InitializeComponent()
         {
             this.cbxDownload = new System.Windows.Forms.CheckBox();
-            this.pbxPreview = new System.Windows.Forms.PictureBox();
             this.lblTitle = new System.Windows.Forms.Label();
+            this.pbxPreview = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPreview)).BeginInit();
             this.SuspendLayout();
             // 
             // cbxDownload
             // 
             this.cbxDownload.AutoSize = true;
-            this.cbxDownload.Location = new System.Drawing.Point(12, 28);
+            this.cbxDownload.Location = new System.Drawing.Point(12, 35);
             this.cbxDownload.Name = "cbxDownload";
             this.cbxDownload.Size = new System.Drawing.Size(15, 14);
             this.cbxDownload.TabIndex = 0;
             this.cbxDownload.UseVisualStyleBackColor = true;
-            // 
-            // pbxPreview
-            // 
-            this.pbxPreview.Location = new System.Drawing.Point(33, 3);
-            this.pbxPreview.Name = "pbxPreview";
-            this.pbxPreview.Size = new System.Drawing.Size(100, 64);
-            this.pbxPreview.TabIndex = 1;
-            this.pbxPreview.TabStop = false;
+            this.cbxDownload.CheckedChanged += new System.EventHandler(this.cbxDownload_CheckedChanged);
             // 
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Location = new System.Drawing.Point(139, 30);
+            this.lblTitle.Location = new System.Drawing.Point(139, 36);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(30, 12);
             this.lblTitle.TabIndex = 2;
             this.lblTitle.Text = "Test";
             // 
-            // UserControl1
+            // pbxPreview
+            // 
+            this.pbxPreview.Location = new System.Drawing.Point(33, 3);
+            this.pbxPreview.Name = "pbxPreview";
+            this.pbxPreview.Size = new System.Drawing.Size(100, 78);
+            this.pbxPreview.TabIndex = 1;
+            this.pbxPreview.TabStop = false;
+            // 
+            // ucDownloadInfo
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pbxPreview);
             this.Controls.Add(this.cbxDownload);
-            this.Name = "UserControl1";
-            this.Size = new System.Drawing.Size(548, 68);
+            this.Name = "ucDownloadInfo";
+            this.Size = new System.Drawing.Size(548, 84);
+            this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.ucDownloadInfo_MouseClick);
             ((System.ComponentModel.ISupportInitialize)(this.pbxPreview)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
