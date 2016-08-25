@@ -64,7 +64,7 @@
             this.btnAddDownloadList.TabIndex = 1;
             this.btnAddDownloadList.Text = "추가";
             this.btnAddDownloadList.UseVisualStyleBackColor = true;
-            this.btnAddDownloadList.Click += new System.EventHandler(this.button1_Click);
+            this.btnAddDownloadList.Click += new System.EventHandler(this.btnAddDownloadList_Click);
             // 
             // panel1
             // 
@@ -90,6 +90,7 @@
             this.btnFavoriteLocalDownPath.Size = new System.Drawing.Size(31, 23);
             this.btnFavoriteLocalDownPath.TabIndex = 8;
             this.btnFavoriteLocalDownPath.UseVisualStyleBackColor = true;
+            this.btnFavoriteLocalDownPath.Click += new System.EventHandler(this.btnAddDownloadList_Click);
             // 
             // cboDownloadType
             // 
@@ -124,6 +125,7 @@
             this.btnDownloadPath.Size = new System.Drawing.Size(31, 23);
             this.btnDownloadPath.TabIndex = 4;
             this.btnDownloadPath.UseVisualStyleBackColor = true;
+            this.btnDownloadPath.Click += new System.EventHandler(this.btnAddDownloadList_Click);
             // 
             // tbxDownloadPath
             // 
@@ -178,6 +180,7 @@
             this.Controls.Add(this.ucProgressBar1);
             this.Controls.Add(this.panel1);
             this.Name = "frmYoutubeDownload";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Youtube Downloader";
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

@@ -52,6 +52,11 @@ namespace LHJ.YoutubeDownloader
             this.cboDownloadType.DisplayMember = "CODE_NAME";
             this.cboDownloadType.ValueMember = "CODE";
             this.cboDownloadType.DataSource = this.YoutubeDownloader_DownloadType();
+
+            if (!string.IsNullOrEmpty(Properties.Settings.Default.LocalDownPath))
+            {
+                this.tbxDownloadPath.Text = Properties.Settings.Default.LocalDownPath;
+            }
         }
         #endregion 5.Set Initialize
 
@@ -81,29 +86,45 @@ namespace LHJ.YoutubeDownloader
             return dtType;
         }
 
+        private bool CheckLocalPath()
+        {
+            if (!Directory.Exists(this.tbxDownloadPath.Text))
+            {
+                this.tbxDownloadPath.Focus();
+                MessageBox.Show(this, "올바른 폴더경로를 입력하세요.", ConstValue.MSGBOX_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
+        }
+
         private Tuple<bool, string> ValidateLink()
         {
             //Contains the normalized URL
             string normalUrl;
+            Tuple<bool, string> tuple = null;
 
             //Checks that a valid folder is entered to store downloaded files
             if (!Directory.Exists(this.tbxDownloadPath.Text))
             {
-                this.tbxDownloadPath.Focus();
-                MessageBox.Show("올바른 폴더경로를 입력하세요.");
-                return Tuple.Create(false, "");
+                if (!this.CheckLocalPath())
+                {
+                    tuple = Tuple.Create(false, "");
+                }
             }
             //Checks that URL entered corresponds to a valid Youtube video
             else if (!(DownloadUrlResolver.TryNormalizeYoutubeUrl(this.tbxYoutubeUrl.Text, out normalUrl)))
             {
                 this.tbxYoutubeUrl.Focus();
-                MessageBox.Show("올바른 Youtube URL을 입력하세요.");
-                return Tuple.Create(false, "");
+                MessageBox.Show(this, "올바른 Youtube URL을 입력하세요.", ConstValue.MSGBOX_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                tuple = Tuple.Create(false, "");
             }
             else
             {
-                return Tuple.Create(true, normalUrl);
+                tuple = Tuple.Create(true, normalUrl);
             }
+
+            return tuple;
         }
 
         private LHJ.Common.Definition.ConstValue.YoutubeDownloaderDownloadType GetDownloadType()
@@ -182,32 +203,55 @@ namespace LHJ.YoutubeDownloader
             this.Cursor = Cursors.Default;
         }
 
-        private void UpdateDownloadList(YoutubeModel model, string aLink)
+        private void UpdateDownloadList(YoutubeModel aModel, string aLink)
         {
-            ucDownloadInfo ctrl = new ucDownloadInfo();
-            ctrl.Width = this.flpDownloadList.Width - 20;
-            ctrl.SetDownloadInfo(model, aLink);
-            this.flpDownloadList.Controls.Add(ctrl);
+            ucDownloadInfoBox downInfoBox = new ucDownloadInfoBox();
+            downInfoBox.Width = this.flpDownloadList.Width - 20;
+            downInfoBox.SetDownloadInfo(aModel, aLink);
+            this.flpDownloadList.Controls.Add(downInfoBox);
 
             //Add item to download to the beginning of the list
             //If you use Add it adds to the end of the list
-            this.m_DownloadList.Insert(0, model);
+            this.m_DownloadList.Insert(0, aModel);
 
             //Reset the textbox where the link was typed in
-            this.tbxYoutubeUrl.Text = "";
+            this.tbxYoutubeUrl.Text = string.Empty;
         }
         #endregion 6.Method
 
 
         #region 7.Event
-        private void button1_Click(object sender, EventArgs e)
+        private void btnAddDownloadList_Click(object sender, EventArgs e)
         {
-            BackgroundWorker bg = new BackgroundWorker();
-            var isGoodLink = this.ValidateLink();
+            Button btn = sender as Button;
 
-            if (isGoodLink.Item1 == true)
+            if (btn != null)
             {
-                this.CreateVideoOrAudioObject(isGoodLink.Item2);
+                if (btn.Equals(this.btnAddDownloadList))
+                {
+                    var isGoodLink = this.ValidateLink();
+
+                    if (isGoodLink.Item1 == true)
+                    {
+                        this.CreateVideoOrAudioObject(isGoodLink.Item2);
+                    }
+                }
+                else if (btn.Equals(this.btnFavoriteLocalDownPath))
+                {
+                    if (!this.CheckLocalPath())
+                    {
+                        return;
+                    }
+
+                    if (MessageBox.Show(this, "다운로드 폴더경로를 기본 다운로드 경로로\r\n지정하시겠습니까?", ConstValue.MSGBOX_TITLE, MessageBoxButtons.YesNo, MessageBoxIcon.Question).Equals(DialogResult.Yes))
+                    {
+                        Properties.Settings.Default.LocalDownPath = this.tbxDownloadPath.Text;
+                    }
+                }
+                else if (btn.Equals(this.btnDownloadPath))
+                { 
+                    
+                }
             }
         }
 
