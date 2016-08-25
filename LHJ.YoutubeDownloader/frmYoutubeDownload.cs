@@ -217,6 +217,56 @@ namespace LHJ.YoutubeDownloader
             //Reset the textbox where the link was typed in
             this.tbxYoutubeUrl.Text = string.Empty;
         }
+
+        private void SetFavoriteLocalDownPath()
+        {
+            if (!this.CheckLocalPath())
+            {
+                return;
+            }
+
+            if (MessageBox.Show(this, "입렧하신 다운로드 폴더경로를\r\n기본 다운로드 경로로 지정하시겠습니까?", ConstValue.MSGBOX_TITLE, MessageBoxButtons.YesNo, MessageBoxIcon.Question).Equals(DialogResult.Yes))
+            {
+                Properties.Settings.Default.LocalDownPath = this.tbxDownloadPath.Text;
+            }
+        }
+
+        private bool CheckExistDownloadList()
+        {
+            int count = 0;
+            int checkCnt = 0;
+
+            Control.ControlCollection ctrlColl = this.flpDownloadList.Controls;
+
+            foreach (Control ctrl in ctrlColl)
+            {
+                if (ctrl.GetType().Equals(typeof(ucDownloadInfoBox)))
+                {
+                    count++;
+
+                    ucDownloadInfoBox downInfoBox = ctrl as ucDownloadInfoBox;
+
+                    if (downInfoBox.GetCheckState())
+                    {
+                        checkCnt++;
+                    }
+                }
+            }
+
+            if (count < 1)
+            {
+                MessageBox.Show(this, "리스트에 추가된 동영상이 존재하지 않습니다.", ConstValue.MSGBOX_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            if (checkCnt < 1)
+            {
+                MessageBox.Show(this, "리스트에 체크된 동영상이 존재하지 않습니다.", ConstValue.MSGBOX_TITLE, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
+
+            return true;
+        }
         #endregion 6.Method
 
 
@@ -238,17 +288,20 @@ namespace LHJ.YoutubeDownloader
                 }
                 else if (btn.Equals(this.btnFavoriteLocalDownPath))
                 {
-                    if (!this.CheckLocalPath())
+                    this.SetFavoriteLocalDownPath();
+                }
+                else if (btn.Equals(this.btnDownloadPath))
+                { 
+                    
+                }
+                else if (btn.Equals(this.btnDelDownloadList))
+                {
+                    if (!this.CheckExistDownloadList())
                     {
                         return;
                     }
-
-                    if (MessageBox.Show(this, "다운로드 폴더경로를 기본 다운로드 경로로\r\n지정하시겠습니까?", ConstValue.MSGBOX_TITLE, MessageBoxButtons.YesNo, MessageBoxIcon.Question).Equals(DialogResult.Yes))
-                    {
-                        Properties.Settings.Default.LocalDownPath = this.tbxDownloadPath.Text;
-                    }
                 }
-                else if (btn.Equals(this.btnDownloadPath))
+                else if (btn.Equals(this.btnDownload))
                 { 
                     
                 }
@@ -258,6 +311,28 @@ namespace LHJ.YoutubeDownloader
         private void flpDownloadList_MouseEnter(object sender, EventArgs e)
         {
             this.flpDownloadList.Focus();
+        }
+
+        private void cbxCheckAllDownloadList_CheckedChanged(object sender, EventArgs e)
+        {
+            Control.ControlCollection ctrlColl = this.flpDownloadList.Controls;
+
+            foreach (Control ctrl in ctrlColl)
+            {
+                if (ctrl.GetType().Equals(typeof(ucDownloadInfoBox)))
+                {
+                    ucDownloadInfoBox downInfoBox = ctrl as ucDownloadInfoBox;
+
+                    if (this.cbxCheckAllDownloadList.Checked)
+                    {
+                        downInfoBox.SetCheck();
+                    }
+                    else
+                    {
+                        downInfoBox.SetUnCheck();
+                    }
+                }
+            }
         }
         #endregion 7.Event
     }

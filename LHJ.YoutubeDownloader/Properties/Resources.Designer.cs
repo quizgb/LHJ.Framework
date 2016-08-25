@@ -61,6 +61,16 @@ namespace LHJ.YoutubeDownloader.Properties {
         }
         
         /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1464172710_Less {
+            get {
+                object obj = ResourceManager.GetObject("_1464172710_Less", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   (아이콘)과(와) 유사한 System.Drawing.Icon 형식의 지역화된 리소스를 찾습니다.
         /// </summary>
         internal static System.Drawing.Icon _1472122004_youtube {
@@ -86,6 +96,16 @@ namespace LHJ.YoutubeDownloader.Properties {
         internal static System.Drawing.Bitmap _1472131444_star {
             get {
                 object obj = ResourceManager.GetObject("_1472131444_star", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   System.Drawing.Bitmap 형식의 지역화된 리소스를 찾습니다.
+        /// </summary>
+        internal static System.Drawing.Bitmap _1472133673_download {
+            get {
+                object obj = ResourceManager.GetObject("_1472133673_download", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

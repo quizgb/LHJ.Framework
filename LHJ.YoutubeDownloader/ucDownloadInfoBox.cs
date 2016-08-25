@@ -12,11 +12,41 @@ namespace LHJ.YoutubeDownloader
 {
     public partial class ucDownloadInfoBox : UserControl
     {
+        #region 1.Variable
+
+        #endregion 1.Variable
+
+
+        #region 2.Property
+
+        #endregion 2.Property
+
+
+        #region 3.Constructor
         public ucDownloadInfoBox()
         {
             InitializeComponent();
         }
+        #endregion 3.Constructor
 
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
         public void SetDownloadInfo(YoutubeModel aYoutubeModel, string aLink)
         {
             this.lblTitle.Text = aYoutubeModel.Video.Title;
@@ -32,6 +62,31 @@ namespace LHJ.YoutubeDownloader
             this.pbxPreview.ImageLocation = "1.jpg";
         }
 
+        public bool GetCheckState()
+        {
+            if (this.cbxDownload.Checked)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void SetCheck()
+        {
+            this.cbxDownload.Checked = true;
+        }
+
+        public void SetUnCheck()
+        {
+            this.cbxDownload.Checked = false;
+        }
+        #endregion 6.Method
+
+
+        #region 7.Event
         private void cbxDownload_CheckedChanged(object sender, EventArgs e)
         {
             if (this.cbxDownload.Checked)
@@ -55,5 +110,6 @@ namespace LHJ.YoutubeDownloader
                 this.cbxDownload.Checked = true;
             }
         }
+        #endregion 7.Event
     }
 }
