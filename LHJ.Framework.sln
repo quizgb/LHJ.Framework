@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LHJ.DBViewer", "LHJ.DBViewe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LHJ.DrawingBoard", "LHJ.DrawingBoard\LHJ.DrawingBoard.csproj", "{F4965A0A-463B-4424-879D-8CCE99191EFB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LHJ.YoutubeDownloader", "LHJ.YoutubeDownloader\LHJ.YoutubeDownloader.csproj", "{2EA43AC4-229F-4E55-AFD6-FA0020E8EBA8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -86,6 +88,16 @@ Global
 		{F4965A0A-463B-4424-879D-8CCE99191EFB}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{F4965A0A-463B-4424-879D-8CCE99191EFB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{F4965A0A-463B-4424-879D-8CCE99191EFB}.Release|x86.ActiveCfg = Release|Any CPU
+		{2EA43AC4-229F-4E55-AFD6-FA0020E8EBA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EA43AC4-229F-4E55-AFD6-FA0020E8EBA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EA43AC4-229F-4E55-AFD6-FA0020E8EBA8}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2EA43AC4-229F-4E55-AFD6-FA0020E8EBA8}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2EA43AC4-229F-4E55-AFD6-FA0020E8EBA8}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2EA43AC4-229F-4E55-AFD6-FA0020E8EBA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EA43AC4-229F-4E55-AFD6-FA0020E8EBA8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EA43AC4-229F-4E55-AFD6-FA0020E8EBA8}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2EA43AC4-229F-4E55-AFD6-FA0020E8EBA8}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2EA43AC4-229F-4E55-AFD6-FA0020E8EBA8}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

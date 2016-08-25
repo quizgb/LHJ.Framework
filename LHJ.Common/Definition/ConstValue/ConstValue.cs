@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 
@@ -26,6 +27,18 @@ namespace LHJ.Common.Definition
             SchemaBrowser = 2, 
             SessionViewer = 3,
             TableSpaceViewer = 4
+        }
+
+        public enum YoutubeDownloaderDownloadType
+        {
+            Video = 1,
+            MP3 = 2
+        }
+
+        public struct YoutubeDownloaderDownloadType_DISPLAY
+        {
+            public const string VIDEO = "Video";
+            public const string MP3 = "MP3";
         }
 
         public struct DBViewer_ObjectList_DISPLAY
