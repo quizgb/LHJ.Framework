@@ -7,9 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-
 using LHJ.Common.Definition;
-
+using Microsoft.WindowsAPICodePack.Dialogs;
 using YoutubeExtractor;
 
 namespace LHJ.YoutubeDownloader
@@ -17,6 +16,7 @@ namespace LHJ.YoutubeDownloader
     public partial class frmYoutubeDownload : Form
     {
         #region 1.Variable
+        private Timer mDownCheckTimer = new Timer();
         #endregion 1.Variable
 
 
@@ -47,7 +47,7 @@ namespace LHJ.YoutubeDownloader
         public void SetInitialize()
         {
             this.Icon = Properties.Resources._1472122004_youtube;
-            this.tbxDownloadPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
             this.cboDownloadType.DisplayMember = "CODE_NAME";
             this.cboDownloadType.ValueMember = "CODE";
             this.cboDownloadType.DataSource = this.YoutubeDownloader_DownloadType();
@@ -56,11 +56,59 @@ namespace LHJ.YoutubeDownloader
             {
                 this.tbxDownloadPath.Text = Properties.Settings.Default.LocalDownPath;
             }
+            else
+            {
+                this.tbxDownloadPath.Text = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            }
+
+            this.mDownCheckTimer.Interval = 1000;
+            this.mDownCheckTimer.Tick += this.mDownCheckTimer_Tick;
         }
         #endregion 5.Set Initialize
 
 
         #region 6.Method
+        private bool CheckAllDownloadComplete()
+        {
+            bool state = true;
+
+            Control.ControlCollection ctrlColl = this.flpDownloadList.Controls;
+
+            foreach (Control ctrl in ctrlColl)
+            {
+                if (ctrl.GetType().Equals(typeof(ucDownloadInfoBox)))
+                {
+                    ucDownloadInfoBox downInfoBox = ctrl as ucDownloadInfoBox;
+
+                    if (downInfoBox.GetCheckState())
+                    {
+                        if (downInfoBox.DownloadComlete)
+                        {
+                            state &= true;
+                        }
+                        else
+                        {
+                            state = false;
+                        }
+                    }
+                    else
+                    {
+                        state &= true;
+                    }
+                }
+            }
+
+            return state;
+        }
+
+        private void mDownCheckTimer_Tick(object sender, EventArgs e)
+        {
+            if (this.CheckAllDownloadComplete())
+            {
+                this.DownloadComplete();
+            }
+        }
+
         private DataTable YoutubeDownloader_DownloadType()
         {
             DataTable dtType = new DataTable();
@@ -220,7 +268,7 @@ namespace LHJ.YoutubeDownloader
                 return;
             }
 
-            if (MessageBox.Show(this, "입렧하신 다운로드 폴더경로를\r\n기본 다운로드 경로로 지정하시겠습니까?", ConstValue.MSGBOX_TITLE, MessageBoxButtons.YesNo, MessageBoxIcon.Question).Equals(DialogResult.Yes))
+            if (MessageBox.Show(this, "입력하신 다운로드 폴더경로를\r\n기본 다운로드 경로로 지정하시겠습니까?", ConstValue.MSGBOX_TITLE, MessageBoxButtons.YesNo, MessageBoxIcon.Question).Equals(DialogResult.Yes))
             {
                 Properties.Settings.Default.LocalDownPath = this.tbxDownloadPath.Text;
             }
@@ -263,6 +311,28 @@ namespace LHJ.YoutubeDownloader
             return true;
         }
 
+        private int GetCheckDownloadListCount()
+        {
+            int checkCnt = 0;
+
+            Control.ControlCollection ctrlColl = this.flpDownloadList.Controls;
+
+            foreach (Control ctrl in ctrlColl)
+            {
+                if (ctrl.GetType().Equals(typeof(ucDownloadInfoBox)))
+                {
+                    ucDownloadInfoBox downInfoBox = ctrl as ucDownloadInfoBox;
+
+                    if (downInfoBox.GetCheckState())
+                    {
+                        checkCnt++;
+                    }
+                }
+            }
+
+            return checkCnt;
+        }
+
         private void DeleteCheckDownloadList()
         {
             List<ucDownloadInfoBox> delList = new List<ucDownloadInfoBox>();
@@ -284,6 +354,94 @@ namespace LHJ.YoutubeDownloader
             foreach (ucDownloadInfoBox downInfoBox in delList)
             {
                 this.flpDownloadList.Controls.Remove(downInfoBox);
+            }
+        }
+
+        private void SetControlEnabled(bool aDownloading)
+        {
+            if (aDownloading)
+            {
+                this.flpDownloadList.Enabled = false;
+                this.btnDownload.Enabled = false;
+                this.btnAddDownloadList.Enabled = false;
+                this.btnDelDownloadList.Enabled = false;
+                this.btnSetDownloadPath.Enabled = false;
+                this.tbxDownloadPath.Enabled = false;
+                this.tbxYoutubeUrl.Enabled = false;
+                this.cbxCheckAllDownloadList.Enabled = false;
+            }
+            else
+            {
+                this.flpDownloadList.Enabled = true;
+                this.btnDownload.Enabled = true;
+                this.btnAddDownloadList.Enabled = true;
+                this.btnDelDownloadList.Enabled = true;
+                this.btnSetDownloadPath.Enabled = true;
+                this.tbxDownloadPath.Enabled = true;
+                this.tbxYoutubeUrl.Enabled = true;
+                this.cbxCheckAllDownloadList.Enabled = true;
+            }
+        }
+
+        private void Download()
+        {
+            this.Cursor = Cursors.WaitCursor;
+            this.mDownCheckTimer.Start();
+            this.SetControlEnabled(true);
+
+            Control.ControlCollection ctrlColl = this.flpDownloadList.Controls;
+
+            foreach (Control ctrl in ctrlColl)
+            {
+                if (ctrl.GetType().Equals(typeof(ucDownloadInfoBox)))
+                {
+                    ucDownloadInfoBox downInfoBox = ctrl as ucDownloadInfoBox;
+
+                    if (downInfoBox.GetCheckState())
+                    {
+                        downInfoBox.Download();
+                    }
+                }
+            }
+        }
+
+        private void DownloadComplete()
+        {
+            this.Cursor = Cursors.Default;
+            this.mDownCheckTimer.Stop();
+            this.SetControlEnabled(false);
+
+            List<ucDownloadInfoBox> completeList = new List<ucDownloadInfoBox>();
+            Control.ControlCollection ctrlColl = this.flpDownloadList.Controls;
+
+            foreach (Control ctrl in ctrlColl)
+            {
+                if (ctrl.GetType().Equals(typeof(ucDownloadInfoBox)))
+                {
+                    ucDownloadInfoBox downInfoBox = ctrl as ucDownloadInfoBox;
+
+                    if (downInfoBox.DownloadComlete)
+                    {
+                        completeList.Add(downInfoBox);
+                    }
+                }
+            }
+
+            foreach (ucDownloadInfoBox downInfoBox in completeList)
+            {
+                this.flpDownloadList.Controls.Remove(downInfoBox);
+            }
+        }
+
+        private void SelectFolderPath()
+        {
+            CommonOpenFileDialog cofd = new CommonOpenFileDialog();
+            cofd.IsFolderPicker = true;
+            cofd.Title = "폴더 선택";
+
+            if (cofd.ShowDialog().Equals(CommonFileDialogResult.Ok))
+            {
+                this.tbxDownloadPath.Text = cofd.FileName;
             }
         }
         #endregion 6.Method
@@ -310,8 +468,8 @@ namespace LHJ.YoutubeDownloader
                     this.SetFavoriteLocalDownPath();
                 }
                 else if (btn.Equals(this.btnSetDownloadPath))
-                { 
-                    
+                {
+                    this.SelectFolderPath();
                 }
                 else if (btn.Equals(this.btnDelDownloadList))
                 {
@@ -329,7 +487,12 @@ namespace LHJ.YoutubeDownloader
                         return;
                     }
 
+                    if (!this.CheckLocalPath())
+                    {
+                        return;
+                    }
 
+                    this.Download();
                 }
             }
         }
@@ -359,21 +522,6 @@ namespace LHJ.YoutubeDownloader
                     }
                 }
             }
-        }
-
-        private void bgwDownload_DoWork(object sender, DoWorkEventArgs e)
-        {
-
-        }
-
-        private void bgwDownload_ProgressChanged(object sender, ProgressChangedEventArgs e)
-        {
-
-        }
-
-        private void bgwDownload_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-
         }
         #endregion 7.Event
     }

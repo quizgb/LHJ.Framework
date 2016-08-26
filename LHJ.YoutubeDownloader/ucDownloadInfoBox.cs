@@ -14,11 +14,20 @@ namespace LHJ.YoutubeDownloader
     {
         #region 1.Variable
         private YoutubeModel mYoutubeModel;
+        private bool mDownloadComplete = false;
         #endregion 1.Variable
 
 
         #region 2.Property
+        public YoutubeModel YoutubeModel
+        {
+            get { return this.mYoutubeModel; }
+        }
 
+        public bool DownloadComlete
+        {
+            get { return this.mDownloadComplete; }
+        }
         #endregion 2.Property
 
 
@@ -83,6 +92,57 @@ namespace LHJ.YoutubeDownloader
         public void SetUnCheck()
         {
             this.cbxDownload.Checked = false;
+        }
+
+        public void Download()
+        {
+            //Get first DownloadItem from list
+            YoutubeModel model = this.mYoutubeModel;
+
+            //Download video
+            if (model is YoutubeVideoModel)
+            {
+                DownloadVideo((YoutubeVideoModel)model);
+            }
+        }
+
+        private void DownloadVideo(YoutubeVideoModel videoDownloader)
+        {
+            try
+            {
+                //Stores FilePath in model
+                videoDownloader.FilePath = FileDownloader.GetPath(videoDownloader);
+                videoDownloader.FilePath += videoDownloader.Video.VideoExtension;
+
+                //Stores VideoDownloaderType object in model
+                videoDownloader.VideoDownloaderType = FileDownloader.GetVideoDownloader(videoDownloader);
+
+                //Call DownloadList method until all items in list are downloaded
+                videoDownloader.VideoDownloaderType.DownloadFinished += (sender, args) => this.mDownloadComplete = true;
+
+                //Link progress bar up to download progress
+                videoDownloader.VideoDownloaderType.DownloadProgressChanged += (sender, args) =>
+                {
+                    if (this.ucpgbDownload.InvokeRequired)
+                    {
+                        this.ucpgbDownload.Invoke(new MethodInvoker(delegate()
+                        {
+                            this.ucpgbDownload.Value = (int)args.ProgressPercentage;
+                        }));
+                    }
+                    else
+                    {
+                        this.ucpgbDownload.Value = (int)args.ProgressPercentage;
+                    }
+                };
+
+                //Download video
+                FileDownloader.DownloadVideo(videoDownloader);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Download cancelled");
+            }
         }
         #endregion 6.Method
 

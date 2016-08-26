@@ -38,13 +38,11 @@
             this.btnSetDownloadPath = new System.Windows.Forms.Button();
             this.tbxDownloadPath = new System.Windows.Forms.TextBox();
             this.lblDownloadPath = new System.Windows.Forms.Label();
-            this.ucpgbDownload = new LHJ.Controls.ucProgressBar();
             this.pnlDownloadList = new System.Windows.Forms.Panel();
             this.pnlDownloadListMenu = new System.Windows.Forms.Panel();
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnDelDownloadList = new System.Windows.Forms.Button();
             this.cbxCheckAllDownloadList = new System.Windows.Forms.CheckBox();
-            this.bgwDownload = new System.ComponentModel.BackgroundWorker();
             this.panel1.SuspendLayout();
             this.pnlDownloadList.SuspendLayout();
             this.pnlDownloadListMenu.SuspendLayout();
@@ -57,7 +55,7 @@
             this.flpDownloadList.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpDownloadList.Location = new System.Drawing.Point(0, 30);
             this.flpDownloadList.Name = "flpDownloadList";
-            this.flpDownloadList.Size = new System.Drawing.Size(761, 421);
+            this.flpDownloadList.Size = new System.Drawing.Size(761, 450);
             this.flpDownloadList.TabIndex = 0;
             this.flpDownloadList.MouseEnter += new System.EventHandler(this.flpDownloadList_MouseEnter);
             // 
@@ -150,23 +148,14 @@
             this.lblDownloadPath.TabIndex = 2;
             this.lblDownloadPath.Text = "다운로드 받을 폴더경로";
             // 
-            // ucpgbDownload
-            // 
-            this.ucpgbDownload.Location = new System.Drawing.Point(12, 68);
-            this.ucpgbDownload.Name = "ucpgbDownload";
-            this.ucpgbDownload.ProgressBarText = "";
-            this.ucpgbDownload.Size = new System.Drawing.Size(763, 23);
-            this.ucpgbDownload.TabIndex = 3;
-            this.ucpgbDownload.TextType = LHJ.Common.Definition.ConstValue.ProgressBarTextType.None;
-            // 
             // pnlDownloadList
             // 
             this.pnlDownloadList.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlDownloadList.Controls.Add(this.flpDownloadList);
             this.pnlDownloadList.Controls.Add(this.pnlDownloadListMenu);
-            this.pnlDownloadList.Location = new System.Drawing.Point(12, 97);
+            this.pnlDownloadList.Location = new System.Drawing.Point(12, 68);
             this.pnlDownloadList.Name = "pnlDownloadList";
-            this.pnlDownloadList.Size = new System.Drawing.Size(763, 453);
+            this.pnlDownloadList.Size = new System.Drawing.Size(763, 482);
             this.pnlDownloadList.TabIndex = 4;
             // 
             // pnlDownloadListMenu
@@ -212,20 +201,11 @@
             this.cbxCheckAllDownloadList.UseVisualStyleBackColor = true;
             this.cbxCheckAllDownloadList.CheckedChanged += new System.EventHandler(this.cbxCheckAllDownloadList_CheckedChanged);
             // 
-            // bgwDownload
-            // 
-            this.bgwDownload.WorkerReportsProgress = true;
-            this.bgwDownload.WorkerSupportsCancellation = true;
-            this.bgwDownload.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwDownload_DoWork);
-            this.bgwDownload.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.bgwDownload_ProgressChanged);
-            this.bgwDownload.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.bgwDownload_RunWorkerCompleted);
-            // 
             // frmYoutubeDownload
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(788, 562);
             this.Controls.Add(this.pnlDownloadList);
-            this.Controls.Add(this.ucpgbDownload);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
@@ -252,7 +232,6 @@
         private System.Windows.Forms.Label lblDownloadPath;
         private System.Windows.Forms.TextBox tbxYoutubeUrl;
         private System.Windows.Forms.Label lblYoutubeUrl;
-        private Controls.ucProgressBar ucpgbDownload;
         private System.Windows.Forms.Panel pnlDownloadList;
         private System.Windows.Forms.Panel pnlDownloadListMenu;
         private System.Windows.Forms.Button btnFavoriteLocalDownPath;
@@ -260,7 +239,6 @@
         private System.Windows.Forms.CheckBox cbxCheckAllDownloadList;
         private System.Windows.Forms.Button btnDownload;
         private System.Windows.Forms.Button btnDelDownloadList;
-        private System.ComponentModel.BackgroundWorker bgwDownload;
     }
 }
 
