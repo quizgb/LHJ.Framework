@@ -31,7 +31,7 @@
             this.cbxDownload = new System.Windows.Forms.CheckBox();
             this.lblTitle = new System.Windows.Forms.Label();
             this.pbxPreview = new System.Windows.Forms.PictureBox();
-            this.ucpgbDownload = new LHJ.Controls.ucProgressBar();
+            this.pgbDownload = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.pbxPreview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -62,22 +62,20 @@
             this.pbxPreview.TabIndex = 1;
             this.pbxPreview.TabStop = false;
             // 
-            // ucpgbDownload
+            // pgbDownload
             // 
-            this.ucpgbDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.pgbDownload.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ucpgbDownload.Location = new System.Drawing.Point(141, 51);
-            this.ucpgbDownload.Name = "ucpgbDownload";
-            this.ucpgbDownload.ProgressBarText = "";
-            this.ucpgbDownload.Size = new System.Drawing.Size(400, 23);
-            this.ucpgbDownload.TabIndex = 4;
-            this.ucpgbDownload.TextType = LHJ.Common.Definition.ConstValue.ProgressBarTextType.None;
+            this.pgbDownload.Location = new System.Drawing.Point(141, 51);
+            this.pgbDownload.Name = "pgbDownload";
+            this.pgbDownload.Size = new System.Drawing.Size(400, 23);
+            this.pgbDownload.TabIndex = 5;
             // 
             // ucDownloadInfoBox
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.ucpgbDownload);
+            this.Controls.Add(this.pgbDownload);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.pbxPreview);
             this.Controls.Add(this.cbxDownload);
@@ -95,6 +93,6 @@
         private System.Windows.Forms.CheckBox cbxDownload;
         private System.Windows.Forms.PictureBox pbxPreview;
         private System.Windows.Forms.Label lblTitle;
-        private Controls.ucProgressBar ucpgbDownload;
+        private System.Windows.Forms.ProgressBar pgbDownload;
     }
 }

@@ -494,6 +494,10 @@ namespace LHJ.YoutubeDownloader
 
                     this.Download();
                 }
+                else if (btn.Equals(this.btnCreateShortCut))
+                {
+                    ExFile.CreateShortcut("LHJ.YoutubeDownloader", Application.ExecutablePath, "");
+                }
             }
         }
 

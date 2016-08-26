@@ -69,6 +69,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExFile.cs" />
     <Compile Include="FileDownloader.cs" />
     <Compile Include="frmYoutubeDownload.cs">
       <SubType>Form</SubType>
@@ -114,13 +115,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\LHJ.Controls\LHJ.Controls.csproj">
-      <Project>{8F1A4C8D-AEDA-47DF-B4C0-5BA81C54384E}</Project>
-      <Name>LHJ.Controls</Name>
-      <Private>False</Private>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\1472122004_youtube.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -144,7 +138,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="LHJ.Common.dll" />
-    <EmbeddedResource Include="LHJ.Controls.dll" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Newtonsoft.Json.dll" />

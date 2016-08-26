@@ -43,6 +43,7 @@
             this.btnDownload = new System.Windows.Forms.Button();
             this.btnDelDownloadList = new System.Windows.Forms.Button();
             this.cbxCheckAllDownloadList = new System.Windows.Forms.CheckBox();
+            this.btnCreateShortCut = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.pnlDownloadList.SuspendLayout();
             this.pnlDownloadListMenu.SuspendLayout();
@@ -161,6 +162,7 @@
             // pnlDownloadListMenu
             // 
             this.pnlDownloadListMenu.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnlDownloadListMenu.Controls.Add(this.btnCreateShortCut);
             this.pnlDownloadListMenu.Controls.Add(this.btnDownload);
             this.pnlDownloadListMenu.Controls.Add(this.btnDelDownloadList);
             this.pnlDownloadListMenu.Controls.Add(this.cbxCheckAllDownloadList);
@@ -201,6 +203,16 @@
             this.cbxCheckAllDownloadList.UseVisualStyleBackColor = true;
             this.cbxCheckAllDownloadList.CheckedChanged += new System.EventHandler(this.cbxCheckAllDownloadList_CheckedChanged);
             // 
+            // btnCreateShortCut
+            // 
+            this.btnCreateShortCut.Location = new System.Drawing.Point(666, 3);
+            this.btnCreateShortCut.Name = "btnCreateShortCut";
+            this.btnCreateShortCut.Size = new System.Drawing.Size(90, 23);
+            this.btnCreateShortCut.TabIndex = 11;
+            this.btnCreateShortCut.Text = "바로가기 생성";
+            this.btnCreateShortCut.UseVisualStyleBackColor = true;
+            this.btnCreateShortCut.Click += new System.EventHandler(this.btnAddDownloadList_Click);
+            // 
             // frmYoutubeDownload
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -239,6 +251,7 @@
         private System.Windows.Forms.CheckBox cbxCheckAllDownloadList;
         private System.Windows.Forms.Button btnDownload;
         private System.Windows.Forms.Button btnDelDownloadList;
+        private System.Windows.Forms.Button btnCreateShortCut;
     }
 }
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Net;
+using System.IO;
 
 namespace LHJ.YoutubeDownloader
 {
@@ -69,7 +70,11 @@ namespace LHJ.YoutubeDownloader
                 client.DownloadFile(imageLink1, "1.jpg");
             }
 
-            this.pbxPreview.ImageLocation = "1.jpg";
+            FileStream fs = new System.IO.FileStream("1.jpg", System.IO.FileMode.Open, System.IO.FileAccess.Read);
+            this.pbxPreview.Image = System.Drawing.Image.FromStream(fs);
+            fs.Close();
+
+            File.Delete("1.jpg");
         }
 
         public bool GetCheckState()
@@ -123,16 +128,16 @@ namespace LHJ.YoutubeDownloader
                 //Link progress bar up to download progress
                 videoDownloader.VideoDownloaderType.DownloadProgressChanged += (sender, args) =>
                 {
-                    if (this.ucpgbDownload.InvokeRequired)
+                    if (this.pgbDownload.InvokeRequired)
                     {
-                        this.ucpgbDownload.Invoke(new MethodInvoker(delegate()
+                        this.pgbDownload.Invoke(new MethodInvoker(delegate()
                         {
-                            this.ucpgbDownload.Value = (int)args.ProgressPercentage;
+                            this.pgbDownload.Value = (int)args.ProgressPercentage;
                         }));
                     }
                     else
                     {
-                        this.ucpgbDownload.Value = (int)args.ProgressPercentage;
+                        this.pgbDownload.Value = (int)args.ProgressPercentage;
                     }
                 };
 

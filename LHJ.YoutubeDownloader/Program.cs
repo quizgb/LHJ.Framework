@@ -21,15 +21,18 @@ namespace LHJ.YoutubeDownloader
                 string dllName = new AssemblyName(bargs.Name).Name + ".dll";
                 var assem = Assembly.GetExecutingAssembly();
                 string resourceName = null;
+
                 foreach (string str in assem.GetManifestResourceNames())
                 {
-                    if (str.IndexOf(dllName) != -1)
+                    if (str.ToUpper().Contains(dllName.ToUpper()))
                     {
                         resourceName = str;
                         break;
                     }
                 }
+
                 if (resourceName == null) return null;
+
                 using (var stream = assem.GetManifestResourceStream(resourceName))
                 {
                     Byte[] assemblyData = new Byte[stream.Length];
@@ -42,6 +45,5 @@ namespace LHJ.YoutubeDownloader
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new frmYoutubeDownload());
         }
-
     }
 }
