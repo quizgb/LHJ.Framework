@@ -24,6 +24,12 @@ namespace LHJ.Common
         {
             get { return m_Logger; }
         }
+
+        private static LHJ.Common.Common.Com.Util m_Util = new LHJ.Common.Common.Com.Util();
+        public static LHJ.Common.Common.Com.Util Util
+        {
+            get { return m_Util; }
+        }
         #endregion 2.Property
 
 

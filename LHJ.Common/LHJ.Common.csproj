@@ -67,6 +67,11 @@
       <HintPath>.\log4net.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.Win32.TaskScheduler, Version=2.5.21.0, Culture=neutral, PublicKeyToken=0d013ddd5178a2ae, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Compile\Microsoft.Win32.TaskScheduler.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -85,6 +90,7 @@
     <Compile Include="ClsGetSlnCodeLine.cs" />
     <Compile Include="Common\Comm.cs" />
     <Compile Include="Common\Com\Logger.cs" />
+    <Compile Include="Common\Com\Util.cs" />
     <Compile Include="Control\ColorSpoid\FrmColorSpoid.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -162,7 +168,9 @@
   <ItemGroup>
     <None Include="Resources\recv_mail.wav" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Microsoft.Win32.TaskScheduler.dll" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
