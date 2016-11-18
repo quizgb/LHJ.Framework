@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>LHJ.Controls</RootNamespace>
     <AssemblyName>LHJ.Controls</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
   </PropertyGroup>
@@ -59,6 +59,7 @@
       <HintPath>..\Compile\LHJ.DBService.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -78,6 +79,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ucDataGridView.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ucMarqueeTextBox.cs">
+      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="ucProgressBar.cs">
       <SubType>Component</SubType>

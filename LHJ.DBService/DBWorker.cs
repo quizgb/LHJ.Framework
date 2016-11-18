@@ -10,6 +10,7 @@ namespace LHJ.DBService
     public class DBWorker
     {
         #region 1.Variable
+        private static Program m_Pgm = new Program();
         private string m_DataSource = string.Empty;
         private string m_UserID = string.Empty;
         private string m_Password = string.Empty;
