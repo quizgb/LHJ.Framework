@@ -28,9 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // FrmColorSpoid
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.KeyPreview = true;
+            this.Name = "FrmColorSpoid";
             this.Text = "FrmColorSpoid";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmColorSpoid_KeyDown);
+            this.ResumeLayout(false);
+
         }
 
         #endregion

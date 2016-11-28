@@ -144,6 +144,9 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Control\ColorSpoid\FrmColorSpoid.resx">
+      <DependentUpon>FrmColorSpoid.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Control\LoadingControl\FrmSplash.resx">
       <DependentUpon>FrmSplash.cs</DependentUpon>
     </EmbeddedResource>
