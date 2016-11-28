@@ -40,7 +40,17 @@ namespace LHJ.Common.Control.ColorSpoid
 
 
         #region 4.Override Method
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            switch (keyData)
+            {
+                case Keys.F4:
+                    this.mButton.PerformClick();
+                    break;
+            }
 
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
         #endregion 4.Override Method
 
 
@@ -201,14 +211,6 @@ namespace LHJ.Common.Control.ColorSpoid
         {
             Color colorBuff = ScreenColor(System.Windows.Forms.Control.MousePosition.X, System.Windows.Forms.Control.MousePosition.Y);
             Clipboard.SetDataObject(string.Format("{0}, {1}, {2}", colorBuff.R.ToString(), colorBuff.G.ToString(), colorBuff.B.ToString()));
-        }
-
-        private void FrmColorSpoid_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode.Equals(Keys.F4))
-            {
-                this.mButton.PerformClick();
-            }
         }
     }
 }

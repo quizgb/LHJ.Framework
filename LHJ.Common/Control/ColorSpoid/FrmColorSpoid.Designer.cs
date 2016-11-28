@@ -38,7 +38,6 @@
             this.KeyPreview = true;
             this.Name = "FrmColorSpoid";
             this.Text = "FrmColorSpoid";
-            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FrmColorSpoid_KeyDown);
             this.ResumeLayout(false);
 
         }
