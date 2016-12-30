@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LHJ.NaverAPI
+namespace LHJ.NaverTTSTranslation
 {
     static class Program
     {

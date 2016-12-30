@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LHJ.YoutubeDownloader", "LH
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LHJ.TextCompare", "LHJ.TextCompare\LHJ.TextCompare.csproj", "{328A2847-AE87-41EF-A863-F296F5C30E59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LHJ.NaverAPI", "LHJ.NaverAPI\LHJ.NaverAPI.csproj", "{9A287528-672F-4E6A-8439-A2E70D1734E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LHJ.NaverTTSTranslation", "LHJ.NaverAPI\LHJ.NaverTTSTranslation.csproj", "{9A287528-672F-4E6A-8439-A2E70D1734E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

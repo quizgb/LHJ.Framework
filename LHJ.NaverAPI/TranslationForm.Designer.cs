@@ -1,4 +1,4 @@
-﻿namespace LHJ.NaverAPI
+﻿namespace LHJ.NaverTTSTranslation
 {
     partial class TranslationForm
     {

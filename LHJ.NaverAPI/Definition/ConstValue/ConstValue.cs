@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LHJ.NaverAPI.Definition.ConstValue
+namespace LHJ.NaverTTSTranslation.Definition.ConstValue
 {
     public class ConstValue
     {

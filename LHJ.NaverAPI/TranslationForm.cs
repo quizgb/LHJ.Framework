@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LHJ.NaverAPI
+namespace LHJ.NaverTTSTranslation
 {
     public partial class TranslationForm : Form
     {

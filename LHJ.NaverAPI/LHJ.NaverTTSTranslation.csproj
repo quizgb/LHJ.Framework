@@ -7,8 +7,8 @@
     <ProjectGuid>{9A287528-672F-4E6A-8439-A2E70D1734E2}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LHJ.NaverAPI</RootNamespace>
-    <AssemblyName>LHJ.NaverAPI</AssemblyName>
+    <RootNamespace>LHJ.NaverTTSTranslation</RootNamespace>
+    <AssemblyName>LHJ.NaverTTSTranslation</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -70,6 +70,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
