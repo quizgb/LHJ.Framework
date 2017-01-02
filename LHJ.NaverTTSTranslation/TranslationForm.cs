@@ -1,4 +1,5 @@
 ﻿using NAudio.Wave;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,23 @@ namespace LHJ.NaverTTSTranslation
 {
     public partial class TranslationForm : Form
     {
+        public class Trans
+        {
+            public Message message { get; set; }
+        }
 
+        public class Message
+        {
+            public string type { get; set; }
+            public string service { get; set; }
+            public string version { get; set; }
+            public Result result { get; set; }
+        }
+
+        public class Result
+        {
+            public string translatedText { get; set; }
+        }
 
         #region 1.Variable
 
@@ -207,7 +224,9 @@ namespace LHJ.NaverTTSTranslation
                 }
             }
 
-            return text;    
+            Trans ts = JsonConvert.DeserializeObject<Trans>(text);
+
+            return ts.message.result.translatedText;
         }
 
         private void TTS(string aSpeacker, int aSpeed, string aText)
@@ -262,11 +281,8 @@ namespace LHJ.NaverTTSTranslation
         }
         #endregion 6.Method
 
+
         #region 7.Event
-
-        #endregion 7.Event
-
-
         private void btnTranslation_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(this.txtSource.Text))
@@ -335,5 +351,6 @@ namespace LHJ.NaverTTSTranslation
                 }
             }
         }
+        #endregion 7.Event
     }
 }
