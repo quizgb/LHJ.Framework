@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -102,7 +101,7 @@ namespace LHJ.NaverSearch
                         }
                     }
 
-                    BookSearchRslt ts = JsonConvert.DeserializeObject<BookSearchRslt>(text);
+                    BookSearchRslt ts = Newtonsoft.Json.JsonConvert.DeserializeObject<BookSearchRslt>(text);
                 }
                 else
                 {

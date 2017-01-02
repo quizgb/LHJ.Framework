@@ -1,5 +1,4 @@
 ﻿using NAudio.Wave;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -226,7 +225,7 @@ namespace LHJ.NaverTTSTranslation
                 }
             }
 
-            Trans ts = JsonConvert.DeserializeObject<Trans>(text);
+            Trans ts = Newtonsoft.Json.JsonConvert.DeserializeObject<Trans>(text);
 
             return ts.message.result.translatedText;
         }
