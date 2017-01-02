@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9A287528-672F-4E6A-8439-A2E70D1734E2}</ProjectGuid>
+    <ProjectGuid>{D42DAB53-4EF0-450A-BCE2-CA705AE5CD43}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LHJ.NaverTTSTranslation</RootNamespace>
-    <AssemblyName>LHJ.NaverTTSTranslation</AssemblyName>
+    <RootNamespace>LHJ.NaverSearch</RootNamespace>
+    <AssemblyName>LHJ.NaverSearch</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,14 +32,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup>
-    <ApplicationIcon>Resources\1483348680_Translate.ico</ApplicationIcon>
-  </PropertyGroup>
   <ItemGroup>
-    <Reference Include="NAudio, Version=1.8.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NAudio.1.8.0\lib\net35\NAudio.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>False</Private>
@@ -57,17 +50,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Definition\ConstValue\ConstValue.cs" />
-    <Compile Include="TranslationForm.cs">
+    <Compile Include="BookSearch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TranslationForm.Designer.cs">
-      <DependentUpon>TranslationForm.cs</DependentUpon>
+    <Compile Include="BookSearch.Designer.cs">
+      <DependentUpon>BookSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Definition\ConstValue\ConstValue.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="TranslationForm.resx">
-      <DependentUpon>TranslationForm.cs</DependentUpon>
+    <EmbeddedResource Include="BookSearch.resx">
+      <DependentUpon>BookSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -77,7 +70,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -94,13 +86,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="NAudio.dll" />
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Newtonsoft.Json.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\1483348680_Translate.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
