@@ -65,6 +65,8 @@ namespace LHJ.NaverTTSTranslation
         /// </summary>
         public void SetInitialize()
         {
+            this.Icon = Properties.Resources._1483348680_Translate;
+
             this.cboFromLanguage.DisplayMember = "CODE_NAME";
             this.cboFromLanguage.ValueMember = "CODE";
 
