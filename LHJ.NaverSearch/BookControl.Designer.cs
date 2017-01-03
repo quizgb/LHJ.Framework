@@ -99,7 +99,7 @@
         "}}"};
             this.lnklblBookTitle.TabIndex = 7;
             this.lnklblBookTitle.Text = "책 제목";
-            this.lnklblBookTitle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.richLabel1_MouseClick);
+            this.lnklblBookTitle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lnklblBookTitle_MouseClick);
             // 
             // BookControl
             // 

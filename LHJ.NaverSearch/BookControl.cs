@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace LHJ.NaverSearch
 {
@@ -70,6 +71,7 @@ namespace LHJ.NaverSearch
 
         public void SetValue(Item aItm)
         {
+            this.lnklblBookTitle.Tag = aItm.link;
             this.lnklblBookTitle.Text = aItm.title.Replace("<b>", string.Empty).Replace("</b>", string.Empty);
             this.lblBookInfo1.Text = string.Format("{0} 저 | {1} | {2}", aItm.author, aItm.publisher, aItm.pubdate.Insert(4, "-").Insert(7, "-"));
             this.lblBookPrice.Text = string.Format("{0} 원", this.SetComma(aItm.price));
@@ -79,9 +81,12 @@ namespace LHJ.NaverSearch
         #endregion 6.Method
 
         #region 7.Event
-        private void richLabel1_MouseClick(object sender, MouseEventArgs e)
+        private void lnklblBookTitle_MouseClick(object sender, MouseEventArgs e)
         {
-
+            if (this.lnklblBookTitle.Tag != null)
+            {
+                Process.Start(this.lnklblBookTitle.Tag.ToString());
+            }
         }
         #endregion 7.Event
     }
