@@ -13,30 +13,7 @@ using System.Windows.Forms;
 namespace LHJ.NaverSearch
 {
     public partial class BookSearch : Form
-    {
-        public class BookSearchRslt
-        {
-            public string lastBuildDate { get; set; }
-            public int total { get; set; }
-            public int start { get; set; }
-            public int display { get; set; }
-            public Item[] items { get; set; }
-        }
-
-        public class Item
-        {
-            public string title { get; set; }
-            public string link { get; set; }
-            public string image { get; set; }
-            public string author { get; set; }
-            public string price { get; set; }
-            public string discount { get; set; }
-            public string publisher { get; set; }
-            public string pubdate { get; set; }
-            public string isbn { get; set; }
-            public string description { get; set; }
-        }
-
+    {                                                             
         #region 1.Variable
 
         #endregion 1.Variable
@@ -72,42 +49,139 @@ namespace LHJ.NaverSearch
 
 
         #region 6.Method
+        private void SetRsltInfo(int aStart, int aDisplay, int aTotal)
+        {
+            this.lblSearchRslt.Visible = true;
+            this.lblSearchRsltIdx.Visible = true;
 
+            this.lblSearchRsltIdx.Text = string.Format("({0}-{1} / {2} 건)", aStart.ToString(), aDisplay.ToString(), aTotal.ToString());
+        }
+
+        private bool CheckBeforeSearch()
+        {
+            if (string.IsNullOrEmpty(this.tbxBookTitle.Text))
+            {
+                MessageBox.Show("책 제목을 입력하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void ResizeSearchRsltCtrl()
+        {
+            if (this.flpSearchRslt.Controls.Count > 0)
+            {
+                foreach (Control ctrl in this.flpSearchRslt.Controls)
+                {
+                    if (ctrl.GetType().Equals(typeof(BookControl)))
+                    {
+                        BookControl bc = ctrl as BookControl;
+                        bc.Width = this.flpSearchRslt.Width - 25;
+                    }
+                }
+            }
+        }
+
+        private void CreateSearchRsltCtrl(string aRsltText)
+        {
+            BookSearchRslt bsr = Newtonsoft.Json.JsonConvert.DeserializeObject<BookSearchRslt>(aRsltText);
+
+            if (bsr != null)
+            {
+                this.SetRsltInfo(bsr.start, bsr.display, bsr.total);
+
+                foreach (Item itm in bsr.items)
+                {
+                    BookControl bc = new BookControl();
+
+                    bc.Width = this.flpSearchRslt.Width - 25;
+                    bc.SetValue(itm);
+
+                    this.flpSearchRslt.Controls.Add(bc);
+                }
+            }
+        }
+
+        private void Search()
+        {
+            if (!this.CheckBeforeSearch())
+            {
+                return;
+            }
+
+            try
+            {
+                this.Cursor = Cursors.WaitCursor;
+
+                this.flpSearchRslt.Controls.Clear();
+
+                string subUrl = string.Format("query={0}&display=10&d_titl={1}", string.Empty, this.tbxBookTitle.Text);
+                string url = "https://openapi.naver.com/v1/search/book_adv.json?" + subUrl;
+                string text = string.Empty;
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+                request.Headers.Add("X-Naver-Client-Id", Definition.ConstValue.ConstValue.NaverClintInfo.ID);
+                request.Headers.Add("X-Naver-Client-Secret", Definition.ConstValue.ConstValue.NaverClintInfo.PASS);
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+                {
+                    string status = response.StatusCode.ToString();
+
+                    if (status == "OK")
+                    {
+                        using (Stream stream = response.GetResponseStream())
+                        {
+                            using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                            {
+                                text = reader.ReadToEnd();
+                            }
+                        }
+
+                        this.CreateSearchRsltCtrl(text);
+                    }
+                    else
+                    {
+                        MessageBox.Show(string.Format("에러 발생! {0}", status), "알림", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "알림", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+        }
         #endregion 6.Method
 
 
         #region 7.Event
-        private void button1_Click(object sender, EventArgs e)
+        private void btnSearch_Click(object sender, EventArgs e)
         {
-            string subUrl = string.Format("query={0}&d_titl={1}", string.Empty, "어린왕자");
-            string url = "https://openapi.naver.com/v1/search/book_adv.json?" + subUrl;
-            string text = string.Empty;
+            this.Search();
+        }
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Headers.Add("X-Naver-Client-Id", Definition.ConstValue.ConstValue.NaverClintInfo.ID);
-            request.Headers.Add("X-Naver-Client-Secret", Definition.ConstValue.ConstValue.NaverClintInfo.PASS);
-
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+        private void tbxBookTitle_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
             {
-                string status = response.StatusCode.ToString();
-
-                if (status == "OK")
-                {
-                    using (Stream stream = response.GetResponseStream())
-                    {
-                        using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
-                        {
-                            text = reader.ReadToEnd();
-                        }
-                    }
-
-                    BookSearchRslt ts = Newtonsoft.Json.JsonConvert.DeserializeObject<BookSearchRslt>(text);
-                }
-                else
-                {
-                    Console.WriteLine("Error 발생=" + status);
-                }
+                this.btnSearch.PerformClick();
             }
+        }
+
+        private void BookSearch_Shown(object sender, EventArgs e)
+        {
+            this.tbxBookTitle.Focus();
+        }
+
+        private void BookSearch_Resize(object sender, EventArgs e)
+        {
+            this.ResizeSearchRsltCtrl();
         }
         #endregion 7.Event
     }

@@ -51,15 +51,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BookSearchRslt.cs" />
+    <Compile Include="BookControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="BookControl.Designer.cs">
+      <DependentUpon>BookControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="BookSearch.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="BookSearch.Designer.cs">
       <DependentUpon>BookSearch.cs</DependentUpon>
     </Compile>
+    <Compile Include="RichLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Definition\ConstValue\ConstValue.cs" />
+    <Compile Include="Item.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BookControl.resx">
+      <DependentUpon>BookControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="BookSearch.resx">
       <DependentUpon>BookSearch.cs</DependentUpon>
     </EmbeddedResource>
