@@ -47,13 +47,34 @@ namespace LHJ.NaverSearch
 
 
         #region 6.Method
+        private string SetComma(string aStr)
+        {
+            string s = aStr;
+            string temp = string.Empty;
+            int con = 0;
+
+            for (int cnt = s.Length - 1; 0 <= cnt; cnt--)
+            {
+                temp = s.Substring(cnt, 1) + temp;
+                con += 1;
+
+                if (con == 3 && cnt > 0)
+                {
+                    temp = "," + temp;
+                    con = 0;
+                }
+            }
+
+            return temp;
+        }
+
         public void SetValue(Item aItm)
         {
-            this.lnklblBookTitle.Text = aItm.title;
-            //this.lnklblBookTitle.Text = aItm.title.Replace("<b>", string.Empty).Replace("</b>", string.Empty);
+            this.lnklblBookTitle.Text = aItm.title.Replace("<b>", string.Empty).Replace("</b>", string.Empty);
             this.lblBookInfo1.Text = string.Format("{0} 저 | {1} | {2}", aItm.author, aItm.publisher, aItm.pubdate.Insert(4, "-").Insert(7, "-"));
-            this.lblBookPrice.Text = string.Format("{0} 원", aItm.price);
-            this.lblBookDesc.Text = aItm.description;       
+            this.lblBookPrice.Text = string.Format("{0} 원", this.SetComma(aItm.price));
+            this.lblBookDesc.Text = aItm.description.Replace("<b>", string.Empty).Replace("</b>", string.Empty);
+            this.pbxBookImage.ImageLocation = aItm.image;
         }
         #endregion 6.Method
 

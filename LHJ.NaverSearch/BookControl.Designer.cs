@@ -44,7 +44,8 @@
             this.pbxBookImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbxBookImage.Location = new System.Drawing.Point(0, 0);
             this.pbxBookImage.Name = "pbxBookImage";
-            this.pbxBookImage.Size = new System.Drawing.Size(108, 113);
+            this.pbxBookImage.Size = new System.Drawing.Size(84, 102);
+            this.pbxBookImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbxBookImage.TabIndex = 0;
             this.pbxBookImage.TabStop = false;
             // 
@@ -54,13 +55,13 @@
             this.pnlBookImage.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlBookImage.Location = new System.Drawing.Point(0, 0);
             this.pnlBookImage.Name = "pnlBookImage";
-            this.pnlBookImage.Size = new System.Drawing.Size(108, 113);
+            this.pnlBookImage.Size = new System.Drawing.Size(84, 102);
             this.pnlBookImage.TabIndex = 1;
             // 
             // lblBookInfo1
             // 
             this.lblBookInfo1.AutoSize = true;
-            this.lblBookInfo1.Location = new System.Drawing.Point(118, 21);
+            this.lblBookInfo1.Location = new System.Drawing.Point(92, 21);
             this.lblBookInfo1.Name = "lblBookInfo1";
             this.lblBookInfo1.Size = new System.Drawing.Size(165, 12);
             this.lblBookInfo1.TabIndex = 3;
@@ -69,7 +70,7 @@
             // lblBookPrice
             // 
             this.lblBookPrice.AutoSize = true;
-            this.lblBookPrice.Location = new System.Drawing.Point(118, 37);
+            this.lblBookPrice.Location = new System.Drawing.Point(92, 37);
             this.lblBookPrice.Name = "lblBookPrice";
             this.lblBookPrice.Size = new System.Drawing.Size(29, 12);
             this.lblBookPrice.TabIndex = 4;
@@ -78,7 +79,7 @@
             // lblBookDesc
             // 
             this.lblBookDesc.AutoSize = true;
-            this.lblBookDesc.Location = new System.Drawing.Point(118, 58);
+            this.lblBookDesc.Location = new System.Drawing.Point(92, 58);
             this.lblBookDesc.Name = "lblBookDesc";
             this.lblBookDesc.Size = new System.Drawing.Size(29, 12);
             this.lblBookDesc.TabIndex = 5;
@@ -90,7 +91,7 @@
             this.lnklblBookTitle.CustomAutoSize = false;
             this.lnklblBookTitle.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lnklblBookTitle.ForeColorAlt = System.Drawing.SystemColors.HighlightText;
-            this.lnklblBookTitle.Location = new System.Drawing.Point(118, 4);
+            this.lnklblBookTitle.Location = new System.Drawing.Point(92, 4);
             this.lnklblBookTitle.Name = "lnklblBookTitle";
             this.lnklblBookTitle.Size = new System.Drawing.Size(45, 12);
             this.lnklblBookTitle.Splitters = new string[] {
@@ -110,7 +111,7 @@
             this.Controls.Add(this.lblBookInfo1);
             this.Controls.Add(this.pnlBookImage);
             this.Name = "BookControl";
-            this.Size = new System.Drawing.Size(517, 113);
+            this.Size = new System.Drawing.Size(527, 102);
             ((System.ComponentModel.ISupportInitialize)(this.pbxBookImage)).EndInit();
             this.pnlBookImage.ResumeLayout(false);
             this.ResumeLayout(false);
