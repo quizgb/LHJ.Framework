@@ -35,11 +35,13 @@
             // ucDataGridView1
             // 
             this.ucDataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.ucDataGridView1.Location = new System.Drawing.Point(12, 12);
+            this.ucDataGridView1.Location = new System.Drawing.Point(30, 45);
             this.ucDataGridView1.Name = "ucDataGridView1";
+            this.ucDataGridView1.Paging = false;
+            this.ucDataGridView1.PagingRowCount = 0;
             this.ucDataGridView1.RowTemplate.Height = 23;
             this.ucDataGridView1.ShowRowHeaderValue = true;
-            this.ucDataGridView1.Size = new System.Drawing.Size(675, 471);
+            this.ucDataGridView1.Size = new System.Drawing.Size(636, 343);
             this.ucDataGridView1.TabIndex = 0;
             // 
             // FrmDataGridView

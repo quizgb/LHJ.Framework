@@ -67,6 +67,8 @@ namespace LHJ.Practice
             {
                 this.ucDataGridView1.Rows.Add(row);
             }
+
+            this.ucDataGridView1.AddHighHeader(0,1,"12");
         }
         #endregion 5.Set Initialize
 

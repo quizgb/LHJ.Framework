@@ -9,9 +9,41 @@ using LHJ.Common.Definition;
 using LHJ.DBService;
 using Microsoft.Win32;
 using Excel = Microsoft.Office.Interop.Excel;
+using System.Collections.Generic;
 
 namespace LHJ.Controls
 {
+    /// <summary>
+    /// 상위 헤더 클래스
+    /// </summary>
+    internal class BandHeader
+    {
+        int startCol;
+        /// <summary>
+        /// 시작 컬럼 위치
+        /// </summary>
+        internal int StartCol
+        {
+            get { return startCol; }
+            set { this.startCol = value; }
+        }
+        int endCol;
+        /// <summary>
+        /// 종료 컬럼 위치
+        /// </summary>
+        internal int EndCol
+        {
+            get { return this.endCol; }
+            set { this.endCol = value; }
+        }
+        internal string Text { get; set; }
+
+        internal bool Contains(int col)
+        {
+            return this.startCol <= col && this.endCol >= col;
+        }
+    }
+
     /// <summary>
     /// 1.Cell Row Number 표시
     /// 2.엑셀 출력
@@ -24,6 +56,8 @@ namespace LHJ.Controls
         private bool mShowRowHeaderValue = true;
         private bool mPaging = false;
         private int mPagingRowCount = 150;
+        private Pen blackPen = new Pen(Color.Gray);
+        private List<BandHeader> mBandHeaderList = new List<BandHeader>();
         #endregion 1.Variable
 
 
@@ -64,7 +98,10 @@ namespace LHJ.Controls
 
 
         #region 3.Constructor
-
+        public ucDataGridView()
+        {
+            //this.SetInitialize();
+        }
         #endregion 3.Constructor
 
 
@@ -92,6 +129,40 @@ namespace LHJ.Controls
             }
         }
 
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+
+            StringFormat format = new StringFormat();
+            format.Alignment = StringAlignment.Center;
+            format.LineAlignment = StringAlignment.Center;
+
+            foreach (var highHeader in this.mBandHeaderList)
+            {
+                int startCol = highHeader.StartCol;
+                int endCol = highHeader.EndCol;
+
+                Rectangle rect = this.GetHeaderRectangle(startCol);
+
+                int width = 0;
+
+                for (int i = startCol; i <= endCol; i++)
+                {
+                    width += this.Columns[i].Width;
+                }
+
+                rect.Height = (rect.Height / 2);
+                rect.Width = width;
+
+                e.Graphics.FillRectangle(new SolidBrush(this.ColumnHeadersDefaultCellStyle.BackColor), rect);
+                e.Graphics.DrawRectangle(blackPen, rect);
+                e.Graphics.DrawString(highHeader.Text,
+                    this.ColumnHeadersDefaultCellStyle.Font,
+                    new SolidBrush(this.ColumnHeadersDefaultCellStyle.ForeColor),
+                    rect,
+                    format);
+            }
+        }
         #endregion 4.Override Method
 
 
@@ -100,13 +171,119 @@ namespace LHJ.Controls
         /// <summary>
         /// Set Initialize
         /// </summary>
-        public void SetInitialize()
+        public void InitializeBandHeader()
         {
+            this.ColumnWidthChanged += MultiHeaderGrid_ColumnWidthChanged;
+            this.HorizontalScrollBar.Scroll += HorizontalScrollBar_Scroll;
+            this.CellPainting += MultiHeaderGrid_CellPainting;
+
+            foreach (DataGridViewColumn col in this.Columns)
+            {
+                col.HeaderCell.Style.ForeColor = Color.Gray;
+                col.HeaderCell.Style.BackColor = Color.Red;
+                col.SortMode = DataGridViewColumnSortMode.NotSortable;
+                col.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            }
+
+            this.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.RowHeadersWidthSizeMode = DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.AllowUserToResizeColumns = true;
+            this.ColumnHeadersHeight = 46;
+
+            base.DoubleBuffered = true;
         }
         #endregion 5.Set Initialize
 
 
         #region 6.Method
+        /// <summary>
+        /// Header의 영역을 가져옵니다.
+        /// </summary>
+        /// <param name="col"></param>
+        /// <returns></returns>
+        private Rectangle GetHeaderRectangle(int col)
+        {
+            int x = this.RowHeadersWidth - this.HorizontalScrollBar.Value;
+            //int x = this.Left + this.RowHeadersWidth - this.HorizontalScrollBar.Value;
+
+            for (int i = 0; i < col; i++)
+            {
+                x += this.Columns[i].Width;
+            }
+
+            return new Rectangle(new Point(x, 1), this.Columns[col].HeaderCell.Size);
+        }
+
+        public void AddHighHeader(int startCol, int endCol, string text)
+        {
+            this.InitializeBandHeader();
+
+
+            mBandHeaderList.Add(new BandHeader() { StartCol = startCol, EndCol = endCol, Text = text });
+
+            for (int i = startCol; i <= endCol; i++)
+            {
+                this.Columns[i].HeaderCell.Style.Alignment = DataGridViewContentAlignment.BottomCenter;
+            }
+        }
+
+        /// <summary>
+        /// 가로 스크롤을 하면 발생합니다.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void HorizontalScrollBar_Scroll(object sender, ScrollEventArgs e)
+        {
+            Rectangle rtHeader = this.DisplayRectangle;
+            rtHeader.Height = this.ColumnHeadersHeight;
+            this.Invalidate(rtHeader);
+        }
+
+        /// <summary>
+        /// Cell을 그릴때 발생합니다.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void MultiHeaderGrid_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
+        {
+            if (e.RowIndex == -1 && e.ColumnIndex > -1)
+            {
+                bool isContains = false;
+
+                foreach (var highHeader in this.mBandHeaderList)
+                {
+                    isContains = highHeader.Contains(e.ColumnIndex);
+                    if (isContains == true)
+                        break;
+                }
+
+                //보더 그리기
+                Rectangle r = e.CellBounds;
+
+                r.X -= 1;
+                r.Y -= 1;
+                r.Height -= 1;
+
+                e.PaintBackground(r, true);
+                e.PaintContent(r);
+                e.Graphics.DrawRectangle(blackPen, r);
+
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// 컬럼의 가로가 변경되면 발생합니다.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void MultiHeaderGrid_ColumnWidthChanged(object sender, DataGridViewColumnEventArgs e)
+        {
+            Rectangle rtHeader = this.DisplayRectangle;
+            rtHeader.Height = this.ColumnHeadersHeight / 2;
+            this.Invalidate(rtHeader);
+        }
+
         public void SetDataSource(string aQuery)
         {
             this.DataSource = Common.Comm.DBWorker.ExecuteDataTable(aQuery);
