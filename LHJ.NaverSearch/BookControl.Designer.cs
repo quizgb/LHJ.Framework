@@ -34,13 +34,13 @@
             this.lblBookPrice = new System.Windows.Forms.Label();
             this.lblBookDesc = new System.Windows.Forms.Label();
             this.lnklblBookTitle = new LHJ.NaverSearch.RichLabel();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pbxBookImage)).BeginInit();
             this.pnlBookImage.SuspendLayout();
             this.SuspendLayout();
             // 
             // pbxBookImage
             // 
-            this.pbxBookImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pbxBookImage.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pbxBookImage.Location = new System.Drawing.Point(0, 0);
             this.pbxBookImage.Name = "pbxBookImage";
@@ -101,10 +101,20 @@
             this.lnklblBookTitle.Text = "책 제목";
             this.lnklblBookTitle.MouseClick += new System.Windows.Forms.MouseEventHandler(this.lnklblBookTitle_MouseClick);
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel1.Location = new System.Drawing.Point(84, 0);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1, 102);
+            this.panel1.TabIndex = 8;
+            // 
             // BookControl
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.lnklblBookTitle);
             this.Controls.Add(this.lblBookDesc);
             this.Controls.Add(this.lblBookPrice);
@@ -127,5 +137,6 @@
         private System.Windows.Forms.Label lblBookPrice;
         private System.Windows.Forms.Label lblBookDesc;
         private RichLabel lnklblBookTitle;
+        private System.Windows.Forms.Panel panel1;
     }
 }

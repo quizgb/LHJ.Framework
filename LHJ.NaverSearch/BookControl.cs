@@ -73,7 +73,10 @@ namespace LHJ.NaverSearch
         {
             this.lnklblBookTitle.Tag = aItm.link;
             this.lnklblBookTitle.Text = aItm.title.Replace("<b>", string.Empty).Replace("</b>", string.Empty);
-            this.lblBookInfo1.Text = string.Format("{0} 저 | {1} | {2}", aItm.author, aItm.publisher, aItm.pubdate.Insert(4, "-").Insert(7, "-"));
+            this.lblBookInfo1.Text = string.Format("{0} 저 | {1} | {2}", 
+                                                   aItm.author, 
+                                                   aItm.publisher, 
+                                                   string.IsNullOrEmpty(aItm.pubdate) ? string.Empty : aItm.pubdate.Insert(4, "-").Insert(7, "-"));
             this.lblBookPrice.Text = string.Format("{0} 원", this.SetComma(aItm.price));
             this.lblBookDesc.Text = aItm.description.Replace("<b>", string.Empty).Replace("</b>", string.Empty);
             this.pbxBookImage.ImageLocation = aItm.image;

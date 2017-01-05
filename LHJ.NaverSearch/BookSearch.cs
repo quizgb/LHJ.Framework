@@ -54,7 +54,10 @@ namespace LHJ.NaverSearch
             this.lblSearchRslt.Visible = true;
             this.lblSearchRsltIdx.Visible = true;
 
-            this.lblSearchRsltIdx.Text = string.Format("({0}-{1} / {2} 건)", aStart.ToString(), aDisplay.ToString(), aTotal.ToString());
+            this.lblSearchRsltIdx.Text = string.Format("({0}-{1} / {2} 건)", 
+                                                       aStart.ToString(),
+                                                       this.ucPaging.CurPage.Equals(this.ucPaging.TotalPageCount) ? aTotal.ToString() : (this.ucPaging.CurPage * aDisplay).ToString(),
+                                                       aTotal.ToString());
         }
 
         private bool CheckBeforeSearch()
@@ -83,15 +86,13 @@ namespace LHJ.NaverSearch
             }
         }
 
-        private void CreateSearchRsltCtrl(string aRsltText)
+        private void CreateSearchRsltCtrl(BookSearchRslt aBsr)
         {
-            BookSearchRslt bsr = Newtonsoft.Json.JsonConvert.DeserializeObject<BookSearchRslt>(aRsltText);
-
-            if (bsr != null)
+            if (aBsr != null)
             {
-                this.SetRsltInfo(bsr.start, bsr.display, bsr.total);
+                this.SetRsltInfo(aBsr.start, aBsr.display, aBsr.total);
 
-                foreach (Item itm in bsr.items)
+                foreach (Item itm in aBsr.items)
                 {
                     BookControl bc = new BookControl();
 
@@ -103,7 +104,20 @@ namespace LHJ.NaverSearch
             }
         }
 
-        private void Search()
+        private void SetPageing(BookSearchRslt aBsr)
+        {
+            if (aBsr.total < 1)
+            {
+                this.ucPaging.Visible = false;
+            }
+            else
+            {
+                this.ucPaging.Visible = true;
+                this.ucPaging.Setting(aBsr);
+            }
+        }
+
+        private void Search(int aPage)
         {
             if (!this.CheckBeforeSearch())
             {
@@ -114,9 +128,12 @@ namespace LHJ.NaverSearch
             {
                 this.Cursor = Cursors.WaitCursor;
 
+                this.ucPaging.Clear();
+                this.lblSearchRslt.Visible = false;
+                this.lblSearchRsltIdx.Visible = false;
                 this.flpSearchRslt.Controls.Clear();
 
-                string subUrl = string.Format("query={0}&display=10&d_titl={1}", string.Empty, this.tbxBookTitle.Text);
+                string subUrl = string.Format("query={0}&display=10&start={1}&d_titl={2}", string.Empty, (aPage.Equals(1) ? 1 : ((aPage - 1) * 10) + 1), this.tbxBookTitle.Text);
                 string url = "https://openapi.naver.com/v1/search/book_adv.json?" + subUrl;
                 string text = string.Empty;
 
@@ -137,8 +154,6 @@ namespace LHJ.NaverSearch
                                 text = reader.ReadToEnd();
                             }
                         }
-
-                        this.CreateSearchRsltCtrl(text);
                     }
                     else
                     {
@@ -146,6 +161,17 @@ namespace LHJ.NaverSearch
                         return;
                     }
                 }
+
+                BookSearchRslt bsr = Newtonsoft.Json.JsonConvert.DeserializeObject<BookSearchRslt>(text);
+
+                if (bsr.total < 1)
+                {
+                    MessageBox.Show("검색결과가 존재하지 않습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                this.CreateSearchRsltCtrl(bsr);
+                this.SetPageing(bsr);
             }
             catch (Exception ex)
             {
@@ -163,7 +189,7 @@ namespace LHJ.NaverSearch
         #region 7.Event
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            this.Search();
+            this.Search(this.ucPaging.CurPage);
         }
 
         private void tbxBookTitle_KeyDown(object sender, KeyEventArgs e)
@@ -184,5 +210,10 @@ namespace LHJ.NaverSearch
             this.ResizeSearchRsltCtrl();
         }
         #endregion 7.Event
+
+        private void ucPaging_PageChanged(object sender, ucPaging.PageChangedArgs e)
+        {
+            this.Search(e.Page);
+        }
     }
 }

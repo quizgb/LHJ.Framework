@@ -218,7 +218,6 @@ namespace LHJ.Controls
         {
             this.InitializeBandHeader();
 
-
             mBandHeaderList.Add(new BandHeader() { StartCol = startCol, EndCol = endCol, Text = text });
 
             for (int i = startCol; i <= endCol; i++)
