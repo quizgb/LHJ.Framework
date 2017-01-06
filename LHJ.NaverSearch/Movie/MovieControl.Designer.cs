@@ -28,29 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pbxBookImage = new System.Windows.Forms.PictureBox();
+            this.pbxMvImage = new System.Windows.Forms.PictureBox();
             this.pnlBookImage = new System.Windows.Forms.Panel();
             this.lblMvInfo1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.lnklblMvTitle = new LHJ.NaverSearch.RichLabel();
             this.lblRating = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pbxBookImage)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxMvImage)).BeginInit();
             this.pnlBookImage.SuspendLayout();
             this.SuspendLayout();
             // 
-            // pbxBookImage
+            // pbxMvImage
             // 
-            this.pbxBookImage.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pbxBookImage.Location = new System.Drawing.Point(0, 0);
-            this.pbxBookImage.Name = "pbxBookImage";
-            this.pbxBookImage.Size = new System.Drawing.Size(84, 102);
-            this.pbxBookImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbxBookImage.TabIndex = 0;
-            this.pbxBookImage.TabStop = false;
+            this.pbxMvImage.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbxMvImage.Location = new System.Drawing.Point(0, 0);
+            this.pbxMvImage.Name = "pbxMvImage";
+            this.pbxMvImage.Size = new System.Drawing.Size(84, 102);
+            this.pbxMvImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxMvImage.TabIndex = 0;
+            this.pbxMvImage.TabStop = false;
             // 
             // pnlBookImage
             // 
-            this.pnlBookImage.Controls.Add(this.pbxBookImage);
+            this.pnlBookImage.Controls.Add(this.pbxMvImage);
             this.pnlBookImage.Dock = System.Windows.Forms.DockStyle.Left;
             this.pnlBookImage.Location = new System.Drawing.Point(0, 0);
             this.pnlBookImage.Name = "pnlBookImage";
@@ -111,7 +111,7 @@
             this.Controls.Add(this.pnlBookImage);
             this.Name = "MovieControl";
             this.Size = new System.Drawing.Size(527, 102);
-            ((System.ComponentModel.ISupportInitialize)(this.pbxBookImage)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxMvImage)).EndInit();
             this.pnlBookImage.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -120,7 +120,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox pbxBookImage;
+        private System.Windows.Forms.PictureBox pbxMvImage;
         private System.Windows.Forms.Panel pnlBookImage;
         private System.Windows.Forms.Label lblMvInfo1;
         private RichLabel lnklblMvTitle;

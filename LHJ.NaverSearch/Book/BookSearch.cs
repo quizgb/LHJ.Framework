@@ -62,7 +62,7 @@ namespace LHJ.NaverSearch
 
             this.lblSearchRsltIdx.Text = string.Format("({0}-{1} / {2} 건)", 
                                                        aStart.ToString(),
-                                                       this.ucPaging.CurPage.Equals(this.ucPaging.TotalPageCount) ? aTotal.ToString() : (this.ucPaging.CurPage * aDisplay).ToString(),
+                                                       this.ucPaging.CurPage.Equals(this.ucPaging.TotalPageCount) ? aTotal > 100 ? "1000" : aTotal.ToString() : (this.ucPaging.CurPage * aDisplay).ToString(),
                                                        aTotal.ToString());
         }
 
@@ -119,7 +119,7 @@ namespace LHJ.NaverSearch
             else
             {
                 this.ucPaging.Visible = true;
-                this.ucPaging.Setting(aBsr);
+                this.ucPaging.Setting(aBsr.total);
             }
         }
 

@@ -31,7 +31,6 @@ namespace LHJ.NaverSearch
         public event PageChangedEventHandler PageChanged;
 
         private int mTotalItmCount = 0;
-        private int mTotalPageCount = 0;
         private int mItemsPerPage = 10;
         private int mCurPage = 1;
         #endregion 1.Variable
@@ -46,7 +45,7 @@ namespace LHJ.NaverSearch
 
         public int TotalPageCount
         {
-            get { return this.mTotalItmCount / this.mItemsPerPage + ((this.TotalItmCount % this.mItemsPerPage) == 0 ? 0 : 1); }
+            get { return this.GetTotalPageCount(); }
         }
 
         public int CurPage
@@ -81,6 +80,18 @@ namespace LHJ.NaverSearch
 
 
         #region 6.Method
+        private int GetTotalPageCount()
+        {
+            int cnt = this.mTotalItmCount / this.mItemsPerPage + ((this.TotalItmCount % this.mItemsPerPage) == 0 ? 0 : 1);
+
+            if (cnt > 100)
+            {
+                cnt = 100;
+            }
+
+            return cnt;
+        }
+        
         public void Clear(bool aNewSearchState)
         {
             this.flpPage.Controls.Clear();
@@ -149,73 +160,9 @@ namespace LHJ.NaverSearch
             }
         }
 
-        public void Setting(BookSearchRslt aBsr)
+        public void Setting(int aTotCount)
         {
-            this.mTotalItmCount = aBsr.total;
-            int maxCnt = 0;
-            int startCnt = 0;
-
-            if (CurPage > 5 && CurPage + 4 < TotalPageCount)
-            {
-                maxCnt = CurPage + 4;
-                startCnt = CurPage - 6;
-            }
-            else if (CurPage + 4 >= TotalPageCount && TotalPageCount > 10)
-            {
-                maxCnt = TotalPageCount;
-                startCnt = TotalPageCount - 10;
-            }
-            else
-            {
-                if (TotalPageCount > 10)
-                {
-                    maxCnt = 10;
-                    startCnt = 0;
-                }
-                else
-                {
-                    maxCnt = TotalPageCount;
-                    startCnt = 0;
-                }
-            }
-
-            for (int cnt = startCnt; cnt < maxCnt; cnt++)
-            {
-                LinkLabel lbl = new LinkLabel();
-                lbl.LinkClicked += this.lnklbl_LinkClicked;
-                lbl.AutoSize = true;
-                lbl.Text = (cnt + 1).ToString();
-                lbl.Dock = DockStyle.Left;
-                lbl.Visible = true;
-
-                if ((cnt + 1).Equals(this.mCurPage))
-                {
-                    lbl.Font = new Font("맑은 고딕", 10f, FontStyle.Bold);
-                }
-                else
-                {
-                    lbl.Font = new Font("맑은 고딕", 9.5f, FontStyle.Regular);
-                }
-
-                if (lbl.Width > lbl.PreferredWidth)
-                {
-                    lbl.Width = lbl.PreferredWidth;
-                }
-
-                this.Width += lbl.Width + 6;
-
-                if ((cnt + 1) <= TotalPageCount)
-                {
-                    this.flpPage.Controls.Add(lbl);
-                }
-            }
-
-            this.SetBtnEnabled();
-        }
-
-        public void Setting(Movie.MovieSearchRslt aMsr)
-        {
-            this.mTotalItmCount = aMsr.total;
+            this.mTotalItmCount = aTotCount;
             int maxCnt = 0;
             int startCnt = 0;
 

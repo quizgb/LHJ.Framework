@@ -43,6 +43,7 @@ namespace LHJ.NaverSearch
         /// </summary>
         public void SetInitialize()
         {
+            this.Icon = Properties.Resources._1483694358_naver;
             this.SetScreen();
         }
         #endregion 5.Set Initialize
@@ -72,6 +73,18 @@ namespace LHJ.NaverSearch
             ms.Dock = DockStyle.Fill;
             ms.FormBorderStyle = FormBorderStyle.None;
             ms.Show();
+
+            this.tabControl1.TabPages.Add(tp);
+
+            tp = new TabPage();
+            tp.Text = "쇼핑 검색";
+
+            Shopping.ShopSearch ss = new Shopping.ShopSearch();
+            ss.TopLevel = false;
+            tp.Controls.Add(ss);
+            ss.Dock = DockStyle.Fill;
+            ss.FormBorderStyle = FormBorderStyle.None;
+            ss.Show();
 
             this.tabControl1.TabPages.Add(tp);
 

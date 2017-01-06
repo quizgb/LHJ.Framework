@@ -81,7 +81,7 @@
     </Compile>
     <Compile Include="Definition\ConstValue\ConstValue.cs" />
     <Compile Include="Book\BookItem.cs" />
-    <Compile Include="Interface1.cs" />
+    <Compile Include="IBookSearch.cs" />
     <Compile Include="Movie\MovieControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -98,6 +98,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shopping\ShopControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Shopping\ShopControl.Designer.cs">
+      <DependentUpon>ShopControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Shopping\ShopItem.cs" />
+    <Compile Include="Shopping\ShopSearchRslt.cs" />
+    <Compile Include="Shopping\ShopSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shopping\ShopSearch.Designer.cs">
+      <DependentUpon>ShopSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="ucPaging.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,6 +143,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Shopping\ShopControl.resx">
+      <DependentUpon>ShopControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shopping\ShopSearch.resx">
+      <DependentUpon>ShopSearch.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ucPaging.resx">
       <DependentUpon>ucPaging.cs</DependentUpon>
     </EmbeddedResource>
@@ -156,6 +176,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\1483694358_naver.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1483702636_shopping-cart.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

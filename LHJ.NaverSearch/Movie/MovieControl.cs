@@ -64,7 +64,7 @@ namespace LHJ.NaverSearch
                                                    string.IsNullOrEmpty(aItm.pubDate) ? string.Empty : aItm.pubDate);
 
             this.lblRating.Text = string.Format("평점 : {0} / 10", aItm.userRating);
-            this.pbxBookImage.ImageLocation = aItm.image;
+            this.pbxMvImage.ImageLocation = aItm.image;
         }
         #endregion 6.Method
 

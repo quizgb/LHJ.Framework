@@ -10,9 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LHJ.NaverSearch.Movie
+namespace LHJ.NaverSearch.Shopping
 {
-    public partial class MovieSearch : Form, IBookSearch
+    public partial class ShopSearch : Form, IBookSearch
     {
         #region 1.Variable
 
@@ -25,7 +25,7 @@ namespace LHJ.NaverSearch.Movie
 
 
         #region 3.Constructor
-        public MovieSearch()
+        public ShopSearch()
         {
             InitializeComponent();
         }
@@ -43,27 +43,50 @@ namespace LHJ.NaverSearch.Movie
         /// </summary>
         public void SetInitialize()
         {
-            this.Icon = Properties.Resources._1483694295_video;
+            this.Icon = Properties.Resources._1483702636_shopping_cart;
             this.SetFocusTitle();
         }
         #endregion 5.Set Initialize
 
 
         #region 6.Method
+        public void ResizeSearchRsltCtrl()
+        {
+            if (this.flpSearchRslt.Controls.Count > 0)
+            {
+                foreach (Control ctrl in this.flpSearchRslt.Controls)
+                {
+                    if (ctrl.GetType().Equals(typeof(ShopControl)))
+                    {
+                        ShopControl sc = ctrl as ShopControl;
+                        sc.Width = this.flpSearchRslt.Width - 25;
+                    }
+                }
+            }
+        }
+
+        public void SetFocusTitle()
+        {
+            this.tbxShopTitle.Focus();
+        }
+
         public bool CheckBeforeSearch()
         {
-            if (string.IsNullOrEmpty(this.tbxMovieTitle.Text))
+            if (string.IsNullOrEmpty(this.tbxShopTitle.Text))
             {
-                MessageBox.Show("영화 제목을 입력하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("검색어를 입력하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }
 
             return true;
         }
 
-        public void SetFocusTitle()
+        public void ClearSearchBefore(bool aNewSearchState)
         {
-            this.tbxMovieTitle.Focus();
+            this.ucPaging.Clear(aNewSearchState);
+            this.lblSearchRslt.Visible = false;
+            this.lblSearchRsltIdx.Visible = false;
+            this.flpSearchRslt.Controls.Clear();
         }
 
         public void Search(bool aNewSearchState)
@@ -79,8 +102,8 @@ namespace LHJ.NaverSearch.Movie
 
                 this.ClearSearchBefore(aNewSearchState);
 
-                string subUrl = string.Format("query={0}&display=10&start={1}", this.tbxMovieTitle.Text, (this.ucPaging.CurPage.Equals(1) ? 1 : ((this.ucPaging.CurPage - 1) * 10) + 1));
-                string url = "https://openapi.naver.com/v1/search/movie.json?" + subUrl;
+                string subUrl = string.Format("query={0}&display=10&start={1}", this.tbxShopTitle.Text, (this.ucPaging.CurPage.Equals(1) ? 1 : ((this.ucPaging.CurPage - 1) * 10) + 1));
+                string url = "https://openapi.naver.com/v1/search/shop.json?" + subUrl;
                 string text = string.Empty;
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -108,16 +131,16 @@ namespace LHJ.NaverSearch.Movie
                     }
                 }
 
-                MovieSearchRslt msr = Newtonsoft.Json.JsonConvert.DeserializeObject<MovieSearchRslt>(text);
+                ShopSearchRslt ssr = Newtonsoft.Json.JsonConvert.DeserializeObject<ShopSearchRslt>(text);
 
-                if (msr.total < 1)
+                if (ssr.total < 1)
                 {
                     MessageBox.Show("검색결과가 존재하지 않습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                this.CreateSearchRsltCtrl(msr);
-                this.SetPageing(msr);
+                this.CreateSearchRsltCtrl(ssr);
+                this.SetPageing(ssr);
             }
             catch (Exception ex)
             {
@@ -127,45 +150,6 @@ namespace LHJ.NaverSearch.Movie
             finally
             {
                 this.Cursor = Cursors.Default;
-            }
-        }
-
-        public void ClearSearchBefore(bool aNewSearchState)
-        {
-            this.ucPaging.Clear(aNewSearchState);
-            this.lblSearchRslt.Visible = false;
-            this.lblSearchRsltIdx.Visible = false;
-            this.flpSearchRslt.Controls.Clear();
-        }
-
-        private void SetPageing(MovieSearchRslt aMsr)
-        {
-            if (aMsr.total < 1)
-            {
-                this.ucPaging.Visible = false;
-            }
-            else
-            {
-                this.ucPaging.Visible = true;
-                this.ucPaging.Setting(aMsr.total);
-            }
-        }
-
-        private void CreateSearchRsltCtrl(MovieSearchRslt aMsr)
-        {
-            if (aMsr != null)
-            {
-                this.SetSearchRsltInfo(aMsr.start, aMsr.display, aMsr.total);
-
-                foreach (MovieItem itm in aMsr.items)
-                {
-                    MovieControl mc = new MovieControl();
-
-                    mc.Width = this.flpSearchRslt.Width - 25;
-                    mc.SetValue(itm);
-
-                    this.flpSearchRslt.Controls.Add(mc);
-                }
             }
         }
 
@@ -180,18 +164,34 @@ namespace LHJ.NaverSearch.Movie
                                                        aTotal.ToString());
         }
 
-        public void ResizeSearchRsltCtrl()
+        private void CreateSearchRsltCtrl(ShopSearchRslt aSsr)
         {
-            if (this.flpSearchRslt.Controls.Count > 0)
+            if (aSsr != null)
             {
-                foreach (Control ctrl in this.flpSearchRslt.Controls)
+                this.SetSearchRsltInfo(aSsr.start, aSsr.display, aSsr.total);
+
+                foreach (ShopItem itm in aSsr.items)
                 {
-                    if (ctrl.GetType().Equals(typeof(MovieControl)))
-                    {
-                        MovieControl mc = ctrl as MovieControl;
-                        mc.Width = this.flpSearchRslt.Width - 25;
-                    }
+                    ShopControl sc = new ShopControl();
+
+                    sc.Width = this.flpSearchRslt.Width - 25;
+                    sc.SetValue(itm);
+
+                    this.flpSearchRslt.Controls.Add(sc);
                 }
+            }
+        }
+
+        private void SetPageing(ShopSearchRslt aSsr)
+        {
+            if (aSsr.total < 1)
+            {
+                this.ucPaging.Visible = false;
+            }
+            else
+            {
+                this.ucPaging.Visible = true;
+                this.ucPaging.Setting(aSsr.total);
             }
         }
         #endregion 6.Method
@@ -203,7 +203,7 @@ namespace LHJ.NaverSearch.Movie
             this.Search(true);
         }
 
-        private void tbxMovieTitle_KeyDown(object sender, KeyEventArgs e)
+        private void tbxShopTitle_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -211,12 +211,12 @@ namespace LHJ.NaverSearch.Movie
             }
         }
 
-        private void MovieSearch_Shown(object sender, EventArgs e)
+        private void ShopSearch_Shown(object sender, EventArgs e)
         {
             this.SetInitialize();
         }
 
-        private void MovieSearch_Resize(object sender, EventArgs e)
+        private void ShopSearch_Resize(object sender, EventArgs e)
         {
             this.ResizeSearchRsltCtrl();
         }
