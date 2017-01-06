@@ -22,6 +22,7 @@ namespace LHJ.NaverSearch
             }
         }
 
+        #region 1.Variable
         public delegate void PageChangedEventHandler(object sender, PageChangedArgs e);
 
         [Browsable(true),
@@ -33,7 +34,10 @@ namespace LHJ.NaverSearch
         private int mTotalPageCount = 0;
         private int mItemsPerPage = 10;
         private int mCurPage = 1;
+        #endregion 1.Variable
 
+
+        #region 2.Property
         public int TotalItmCount
         {
             get { return this.mTotalItmCount; }
@@ -49,12 +53,34 @@ namespace LHJ.NaverSearch
         {
             get { return this.mCurPage.Equals(0) ? 1 : this.mCurPage; }
         }
+        #endregion 2.Property
 
+
+        #region 3.Constructor
         public ucPaging()
         {
             InitializeComponent();
         }
+        #endregion 3.Constructor
 
+
+        #region 4.Override Method
+
+        #endregion 4.Override Method
+
+
+        #region 5.Set Initialize
+        /// <summary>
+        /// Set Initialize
+        /// </summary>
+        public void SetInitialize()
+        {
+
+        }
+        #endregion 5.Set Initialize
+
+
+        #region 6.Method
         public void Clear()
         {
             this.flpPage.Controls.Clear();
@@ -98,19 +124,6 @@ namespace LHJ.NaverSearch
             {
                 PageChangedArgs e = new PageChangedArgs(aPage);
                 PageChanged(this, e);
-            }
-        }
-
-        private void lnklbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            LinkLabel lnklbl = sender as LinkLabel;
-
-            if (lnklbl != null)
-            {
-                int page = 0;
-                int.TryParse(lnklbl.Text, out page);
-
-                this.SetPageChanged(page);
             }
         }
 
@@ -167,6 +180,22 @@ namespace LHJ.NaverSearch
                 }
             }
         }
+        #endregion 6.Method
+
+
+        #region 7.Event
+        private void lnklbl_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            LinkLabel lnklbl = sender as LinkLabel;
+
+            if (lnklbl != null)
+            {
+                int page = 0;
+                int.TryParse(lnklbl.Text, out page);
+
+                this.SetPageChanged(page);
+            }
+        }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
@@ -192,5 +221,6 @@ namespace LHJ.NaverSearch
                 }
             }
         }
+        #endregion 7.Event
     }
 }

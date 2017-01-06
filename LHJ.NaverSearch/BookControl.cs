@@ -48,7 +48,7 @@ namespace LHJ.NaverSearch
 
 
         #region 6.Method
-        private string SetComma(string aStr)
+        private string SetPriceComma(string aStr)
         {
             string s = aStr;
             string temp = string.Empty;
@@ -77,8 +77,8 @@ namespace LHJ.NaverSearch
                                                    aItm.author, 
                                                    aItm.publisher, 
                                                    string.IsNullOrEmpty(aItm.pubdate) ? string.Empty : aItm.pubdate.Insert(4, "-").Insert(7, "-"));
-            this.lblBookPrice.Text = string.Format("{0} 원", this.SetComma(aItm.price));
-            this.lblBookDesc.Text = aItm.description.Replace("<b>", string.Empty).Replace("</b>", string.Empty);
+            this.lblBookPrice.Text = string.Format("{0} 원", this.SetPriceComma(aItm.price));
+            this.txtBookDesc.Text = aItm.description.Replace("<b>", string.Empty).Replace("</b>", string.Empty);
             this.pbxBookImage.ImageLocation = aItm.image;
         }
         #endregion 6.Method

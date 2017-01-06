@@ -46,7 +46,7 @@
             // btnSearch
             // 
             this.btnSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnSearch.Location = new System.Drawing.Point(494, 4);
+            this.btnSearch.Location = new System.Drawing.Point(697, 4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 0;
@@ -60,7 +60,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbxBookTitle.Location = new System.Drawing.Point(63, 5);
             this.tbxBookTitle.Name = "tbxBookTitle";
-            this.tbxBookTitle.Size = new System.Drawing.Size(425, 21);
+            this.tbxBookTitle.Size = new System.Drawing.Size(628, 21);
             this.tbxBookTitle.TabIndex = 1;
             this.tbxBookTitle.KeyDown += new System.Windows.Forms.KeyEventHandler(this.tbxBookTitle_KeyDown);
             // 
@@ -102,8 +102,9 @@
             this.flpSearchRslt.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flpSearchRslt.Location = new System.Drawing.Point(0, 63);
             this.flpSearchRslt.Name = "flpSearchRslt";
-            this.flpSearchRslt.Size = new System.Drawing.Size(581, 325);
+            this.flpSearchRslt.Size = new System.Drawing.Size(784, 474);
             this.flpSearchRslt.TabIndex = 5;
+            this.flpSearchRslt.MouseEnter += new System.EventHandler(this.flpSearchRslt_MouseEnter);
             // 
             // pnlSearch
             // 
@@ -113,7 +114,7 @@
             this.pnlSearch.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSearch.Location = new System.Drawing.Point(0, 0);
             this.pnlSearch.Name = "pnlSearch";
-            this.pnlSearch.Size = new System.Drawing.Size(581, 32);
+            this.pnlSearch.Size = new System.Drawing.Size(784, 32);
             this.pnlSearch.TabIndex = 6;
             // 
             // pnlSearchRslt
@@ -123,7 +124,7 @@
             this.pnlSearchRslt.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlSearchRslt.Location = new System.Drawing.Point(0, 32);
             this.pnlSearchRslt.Name = "pnlSearchRslt";
-            this.pnlSearchRslt.Size = new System.Drawing.Size(581, 31);
+            this.pnlSearchRslt.Size = new System.Drawing.Size(784, 31);
             this.pnlSearchRslt.TabIndex = 7;
             // 
             // pnlPage
@@ -131,9 +132,9 @@
             this.pnlPage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnlPage.Controls.Add(this.ucPaging);
             this.pnlPage.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.pnlPage.Location = new System.Drawing.Point(0, 363);
+            this.pnlPage.Location = new System.Drawing.Point(0, 537);
             this.pnlPage.Name = "pnlPage";
-            this.pnlPage.Size = new System.Drawing.Size(581, 25);
+            this.pnlPage.Size = new System.Drawing.Size(784, 25);
             this.pnlPage.TabIndex = 8;
             // 
             // ucPaging
@@ -150,10 +151,9 @@
             // BookSearch
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(581, 388);
+            this.ClientSize = new System.Drawing.Size(784, 562);
             this.Controls.Add(this.flpSearchRslt);
             this.Controls.Add(this.pnlPage);
-
             this.Controls.Add(this.pnlSearchRslt);
             this.Controls.Add(this.pnlSearch);
             this.Name = "BookSearch";

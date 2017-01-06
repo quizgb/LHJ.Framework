@@ -43,13 +43,14 @@ namespace LHJ.NaverSearch
         /// </summary>
         public void SetInitialize()
         {
-
+            this.Icon = Properties.Resources._1483687921_LIBRARY_2;
+            this.tbxBookTitle.Focus();
         }
         #endregion 5.Set Initialize
 
 
         #region 6.Method
-        private void SetRsltInfo(int aStart, int aDisplay, int aTotal)
+        private void SetSearchRsltInfo(int aStart, int aDisplay, int aTotal)
         {
             this.lblSearchRslt.Visible = true;
             this.lblSearchRsltIdx.Visible = true;
@@ -90,7 +91,7 @@ namespace LHJ.NaverSearch
         {
             if (aBsr != null)
             {
-                this.SetRsltInfo(aBsr.start, aBsr.display, aBsr.total);
+                this.SetSearchRsltInfo(aBsr.start, aBsr.display, aBsr.total);
 
                 foreach (Item itm in aBsr.items)
                 {
@@ -117,6 +118,14 @@ namespace LHJ.NaverSearch
             }
         }
 
+        private void ClearSearchBefore()
+        {
+            this.ucPaging.Clear();
+            this.lblSearchRslt.Visible = false;
+            this.lblSearchRsltIdx.Visible = false;
+            this.flpSearchRslt.Controls.Clear();
+        }
+
         private void Search(int aPage)
         {
             if (!this.CheckBeforeSearch())
@@ -128,10 +137,7 @@ namespace LHJ.NaverSearch
             {
                 this.Cursor = Cursors.WaitCursor;
 
-                this.ucPaging.Clear();
-                this.lblSearchRslt.Visible = false;
-                this.lblSearchRsltIdx.Visible = false;
-                this.flpSearchRslt.Controls.Clear();
+                this.ClearSearchBefore();
 
                 string subUrl = string.Format("query={0}&display=10&start={1}&d_titl={2}", string.Empty, (aPage.Equals(1) ? 1 : ((aPage - 1) * 10) + 1), this.tbxBookTitle.Text);
                 string url = "https://openapi.naver.com/v1/search/book_adv.json?" + subUrl;
@@ -202,18 +208,23 @@ namespace LHJ.NaverSearch
 
         private void BookSearch_Shown(object sender, EventArgs e)
         {
-            this.tbxBookTitle.Focus();
+            this.SetInitialize();
         }
 
         private void BookSearch_Resize(object sender, EventArgs e)
         {
             this.ResizeSearchRsltCtrl();
         }
-        #endregion 7.Event
 
         private void ucPaging_PageChanged(object sender, ucPaging.PageChangedArgs e)
         {
             this.Search(e.Page);
         }
+
+        private void flpSearchRslt_MouseEnter(object sender, EventArgs e)
+        {
+            this.flpSearchRslt.Focus();
+        }
+        #endregion 7.Event
     }
 }
