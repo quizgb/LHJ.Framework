@@ -92,7 +92,7 @@ namespace LHJ.NaverSearch
             this.lnklblShopTitle.Text = aItm.title.Replace("<b>", string.Empty).Replace("</b>", string.Empty);
             this.lblShopInfo1.Text = string.Format("가격 : {0} ~ {1}", this.SetPriceComma(aItm.lprice), this.SetPriceComma(aItm.hprice));
             this.lblShopInfo2.Text = string.Format("판매처 : {0}", aItm.mallName);
-            this.lblShopInfo3.Text = this.GetProductType(aItm.productId);
+            this.lblShopInfo3.Text = this.GetProductType(aItm.productType);
             this.pbxShopImage.ImageLocation = aItm.image;
         }
         #endregion 6.Method
