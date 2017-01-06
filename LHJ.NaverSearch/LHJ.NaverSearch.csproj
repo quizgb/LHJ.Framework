@@ -36,7 +36,7 @@
     <StartupObject />
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\1483687921_LIBRARY_2.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\1483694358_naver.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -57,24 +57,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BookSearchRslt.cs" />
-    <Compile Include="BookControl.cs">
+    <Compile Include="Book\BookSearchRslt.cs" />
+    <Compile Include="Book\BookControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="BookControl.Designer.cs">
+    <Compile Include="Book\BookControl.Designer.cs">
       <DependentUpon>BookControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="BookSearch.cs">
+    <Compile Include="Book\BookSearch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BookSearch.Designer.cs">
+    <Compile Include="Book\BookSearch.Designer.cs">
       <DependentUpon>BookSearch.cs</DependentUpon>
     </Compile>
-    <Compile Include="RichLabel.cs">
+    <Compile Include="frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Book\RichLabel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Definition\ConstValue\ConstValue.cs" />
-    <Compile Include="Item.cs" />
+    <Compile Include="Book\BookItem.cs" />
+    <Compile Include="Interface1.cs" />
+    <Compile Include="Movie\MovieControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Movie\MovieControl.Designer.cs">
+      <DependentUpon>MovieControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Movie\MovieItem.cs" />
+    <Compile Include="Movie\MovieSearchRslt.cs" />
+    <Compile Include="Movie\MovieSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Movie\MovieSearch.Designer.cs">
+      <DependentUpon>MovieSearch.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ucPaging.cs">
@@ -83,11 +104,20 @@
     <Compile Include="ucPaging.Designer.cs">
       <DependentUpon>ucPaging.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BookControl.resx">
+    <EmbeddedResource Include="Book\BookControl.resx">
       <DependentUpon>BookControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BookSearch.resx">
+    <EmbeddedResource Include="Book\BookSearch.resx">
       <DependentUpon>BookSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Movie\MovieControl.resx">
+      <DependentUpon>MovieControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Movie\MovieSearch.resx">
+      <DependentUpon>MovieSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -120,6 +150,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\1483687921_LIBRARY_2.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1483694295_video.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1483694358_naver.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

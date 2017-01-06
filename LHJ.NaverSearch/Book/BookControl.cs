@@ -69,7 +69,7 @@ namespace LHJ.NaverSearch
             return temp;
         }
 
-        public void SetValue(Item aItm)
+        public void SetValue(BookItem aItm)
         {
             this.lnklblBookTitle.Tag = aItm.link;
             this.lnklblBookTitle.Text = aItm.title.Replace("<b>", string.Empty).Replace("</b>", string.Empty);

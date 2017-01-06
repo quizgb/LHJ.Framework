@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace LHJ.NaverSearch
 {
-    public partial class BookSearch : Form
+    public partial class BookSearch : Form, IBookSearch
     {                                                             
         #region 1.Variable
 
@@ -44,13 +44,18 @@ namespace LHJ.NaverSearch
         public void SetInitialize()
         {
             this.Icon = Properties.Resources._1483687921_LIBRARY_2;
-            this.tbxBookTitle.Focus();
+            this.SetFocusTitle();
         }
         #endregion 5.Set Initialize
 
 
         #region 6.Method
-        private void SetSearchRsltInfo(int aStart, int aDisplay, int aTotal)
+        public void SetFocusTitle()
+        {
+            this.tbxBookTitle.Focus();
+        }
+
+        public void SetSearchRsltInfo(int aStart, int aDisplay, int aTotal)
         {
             this.lblSearchRslt.Visible = true;
             this.lblSearchRsltIdx.Visible = true;
@@ -61,7 +66,7 @@ namespace LHJ.NaverSearch
                                                        aTotal.ToString());
         }
 
-        private bool CheckBeforeSearch()
+        public bool CheckBeforeSearch()
         {
             if (string.IsNullOrEmpty(this.tbxBookTitle.Text))
             {
@@ -72,7 +77,7 @@ namespace LHJ.NaverSearch
             return true;
         }
 
-        private void ResizeSearchRsltCtrl()
+        public void ResizeSearchRsltCtrl()
         {
             if (this.flpSearchRslt.Controls.Count > 0)
             {
@@ -93,7 +98,7 @@ namespace LHJ.NaverSearch
             {
                 this.SetSearchRsltInfo(aBsr.start, aBsr.display, aBsr.total);
 
-                foreach (Item itm in aBsr.items)
+                foreach (BookItem itm in aBsr.items)
                 {
                     BookControl bc = new BookControl();
 
@@ -118,15 +123,15 @@ namespace LHJ.NaverSearch
             }
         }
 
-        private void ClearSearchBefore()
+        public void ClearSearchBefore(bool aNewSearchState)
         {
-            this.ucPaging.Clear();
+            this.ucPaging.Clear(aNewSearchState);
             this.lblSearchRslt.Visible = false;
             this.lblSearchRsltIdx.Visible = false;
             this.flpSearchRslt.Controls.Clear();
         }
 
-        private void Search(int aPage)
+        public void Search(bool aNewSearchState)
         {
             if (!this.CheckBeforeSearch())
             {
@@ -137,9 +142,9 @@ namespace LHJ.NaverSearch
             {
                 this.Cursor = Cursors.WaitCursor;
 
-                this.ClearSearchBefore();
+                this.ClearSearchBefore(aNewSearchState);
 
-                string subUrl = string.Format("query={0}&display=10&start={1}&d_titl={2}", string.Empty, (aPage.Equals(1) ? 1 : ((aPage - 1) * 10) + 1), this.tbxBookTitle.Text);
+                string subUrl = string.Format("query={0}&display=10&start={1}&d_titl={2}", string.Empty, (this.ucPaging.CurPage.Equals(1) ? 1 : ((this.ucPaging.CurPage - 1) * 10) + 1), this.tbxBookTitle.Text);
                 string url = "https://openapi.naver.com/v1/search/book_adv.json?" + subUrl;
                 string text = string.Empty;
 
@@ -195,7 +200,7 @@ namespace LHJ.NaverSearch
         #region 7.Event
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            this.Search(this.ucPaging.CurPage);
+            this.Search(true);
         }
 
         private void tbxBookTitle_KeyDown(object sender, KeyEventArgs e)
@@ -218,7 +223,7 @@ namespace LHJ.NaverSearch
 
         private void ucPaging_PageChanged(object sender, ucPaging.PageChangedArgs e)
         {
-            this.Search(e.Page);
+            this.Search(false);
         }
 
         private void flpSearchRslt_MouseEnter(object sender, EventArgs e)

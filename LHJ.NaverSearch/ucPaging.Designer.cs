@@ -63,6 +63,7 @@
             // btnNext
             // 
             this.btnNext.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnNext.Enabled = false;
             this.btnNext.Location = new System.Drawing.Point(58, 0);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(29, 19);
@@ -74,6 +75,7 @@
             // btnEnd
             // 
             this.btnEnd.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btnEnd.Enabled = false;
             this.btnEnd.Location = new System.Drawing.Point(87, 0);
             this.btnEnd.Name = "btnEnd";
             this.btnEnd.Size = new System.Drawing.Size(30, 19);

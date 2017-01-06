@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LHJ.NaverSearch
 {
-    public class Item
+    public class BookItem
     {
         public string title { get; set; }
         public string link { get; set; }

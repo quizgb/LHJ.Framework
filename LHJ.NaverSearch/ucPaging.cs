@@ -81,21 +81,43 @@ namespace LHJ.NaverSearch
 
 
         #region 6.Method
-        public void Clear()
+        public void Clear(bool aNewSearchState)
         {
             this.flpPage.Controls.Clear();
             this.Width = 117;
+
+            this.btnHome.Enabled = false;
+            this.btnPrev.Enabled = false;
+
+            this.btnEnd.Enabled = false;
+            this.btnNext.Enabled = false;
+
+            if (aNewSearchState)
+            {
+                this.mCurPage = 1;
+            }
         }
 
         private void SetBtnEnabled()
         {
             if (CurPage.Equals(1))
             {
-                this.btnHome.Enabled = false;
-                this.btnPrev.Enabled = false;
+                if (TotalPageCount.Equals(1))
+                {
+                    this.btnHome.Enabled = false;
+                    this.btnPrev.Enabled = false;
 
-                this.btnEnd.Enabled = true;
-                this.btnNext.Enabled = true;
+                    this.btnEnd.Enabled = false;
+                    this.btnNext.Enabled = false;
+                }
+                else
+                {
+                    this.btnHome.Enabled = false;
+                    this.btnPrev.Enabled = false;
+
+                    this.btnEnd.Enabled = true;
+                    this.btnNext.Enabled = true;
+                }
             }
             else if (CurPage.Equals(TotalPageCount))
             {
@@ -138,15 +160,23 @@ namespace LHJ.NaverSearch
                 maxCnt = CurPage + 4;
                 startCnt = CurPage - 6;
             }
-            else if (CurPage + 4 >= TotalPageCount)
+            else if (CurPage + 4 >= TotalPageCount && TotalPageCount > 10)
             {
                 maxCnt = TotalPageCount;
                 startCnt = TotalPageCount - 10;
             }
             else
             {
-                maxCnt = 10;
-                startCnt = 0;
+                if (TotalPageCount > 10)
+                {
+                    maxCnt = 10;
+                    startCnt = 0;
+                }
+                else
+                {
+                    maxCnt = TotalPageCount;
+                    startCnt = 0;
+                }
             }
 
             for (int cnt = startCnt; cnt < maxCnt; cnt++)
@@ -179,6 +209,72 @@ namespace LHJ.NaverSearch
                     this.flpPage.Controls.Add(lbl);
                 }
             }
+
+            this.SetBtnEnabled();
+        }
+
+        public void Setting(Movie.MovieSearchRslt aMsr)
+        {
+            this.mTotalItmCount = aMsr.total;
+            int maxCnt = 0;
+            int startCnt = 0;
+
+            if (CurPage > 5 && CurPage + 4 < TotalPageCount)
+            {
+                maxCnt = CurPage + 4;
+                startCnt = CurPage - 6;
+            }
+            else if (CurPage + 4 >= TotalPageCount && TotalPageCount > 10)
+            {
+                maxCnt = TotalPageCount;
+                startCnt = TotalPageCount - 10;
+            }
+            else
+            {
+                if (TotalPageCount > 10)
+                {
+                    maxCnt = 10;
+                    startCnt = 0;
+                }
+                else
+                {
+                    maxCnt = TotalPageCount;
+                    startCnt = 0;
+                }
+            }
+
+            for (int cnt = startCnt; cnt < maxCnt; cnt++)
+            {
+                LinkLabel lbl = new LinkLabel();
+                lbl.LinkClicked += this.lnklbl_LinkClicked;
+                lbl.AutoSize = true;
+                lbl.Text = (cnt + 1).ToString();
+                lbl.Dock = DockStyle.Left;
+                lbl.Visible = true;
+
+                if ((cnt + 1).Equals(this.mCurPage))
+                {
+                    lbl.Font = new Font("맑은 고딕", 10f, FontStyle.Bold);
+                }
+                else
+                {
+                    lbl.Font = new Font("맑은 고딕", 9.5f, FontStyle.Regular);
+                }
+
+                if (lbl.Width > lbl.PreferredWidth)
+                {
+                    lbl.Width = lbl.PreferredWidth;
+                }
+
+                this.Width += lbl.Width + 6;
+
+                if ((cnt + 1) <= TotalPageCount)
+                {
+                    this.flpPage.Controls.Add(lbl);
+                }
+            }
+
+            this.SetBtnEnabled();
         }
         #endregion 6.Method
 

@@ -47,7 +47,7 @@ namespace LHJ.NaverSearch
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new BookSearch());
+            Application.Run(new frmMain());
         }
 
         static void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e)
