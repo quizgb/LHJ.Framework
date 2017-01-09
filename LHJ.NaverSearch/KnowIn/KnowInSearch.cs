@@ -10,10 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LHJ.NaverSearch
+namespace LHJ.NaverSearch.KnowIn
 {
-    public partial class BookSearch : Form, IBookSearch
-    {                                                             
+    public partial class KnowInSearch : Form, IBookSearch
+    {
         #region 1.Variable
 
         #endregion 1.Variable
@@ -25,7 +25,7 @@ namespace LHJ.NaverSearch
 
 
         #region 3.Constructor
-        public BookSearch()
+        public KnowInSearch()
         {
             InitializeComponent();
         }
@@ -43,85 +43,43 @@ namespace LHJ.NaverSearch
         /// </summary>
         public void SetInitialize()
         {
-            this.Icon = Properties.Resources._1483687921_LIBRARY_2;
+            this.Icon = Properties.Resources._1483945068_square_linkedin;
             this.SetFocusTitle();
         }
+
         #endregion 5.Set Initialize
 
-
         #region 6.Method
-        public void SetFocusTitle()
-        {
-            this.tbxBookTitle.Focus();
-        }
-
-        public void SetSearchRsltInfo(int aStart, int aDisplay, int aTotal)
-        {
-            this.lblSearchRslt.Visible = true;
-            this.lblSearchRsltIdx.Visible = true;
-
-            this.lblSearchRsltIdx.Text = string.Format("({0}-{1} / {2} 건)", 
-                                                       aStart.ToString(),
-                                                       this.ucPaging.CurPage.Equals(this.ucPaging.TotalPageCount) ? aTotal > 100 ? "1000" : aTotal.ToString() : (this.ucPaging.CurPage * aDisplay).ToString(),
-                                                       aTotal.ToString());
-        }
-
-        public bool CheckBeforeSearch()
-        {
-            if (string.IsNullOrEmpty(this.tbxBookTitle.Text))
-            {
-                this.tbxBookTitle.Focus();
-                MessageBox.Show("책 제목을 입력하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
-            }
-
-            return true;
-        }
-
         public void ResizeSearchRsltCtrl()
         {
             if (this.flpSearchRslt.Controls.Count > 0)
             {
                 foreach (Control ctrl in this.flpSearchRslt.Controls)
                 {
-                    if (ctrl.GetType().Equals(typeof(BookControl)))
+                    if (ctrl.GetType().Equals(typeof(KnowInControl)))
                     {
-                        BookControl bc = ctrl as BookControl;
-                        bc.Width = this.flpSearchRslt.Width - 25;
+                        KnowInControl sc = ctrl as KnowInControl;
+                        sc.Width = this.flpSearchRslt.Width - 25;
                     }
                 }
             }
         }
 
-        private void CreateSearchRsltCtrl(BookSearchRslt aBsr)
+        public void SetFocusTitle()
         {
-            if (aBsr != null)
-            {
-                this.SetSearchRsltInfo(aBsr.start, aBsr.display, aBsr.total);
-
-                foreach (BookItem itm in aBsr.items)
-                {
-                    BookControl bc = new BookControl();
-
-                    bc.Width = this.flpSearchRslt.Width - 25;
-                    bc.SetValue(itm);
-
-                    this.flpSearchRslt.Controls.Add(bc);
-                }
-            }
+            this.tbxKnowInTitle.Focus();
         }
 
-        private void SetPageing(BookSearchRslt aBsr)
+        public bool CheckBeforeSearch()
         {
-            if (aBsr.total < 1)
+            if (string.IsNullOrEmpty(this.tbxKnowInTitle.Text))
             {
-                this.ucPaging.Visible = false;
+                this.tbxKnowInTitle.Focus();
+                MessageBox.Show("검색어를 입력하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return false;
             }
-            else
-            {
-                this.ucPaging.Visible = true;
-                this.ucPaging.Setting(aBsr.total);
-            }
+
+            return true;
         }
 
         public void ClearSearchBefore(bool aNewSearchState)
@@ -130,6 +88,48 @@ namespace LHJ.NaverSearch
             this.lblSearchRslt.Visible = false;
             this.lblSearchRsltIdx.Visible = false;
             this.flpSearchRslt.Controls.Clear();
+        }
+
+        public void SetSearchRsltInfo(int aStart, int aDisplay, int aTotal)
+        {
+            this.lblSearchRslt.Visible = true;
+            this.lblSearchRsltIdx.Visible = true;
+
+            this.lblSearchRsltIdx.Text = string.Format("({0}-{1} / {2} 건)",
+                                                       aStart.ToString(),
+                                                       this.ucPaging.CurPage.Equals(this.ucPaging.TotalPageCount) ? aTotal > 100 ? "1000" : aTotal.ToString() : (this.ucPaging.CurPage * aDisplay).ToString(),
+                                                       aTotal.ToString());
+        }
+
+        private void CreateSearchRsltCtrl(KISearchRslt aKisr)
+        {
+            if (aKisr != null)
+            {
+                this.SetSearchRsltInfo(aKisr.start, aKisr.display, aKisr.total);
+
+                foreach (KIItem itm in aKisr.items)
+                {
+                    KnowInControl sc = new KnowInControl();
+
+                    sc.Width = this.flpSearchRslt.Width - 25;
+                    sc.SetValue(itm);
+
+                    this.flpSearchRslt.Controls.Add(sc);
+                }
+            }
+        }
+
+        private void SetPageing(KnowIn.KISearchRslt aKisr)
+        {
+            if (aKisr.total < 1)
+            {
+                this.ucPaging.Visible = false;
+            }
+            else
+            {
+                this.ucPaging.Visible = true;
+                this.ucPaging.Setting(aKisr.total);
+            }
         }
 
         public void Search(bool aNewSearchState)
@@ -145,8 +145,8 @@ namespace LHJ.NaverSearch
 
                 this.ClearSearchBefore(aNewSearchState);
 
-                string subUrl = string.Format("query={0}&display=10&start={1}&d_titl={2}", string.Empty, (this.ucPaging.CurPage.Equals(1) ? 1 : ((this.ucPaging.CurPage - 1) * 10) + 1), this.tbxBookTitle.Text);
-                string url = "https://openapi.naver.com/v1/search/book_adv.json?" + subUrl;
+                string subUrl = string.Format("query={0}&display=10&start={1}", this.tbxKnowInTitle.Text, (this.ucPaging.CurPage.Equals(1) ? 1 : ((this.ucPaging.CurPage - 1) * 10) + 1));
+                string url = "https://openapi.naver.com/v1/search/kin.json?" + subUrl;
                 string text = string.Empty;
 
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
@@ -174,16 +174,16 @@ namespace LHJ.NaverSearch
                     }
                 }
 
-                BookSearchRslt bsr = Newtonsoft.Json.JsonConvert.DeserializeObject<BookSearchRslt>(text);
+                KISearchRslt kisr = Newtonsoft.Json.JsonConvert.DeserializeObject<KISearchRslt>(text);
 
-                if (bsr.total < 1)
+                if (kisr.total < 1)
                 {
                     MessageBox.Show("검색결과가 존재하지 않습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     return;
                 }
 
-                this.CreateSearchRsltCtrl(bsr);
-                this.SetPageing(bsr);
+                this.CreateSearchRsltCtrl(kisr);
+                this.SetPageing(kisr);
             }
             catch (Exception ex)
             {
@@ -197,14 +197,16 @@ namespace LHJ.NaverSearch
         }
         #endregion 6.Method
 
-
         #region 7.Event
+
+        #endregion 7.Event  
+
         private void btnSearch_Click(object sender, EventArgs e)
         {
             this.Search(true);
         }
 
-        private void tbxBookTitle_KeyDown(object sender, KeyEventArgs e)
+        private void tbxKnowInTitle_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)
             {
@@ -212,12 +214,7 @@ namespace LHJ.NaverSearch
             }
         }
 
-        private void BookSearch_Shown(object sender, EventArgs e)
-        {
-            this.SetInitialize();
-        }
-
-        private void BookSearch_Resize(object sender, EventArgs e)
+        private void KnowInSearch_Resize(object sender, EventArgs e)
         {
             this.ResizeSearchRsltCtrl();
         }
@@ -231,6 +228,10 @@ namespace LHJ.NaverSearch
         {
             this.flpSearchRslt.Focus();
         }
-        #endregion 7.Event
+
+        private void KnowInSearch_Shown(object sender, EventArgs e)
+        {
+            this.SetInitialize();
+        }
     }
 }

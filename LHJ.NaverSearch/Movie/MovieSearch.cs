@@ -54,6 +54,7 @@ namespace LHJ.NaverSearch.Movie
         {
             if (string.IsNullOrEmpty(this.tbxMovieTitle.Text))
             {
+                this.tbxMovieTitle.Focus();
                 MessageBox.Show("영화 제목을 입력하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }

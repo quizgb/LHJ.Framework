@@ -82,6 +82,20 @@
     <Compile Include="Definition\ConstValue\ConstValue.cs" />
     <Compile Include="Book\BookItem.cs" />
     <Compile Include="IBookSearch.cs" />
+    <Compile Include="KnowIn\KIItem.cs" />
+    <Compile Include="KnowIn\KISearchRslt.cs" />
+    <Compile Include="KnowIn\KnowInSearch.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KnowIn\KnowInSearch.Designer.cs">
+      <DependentUpon>KnowInSearch.cs</DependentUpon>
+    </Compile>
+    <Compile Include="KnowIn\KnowInControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="KnowIn\KnowInControl.Designer.cs">
+      <DependentUpon>KnowInControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Movie\MovieControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -126,6 +140,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KnowIn\KnowInSearch.resx">
+      <DependentUpon>KnowInSearch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="KnowIn\KnowInControl.resx">
+      <DependentUpon>KnowInControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Movie\MovieControl.resx">
       <DependentUpon>MovieControl.cs</DependentUpon>
@@ -179,6 +199,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\1483702636_shopping-cart.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1483945068_square-linkedin.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -74,6 +74,7 @@ namespace LHJ.NaverSearch.Shopping
         {
             if (string.IsNullOrEmpty(this.tbxShopTitle.Text))
             {
+                this.tbxShopTitle.Focus();
                 MessageBox.Show("검색어를 입력하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return false;
             }

@@ -88,6 +88,18 @@ namespace LHJ.NaverSearch
 
             this.tabControl1.TabPages.Add(tp);
 
+            tp = new TabPage();
+            tp.Text = "지식인 검색";
+
+            KnowIn.KnowInSearch kis = new KnowIn.KnowInSearch();
+            kis.TopLevel = false;
+            tp.Controls.Add(kis);
+            kis.Dock = DockStyle.Fill;
+            kis.FormBorderStyle = FormBorderStyle.None;
+            kis.Show();
+
+            this.tabControl1.TabPages.Add(tp);
+
             this.tabControl1_SelectedIndexChanged(this.tabControl1, null);
         }
         #endregion 6.Method
