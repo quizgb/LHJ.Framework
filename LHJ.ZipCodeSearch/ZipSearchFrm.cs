@@ -154,11 +154,11 @@ namespace LHJ.ZipCodeSearch
         {
             string subUrl = string.Format("ServiceKey={0}&searchSe={1}&srchwrd={2}&countPerPage={3}&currentPage={4}",
                                            "p6tFjeXc4J6rP3pA2DUzI5%2FFopaEOTfA4bfqSPFTCLZXO1Y4GQYWs1iZLYQNEWgHQzYNBXdNULz61rovjSnNaw%3D%3D",
-                                           "dong",
-                                           "가좌마을",
+                                           "road",
+                                           "송포로 207",
                                            "10",
                                            "1");
-            string url = "http://openapi.epost.go.kr/postal/retrieveLotNumberAdressAreaCdService/retrieveLotNumberAdressAreaCdService/getDetailListAreaCd?" + subUrl;
+            string url = "http://openapi.epost.go.kr/postal/retrieveNewAdressAreaCdService/retrieveNewAdressAreaCdService/getNewAddressListAreaCd?" + subUrl;
             string text = string.Empty;
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);

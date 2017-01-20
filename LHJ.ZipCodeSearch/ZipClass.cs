@@ -8,12 +8,12 @@ namespace LHJ.ZipCodeSearch
 {
     public class ZipClass
     {
-        public Detaillistresponse DetailListResponse { get; set; }
+        public Newaddresslistresponse NewAddressListResponse { get; set; }
 
-        public class Detaillistresponse
+        public class Newaddresslistresponse
         {
             public Cmmmsgheader cmmMsgHeader { get; set; }
-            public Detaillistareacd[] detailListAreaCd { get; set; }
+            public Newaddresslistareacd newAddressListAreaCd { get; set; }
         }
 
         public class Cmmmsgheader
@@ -30,10 +30,10 @@ namespace LHJ.ZipCodeSearch
             public string totalPage { get; set; }
         }
 
-        public class Detaillistareacd
+        public class Newaddresslistareacd
         {
-            public string adres { get; set; }
-            public string no { get; set; }
+            public string lnmAdres { get; set; }
+            public string rnAdres { get; set; }
             public string zipNo { get; set; }
         }
     }
