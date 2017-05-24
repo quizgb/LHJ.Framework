@@ -51,10 +51,17 @@ namespace LHJ.ServerInfoMonitor
             this.tabControl1.SizeMode = TabSizeMode.Fixed;
 
             // Add the Handler to draw the Image on Tab Pages
-            tabControl1.DrawItem += TabControl1_DrawItem;
+            this.tabControl1.DrawItem += TabControl1_DrawItem;
 
             this.splitContainer1.SplitterDistance = 0;
             this.즐겨찾기ToolStripMenuItem.Checked = true;
+
+            frmServerList serverFrm = new frmServerList();
+            serverFrm.TopLevel = false;
+            serverFrm.Dock = DockStyle.Fill;
+
+            this.splitContainer1.Panel1.Controls.Add(serverFrm);
+            serverFrm.Show();
         }
         #endregion 5.Set Initialize
 

@@ -64,8 +64,15 @@
     <Compile Include="frmRDPMain.Designer.cs">
       <DependentUpon>frmRDPMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmServerList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmServerList.Designer.cs">
+      <DependentUpon>frmServerList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServerListParam.cs" />
     <EmbeddedResource Include="frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
     </EmbeddedResource>
@@ -74,6 +81,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRDPMain.resx">
       <DependentUpon>frmRDPMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmServerList.resx">
+      <DependentUpon>frmServerList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
