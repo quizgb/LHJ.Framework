@@ -416,6 +416,21 @@ namespace LHJ.Controls
             return DS;
         }
 
+        //엑셀 컬럼명 A~Z 보다 많을경우..AA AB AC..BA BB BC..붙여주기
+        public static String translateColumnIndexToName(int index)
+        {
+            int quotient = (index) / 26;
+
+            if (quotient > 0)
+            {
+                return translateColumnIndexToName(quotient - 1) + (char)((index % 26) + 65);
+            }
+            else
+            {
+                return "" + (char)((index % 26) + 65);
+            }
+        }
+
         /// <summary>
         /// 조회한 내용 엑셀파일 출력
         /// </summary>
@@ -468,8 +483,17 @@ namespace LHJ.Controls
                     for (int c = 0; c < this.ColumnCount; c++)
                     {
                         headers[c] = this.Rows[0].Cells[c].OwningColumn.HeaderText.ToString();
-                        num = c + 65;
-                        columns[c] = Convert.ToString((char)num);
+
+                        int quotient = (c) / 26;
+
+                        if (quotient > 0)
+                        {
+                            columns[c] = Convert.ToString(translateColumnIndexToName(quotient - 1) + (char)((c % 26) + 65));
+                        }
+                        else
+                        {
+                            columns[c] = Convert.ToString((char)((c % 26) + 65));
+                        }
                     }
 
                     objApp = new Excel.Application();
