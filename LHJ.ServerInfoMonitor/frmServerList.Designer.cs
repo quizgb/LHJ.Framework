@@ -95,6 +95,7 @@
             this.btnInit.TabIndex = 4;
             this.btnInit.Text = "초기화";
             this.btnInit.UseVisualStyleBackColor = true;
+            this.btnInit.Click += new System.EventHandler(this.btnInit_Click);
             // 
             // lvwServer
             // 

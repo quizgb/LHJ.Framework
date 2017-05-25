@@ -100,7 +100,7 @@ namespace LHJ.ServerInfoMonitor
             {
                 if (tsmi.Checked)
                 {
-                    this.splitContainer1.SplitterDistance = this.Width / 10;
+                    this.splitContainer1.SplitterDistance = this.Width / 8;
                 }
                 else
                 {

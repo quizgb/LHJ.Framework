@@ -43,19 +43,26 @@ namespace LHJ.ServerInfoMonitor
         /// </summary>
         public void SetInitialize()
         {
+            this.InitServerList();
+        }
+
+        #endregion 5.Set Initialize
+
+        #region 6.Method
+        private void InitServerList()
+        {
             ServerListParam param = new ServerInfoMonitor.ServerListParam();
             this.propertyGrid1.SelectedObject = param;
         }
-        #endregion 5.Set Initialize
-
-
-        #region 6.Method
-
         #endregion 6.Method
-
 
         #region 7.Event
 
         #endregion 7.Event
+
+        private void btnInit_Click(object sender, EventArgs e)
+        {
+            this.InitServerList();
+        }
     }
 }
