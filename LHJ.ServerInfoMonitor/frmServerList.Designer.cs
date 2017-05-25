@@ -86,6 +86,7 @@
             this.btnAdd.TabIndex = 5;
             this.btnAdd.Text = "추가";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // btnInit
             // 
@@ -101,10 +102,12 @@
             // 
             this.lvwServer.Dock = System.Windows.Forms.DockStyle.Top;
             this.lvwServer.Location = new System.Drawing.Point(0, 0);
+            this.lvwServer.MultiSelect = false;
             this.lvwServer.Name = "lvwServer";
             this.lvwServer.Size = new System.Drawing.Size(185, 133);
             this.lvwServer.TabIndex = 0;
             this.lvwServer.UseCompatibleStateImageBehavior = false;
+            this.lvwServer.View = System.Windows.Forms.View.List;
             // 
             // frmServerList
             // 
