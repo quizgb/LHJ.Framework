@@ -77,6 +77,7 @@
             this.btnDel.TabIndex = 6;
             this.btnDel.Text = "삭제";
             this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // btnAdd
             // 
@@ -108,6 +109,7 @@
             this.lvwServer.TabIndex = 0;
             this.lvwServer.UseCompatibleStateImageBehavior = false;
             this.lvwServer.View = System.Windows.Forms.View.List;
+            this.lvwServer.SelectedIndexChanged += new System.EventHandler(this.lvwServer_SelectedIndexChanged);
             // 
             // frmServerList
             // 

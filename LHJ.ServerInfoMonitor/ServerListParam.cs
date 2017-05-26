@@ -78,7 +78,7 @@ namespace LHJ.ServerInfoMonitor
         public string B_IP주소
         {
             get { return this.mIPAddr; }
-            set { this.mServerName = value; }
+            set { this.mIPAddr = value; }
         }
 
         [CategoryAttribute("서버정보"),
@@ -86,7 +86,7 @@ namespace LHJ.ServerInfoMonitor
         public string C_사용자이름
         {
             get { return this.mUserName; }
-            set { this.mServerName = value; }
+            set { this.mUserName = value; }
         }
 
         [CategoryAttribute("서버정보"),
@@ -94,7 +94,7 @@ namespace LHJ.ServerInfoMonitor
         public string D_비밀번호
         {
             get { return this.mPassWord; }
-            set { this.mServerName = value; }
+            set { this.mPassWord = value; }
         }
 
         [CategoryAttribute("화면정보"),
