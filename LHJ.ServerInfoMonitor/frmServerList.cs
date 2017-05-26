@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -16,6 +17,11 @@ namespace LHJ.ServerInfoMonitor
     {
         #region 1.Variable
         private List<ServerListParam> mServerList;
+
+        [Browsable(true),
+         DesignerSerializationVisibility(DesignerSerializationVisibility.Visible),
+         Description("서버리스트 항목이 더블클릭될 때 발생됩니다.")]
+        public event Common.Definition.EventHandler.ServerListDoubleClickEventHandler ServerItemDoubleClicked;
         #endregion 1.Variable
 
 
@@ -57,7 +63,17 @@ namespace LHJ.ServerInfoMonitor
 
         #endregion 5.Set Initialize
 
+        
         #region 6.Method
+        private void SetServerItemDoubleClicked(object aServerListParam)
+        {
+            if (ServerItemDoubleClicked != null)
+            {
+                Common.Definition.EventHandler.ServerListDoubleClickEventArgs e = new Common.Definition.EventHandler.ServerListDoubleClickEventArgs(aServerListParam);
+                ServerItemDoubleClicked(this, e);
+            }
+        }
+
         public void SaveServerList()
         {
             StreamWriter sw = null;
@@ -289,5 +305,43 @@ namespace LHJ.ServerInfoMonitor
             }
         }
         #endregion 7.Event
+
+        private void lvwServer_DoubleClick(object sender, EventArgs e)
+        {
+            string serverName = this.lvwServer.SelectedItems[0].Name;
+
+            if (this.mServerList.Exists(server => server.A_서버명칭.Equals(serverName)))
+            {
+                ServerListParam param = this.mServerList.Find(server => server.A_서버명칭.Equals(serverName));
+                this.SetServerItemDoubleClicked(param);
+            }
+        }
+
+        private void btnPing_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(this.tbxPing.Text))
+            {
+                MessageBox.Show(this, "Ping Test IP주소를 입력하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            Regex regex = new Regex(@"^(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$");
+
+            if (!regex.IsMatch(this.tbxPing.Text))
+            {
+                this.tbxPing.Focus();
+                MessageBox.Show(this, "입력하신 Ping Test IP주소가\r\n형식에 어긋납니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            if (LHJ.Common.Common.Com.Util.PingTest(this.tbxPing.Text))
+            {
+                MessageBox.Show(this, "Ping을 정상적으로 보냈습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show(this, "Ping을 보내지 못했습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }

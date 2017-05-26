@@ -17,7 +17,6 @@ namespace LHJ.ServerInfoMonitor
         #region 1.Variable
         private Point mImageLocation = new Point(15, 5);
         private Point mImgHitArea = new Point(13, 2);
-        const String _ENCRPT_KEY = "egmainkfP@ssw0rd12#$";
         #endregion 1.Variable
 
 
@@ -56,12 +55,10 @@ namespace LHJ.ServerInfoMonitor
             // Add the Handler to draw the Image on Tab Pages
             this.tabControl1.DrawItem += TabControl1_DrawItem;
 
-            this.splitContainer1.SplitterDistance = 0;
-            this.즐겨찾기ToolStripMenuItem.Checked = true;
-
             frmServerList serverFrm = new frmServerList();
             serverFrm.TopLevel = false;
             serverFrm.Dock = DockStyle.Fill;
+            serverFrm.ServerItemDoubleClicked += new Common.Definition.EventHandler.ServerListDoubleClickEventHandler(this.ServerListDoubleClicked);
 
             this.splitContainer1.Panel1.Controls.Add(serverFrm);
             serverFrm.Show();
@@ -75,6 +72,15 @@ namespace LHJ.ServerInfoMonitor
 
 
         #region 7.Event
+        private void ServerListDoubleClicked(object sender, Common.Definition.EventHandler.ServerListDoubleClickEventArgs e)
+        {
+            if (e.ServerListParam is ServerListParam)
+            {
+                ServerListParam param = e.ServerListParam as ServerListParam;
+                this.StartRDP(param);
+            }
+        }
+
         private void TabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
             try
@@ -103,7 +109,7 @@ namespace LHJ.ServerInfoMonitor
             {
                 if (tsmi.Checked)
                 {
-                    this.splitContainer1.SplitterDistance = this.Width / 8;
+                    this.splitContainer1.SplitterDistance = 400;
                 }
                 else
                 {
@@ -112,10 +118,10 @@ namespace LHJ.ServerInfoMonitor
             }
         }
 
-        private void toolStripButton1_Click(object sender, EventArgs e)
+        private void StartRDP(ServerListParam aParam)
         {
             TabPage newPage = new TabPage();
-            frmRDP rdpFrm = new frmRDP();
+            frmRDP rdpFrm = new frmRDP(aParam);
 
             newPage.Text = "RDP  ";
             rdpFrm.TopLevel = false;
@@ -153,6 +159,11 @@ namespace LHJ.ServerInfoMonitor
                 frmServerList serverFrm = this.splitContainer1.Panel1.Controls[0] as frmServerList;
                 serverFrm.SaveServerList();
             }
+        }
+
+        private void frmRDPMain_Shown(object sender, EventArgs e)
+        {
+            this.즐겨찾기ToolStripMenuItem.Checked = true;
         }
     }
 }

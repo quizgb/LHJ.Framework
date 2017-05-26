@@ -53,7 +53,6 @@
             this.Name = "frmRDP";
             this.Text = "frmRDP";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.frmRDP_Load);
             ((System.ComponentModel.ISupportInitialize)(this.rdp)).EndInit();
             this.ResumeLayout(false);
 

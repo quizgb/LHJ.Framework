@@ -263,6 +263,7 @@
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.tsMain);
             this.Controls.Add(this.mnsMain);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.mnsMain;
             this.Name = "frmMain";

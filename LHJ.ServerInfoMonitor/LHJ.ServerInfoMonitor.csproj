@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\1495533426_lcd_monitor.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="LHJ.Common">
       <HintPath>..\Compile\LHJ.Common.dll</HintPath>
@@ -159,6 +162,9 @@
   <ItemGroup>
     <EmbeddedResource Include="AxInterop.MSTSCLib.dll" />
     <EmbeddedResource Include="Interop.MSTSCLib.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\1495533426_lcd_monitor1.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

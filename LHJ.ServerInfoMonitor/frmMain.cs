@@ -26,6 +26,8 @@ namespace LHJ.ServerInfoMonitor
         public frmMain()
         {
             InitializeComponent();
+
+            this.SetInitialize();
         }
         #endregion 3.Constructor
 
@@ -42,7 +44,7 @@ namespace LHJ.ServerInfoMonitor
         public void SetInitialize()
         {
             this.SetLastBuildDate();
-            this.Icon = Properties.Resources._1495533426_lcd_monitor;
+            this.Icon = Properties.Resources._1495533426_lcd_monitor1;
         }
         #endregion 5.Set Initialize
 
@@ -98,9 +100,8 @@ namespace LHJ.ServerInfoMonitor
         }
         #endregion 6.Method
 
-        #region 7.Event
 
-        #endregion 7.Event
+        #region 7.Event
         private void MdiChildFormClosing(object sender, FormClosingEventArgs e)
         {
             Form senderFrm = sender as Form;
@@ -131,5 +132,6 @@ namespace LHJ.ServerInfoMonitor
                 }
             }
         }
+        #endregion 7.Event
     }
 }

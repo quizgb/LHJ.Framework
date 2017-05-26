@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Microsoft.Win32.TaskScheduler;
+using System.Net.NetworkInformation;
 
 namespace LHJ.Common.Common.Com
 {
@@ -223,6 +224,14 @@ Shortcut.Save",
             File.Delete(_scriptTempFilename);
 
             return true;
+        }
+
+        public static bool PingTest(string aIPAddr)
+        {
+            System.Net.NetworkInformation.Ping p = new System.Net.NetworkInformation.Ping();
+            System.Net.NetworkInformation.PingReply reply = p.Send(aIPAddr);
+
+            return reply.Status.Equals(IPStatus.Success) ? true : false;
         }
         #endregion 6.Method
 

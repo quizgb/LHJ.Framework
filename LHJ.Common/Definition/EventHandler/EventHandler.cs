@@ -67,5 +67,21 @@ namespace LHJ.Common.Definition
         }
 
         #endregion ItemDoubleClick Event
+
+        #region ServerListDoubleClick Event
+
+        public delegate void ServerListDoubleClickEventHandler(object sender, ServerListDoubleClickEventArgs e);
+
+        public class ServerListDoubleClickEventArgs : EventArgs
+        {
+            public object ServerListParam { get; set; }
+
+            public ServerListDoubleClickEventArgs(object aServerListParam)
+            {
+                ServerListParam = aServerListParam;
+            }
+        }
+
+        #endregion ServerListDoubleClick Event
     }
 }

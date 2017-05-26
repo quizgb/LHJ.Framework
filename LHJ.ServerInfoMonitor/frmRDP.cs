@@ -24,9 +24,11 @@ namespace LHJ.ServerInfoMonitor
 
 
         #region 3.Constructor
-        public frmRDP()
+        public frmRDP(ServerListParam aParam)
         {
             InitializeComponent();
+
+            this.Start(aParam);
         }
         #endregion 3.Constructor
 
@@ -40,17 +42,17 @@ namespace LHJ.ServerInfoMonitor
         /// <summary>
         /// Set Initialize
         /// </summary>
-        public void SetInitialize()
+        public void Start(ServerListParam aParam)
         {
             rdp.Dock = DockStyle.Fill;
 
-            rdp.Server = "115.22.53.116";
-            rdp.UserName = @"DL\administrator";
+            rdp.Server = aParam.B_IP주소;
+            rdp.UserName = aParam.C_사용자이름;
             rdp.AdvancedSettings7.EnableCredSspSupport = true;
             rdp.AdvancedSettings7.ConnectToAdministerServer = true;
 
             IMsTscNonScriptable secured = (IMsTscNonScriptable)rdp.GetOcx();
-            secured.ClearTextPassword = "dkagh12#$";
+            secured.ClearTextPassword = aParam.D_비밀번호;
 
             rdp.Connect();
         }
@@ -65,11 +67,6 @@ namespace LHJ.ServerInfoMonitor
         private void rdp_OnDisconnected(object sender, AxMSTSCLib.IMsTscAxEvents_OnDisconnectedEvent e)
         {
             MessageBox.Show(this, rdp.GetErrorDescription((uint)e.discReason, (uint)rdp.ExtendedDisconnectReason), "알림", MessageBoxButtons.OK, MessageBoxIcon.Error);
-        }
-
-        private void frmRDP_Load(object sender, EventArgs e)
-        {
-            this.SetInitialize();
         }
         #endregion 7.Event  
     }
