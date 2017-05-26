@@ -36,12 +36,14 @@
     <ApplicationIcon>Resources\1495533426_lcd_monitor.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LHJ.Common">
-      <HintPath>..\Compile\LHJ.Common.dll</HintPath>
+    <Reference Include="LHJ.Common, Version=1.0.6355.27013, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Compile2\LHJ.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="LHJ.Controls">
-      <HintPath>..\Compile\LHJ.Controls.dll</HintPath>
+    <Reference Include="LHJ.Controls, Version=1.0.6355.28409, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Compile2\LHJ.Controls.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

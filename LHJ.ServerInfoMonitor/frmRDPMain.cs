@@ -109,7 +109,7 @@ namespace LHJ.ServerInfoMonitor
             {
                 if (tsmi.Checked)
                 {
-                    this.splitContainer1.SplitterDistance = 400;
+                    this.splitContainer1.SplitterDistance = 300;
                 }
                 else
                 {
@@ -150,7 +150,6 @@ namespace LHJ.ServerInfoMonitor
                 tc.TabPages.Remove(TabP);
             }
         }
-        #endregion 7.Event  
 
         private void frmRDPMain_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -165,5 +164,6 @@ namespace LHJ.ServerInfoMonitor
         {
             this.즐겨찾기ToolStripMenuItem.Checked = true;
         }
+        #endregion 7.Event  
     }
 }

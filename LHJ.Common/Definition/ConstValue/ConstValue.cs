@@ -92,7 +92,31 @@ namespace LHJ.Common.Definition
             "Extended Properties='Excel 12.0; HDR={1}; IMEX={2}';" +
             "Persist Security Info=False";
 
-        public const string ENCRPT_KEY = "LHJFramework";
-        public const string ServerInfoMonitorServerListFileName = "RDP.svl";
+        public struct ServerInfoMonitor_General
+        {
+            public const string ENCRPT_KEY = "LHJFramework";
+            public const string ServerInfoMonitorServerListFileName = "RDP.svl";
+        }
+
+        public struct ServerInfoMonitor_DesktopSize
+        {
+            public const string SIZE800600 = "800X600";
+            public const string SIZE1024768 = "1024X768";
+            public const string SIZE12801024 = "1280X1024";
+            public const string SIZE1366768 = "1366X768";
+            public const string SIZE1440900 = "1440X900";
+            public const string SIZE16001200 = "1600X1200";
+            public const string SIZE19201080 = "1920X1080";
+            public const string SizeFullScreen = "FullScreen";
+            public const string SizeCurView = "CurrentViewSize";
+        }
+
+        public struct ServerInfoMonitor_ColorDepth
+        {
+            public const string Color256 = "256 Color(8 Bit)";
+            public const string High16 = "High Color(16 Bit)";
+            public const string True24 = "True Color(24 Bit)";
+            public const string Max32 = "Maximum Color(32 Bit)";
+        }
     }
 }

@@ -212,22 +212,22 @@ namespace LHJ.ServerInfoMonitor
         {
             mDesktopSizeItm = new List<string>();
 
-            mDesktopSizeItm.Add("800X600");
-            mDesktopSizeItm.Add("1024X768");
-            mDesktopSizeItm.Add("1280X1024");
-            mDesktopSizeItm.Add("1366X768");
-            mDesktopSizeItm.Add("1440X900");
-            mDesktopSizeItm.Add("1600X1200");
-            mDesktopSizeItm.Add("1920X1080");
-            mDesktopSizeItm.Add("FullScreen");
-            mDesktopSizeItm.Add("CurrentViewSize");
+            mDesktopSizeItm.Add(Common.Definition.ConstValue.ServerInfoMonitor_DesktopSize.SIZE800600);
+            mDesktopSizeItm.Add(Common.Definition.ConstValue.ServerInfoMonitor_DesktopSize.SIZE1024768);
+            mDesktopSizeItm.Add(Common.Definition.ConstValue.ServerInfoMonitor_DesktopSize.SIZE12801024);
+            mDesktopSizeItm.Add(Common.Definition.ConstValue.ServerInfoMonitor_DesktopSize.SIZE1366768);
+            mDesktopSizeItm.Add(Common.Definition.ConstValue.ServerInfoMonitor_DesktopSize.SIZE1440900);
+            mDesktopSizeItm.Add(Common.Definition.ConstValue.ServerInfoMonitor_DesktopSize.SIZE16001200);
+            mDesktopSizeItm.Add(Common.Definition.ConstValue.ServerInfoMonitor_DesktopSize.SIZE19201080);
+            mDesktopSizeItm.Add(Common.Definition.ConstValue.ServerInfoMonitor_DesktopSize.SizeFullScreen);
+            mDesktopSizeItm.Add(Common.Definition.ConstValue.ServerInfoMonitor_DesktopSize.SizeCurView);
 
             mColorDepthItm = new List<string>();
 
-            mColorDepthItm.Add("256 Color(8 Bit)");
-            mColorDepthItm.Add("High Color(16 Bit)");
-            mColorDepthItm.Add("True Color(24 Bit)");
-            mColorDepthItm.Add("Maximum Color(32 Bit)");
+            mColorDepthItm.Add(Common.Definition.ConstValue.ServerInfoMonitor_ColorDepth.Color256);
+            mColorDepthItm.Add(Common.Definition.ConstValue.ServerInfoMonitor_ColorDepth.High16);
+            mColorDepthItm.Add(Common.Definition.ConstValue.ServerInfoMonitor_ColorDepth.True24);
+            mColorDepthItm.Add(Common.Definition.ConstValue.ServerInfoMonitor_ColorDepth.Max32);
         }
         #endregion 5.Set Initialize
 

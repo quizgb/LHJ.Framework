@@ -61,10 +61,10 @@ namespace LHJ.Common.Common.Com
 
             // 딕셔너리 공격을 대비해서 키를 더 풀기 어렵게 만들기 위해서 
             // Salt를 사용한다.
-            byte[] Salt = Encoding.ASCII.GetBytes(ConstValue.ENCRPT_KEY.Length.ToString());
+            byte[] Salt = Encoding.ASCII.GetBytes(ConstValue.ServerInfoMonitor_General.ENCRPT_KEY.Length.ToString());
 
             // PasswordDeriveBytes 클래스를 사용해서 SecretKey를 얻는다.
-            PasswordDeriveBytes SecretKey = new PasswordDeriveBytes(ConstValue.ENCRPT_KEY, Salt);
+            PasswordDeriveBytes SecretKey = new PasswordDeriveBytes(ConstValue.ServerInfoMonitor_General.ENCRPT_KEY, Salt);
 
             // Create a encryptor from the existing SecretKey bytes.
             // encryptor 객체를 SecretKey로부터 만든다.
@@ -112,9 +112,9 @@ namespace LHJ.Common.Common.Com
             RijndaelManaged RijndaelCipher = new RijndaelManaged();
 
             byte[] EncryptedData = Convert.FromBase64String(tmpEncrptStr);
-            byte[] Salt = Encoding.ASCII.GetBytes(ConstValue.ENCRPT_KEY.Length.ToString());
+            byte[] Salt = Encoding.ASCII.GetBytes(ConstValue.ServerInfoMonitor_General.ENCRPT_KEY.Length.ToString());
 
-            PasswordDeriveBytes SecretKey = new PasswordDeriveBytes(ConstValue.ENCRPT_KEY, Salt);
+            PasswordDeriveBytes SecretKey = new PasswordDeriveBytes(ConstValue.ServerInfoMonitor_General.ENCRPT_KEY, Salt);
 
             // Decryptor 객체를 만든다.
             ICryptoTransform Decryptor = RijndaelCipher.CreateDecryptor(SecretKey.GetBytes(32), SecretKey.GetBytes(16));

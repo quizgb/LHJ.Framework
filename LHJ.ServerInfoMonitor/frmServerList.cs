@@ -85,7 +85,7 @@ namespace LHJ.ServerInfoMonitor
 
                 try
                 {
-                    sw = new StreamWriter((Stream)File.Create(Application.StartupPath + @"\" + LHJ.Common.Definition.ConstValue.ServerInfoMonitorServerListFileName));
+                    sw = new StreamWriter((Stream)File.Create(Application.StartupPath + @"\" + LHJ.Common.Definition.ConstValue.ServerInfoMonitor_General.ServerInfoMonitorServerListFileName));
                     sw.Write(list);
                 }
                 catch (Exception ex)
@@ -104,11 +104,11 @@ namespace LHJ.ServerInfoMonitor
 
         private void LoadServerList()
         {
-            if (File.Exists(Application.StartupPath + @"\" + LHJ.Common.Definition.ConstValue.ServerInfoMonitorServerListFileName))
+            if (File.Exists(Application.StartupPath + @"\" + LHJ.Common.Definition.ConstValue.ServerInfoMonitor_General.ServerInfoMonitorServerListFileName))
             {
                 string list = string.Empty;
 
-                foreach (string line in File.ReadAllLines(Application.StartupPath + @"\" + LHJ.Common.Definition.ConstValue.ServerInfoMonitorServerListFileName))
+                foreach (string line in File.ReadAllLines(Application.StartupPath + @"\" + LHJ.Common.Definition.ConstValue.ServerInfoMonitor_General.ServerInfoMonitorServerListFileName))
                 {
                     list += line;
                 }
@@ -178,19 +178,6 @@ namespace LHJ.ServerInfoMonitor
 
         private bool CheckServerList(ServerListParam aParam)
         {
-            if (this.mServerList.Count > 0)
-            {
-                IEnumerable<ServerListParam> existList = from idx in this.mServerList
-                                                         where idx.A_서버명칭.Equals(aParam.A_서버명칭)
-                                                         select idx;
-
-                if (existList.Count() > 0)
-                {
-                    MessageBox.Show(this, "서버명칭은 중복될 수 없습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    return false;
-                }
-            }
-
             if (string.IsNullOrEmpty(aParam.A_서버명칭))
             {
                 MessageBox.Show(this, "서버명칭을 입력하세요.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -258,7 +245,34 @@ namespace LHJ.ServerInfoMonitor
                 return;
             }
 
-            this.mServerList.Add(param);
+            if (this.mServerList.Count > 0)
+            {
+                IEnumerable<ServerListParam> existList = from idx in this.mServerList
+                                                         where idx.A_서버명칭.Equals(param.A_서버명칭)
+                                                         select idx;
+
+                if (existList.Count() > 0)
+                {
+                    ServerListParam orgParam = this.mServerList.Find(server => server.A_서버명칭.Equals(param.A_서버명칭));
+
+                    orgParam.A_FullScreen = param.A_FullScreen;
+                    orgParam.A_서버명칭 = param.A_서버명칭;
+                    orgParam.B_IP주소 = param.B_IP주소;
+                    orgParam.B_RedirectDrives = param.B_RedirectDrives;
+                    orgParam.C_RedirectClipboard = param.C_RedirectClipboard;
+                    orgParam.C_사용자이름 = param.C_사용자이름;
+                    orgParam.D_RedirectPrinters = param.D_RedirectPrinters;
+                    orgParam.D_비밀번호 = param.D_비밀번호;
+                    orgParam.E_SmartSizing = param.E_SmartSizing;
+                    orgParam.F_DesktopSize = param.F_DesktopSize;
+                    orgParam.G_ColorDepth = param.G_ColorDepth;
+                }
+                else
+                {
+                    this.mServerList.Add(param);
+                }
+            }
+
             this.dtTolistView(this.ConvertToDatatable(this.mServerList), this.lvwServer);
             this.btnInit.PerformClick();
         }
