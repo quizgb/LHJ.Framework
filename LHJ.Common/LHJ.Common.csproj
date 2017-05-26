@@ -90,6 +90,7 @@
   <ItemGroup>
     <Compile Include="ClsGetSlnCodeLine.cs" />
     <Compile Include="Common\Comm.cs" />
+    <Compile Include="Common\Com\Cryptography.cs" />
     <Compile Include="Common\Com\Logger.cs" />
     <Compile Include="Common\Com\Util.cs" />
     <Compile Include="Control\ColorSpoid\FrmColorSpoid.cs">

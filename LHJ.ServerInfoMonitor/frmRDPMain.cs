@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +17,7 @@ namespace LHJ.ServerInfoMonitor
         #region 1.Variable
         private Point mImageLocation = new Point(15, 5);
         private Point mImgHitArea = new Point(13, 2);
+        const String _ENCRPT_KEY = "egmainkfP@ssw0rd12#$";
         #endregion 1.Variable
 
 
@@ -142,5 +145,34 @@ namespace LHJ.ServerInfoMonitor
             }
         }
         #endregion 7.Event  
+
+        private void frmRDPMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (this.splitContainer1.Panel1.Controls[0] is frmServerList)
+            {
+                StreamWriter sw = null;
+                frmServerList serverFrm = this.splitContainer1.Panel1.Controls[0] as frmServerList;
+                serverFrm.SetEncryptPassword();
+
+                string list = Newtonsoft.Json.JsonConvert.SerializeObject(serverFrm.ServerList);
+
+                try
+                {
+                    sw = new StreamWriter((Stream)File.Create(Application.StartupPath + @"\\TEMP.LST"));
+                    sw.Write(list);
+                }
+                catch(Exception ex)
+                {
+
+                }
+                finally
+                {
+                    if (sw != null)
+                    {
+                        sw.Close();
+                    }
+                }
+            }
+        }
     }
 }

@@ -30,6 +30,12 @@ namespace LHJ.Common
         {
             get { return m_Util; }
         }
+
+        private static LHJ.Common.Common.Com.Cryptography m_Cryptography = new LHJ.Common.Common.Com.Cryptography();
+        public static LHJ.Common.Common.Com.Cryptography Cryptography
+        {
+            get { return m_Cryptography; }
+        }
         #endregion 2.Property
 
 

@@ -132,6 +132,7 @@
             this.Name = "frmRDPMain";
             this.Text = "원격접속";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmRDPMain_FormClosing);
             this.tsMain.ResumeLayout(false);
             this.tsMain.PerformLayout();
             this.pnlMain.ResumeLayout(false);

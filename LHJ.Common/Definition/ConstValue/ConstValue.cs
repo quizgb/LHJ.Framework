@@ -91,5 +91,7 @@ namespace LHJ.Common.Definition
             "Mode=ReadWrite|Share Deny None;" +
             "Extended Properties='Excel 12.0; HDR={1}; IMEX={2}';" +
             "Persist Security Info=False";
+
+        public const string ENCRPT_KEY = "LHJFramework";
     }
 }

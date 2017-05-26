@@ -19,7 +19,10 @@ namespace LHJ.ServerInfoMonitor
 
 
         #region 2.Property
-
+        public List<ServerListParam> ServerList
+        {
+            get { return this.mServerList; }
+        }
         #endregion 2.Property
 
 
@@ -149,6 +152,17 @@ namespace LHJ.ServerInfoMonitor
 
             return true;
         }
+
+        public void SetEncryptPassword()
+        {
+            if (this.mServerList.Count > 0)
+            {
+                foreach (ServerListParam param in this.mServerList)
+                {
+                    param.D_비밀번호 = LHJ.Common.Common.Com.Cryptography.FN_ENCRPT(param.D_비밀번호);
+                }
+            }
+        }
         #endregion 6.Method
 
         #region 7.Event
@@ -172,7 +186,6 @@ namespace LHJ.ServerInfoMonitor
             this.dtTolistView(this.ConvertToDatatable(this.mServerList), this.lvwServer);
             this.btnInit.PerformClick();
         }
-        #endregion 7.Event
 
         private void lvwServer_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -215,5 +228,6 @@ namespace LHJ.ServerInfoMonitor
                 this.btnInit.PerformClick();
             }
         }
+        #endregion 7.Event
     }
 }
