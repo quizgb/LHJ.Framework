@@ -129,7 +129,7 @@ namespace LHJ.ServerInfoMonitor
             }
 
             ServerListParam param = new ServerInfoMonitor.ServerListParam();
-            this.propertyGrid1.SelectedObject = param;
+            this.propertyGridEx1.SelectedObject = param;
         }
 
         DataTable ConvertToDatatable(List<ServerListParam> aServerList)
@@ -251,7 +251,7 @@ namespace LHJ.ServerInfoMonitor
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            ServerListParam param = (ServerListParam)this.propertyGrid1.SelectedObject;
+            ServerListParam param = (ServerListParam)this.propertyGridEx1.SelectedObject;
 
             if (!this.CheckServerList(param))
             {
@@ -276,7 +276,7 @@ namespace LHJ.ServerInfoMonitor
 
             if (existList.Count() > 0)
             {
-                this.propertyGrid1.SelectedObject = existList.ToList()[0];
+                this.propertyGridEx1.SelectedObject = existList.ToList()[0];
             }
         }
 

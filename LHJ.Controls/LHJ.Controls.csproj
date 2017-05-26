@@ -60,6 +60,7 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
@@ -70,6 +71,21 @@
     <Compile Include="clsScrollingText.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="PropertyGridEx\BrowsableTypeConverter.cs" />
+    <Compile Include="PropertyGridEx\CustomChoices.cs" />
+    <Compile Include="PropertyGridEx\CustomColorScheme.cs" />
+    <Compile Include="PropertyGridEx\CustomProperty.cs" />
+    <Compile Include="PropertyGridEx\CustomPropertyCollection.cs" />
+    <Compile Include="PropertyGridEx\CustomPropertyCollectionSet.cs" />
+    <Compile Include="PropertyGridEx\PropertyGridEx.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="PropertyGridEx\PropertyGridEx.Designer.cs">
+      <DependentUpon>PropertyGridEx.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PropertyGridEx\UICustomEventEditor.cs" />
+    <Compile Include="PropertyGridEx\UIFilenameEditor.cs" />
+    <Compile Include="PropertyGridEx\UIListboxEditor.cs" />
     <Compile Include="ucImageViewer.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -77,12 +93,8 @@
       <DependentUpon>ucImageViewer.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ucDataGridView.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="ucMarqueeTextBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
+    <Compile Include="ucDataGridView.cs" />
+    <Compile Include="ucMarqueeTextBox.cs" />
     <Compile Include="ucProgressBar.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -122,6 +134,7 @@
       <DependentUpon>ucImageViewer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
