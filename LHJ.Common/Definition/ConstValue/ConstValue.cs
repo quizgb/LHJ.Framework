@@ -93,5 +93,6 @@ namespace LHJ.Common.Definition
             "Persist Security Info=False";
 
         public const string ENCRPT_KEY = "LHJFramework";
+        public const string ServerInfoMonitorServerListFileName = "RDP.svl";
     }
 }

@@ -150,28 +150,8 @@ namespace LHJ.ServerInfoMonitor
         {
             if (this.splitContainer1.Panel1.Controls[0] is frmServerList)
             {
-                StreamWriter sw = null;
                 frmServerList serverFrm = this.splitContainer1.Panel1.Controls[0] as frmServerList;
-                serverFrm.SetEncryptPassword();
-
-                string list = Newtonsoft.Json.JsonConvert.SerializeObject(serverFrm.ServerList);
-
-                try
-                {
-                    sw = new StreamWriter((Stream)File.Create(Application.StartupPath + @"\\TEMP.LST"));
-                    sw.Write(list);
-                }
-                catch(Exception ex)
-                {
-
-                }
-                finally
-                {
-                    if (sw != null)
-                    {
-                        sw.Close();
-                    }
-                }
+                serverFrm.SaveServerList();
             }
         }
     }

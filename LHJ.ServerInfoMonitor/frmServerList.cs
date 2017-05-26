@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -51,12 +52,59 @@ namespace LHJ.ServerInfoMonitor
             this.lvwServer.GridLines = true;
             this.lvwServer.View = View.List;
 
-            this.InitServerList();
+            this.LoadServerList();
         }
 
         #endregion 5.Set Initialize
 
         #region 6.Method
+        public void SaveServerList()
+        {
+            StreamWriter sw = null;
+            this.SetEncryptPassword();
+
+            if (this.mServerList.Count > 0)
+            {
+                string list = Newtonsoft.Json.JsonConvert.SerializeObject(this.mServerList);
+
+                try
+                {
+                    sw = new StreamWriter((Stream)File.Create(Application.StartupPath + @"\" + LHJ.Common.Definition.ConstValue.ServerInfoMonitorServerListFileName));
+                    sw.Write(list);
+                }
+                catch (Exception ex)
+                {
+
+                }
+                finally
+                {
+                    if (sw != null)
+                    {
+                        sw.Close();
+                    }
+                }
+            }
+        }
+
+        private void LoadServerList()
+        {
+            if (File.Exists(Application.StartupPath + @"\" + LHJ.Common.Definition.ConstValue.ServerInfoMonitorServerListFileName))
+            {
+                string list = string.Empty;
+
+                foreach (string line in File.ReadAllLines(Application.StartupPath + @"\" + LHJ.Common.Definition.ConstValue.ServerInfoMonitorServerListFileName))
+                {
+                    list += line;
+                }
+
+                this.mServerList = Newtonsoft.Json.JsonConvert.DeserializeObject<List<ServerListParam>>(list);
+                this.SetDecryptPassword();
+                this.dtTolistView(this.ConvertToDatatable(this.mServerList), this.lvwServer);
+            }
+
+            this.InitServerList();
+        }
+
         private void InitServerList()
         {
             if (this.mServerList == null)
@@ -114,14 +162,17 @@ namespace LHJ.ServerInfoMonitor
 
         private bool CheckServerList(ServerListParam aParam)
         {
-            IEnumerable<ServerListParam> existList = from idx in this.mServerList
-                                                     where idx.A_서버명칭.Equals(aParam.A_서버명칭)
-                                                     select idx;
-
-            if (existList.Count() > 0)
+            if (this.mServerList.Count > 0)
             {
-                MessageBox.Show(this, "서버명칭은 중복될 수 없습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return false;
+                IEnumerable<ServerListParam> existList = from idx in this.mServerList
+                                                         where idx.A_서버명칭.Equals(aParam.A_서버명칭)
+                                                         select idx;
+
+                if (existList.Count() > 0)
+                {
+                    MessageBox.Show(this, "서버명칭은 중복될 수 없습니다.", "알림", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return false;
+                }
             }
 
             if (string.IsNullOrEmpty(aParam.A_서버명칭))
@@ -163,6 +214,17 @@ namespace LHJ.ServerInfoMonitor
                 }
             }
         }
+
+        public void SetDecryptPassword()
+        {
+            if (this.mServerList.Count > 0)
+            {
+                foreach (ServerListParam param in this.mServerList)
+                {
+                    param.D_비밀번호 = LHJ.Common.Common.Com.Cryptography.FN_DECRPT(param.D_비밀번호);
+                }
+            }
+        }
         #endregion 6.Method
 
         #region 7.Event
@@ -181,8 +243,6 @@ namespace LHJ.ServerInfoMonitor
             }
 
             this.mServerList.Add(param);
-            //string temp = Newtonsoft.Json.JsonConvert.SerializeObject(param);
-
             this.dtTolistView(this.ConvertToDatatable(this.mServerList), this.lvwServer);
             this.btnInit.PerformClick();
         }
